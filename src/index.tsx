@@ -13,12 +13,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App />
-    <BrowserRouter>
+    {/* <BrowserRouter>
       <Routes>
         <Route path='/CreateAccount' element={<CreateAccount/>} />
         <Route path='/LogIn' element={<LogIn/>} />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter> */}
   </React.StrictMode>
 );
 

@@ -46,7 +46,7 @@ const AccountWrapper = styled.div `
 
 const Header: FC<HeaderProps> = (props): JSX.Element => {
 
-  const { handleSignUp } = props;
+  const { handleSignUp, handleLogIn } = props;
 
   return (
     <HeaderWrapper>
@@ -58,7 +58,7 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
       </LogoWrapper>
       <AccountWrapper>
         <SignUp handleSignUp={handleSignUp} />
-        <SignIn />
+        <SignIn handleLogIn={handleLogIn} />
       </AccountWrapper>
     </HeaderWrapper>
   );
