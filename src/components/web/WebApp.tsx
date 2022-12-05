@@ -8,7 +8,6 @@ createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
 GoogleAuthProvider,
 signInWithPopup,
-User,
 } from "firebase/auth";
 import { userState } from '../../types/interfaces';
 import LogIn from '../auth/LogIn';
@@ -73,9 +72,9 @@ const WebApp = () => {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
 
   const createAccountWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
-    console.log('form is being submitted');
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
@@ -100,7 +99,6 @@ const WebApp = () => {
   };
 
   const signInUser = async (email: string, password: string): Promise<void> => {
-    console.log('attempting to sign in');
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
@@ -124,6 +122,37 @@ const WebApp = () => {
       });
   };
 
+  const signInWithGoogleAccount = async (): Promise<void> => {
+    await signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        if (credential) {
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const user = result.user;
+          setUserStatus({
+            formCompleted: true,
+            currentUser: user,
+            errorStatus: '',
+          });
+          console.log(user);
+        };
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        setUserStatus({
+          formCompleted: false,
+          currentUser: 'not found',
+          errorStatus: `${errorCode}, ${errorMessage}`,
+        });
+        alert(`${errorCode}, ${errorMessage}; ${email}, ${credential} please try again`);
+      });
+  };
+
   if (signUpStatus.signUp === true) {
     return (
       <div className="app-web">
@@ -137,7 +166,7 @@ const WebApp = () => {
     return (
       <div className="app-web">
         <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} userStatus={userStatus} />
-        <LogIn signInUser={signInUser} handleLogIn={handleLogIn} />
+        <LogIn signInUser={signInUser} handleLogIn={handleLogIn} signInWithGoogleAccount={signInWithGoogleAccount} />
       </div>
     );
   };

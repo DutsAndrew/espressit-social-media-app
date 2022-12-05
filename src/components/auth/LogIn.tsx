@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { LogInProps } from '../../types/interfaces';
+import google from '../../assets/google-logo.svg';
 
 const LogIn: FC<LogInProps> = (props): JSX.Element => {
 
-  const { signInUser, handleLogIn } = props;
+  const { signInUser, handleLogIn, signInWithGoogleAccount } = props;
 
   const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -14,6 +15,10 @@ const LogIn: FC<LogInProps> = (props): JSX.Element => {
         signInUser(emailEntry.value, passwordEntry.value);
       };
     };
+  };
+
+  const handleGoogleSignIn = (): void => {
+    signInWithGoogleAccount();
   };
 
   return (
@@ -39,6 +44,7 @@ const LogIn: FC<LogInProps> = (props): JSX.Element => {
           X Close Form
         </button>
       </fieldset>
+      <button type="button" id="google-sign-in-button" onClick={handleGoogleSignIn} >Sign in with <img src={google} alt="google logo"></img></button>
     </form>
   );
 };

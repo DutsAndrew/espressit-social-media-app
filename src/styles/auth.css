@@ -26,12 +26,13 @@
   background-color: #ad6d2f;
   color: #37251b;
   width: 25vw;
-  height: 45vh;
+  height: 50vh;
   font-size: 1.25em;
   justify-items: center;
   align-items: center;
   justify-content: center;
   align-content: center;
+  margin-bottom: 1%;
 }
 
 #create-account-fieldset {
@@ -44,6 +45,7 @@
   height: 3vh;
   color: #e4bc84;
   background-color: #37251b;
+  margin-bottom: 1%;
 }
 
 /* SIGN IN FORM */
@@ -55,17 +57,19 @@
   background-color: #ad6d2f;
   color: #37251b;
   width: 25vw;
-  height: 45vh;
+  height: 50vh;
   font-size: 1.25em;
   justify-items: center;
   align-items: center;
   justify-content: center;
   align-content: center;
+  margin-bottom: 1%;
 }
 
 #sign-in-fieldset {
   display: flex;
   flex-flow: column nowrap;
+  height: auto;
 }
 
 #email-login, #password-login {
@@ -77,6 +81,7 @@
   height: 3vh;
   color: #e4bc84;
   background-color: #37251b;
+  margin-bottom: 1%;
 }
 
 /* EXTERNAL LOGIN STYLES */
@@ -91,23 +96,19 @@
   justify-content: center;
 }
 
-#sign-in-with-google-button {
+#google-sign-in-button {
+  width: 15vw;
+  height: 4vh;
+  color: #e4bc84;
+  background-color: #37251b;
+  margin-top: 4%;
+  margin-bottom: 1%;
   display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
   align-items: center;
-  width: 40vw;
-  height: 10vh;
-  background-color: #175676;
 }
 
-#sign-in-with-google-text {
-  margin: 0;
-  margin-bottom: 3%;
-  font-size: 1.5em;
-  color: #CCE6F4;
-}
 
 /* FORM VALIDATION */
 
@@ -117,12 +118,12 @@ input:invalid {
 }
 
 input:valid {
-  border: 2px solid black;
+  border: 2px solid #37251b;
 }
 
 input:invalid:required {
-  background-image: linear-gradient(to right, pink, lightgreen);
-  box-shadow: 0 0 5px 1px red;
+  background-image: linear-gradient(to right, #e4bc84, #d2c1b0);
+  box-shadow: 0 0 5px 1px #8f755f;
 }
 
 input:focus:invalid {

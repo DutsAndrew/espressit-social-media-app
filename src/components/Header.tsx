@@ -33,6 +33,7 @@ const Title = styled.p `
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: #37251b;
 `;
 
 const AccountWrapper = styled.div `

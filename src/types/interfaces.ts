@@ -33,6 +33,7 @@ interface userState {
 interface LogInProps {
   signInUser: (email: string, password: string) => Promise<void>,
   handleLogIn: MouseEventHandler<HTMLButtonElement>,
+  signInWithGoogleAccount: () => Promise<void>,
 };
 
 interface AccountDisplayProps {
