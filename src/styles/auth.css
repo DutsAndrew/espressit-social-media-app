@@ -1,0 +1,11 @@
+.sign-up-link, .sign-in-link {
+  margin: 0;
+  text-decoration: underline;
+  color: #ad6d2f;
+}
+
+.sign-up-link:hover, .sign-in-link:hover {
+  cursor: pointer;
+  font-size: 0.95em;
+  color: #37251b;
+}

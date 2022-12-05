@@ -1,0 +1,24 @@
+.espresso-logo {
+  width: 5vw;
+  height: 5vh;
+}
+
+.app-web {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+  background-color: #d2c1b0;
+  color: #80411e;
+}
+
+.home-page-web {
+  
+}
+
+.home-page-mobile {
+
+}
+
