@@ -1,10 +1,9 @@
 import React, { FC } from "react";
 import styled from 'styled-components'
-import SignUp from "./auth/SignUp";
-import SignIn from "./auth/SignIn";
 import '../styles/auth.css';
 import espresso from '../assets/espresso.svg';
 import { HeaderProps } from "../types/interfaces";
+import AccountDisplay from "./auth/AccountDisplay";
 
 const HeaderWrapper = styled.div `
   width: 100vw;
@@ -12,6 +11,9 @@ const HeaderWrapper = styled.div `
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  background-color: #8f755f;
+  border-bottom: 1px solid #80411e;
+  margin-bottom: 0.5%;
 `;
 
 const LogoWrapper = styled.div `
@@ -46,21 +48,39 @@ const AccountWrapper = styled.div `
 
 const Header: FC<HeaderProps> = (props): JSX.Element => {
 
-  const { handleSignUp, handleLogIn } = props;
+  const { handleSignUp, handleLogIn, userStatus } = props;
 
+  // if user isn't logged in
+  if (typeof userStatus.currentUser === 'string') {
+    return (
+      <HeaderWrapper>
+        <LogoWrapper>
+          <img className="espresso-logo" src={espresso} alt="espresso" ></img>
+          <Title>
+            Espressit!
+          </Title>
+        </LogoWrapper>
+        <AccountWrapper>
+          <p className="sign-up-link" onClick={handleSignUp} >Sign Up</p>
+          <p className="sign-in-link" onClick={handleLogIn} >Sign In</p>
+        </AccountWrapper>
+      </HeaderWrapper>
+    );
+  };
+
+  // if logged in
   return (
     <HeaderWrapper>
-      <LogoWrapper>
-        <img className="espresso-logo" src={espresso} alt="espresso" ></img>
-        <Title>
-          Espressit!
-        </Title>
-      </LogoWrapper>
-      <AccountWrapper>
-        <SignUp handleSignUp={handleSignUp} />
-        <SignIn handleLogIn={handleLogIn} />
-      </AccountWrapper>
-    </HeaderWrapper>
+        <LogoWrapper>
+          <img className="espresso-logo" src={espresso} alt="espresso" ></img>
+          <Title>
+            Espressit!
+          </Title>
+        </LogoWrapper>
+        <AccountWrapper>
+          <AccountDisplay userStatus={userStatus} />
+        </AccountWrapper>
+      </HeaderWrapper>
   );
 };
 

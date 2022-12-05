@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, FormEventHandler } from "react";
+import React, { FC, MouseEventHandler } from "react";
 import { CreateAccountProps } from '../../types/interfaces';
 
 const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
@@ -146,7 +146,7 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
           type="submit">
             Submit
         </button>
-        <button id="close-form" onClick={handleSignUp as unknown as MouseEventHandler<HTMLButtonElement>} >
+        <button id="close-form-button" onClick={handleSignUp as unknown as MouseEventHandler<HTMLButtonElement>} >
           X Close Form
         </button>
       </fieldset>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../Header";
 import HomePageMobile from "./HomePage";
+import { userState } from "../../types/interfaces";
 
 const MobileApp = () => {
 
@@ -15,6 +16,12 @@ const MobileApp = () => {
     closeShare: false,
   });
 
+  const [userStatus, setUserStatus] = useState<userState>({
+    formCompleted: false,
+    currentUser: '',
+    errorStatus: '',
+  });
+
   const handleSignUp = () => {
     console.log('handling signup');
   };
@@ -25,7 +32,7 @@ const MobileApp = () => {
 
   return (
     <div className="app-mobile">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} userStatus={userStatus} />
         <HomePageMobile />
     </div>
   )

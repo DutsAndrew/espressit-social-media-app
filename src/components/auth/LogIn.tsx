@@ -1,4 +1,4 @@
-import React, { FC, FormEventHandler } from "react";
+import React, { FC } from "react";
 import { LogInProps } from '../../types/interfaces';
 
 const LogIn: FC<LogInProps> = (props): JSX.Element => {
@@ -35,7 +35,7 @@ const LogIn: FC<LogInProps> = (props): JSX.Element => {
            required>
         </input>
         <button id="sign-in-button" type="submit" >Sign In</button>
-        <button id="close-form" onClick={handleLogIn}>
+        <button id="close-form-button" onClick={handleLogIn}>
           X Close Form
         </button>
       </fieldset>

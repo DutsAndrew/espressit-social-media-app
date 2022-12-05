@@ -4,6 +4,11 @@ import { User } from "firebase/auth";
 interface HeaderProps {
   handleSignUp: MouseEventHandler<HTMLParagraphElement>,
   handleLogIn: MouseEventHandler<HTMLParagraphElement>,
+  userStatus: {
+    formCompleted: boolean,
+    currentUser: User | string,
+    errorStatus: string | object,
+  },
 };
 
 interface SignUpProps {
@@ -30,6 +35,14 @@ interface LogInProps {
   handleLogIn: MouseEventHandler<HTMLButtonElement>,
 };
 
+interface AccountDisplayProps {
+  userStatus: {
+    formCompleted: boolean,
+    currentUser: User | string,
+    errorStatus: string | object,
+  },
+};
+
 export {
   type HeaderProps,
   type SignUpProps,
@@ -37,4 +50,5 @@ export {
   type CreateAccountProps,
   type userState,
   type LogInProps,
+  type AccountDisplayProps,
 };

@@ -26,6 +26,11 @@ const WebApp = () => {
 
   const handleSignUp = () => {
     if (signUpStatus.signUp === false) {
+      if (logInStatus.logIn === true) {
+        setLogInStatus({
+          logIn: false,
+        });
+      };
       setSignUpStatus({
         signUp: true,
       });
@@ -39,6 +44,11 @@ const WebApp = () => {
 
   const handleLogIn = () => {
     if (logInStatus.logIn === false) {
+      if (signUpStatus.signUp === true) {
+        setSignUpStatus({
+          signUp: false,
+        });
+      };
       setLogInStatus({
         logIn: true,
       });
@@ -117,7 +127,7 @@ const WebApp = () => {
   if (signUpStatus.signUp === true) {
     return (
       <div className="app-web">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} userStatus={userStatus} />
         <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword} handleSignUp={handleSignUp} />
       </div>
     );
@@ -126,7 +136,7 @@ const WebApp = () => {
   if (logInStatus.logIn === true) {
     return (
       <div className="app-web">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} userStatus={userStatus} />
         <LogIn signInUser={signInUser} handleLogIn={handleLogIn} />
       </div>
     );
@@ -134,7 +144,7 @@ const WebApp = () => {
 
   return (
     <div className="app-web">
-      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} />
+      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} userStatus={userStatus} />
       <HomePageWeb />
     </div>
   );
