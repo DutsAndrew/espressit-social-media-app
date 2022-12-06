@@ -37,7 +37,7 @@ const Title = styled.p `
 `;
 
 const AccountWrapper = styled.div `
-  width: 10vw;
+  width: 30vw;
   height: 10vh;
   font-size: 1em;
   display: flex;
@@ -49,10 +49,10 @@ const AccountWrapper = styled.div `
 
 const Header: FC<HeaderProps> = (props): JSX.Element => {
 
-  const { handleSignUp, handleLogIn, userStatus } = props;
+  const { handleSignUp, handleLogIn, currentUser } = props;
 
   // if user isn't logged in
-  if (typeof userStatus.currentUser === 'string') {
+  if (typeof currentUser === 'string') {
     return (
       <HeaderWrapper>
         <LogoWrapper>
@@ -79,7 +79,7 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
           </Title>
         </LogoWrapper>
         <AccountWrapper>
-          <AccountDisplay userStatus={userStatus} />
+          <AccountDisplay currentUser={currentUser} />
         </AccountWrapper>
       </HeaderWrapper>
   );

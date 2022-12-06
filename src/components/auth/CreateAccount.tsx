@@ -110,6 +110,9 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
 
   return (
     <form id="user-creation-form" onSubmit={submitAccountCreationForm}>
+      <button id="close-form-button" onClick={handleSignUp as unknown as MouseEventHandler<HTMLButtonElement>} >
+          X Close Form
+      </button>
       <fieldset id="create-account-fieldset" >
         <legend>Create an account:</legend>
         <label htmlFor="email-input" >*Email:</label>
@@ -145,9 +148,6 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
         <button id="account-submit"
           type="submit">
             Submit
-        </button>
-        <button id="close-form-button" onClick={handleSignUp as unknown as MouseEventHandler<HTMLButtonElement>} >
-          X Close Form
         </button>
       </fieldset>
     </form>

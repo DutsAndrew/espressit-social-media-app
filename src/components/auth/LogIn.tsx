@@ -23,6 +23,9 @@ const LogIn: FC<LogInProps> = (props): JSX.Element => {
 
   return (
     <form id="sign-in-form" onSubmit={handleSignIn} >
+      <button type="button" id="close-form-button" onClick={handleLogIn}>
+          X Close Form
+      </button>
       <fieldset id="sign-in-fieldset" >
         <legend>Sign In:</legend>
         <label htmlFor="email-login" >*Email:</label>
@@ -40,9 +43,6 @@ const LogIn: FC<LogInProps> = (props): JSX.Element => {
            required>
         </input>
         <button id="sign-in-button" type="submit" >Sign In</button>
-        <button id="close-form-button" onClick={handleLogIn}>
-          X Close Form
-        </button>
       </fieldset>
       <button type="button" id="google-sign-in-button" onClick={handleGoogleSignIn} >Sign in with <img src={google} alt="google logo"></img></button>
     </form>

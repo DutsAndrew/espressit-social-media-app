@@ -84,6 +84,9 @@ const WebApp = () => {
           currentUser: user,
           errorStatus: '',
         });
+        setSignUpStatus({
+          signUp: false,
+        });
         console.log(user);
       })
       .catch((error) => {
@@ -107,6 +110,9 @@ const WebApp = () => {
           formCompleted: true,
           currentUser: user,
           errorStatus: '',
+        });
+        setLogInStatus({
+          logIn: false,
         });
         console.log(user);
       })
@@ -136,6 +142,9 @@ const WebApp = () => {
             currentUser: user,
             errorStatus: '',
           });
+          setLogInStatus({
+            logIn: false,
+          });
           console.log(user);
         };
       })
@@ -153,10 +162,14 @@ const WebApp = () => {
       });
   };
 
+  const editProfile = () => {
+    console.log('editProfile');
+  };
+
   if (signUpStatus.signUp === true) {
     return (
       <div className="app-web">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} userStatus={userStatus} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} />
         <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword} handleSignUp={handleSignUp} />
       </div>
     );
@@ -165,7 +178,7 @@ const WebApp = () => {
   if (logInStatus.logIn === true) {
     return (
       <div className="app-web">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} userStatus={userStatus} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} />
         <LogIn signInUser={signInUser} handleLogIn={handleLogIn} signInWithGoogleAccount={signInWithGoogleAccount} />
       </div>
     );
@@ -173,7 +186,7 @@ const WebApp = () => {
 
   return (
     <div className="app-web">
-      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} userStatus={userStatus} />
+      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} />
       <HomePageWeb />
     </div>
   );
