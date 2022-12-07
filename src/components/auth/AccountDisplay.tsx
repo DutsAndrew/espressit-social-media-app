@@ -1,21 +1,31 @@
 import React, { FC } from "react";
 import { AccountDisplayProps } from "../../types/interfaces";
 import chevron from '../../assets/chevron-down.svg';
-import { sign } from "crypto";
+import '../../styles/account.css';
 
 const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
   const { currentUser } = props;
 
   const accountDropDown = (e: React.MouseEvent) => {
+
+    // checks if dropDown is open and calls account functions
     const target = e.target as Element;
-    if ((target.classList.contains('profile-text')
-      || target.classList.contains('profile-img')
-      || target.classList.contains('account-menu-button'))
-      && !document.querySelector('.account-drop-down-menu')
-    ) {
-      const profileContainer = document.querySelector('.profile-container');
+    if (target.classList.contains('sign-out-text') || target.classList.contains('edit-profile-text')) {
+      // run account functions here
+      return;
+    };
+
+    // open and closes drop down menu
+    const profileContainer = document.querySelector('.profile-container');
+    const dropDownMenu = document.querySelector('.account-drop-down-menu');
+    const chevronButton = document.querySelector('.account-menu-button');
+    const profileText = document.querySelector('.profile-text');
+    if (!dropDownMenu) {
+      chevronButton?.classList.add('drop-down-active');
+      profileText?.classList.add('drop-down-text-active');
       const dropDownMenu = document.createElement('div');
+        dropDownMenu.classList.remove('account-menu-button');
         dropDownMenu.classList.add('account-drop-down-menu');
       const signOut = document.createElement('p');
         signOut.classList.add('sign-out-text');
@@ -27,6 +37,12 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       dropDownMenu.appendChild(editProfile);
       profileContainer?.appendChild(dropDownMenu);
     };
+    if (dropDownMenu) {
+      dropDownMenu?.remove()
+      chevronButton?.classList.remove('drop-down-active');
+      chevronButton?.classList.add('account-menu-button');
+      profileText?.classList.remove('drop-down-text-active');
+    };
   };
 
   if (currentUser.displayName !== null) {
@@ -34,7 +50,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       <div className="profile-container" onClick={accountDropDown}>
         <p className="logged-in-as-text">Logged in as:</p>
         <div className="img-name-container">
-          <img className="profile-img" src={currentUser.photoURL} alt="profile" ></img>
+          <img className="profile-img" referrerPolicy="no-referrer" src={currentUser.photoURL} alt="profile" ></img>
           <p className="profile-text">{currentUser.displayName}</p>
           <img className="account-menu-button" src={chevron} alt="chevron" ></img>
         </div>
