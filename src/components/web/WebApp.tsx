@@ -162,6 +162,15 @@ const WebApp = () => {
       });
   };
 
+  const signOut = () => {
+    console.log('singing out');
+    setUserStatus({
+      formCompleted: false,
+      currentUser: '',
+      errorStatus: '',
+    });
+  };
+
   const editProfile = () => {
     console.log('editProfile');
   };
@@ -169,7 +178,7 @@ const WebApp = () => {
   if (signUpStatus.signUp === true) {
     return (
       <div className="app-web">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} />
         <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword} handleSignUp={handleSignUp} />
       </div>
     );
@@ -178,7 +187,7 @@ const WebApp = () => {
   if (logInStatus.logIn === true) {
     return (
       <div className="app-web">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} />
         <LogIn signInUser={signInUser} handleLogIn={handleLogIn} signInWithGoogleAccount={signInWithGoogleAccount} />
       </div>
     );
@@ -186,7 +195,7 @@ const WebApp = () => {
 
   return (
     <div className="app-web">
-      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} />
+      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} />
       <HomePageWeb />
     </div>
   );

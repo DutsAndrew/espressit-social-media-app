@@ -30,9 +30,17 @@ const MobileApp = () => {
     console.log('logging in');
   };
 
+  const signOut = () => {
+
+  };
+
+  const editProfile = () => {
+
+  }
+
   return (
     <div className="app-mobile">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} />
         <HomePageMobile />
     </div>
   )

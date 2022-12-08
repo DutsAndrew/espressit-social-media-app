@@ -62,6 +62,8 @@
   margin: 0;
   margin-top: 20vh;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-flow: column nowrap;
   position: absolute;
   background-color: #9D6538;

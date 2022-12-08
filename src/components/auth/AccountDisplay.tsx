@@ -5,16 +5,21 @@ import '../../styles/account.css';
 
 const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
-  const { currentUser } = props;
+  const { currentUser, signOut } = props;
 
   const accountDropDown = (e: React.MouseEvent) => {
 
     // checks if dropDown is open and calls account functions
     const target = e.target as Element;
-    if (target.classList.contains('sign-out-text') || target.classList.contains('edit-profile-text')) {
-      // run account functions here
+    if (target.classList.contains('sign-out-text')) {
+      signOut();
       return;
     };
+
+    if (target.classList.contains('edit-profile-text')) {
+      // run editProfile
+      return;
+    }
 
     // open and closes drop down menu
     const profileContainer = document.querySelector('.profile-container');

@@ -5,6 +5,7 @@ interface HeaderProps {
   handleSignUp: MouseEventHandler<HTMLParagraphElement>,
   handleLogIn: MouseEventHandler<HTMLParagraphElement>,
   currentUser: any,
+  signOut: Function,
 };
 
 interface SignUpProps {
@@ -34,6 +35,7 @@ interface LogInProps {
 
 interface AccountDisplayProps {
   currentUser: any,
+  signOut: Function,
 };
 
 export {
