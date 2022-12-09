@@ -132,6 +132,7 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
           minLength={8}
           maxLength={127}
           type="password"
+          data-testid="password-input"
           required>
         </input>
         <p id="password-input-error" className ="error-msg" ></p>
@@ -142,6 +143,7 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
           minLength={8}
           maxLength={127}
           type="password"
+          data-testid="confirm-password-input"
           required>
         </input>
         <p id="password-confirm-input-error" className ="error-msg" ></p>

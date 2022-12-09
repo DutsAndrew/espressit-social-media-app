@@ -5,7 +5,7 @@ import '../../styles/account.css';
 
 const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
-  const { currentUser, signOut } = props;
+  const { currentUser, signOut, editProfile } = props;
 
   const accountDropDown = (e: React.MouseEvent) => {
 
@@ -17,7 +17,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
     };
 
     if (target.classList.contains('edit-profile-text')) {
-      // run editProfile
+      editProfile();
       return;
     }
 
@@ -52,19 +52,19 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
   if (currentUser.displayName !== null) {
     return (
-      <div className="profile-container" onClick={accountDropDown}>
-        <p className="logged-in-as-text">Logged in as:</p>
+      <div className="profile-container" onClick={accountDropDown} role="menu" >
+        <p className="logged-in-as-text" role="paragraph">Logged in as:</p>
         <div className="img-name-container">
           <img className="profile-img" referrerPolicy="no-referrer" src={currentUser.photoURL} alt="profile" ></img>
-          <p className="profile-text">{currentUser.displayName}</p>
+          <p className="profile-text" >{currentUser.displayName}</p>
           <img className="account-menu-button" src={chevron} alt="chevron" ></img>
         </div>
       </div>
     );
   } else {
     return (
-      <div className="profile-container" onClick={accountDropDown}>
-        <p className="logged-in-as-text">Logged in as:</p>
+      <div className="profile-container" onClick={accountDropDown} role="menu" >
+        <p className="logged-in-as-text" role="paragraph" >Logged in as:</p>
         <div className="img-name-container">
           <p className="profile-text">{currentUser.email}</p>
           <img className="account-menu-button" src={chevron} alt="chevron" ></img>

@@ -40,7 +40,7 @@ const MobileApp = () => {
 
   return (
     <div className="app-mobile">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} editProfile={editProfile} />
         <HomePageMobile />
     </div>
   )
