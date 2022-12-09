@@ -34,13 +34,13 @@ const MobileApp = () => {
 
   };
 
-  const editProfile = () => {
+  const toggleEditProfilePage = () => {
 
   }
 
   return (
     <div className="app-mobile">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} editProfile={editProfile} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
         <HomePageMobile />
     </div>
   )

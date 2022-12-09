@@ -11,6 +11,7 @@ signInWithPopup,
 } from "firebase/auth";
 import { userState } from '../../types/interfaces';
 import LogIn from '../auth/LogIn';
+import EditProfile from "../auth/EditProfile";
 
 const WebApp = () => {
 
@@ -22,6 +23,8 @@ const WebApp = () => {
     currentUser: '',
     errorStatus: '',
   });
+
+  const [editProfileRequested, setEditProfileRequested] = useState({status: false});
 
   const handleSignUp = () => {
     if (signUpStatus.signUp === false) {
@@ -163,7 +166,6 @@ const WebApp = () => {
   };
 
   const signOut = () => {
-    console.log('signing out');
     setUserStatus({
       formCompleted: false,
       currentUser: '',
@@ -171,14 +173,22 @@ const WebApp = () => {
     });
   };
 
-  const editProfile = () => {
-    console.log('editProfile');
+  const toggleEditProfilePage = () => {
+    if (editProfileRequested.status === false) {
+      setEditProfileRequested({
+        status: true,
+      });
+    } else {
+      setEditProfileRequested({
+        status: false,
+      });
+    };
   };
 
   if (signUpStatus.signUp === true) {
     return (
       <div className="app-web">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} editProfile={editProfile} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
         <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword} handleSignUp={handleSignUp} />
       </div>
     );
@@ -187,15 +197,24 @@ const WebApp = () => {
   if (logInStatus.logIn === true) {
     return (
       <div className="app-web">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} editProfile={editProfile} />
+        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
         <LogIn signInUser={signInUser} handleLogIn={handleLogIn} signInWithGoogleAccount={signInWithGoogleAccount} />
       </div>
     );
   };
 
+  if (editProfileRequested.status === true) {
+   return (
+    <div className="app-web">
+      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
+      <EditProfile currentUser={userStatus.currentUser} toggleEditProfilePage={toggleEditProfilePage} />
+    </div>
+   )
+  };
+
   return (
     <div className="app-web">
-      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} editProfile={editProfile} />
+      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
       <HomePageWeb />
     </div>
   );

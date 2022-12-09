@@ -49,7 +49,7 @@ const AccountWrapper = styled.div `
 
 const Header: FC<HeaderProps> = (props): JSX.Element => {
 
-  const { handleSignUp, handleLogIn, currentUser, signOut, editProfile } = props;
+  const { handleSignUp, handleLogIn, currentUser, signOut, toggleEditProfilePage } = props;
 
   // if user isn't logged in
   if (typeof currentUser === 'string') {
@@ -79,7 +79,7 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
           </Title>
         </LogoWrapper>
         <AccountWrapper>
-          <AccountDisplay currentUser={currentUser} signOut={signOut} editProfile={editProfile} />
+          <AccountDisplay currentUser={currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
         </AccountWrapper>
       </HeaderWrapper>
   );

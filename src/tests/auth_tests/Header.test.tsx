@@ -14,18 +14,18 @@ describe('unit test for header', () => {
   const userMock = "Bob Dillon" as unknown as User;
 
   test('renders header, title', () => {
-    render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} editProfile={editProfileMock} />);
+    render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
     const websiteTitle = screen.getByText(/Espressit!/i);
     expect(websiteTitle).toBeInTheDocument();
   });
 
   test('header matches snapshot', () => {
-    const { container } = render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} editProfile={editProfileMock} />);
+    const { container } = render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
     expect(container).toMatchSnapshot();
   });
 
   test('signup and login are visible when not signed in', () => {
-    render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} editProfile={editProfileMock} />);
+    render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
     const signUpText = screen.getByText(/Sign Up/i);
     const signInText = screen.getByText(/Sign In/i);
     expect(signUpText).toBeInTheDocument();
@@ -33,14 +33,14 @@ describe('unit test for header', () => {
   });
 
   test('sign up form opens on text click', () => {
-    render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} editProfile={editProfileMock} />);
+    render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
     const link: any = screen.getByText("Sign Up");
     userEvent.click(link);
     expect(signUpMock).toHaveBeenCalled();
   });
 
   test('sign in form opens on text click', () => {
-    render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} editProfile={editProfileMock} />);
+    render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
     const link: any = screen.getByText("Sign In");
     userEvent.click(link);
     expect(logInMock).toHaveBeenCalled();

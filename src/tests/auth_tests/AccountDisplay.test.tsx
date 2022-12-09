@@ -21,7 +21,7 @@ describe('unit test for account display', () => {
   const editProfileMock = jest.fn();
 
   test('Account Display renders correct elements when user has a display name', () => {
-    render(<AccountDisplay currentUser={userMock} signOut={signOutMock} editProfile={editProfileMock} />);
+    render(<AccountDisplay currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
     const loggdInText = screen.getByRole('paragraph');
     expect(loggdInText).toBeInTheDocument();
     const profileImg = screen.getAllByRole('img')[0];
@@ -33,7 +33,7 @@ describe('unit test for account display', () => {
   });
 
   test('Account display renders correct elements when user has just an email on login', () => {
-    render(<AccountDisplay currentUser={userMockWithoutDisplayName} signOut={signOutMock} editProfile={editProfileMock} />);
+    render(<AccountDisplay currentUser={userMockWithoutDisplayName} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
     const loggdInText = screen.getByRole('paragraph');
     expect(loggdInText).toBeInTheDocument();
     const chevronSVG = screen.getAllByRole('img')[0];
@@ -43,7 +43,7 @@ describe('unit test for account display', () => {
   });
   
   test('drop down menu open and closes', () => {
-    render(<AccountDisplay currentUser={userMock} signOut={signOutMock} editProfile={editProfileMock} />);
+    render(<AccountDisplay currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
     const accountContainer = screen.getByRole("menu");
     userEvent.click(accountContainer);
     expect(screen.getByText(/Sign Out/i)).toBeInTheDocument();
@@ -54,7 +54,7 @@ describe('unit test for account display', () => {
   });
   
   test('sign out and edit profile are called on click', () => {
-    const { container } = render(<AccountDisplay currentUser={userMock} signOut={signOutMock} editProfile={editProfileMock} />);
+    const { container } = render(<AccountDisplay currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
     const accountContainer = screen.getByRole("menu");
     userEvent.click(accountContainer);
     const signOutBtn = screen.getByText(/Sign Out/i);

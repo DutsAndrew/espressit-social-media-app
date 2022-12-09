@@ -1,4 +1,4 @@
-/* Account profile display */
+/* ACCOUNT DISPLAY */
 
 .profile-container {
   display: flex;
@@ -58,7 +58,7 @@
 
 .account-drop-down-menu {
   height: 10vh;
-  width: 10vw;
+  width: 15vw;
   margin: 0;
   margin-top: 20vh;
   display: flex;
@@ -86,4 +86,55 @@
 
 .drop-down-text-active {
   color:#DABE99;
+}
+
+/* EDIT PROFILE */
+
+.edit-profile-form {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+}
+
+.edit-profile-fieldset {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 1vh;
+  margin: 2%;
+  width: 50vw;
+  height: auto;
+}
+
+.edit-profile-legend {
+  font-size: 2em;
+}
+
+.edit-profile-label {
+  font-size: 1.25em;
+}
+
+.edit-profile-input {
+  width: 50vw;
+  height: 2.5vh;
+  font-size: 1.5em;
+}
+
+.return-to-main-page-button, .submit-profile-button {
+  width: 20vw;
+  height: 3.5vh;
+  font-size: 0.95em;
+}
+
+.submit-profile-button {
+  margin-left: 30%;
+  margin-top: 3%;
+}
+
+.delete-account-button, .remove-data-button {
+  width: 50vw;
+  height: 3.5vh;
+  font-size: 1em;
 }

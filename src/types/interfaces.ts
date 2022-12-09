@@ -6,7 +6,7 @@ interface HeaderProps {
   handleLogIn: MouseEventHandler<HTMLParagraphElement>,
   currentUser: any,
   signOut: Function,
-  editProfile: Function,
+  toggleEditProfilePage: Function,
 };
 
 interface SignUpProps {
@@ -37,8 +37,13 @@ interface LogInProps {
 interface AccountDisplayProps {
   currentUser: any,
   signOut: Function,
-  editProfile: Function,
+  toggleEditProfilePage: Function,
 };
+
+interface EditProfileProps {
+  currentUser: any,
+  toggleEditProfilePage: Function,
+}
 
 export {
   type HeaderProps,
@@ -48,4 +53,5 @@ export {
   type userState,
   type LogInProps,
   type AccountDisplayProps,
+  type EditProfileProps,
 };

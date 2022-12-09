@@ -5,7 +5,7 @@ import '../../styles/account.css';
 
 const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
-  const { currentUser, signOut, editProfile } = props;
+  const { currentUser, signOut, toggleEditProfilePage } = props;
 
   const accountDropDown = (e: React.MouseEvent) => {
 
@@ -17,7 +17,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
     };
 
     if (target.classList.contains('edit-profile-text')) {
-      editProfile();
+      toggleEditProfilePage();
       return;
     }
 
