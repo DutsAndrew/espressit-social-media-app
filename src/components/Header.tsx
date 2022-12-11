@@ -11,7 +11,7 @@ const HeaderWrapper = styled.div `
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  background-color: #8f755f;
+  background-color: rgb(77, 39, 14, 1);
   border-bottom: 1px solid #80411e;
   margin-bottom: 0.5%;
 `;
@@ -33,7 +33,7 @@ const Title = styled.p `
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: #37251b;
+  color: rgb(138, 109, 76);
 `;
 
 const AccountWrapper = styled.div `

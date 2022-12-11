@@ -16,6 +16,8 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
     toggleEditProfilePage();
   };
 
+  // fetch firebase user data to check for variables below and then validate on what already exists and add it to page
+
   return (
     <form className="edit-profile-form" onSubmit={handleProfileEdit}>
       <button type="button" className="return-to-main-page-button" onClick={handleReturnToMain} >
@@ -24,7 +26,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
       <fieldset className="edit-profile-fieldset">
         <legend className="edit-profile-legend" >Profile Information:</legend>
         <label htmlFor="first-name" className="edit-profile-label">First Name:</label>
-        <input id="first-name-input" name="first-name" className="edit-profile-input" ></input>
+        <input id="first-name-input" name="first-name" className="edit-profile-input" >{currentUser.displayName ? currentUser.email : "Not Set"}</input>
         <label htmlFor="last-name" className="edit-profile-label">Last Name:</label>
         <input id="last-name-input" name="last-name" className="edit-profile-input" ></input>
         <label htmlFor="user-name" className="edit-profile-label">Username:</label>

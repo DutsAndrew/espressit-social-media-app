@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../Header";
-import HomePageWeb from "./HomePage";
+import HomePageWeb from "./HomePageWeb";
 import CreateAccount from '../auth/CreateAccount';
 import { initializeApp } from "firebase/app";
 import { getAuth,

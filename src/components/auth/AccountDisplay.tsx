@@ -9,18 +9,6 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
   const accountDropDown = (e: React.MouseEvent) => {
 
-    // checks if dropDown is open and calls account functions
-    const target = e.target as Element;
-    if (target.classList.contains('sign-out-text')) {
-      signOut();
-      return;
-    };
-
-    if (target.classList.contains('edit-profile-text')) {
-      toggleEditProfilePage();
-      return;
-    }
-
     // open and closes drop down menu
     const profileContainer = document.querySelector('.profile-container');
     const dropDownMenu = document.querySelector('.account-drop-down-menu');
@@ -48,6 +36,18 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       chevronButton?.classList.add('account-menu-button');
       profileText?.classList.remove('drop-down-text-active');
     };
+
+    const target = e.target as Element;
+    if (target.classList.contains('sign-out-text')) {
+      signOut();
+      return;
+    };
+
+    if (target.classList.contains('edit-profile-text')) {
+      toggleEditProfilePage();
+      return;
+    };
+
   };
 
   if (currentUser.displayName !== null) {

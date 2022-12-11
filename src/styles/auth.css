@@ -1,13 +1,13 @@
 .sign-up-link, .sign-in-link {
   margin: 0;
   text-decoration: underline;
-  color: #37251b;
+  color: rgb(194, 161, 134);
 }
 
 .sign-up-link:hover, .sign-in-link:hover {
   cursor: pointer;
   font-size: 0.95em;
-  color: #80411e;
+  color: rgb(138, 109, 76);
 }
 
 #close-form-button {
