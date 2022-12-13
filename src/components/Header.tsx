@@ -13,7 +13,6 @@ const HeaderWrapper = styled.div `
   justify-content: space-between;
   background-color: rgb(77, 39, 14, 1);
   border-bottom: 1px solid #80411e;
-  margin-bottom: 0.5%;
 `;
 
 const LogoWrapper = styled.div `

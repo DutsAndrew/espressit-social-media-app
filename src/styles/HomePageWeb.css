@@ -20,6 +20,8 @@
   width: 70vw;
   height: 5vh;
   gap: 1vw;
+  margin: 0;
+  margin-top: 1%;
   background-color: rgb(129, 83, 40);
 }
 

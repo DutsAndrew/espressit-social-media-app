@@ -7,7 +7,7 @@
   align-items: center;
   height: 10vh;
   width: 30vw;
-  color: #37251b;
+  color: rgb(184, 161, 134);
 }
 
 .logged-in-as-text {
@@ -58,9 +58,10 @@
 
 .account-drop-down-menu {
   height: 10vh;
-  width: 15vw;
+  width: 12vw;
   margin: 0;
   margin-top: 20vh;
+  margin-left: 15vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,6 +98,8 @@
   align-items: center;
   width: 100vw;
   height: 90vh;
+  background-color: rgb(253, 255, 246);
+  color: rgb(17, 7, 2);
 }
 
 .edit-profile-fieldset {
@@ -123,6 +126,8 @@
 }
 
 .return-to-main-page-button, .submit-profile-button {
+  margin: 0;
+  margin-top: 2%;
   width: 20vw;
   height: 3.5vh;
   font-size: 0.95em;
