@@ -73,7 +73,7 @@
   height: 3vh;
 }
 
-.create-post-text-container, .create-post-img-container, .create-post-link-container {
+.create-post-text-container {
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
@@ -131,7 +131,18 @@
   color: rgb(17, 7, 2);
 }
 
-/* INSERT IMG CONTAINER ITEMS, all post type containers are styled above */
+/* INSERT IMG CONTAINER ITEMS */
+
+.create-post-img-container, .create-post-link-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 65vw;
+  height: auto;
+  margin: 0;
+  margin-top: 2%;
+}
 
 .insert-image-input, .insert-link-input {
   width: 40vw;
@@ -149,11 +160,8 @@
   color: rgb(253, 255, 246);
 }
 
-.insert-image-button, .insert-link-button {
-  width: 10vw;
-  height: 3vh;
-  background-color: rgb(253, 255, 246);
-  border-radius: 5%;
-  margin-top: 2%;
-  color: rgb(17, 7, 2);
+.error-text-post-input {
+  width: 65vw;
+  height: auto;
+  color: white;
 }

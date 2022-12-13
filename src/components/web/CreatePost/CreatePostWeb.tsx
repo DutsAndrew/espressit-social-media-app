@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import imgSVG from '../../../assets/image.svg';
-import linkSVG from '../../../assets/link.svg';
 import closeItem from '../../../assets/close.svg';
-import tamper from '../../../assets/tamper.svg';
 import { postType } from '../../../types/interfaces';
 import TextForm from "./TextForm";
 import PostNav from "./PostNav";
@@ -14,7 +11,7 @@ const CreatePostWeb = (): JSX.Element => {
     type: '',
   });
 
-  const handleCreatePostActivation = (typeOfPost: postType) => {
+  const handlePostType = (typeOfPost: postType) => {
     // helps render the correct post type
     if (typeOfPost.text) {
       setPostData({
@@ -47,6 +44,18 @@ const CreatePostWeb = (): JSX.Element => {
 
   const handleInsertLink = () => {
     console.log('allowing link insertion');
+    const input = document.querySelector('.insert-link-input') as HTMLInputElement;
+    const errorText = document.querySelector('.error-text-post-input');
+
+    // handles error text production and removal
+    if (input.validity.valid === false) {
+     if (errorText) {
+      errorText.textContent = "Your link must have: 1) https:// 2) URL 3) .com, .net, .org, or other website ending";
+      setTimeout(() => {
+        errorText.textContent = "";
+      }, 10000);
+     };
+    };
   };
 
   const handleFormSubmission = () => {
@@ -57,7 +66,7 @@ const CreatePostWeb = (): JSX.Element => {
     return (
       <>
         <button className="close-form-button" type="button" onClick={handleCloseForm} ><img className="close-button-svg" src={closeItem} alt="close svg" ></img></button>
-        <PostNav handleCreatePostActivation={handleCreatePostActivation} />
+        <PostNav handlePostType={handlePostType} />
         <TextForm handleFormSubmission={handleFormSubmission} />
       </>
     );
@@ -67,11 +76,11 @@ const CreatePostWeb = (): JSX.Element => {
     return (
       <>
         <button className="close-form-button" type="button" onClick={handleCloseForm} ><img className="close-button-svg" src={closeItem} alt="close svg" ></img></button>
-        <PostNav handleCreatePostActivation={handleCreatePostActivation} />
+        <PostNav handlePostType={handlePostType} />
         <div className="create-post-img-container">
-          <input className="insert-image-input" type="file" accept="/image/*" ></input>
-          <button type="button" className="insert-image-button" onClick={handleInsertImage} >Insert</button>
+          <input className="insert-image-input" type="file" accept="/image/*" onChange={handleInsertImage} ></input>
         </div>
+        <TextForm handleFormSubmission={handleFormSubmission} />
       </>
     );
   };
@@ -80,17 +89,18 @@ const CreatePostWeb = (): JSX.Element => {
     return (
       <>
         <button className="close-form-button" type="button" onClick={handleCloseForm} ><img className="close-button-svg" src={closeItem} alt="close svg" ></img></button>
-        <PostNav handleCreatePostActivation={handleCreatePostActivation} />
+        <PostNav handlePostType={handlePostType} />
         <div className="create-post-link-container">
-          <input className="insert-link-input" type="url" placeholder="Insert Link here" ></input>
-          <button type="button" className="insert-link-button" onClick={handleInsertLink} >Insert</button>
+          <input className="insert-link-input" type="url" placeholder="Insert Link here" onChange={handleInsertLink} ></input>
         </div>
+        <p className="error-text-post-input"></p>
+        <TextForm handleFormSubmission={handleFormSubmission} />
       </>
     );
   };
 
   return (
-    <PostNav handleCreatePostActivation={handleCreatePostActivation} />
+    <PostNav handlePostType={handlePostType} />
   );
 };
 

@@ -56,7 +56,7 @@ interface TextFormProps {
 };
 
 interface PostNavProps {
-  handleCreatePostActivation: Function,
+  handlePostType: Function,
 }
 
 export {
