@@ -1,4 +1,4 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, FormEventHandler } from 'react';
 import { User } from "firebase/auth";
 
 interface HeaderProps {
@@ -45,6 +45,20 @@ interface EditProfileProps {
   toggleEditProfilePage: Function,
 }
 
+interface postType {
+  text?: boolean,
+  img?: boolean,
+  link?: boolean,
+};
+
+interface TextFormProps {
+  handleFormSubmission: FormEventHandler<HTMLFormElement>,
+};
+
+interface PostNavProps {
+  handleCreatePostActivation: Function,
+}
+
 export {
   type HeaderProps,
   type SignUpProps,
@@ -54,4 +68,7 @@ export {
   type LogInProps,
   type AccountDisplayProps,
   type EditProfileProps,
+  type postType,
+  type TextFormProps,
+  type PostNavProps,
 };

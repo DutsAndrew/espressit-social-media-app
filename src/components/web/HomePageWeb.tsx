@@ -1,6 +1,6 @@
 import React from "react";
 import '../../styles/HomePageWeb.css';
-import CreatePostWeb from "./CreatePostWeb";
+import CreatePostWeb from "./CreatePost/CreatePostWeb";
 
 const HomePageWeb = () => {
 
