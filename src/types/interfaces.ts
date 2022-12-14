@@ -45,6 +45,10 @@ interface EditProfileProps {
   toggleEditProfilePage: Function,
 }
 
+interface HomePageWebProps {
+  currentUser: any,
+}
+
 interface postType {
   text?: boolean,
   img?: boolean,
@@ -71,4 +75,5 @@ export {
   type postType,
   type TextFormProps,
   type PostNavProps,
+  type HomePageWebProps,
 };

@@ -1,4 +1,4 @@
-import EditProfile from "../../components/auth/EditProfile";
+import ViewPost from "../../components/web/Posts/ViewPost";
 
 describe('unit tests for Edit Profile', () => {
 

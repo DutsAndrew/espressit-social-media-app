@@ -5,8 +5,6 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
 
   const { currentUser, toggleEditProfilePage } = props;
 
-  console.log(currentUser);
-
   const handleProfileEdit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('editing profile');
@@ -14,6 +12,14 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
 
   const handleReturnToMain = () => {
     toggleEditProfilePage();
+  };
+
+  const handleDeleteAccount = () => {
+
+  };
+
+  const handleRemoveAccountInfo = () => {
+
   };
 
   // fetch firebase user data to check for variables below and then validate on what already exists and add it to page
@@ -26,23 +32,40 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
       <fieldset className="edit-profile-fieldset">
         <legend className="edit-profile-legend" >Profile Information:</legend>
         <label htmlFor="first-name" className="edit-profile-label">First Name:</label>
-        <input id="first-name-input" name="first-name" className="edit-profile-input" placeholder={currentUser.displayName ? currentUser.email : "Not Set"} ></input>
+        <input id="first-name-input"
+          name="first-name"
+          className="edit-profile-input"
+          placeholder={currentUser.displayName ? currentUser.email : "Not Set"}
+          data-testid="first-name" >
+        </input>
         <label htmlFor="last-name" className="edit-profile-label">Last Name:</label>
-        <input id="last-name-input" name="last-name" className="edit-profile-input" ></input>
+        <input id="last-name-input"
+          name="last-name"
+          className="edit-profile-input"
+          data-testid="last-name" >
+        </input>
         <label htmlFor="user-name" className="edit-profile-label">Username:</label>
-        <input id="user-name-input" name="user-name" className="edit-profile-input" ></input>
+        <input id="user-name-input"
+          name="user-name"
+          className="edit-profile-input"
+          data-testid="username" >
+        </input>
         <label htmlFor="email" className="edit-profile-label">Email:</label>
-        <input id="email-input" name="email" className="edit-profile-input" ></input>
+        <input id="email-input"
+          name="email"
+          className="edit-profile-input" 
+          data-testid="email" >
+        </input>
         <button type="submit" className="submit-profile-button">
           Submit Information
         </button>
       </fieldset>
       <fieldset className="edit-profile-fieldset">
         <legend className="edit-profile-legend" >Danger Zone</legend>
-        <button type="button" className="delete-account-button">
+        <button type="button" className="delete-account-button" onClick={handleDeleteAccount} >
           Delete Account
         </button>
-        <button type="button" className="remove-data-button">
+        <button type="button" className="remove-data-button" onClick={handleRemoveAccountInfo}>
           Remove all account information and posts
         </button>
       </fieldset>

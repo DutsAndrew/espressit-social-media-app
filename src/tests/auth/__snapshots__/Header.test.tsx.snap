@@ -3,7 +3,7 @@
 exports[`unit test for header header matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bcXHqe kaXDTo"
+    class="sc-bcXHqe eGdZpx"
   >
     <div
       class="sc-gswNZR bhqVXH"
@@ -14,7 +14,7 @@ exports[`unit test for header header matches snapshot 1`] = `
         src="espresso.svg"
       />
       <p
-        class="sc-dkrFOg kegtyY"
+        class="sc-dkrFOg cIRlKe"
       >
         Espressit!
       </p>

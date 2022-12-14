@@ -215,7 +215,7 @@ const WebApp = () => {
   return (
     <div className="app-web">
       <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
-      <HomePageWeb />
+      <HomePageWeb currentUser={userStatus.currentUser} />
     </div>
   );
 };

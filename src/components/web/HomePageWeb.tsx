@@ -1,18 +1,26 @@
-import React from "react";
+import React, { FC } from "react";
 import '../../styles/HomePageWeb.css';
 import CreatePostWeb from "./CreatePost/CreatePostWeb";
+import { HomePageWebProps } from "../../types/interfaces";
+import Posts from "./Posts/Posts";
 
-const HomePageWeb = () => {
+const HomePageWeb: FC<HomePageWebProps> = (props): JSX.Element => {
 
-  // create post container will be snapped to top of screen, should show account picture, create post
+  const { currentUser } = props;
 
-  // if user is logged in... return this:
+  // removes CreatePost components if user is not signed in
+  if (typeof currentUser === 'string') {
+   return (
+    <div className="home-page-web">
+      <Posts />
+    </div>
+   );
+  };
+
   return (
     <div className="home-page-web">
       <CreatePostWeb />
-      <div className="all-posts-container">
-        
-      </div>
+      <Posts />
     </div>
   );
 };

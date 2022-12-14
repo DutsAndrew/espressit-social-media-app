@@ -60,6 +60,7 @@ describe('unit test for account display', () => {
     const signOutBtn = screen.getByText(/Sign Out/i);
     userEvent.click(signOutBtn);
     expect(signOutMock).toBeCalled();
+    userEvent.click(accountContainer);
     const editProfileBtn = screen.getByText(/Edit Profile/i);
     userEvent.click(editProfileBtn);
     expect(editProfileMock).toBeCalled();
