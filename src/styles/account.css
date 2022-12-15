@@ -32,7 +32,6 @@
 }
 
 .img-name-container:hover > .account-menu-button {
-  filter: invert(86%) sepia(32%) saturate(424%) hue-rotate(333deg) brightness(92%) contrast(84%);
   transform: rotate(0deg);
 }
 
@@ -45,7 +44,7 @@
 .account-menu-button {
   width: 3.5vw;
   height: 3.5vh;
-  filter: invert(9%) sepia(8%) saturate(4181%) hue-rotate(337deg) brightness(99%) contrast(84%);
+  filter: invert(86%) sepia(32%) saturate(424%) hue-rotate(333deg) brightness(92%) contrast(84%);
   transform: rotate(270deg);
 }
 
