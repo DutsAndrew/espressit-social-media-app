@@ -31,12 +31,16 @@
 .sort-menu-drop-down {
   /* width/height styling are in Posts.tsx */
   filter: invert(89%) sepia(10%) saturate(220%) hue-rotate(56deg) brightness(109%) contrast(108%);
-  transform: rotate(90deg);
+  transform: rotate(0deg);
 }
 
 .sort-menu-drop-down:hover {
   transform: rotate(270deg);
   cursor: pointer;
+}
+
+.sort-drop-down-open {
+  transform: rotate(270deg);
 }
 
 .sort-by-button {

@@ -12,12 +12,19 @@ const Posts = (): JSX.Element => {
   const [dropDownMenu, setDropDownMenu] = useState({open: false});
 
   const handleSortClick = (): void => {
+    const sortDropDown = document.querySelector('.sort-menu-drop-down');
     if (dropDownMenu.open === true) {
-      setDropDownMenu({open: false});
+      setDropDownMenu({
+        open: false
+      });
+      sortDropDown?.classList.remove('sort-drop-down-open');
       return;
     };
     if (dropDownMenu.open === false) {
-      setDropDownMenu({open: true});
+      setDropDownMenu({
+        open: true
+      });
+      sortDropDown?.classList.add('sort-drop-down-open');
       return;
     };
   };
@@ -33,13 +40,13 @@ const Posts = (): JSX.Element => {
 
   if (dropDownMenu.open === false) {
     return (
-      <div className="posts-container">
-        <div className="sort-by-container">
+      <div className="posts-container" >
+        <div className="sort-by-container" onClick={handleSortClick} >
           <p className="sort-by-text">Sort by:</p>
           <img className="sort-menu-drop-down" src={dropDown} alt="chevron arrow" style={{width: "4vw", height: "4vh"}} onClick={handleSortClick} ></img>
-          <button type="button" className="sort-by-new" onClick={() => handleSortType(sortType.type)}>{sortType.type}</button>
+          <button type="button" className="sort-by-new" onClick={() => handleSortType(sortType.type) }>{sortType.type}</button>
         </div>
-        <Feed />
+        <Feed sortType={sortType.type} />
       </div>
     );
   };
@@ -47,8 +54,8 @@ const Posts = (): JSX.Element => {
 
   if (dropDownMenu.open === true) {
     return (
-      <div className="posts-container">
-        <div className="sort-by-container">
+      <div className="posts-container" >
+        <div className="sort-by-container" onClick={handleSortClick} >
           <p className="sort-by-text">Sort by:</p>
           <img className="sort-menu-drop-down" src={dropDown} alt="chevron arrow" style={{width: "4vw", height: "4vh"}} onClick={handleSortClick} ></img>
           <button type="button" className="sort-by-button" onClick={() => handleSortType("New")} >New</button>
@@ -56,7 +63,7 @@ const Posts = (): JSX.Element => {
           <button type="button" className="sort-by-button" onClick={() => handleSortType("Contributed")} >Contributed</button>
           <button type="button" className="sort-by-button" onClick={() => handleSortType("Controversial")} >Controversial</button>
         </div>
-        <Feed />
+        <Feed sortType={sortType.type} />
       </div>
     );
   };

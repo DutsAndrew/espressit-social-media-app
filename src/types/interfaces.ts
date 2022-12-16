@@ -63,6 +63,10 @@ interface PostNavProps {
   handlePostType: Function,
 }
 
+interface FeedProps {
+  sortType: Object,
+};
+
 export {
   type HeaderProps,
   type SignUpProps,
@@ -76,4 +80,5 @@ export {
   type TextFormProps,
   type PostNavProps,
   type HomePageWebProps,
+  type FeedProps,
 };
