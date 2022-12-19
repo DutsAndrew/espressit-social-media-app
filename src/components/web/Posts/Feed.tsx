@@ -4,14 +4,31 @@ import upVoteSVG from '../../../assets/arrow-up.svg';
 import downVoteSVG from '../../../assets/arrow-down.svg';
 import saveSVG from '../../../assets/save.svg';
 import commentSVG from '../../../assets/comment.svg';
+import uniqid from 'uniqid';
+import '../../../styles/Feed.css';
+import timeSort from "../../../scripts/timeSort";
 
 const Feed: FC<FeedProps> = (props): JSX.Element => {
+
+  // fetch posts from db
+  // sort db based on sortType
+  // create map function to map sortedData to feed
+    // listeners for each post
+      // upvote and downvote clicks
+      // comment, and favorite clicks
+      // comment click will auto trigger viewComment
+      // any click on post will send user to viewPost version of post
+      // there will be no share click to avoid potential problem with page linking and db query issues
 
   const { sortType } = props;
 
   const [currentlyViewing, setCurrentlyViewing] = useState({
     post: '',
   });
+
+  const handleViewPost = () => {
+    console.log('viewing post');
+  };
 
   const fakePosts = [
     {
@@ -63,33 +80,43 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
       ],
     },
   ];
+ 
+  (function fakeDates () {
+    const dateArray: any[] = [];
+    const date1: any = new Date().toLocaleString();
+  
+    dateArray.push(date1);
 
-  // fetch posts from db
-  // sort db based on sortType
-  // create map function to map sortedData to feed
-    // listeners for each post
-      // upvote and downvote clicks
-      // comment, and favorite clicks
-      // comment click will auto trigger viewComment
-      // any click on post will send user to viewPost version of post
-      // there will be no share click to avoid potential problem with page linking and db query issues
+    setTimeout(() => {
+      const date2 = new Date().toLocaleString();
+      dateArray.push(date2);
+    }, 1000);
+
+    const date3 = new Date(1995, 8, 17, 3, 24, 10).toLocaleString();
+    const date4 = new Date(2022, 10, 3, 10, 3, 8).toLocaleString();
+    dateArray.push(date3, date4);
+
+    const results = timeSort(dateArray);
+    console.log(results);
+  })();
 
   return (
     <div className="feed-container">
       {Array.isArray(fakePosts) && fakePosts.map((post) => {
-        return <div className="post" key="123">
+        return <div className="post" key={uniqid()}>
           <div className="upvote-downvote-container">
-            <img className="upvote-svg" src={upVoteSVG} alt="arrow pointing up" ></img>
+            <img className="upvote-svg" src={upVoteSVG} alt="arrow pointing up" style={{width: "3vw", height: "3vh"}} ></img>
             <p className="upvote-count-text">{(post.likes - post.dislikes) > 0 ? post.likes - post.dislikes : 0}</p>
-            <img className="downvote-svg" src={downVoteSVG} alt="arrow pointing down" ></img>
+            <img className="downvote-svg" src={downVoteSVG} alt="arrow pointing down" style={{width: "3vw", height: "3vh"}} ></img>
           </div>
           <div className="content-container">
-            <h1 className="post-title">{post.title}</h1>
+            <h1 className="post-title" onClick={handleViewPost} >{post.title.length > 75 ? post.title.slice(0, 75).concat('...') : post.title}</h1>
               {/* create conditional render when an img or link is also present as h2s */}
-            <h3 className="post-description">{post.body}</h3>
+            <h3 className="post-description" onClick={handleViewPost} >{post.body.length > 400 ? post.body.slice(0, 400).concat('...') : post.body}</h3>
             <div className="post-footer-container">
-              <img className="post-comment-svg" src={commentSVG} alt="comment icon"></img>
-              <img className="post-save-svg" src={saveSVG} alt="save icon"></img>
+              <img className="post-comment-svg" src={commentSVG} alt="comment icon" style={{width: "2vw", height: "2vh"}} ></img>
+              <p className="post-comment-amount">{post.comments.length}</p>
+              <img className="post-save-svg" src={saveSVG} alt="save icon" style={{width: "2vw", height: "2vh"}} ></img>
             </div>
           </div>
         </div>
