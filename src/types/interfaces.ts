@@ -43,7 +43,7 @@ interface AccountDisplayProps {
 interface EditProfileProps {
   currentUser: any,
   toggleEditProfilePage: Function,
-}
+};
 
 interface HomePageWebProps {
   currentUser: any,
@@ -65,12 +65,17 @@ interface PostNavProps {
 
 interface FeedProps {
   sortedData: Object,
+  viewPost: Function,
 };
 
 interface SortNavProps {
   handleSortChange: Function,
   sortType: { type: string; },
-}
+};
+
+interface ViewPostProps {
+  viewing: {},
+};
 
 export {
   type HeaderProps,
@@ -87,4 +92,5 @@ export {
   type HomePageWebProps,
   type FeedProps,
   type SortNavProps,
+  type ViewPostProps,
 };

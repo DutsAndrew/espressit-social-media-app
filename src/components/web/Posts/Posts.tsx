@@ -1,23 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Feed from "./Feed";
 import SortNav from "./SortNav";
 import '../../../styles/Posts.css';
 import timeSort from "../../../scripts/timeSort";
+import ViewPost from "./ViewPost";
 
 const Posts = (): JSX.Element => {
 
-  // controller to use algorithms for sorting feed based on new, most popular, and posts that the user has contributed to
-
-  // sort by new on default
-  const [sortType, setSortType] = useState({type: "New"});
-
-  const [sortedData, setSortedData] = useState({});
-
-  const handleSortChange = (type: string): void => {
-    setSortType({
-      type: type
-    });
-  };
+    // fetch posts from db
+  // sort db based on sortType
+  // create map function to map sortedData to feed
+    // listeners for each post
+      // upvote and downvote clicks
+      // comment, and favorite clicks
+      // comment click will auto trigger viewComment
+      // any click on post will send user to viewPost version of post
+      // there will be no share click to avoid potential problem with page linking and db query issues
 
   const fakePosts = [
     {
@@ -28,6 +26,12 @@ const Posts = (): JSX.Element => {
       views: 1200,
       likes: 432,
       dislikes: 108,
+      whoLiked: [
+        "disneyscoffee", "noodelsaregood", "mario"
+      ],
+      whoDisliked: [
+        "usernameis1"
+      ],
       comments: [
         {
           account: "darthmeowcakes",
@@ -35,6 +39,12 @@ const Posts = (): JSX.Element => {
           comment: "I get the let down but this is every single industry ever. People should be trained properly and (this one gets forgotten a lot) management should support the workers not cutting corners and continuing education.",
           likes: 282,
           dislikes: 0,
+          whoLiked: [
+            "disneyscoffee", "noodelsaregood", "mario"
+          ],
+          whoDisliked: [
+            "usernameis1"
+          ],
         },
         {
           account: "disneyscoffee",
@@ -42,6 +52,12 @@ const Posts = (): JSX.Element => {
           comment: "As a teacher (and former barista), I will say that even when given multiple opportunities to advance one's skills and training, there are a growing number of people who simply don't care enough about what they learn in training to actually apply it consistently or at all. Those who do care tend to pour their hearts into their craft, but apathy is more common than passion.",
           likes: 86,
           dislikes: 2,
+          whoLiked: [
+            "disneyscoffee", "noodelsaregood", "mario"
+          ],
+          whoDisliked: [
+            "usernameis1"
+          ],
         },
         {
           account: "noodelsaregood",
@@ -49,6 +65,12 @@ const Posts = (): JSX.Element => {
           comment: "If the Barista isn't well trained, it's not a speciality coffee shop... It's a money grab...",
           likes: 509,
           dislikes: 105,
+          whoLiked: [
+            "disneyscoffee", "noodelsaregood", "mario"
+          ],
+          whoDisliked: [
+            "usernameis1"
+          ],
         },
       ],
     },
@@ -60,15 +82,53 @@ const Posts = (): JSX.Element => {
       views: 201,
       likes: 73,
       dislikes: 12,
+      whoLiked: [
+        "disneyscoffee", "noodelsaregood", "mario"
+      ],
+      whoDisliked: [
+        "usernameis1"
+      ],
       comments: [
         {
           account: "2basnes",
           time: "51 min. ago",
           comment: "Start using your gear. Everything that is important will become clear soon enough, everything else is just a noise.",
+          likes: 509,
+          dislikes: 105,
+          whoLiked: [
+            "disneyscoffee", "noodelsaregood", "mario"
+          ],
+          whoDisliked: [
+            "usernameis1"
+          ],
         },
       ],
     },
   ];
+
+  // sort by new on default
+  const [sortType, setSortType] = useState({type: "New"});
+
+  const [sortedData, setSortedData] = useState({
+    data: fakePosts,
+  });
+
+  const handleSortChange = (type: string): void => {
+    setSortType({
+      type: type
+    });
+  };
+
+  // handles when user wants to view a post
+  const [currentlyViewing, setCurrentlyViewing] = useState({
+    post: {},
+  });
+
+  const viewPost = (index: number): void => {
+    setCurrentlyViewing({
+      post: sortedData.data[index],
+    });
+  };
  
   (function fakeDates () {
     const dateArray: any[] = [];
@@ -85,17 +145,26 @@ const Posts = (): JSX.Element => {
     const date4 = new Date(2022, 10, 3, 10, 3, 8).toLocaleString();
     dateArray.push(date3, date4);
 
-    console.log(dateArray);
     const results = timeSort(dateArray);
-    console.log(results);
   })();
 
-  return (
-    <div className="posts-container" >
-      <SortNav handleSortChange={handleSortChange} sortType={sortType} />
-      <Feed sortedData={fakePosts} />
-    </div>
-  );
+  useEffect(() => {
+    console.log(currentlyViewing);
+  }, [currentlyViewing]);
+
+  // if a post isn't being viewed return feed
+  if (Object.keys(currentlyViewing.post).length === 0) {
+    return (
+      <div className="posts-container" >
+        <SortNav handleSortChange={handleSortChange} sortType={sortType} />
+        <Feed sortedData={fakePosts} viewPost={viewPost} />
+      </div>
+    );
+  } else {
+    return (
+      <ViewPost viewing={currentlyViewing.post} />
+    );
+  };
 };
 
 export default Posts;
