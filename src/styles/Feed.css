@@ -23,10 +23,17 @@
 }
 
 .post:hover {
-  cursor: pointer;
   box-shadow: 10px 5px 5px black;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
   margin-bottom: 1vh;
   transform: scale(1.01);
+}
+
+.post-title:hover, .post-description:hover {
+  cursor: pointer;
 }
 
 .upvote-downvote-container {
@@ -43,6 +50,7 @@
 
 .upvote-svg:hover, .downvote-svg:hover, .post-comment-svg:hover, .post-save-svg:hover {
   filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
+  cursor: pointer;
 }
 
 .content-container {

@@ -64,8 +64,13 @@ interface PostNavProps {
 }
 
 interface FeedProps {
-  sortType: Object,
+  sortedData: Object,
 };
+
+interface SortNavProps {
+  handleSortChange: Function,
+  sortType: { type: string; },
+}
 
 export {
   type HeaderProps,
@@ -81,4 +86,5 @@ export {
   type PostNavProps,
   type HomePageWebProps,
   type FeedProps,
+  type SortNavProps,
 };

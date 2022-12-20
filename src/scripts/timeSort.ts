@@ -24,30 +24,48 @@ export default function timeSort (dateArray: any[]) {
     };
 
     // sorts by day third
-    if (monthRef(date1) === monthRef(date2)
+    if (yearRef(date1) === yearRef(date2)
+      && monthRef(date1) === monthRef(date2)
       && dayRef(date1) < dayRef(date2)
     ) {
       return -1;
-    } else if (monthRef(date1) === monthRef(date2)
+    } else if (yearRef(date1) === yearRef(date2)
+      && monthRef(date1) === monthRef(date2)
       && dayRef(date1) < dayRef(date2)
       ) {
         return 1;
     };
 
     // sorts by time of day fourth
-    if (timeOfDayRef(date1) === "AM" && timeOfDayRef(date2) === "PM") {
-      return -1;
-    } else if (timeOfDayRef(date1) === "PM" && timeOfDayRef(date2) === "AM") {
-      return 1;
+    if (yearRef(date1) === yearRef(date2)
+      && monthRef(date1) === monthRef(date2)
+      && dayRef(date1) === dayRef(date2)
+      && timeOfDayRef(date1) === "AM" && timeOfDayRef(date2) === "PM"
+      ) {
+        return -1;
+    } else if (yearRef(date1) === yearRef(date2)
+      && monthRef(date1) === monthRef(date2)
+      && dayRef(date1) === dayRef(date2)
+      && timeOfDayRef(date1) === "PM" && timeOfDayRef(date2) === "AM"
+      ) {
+        return 1;
     };
 
     // sorts by hour fifth
-    if (dayRef(date1) === dayRef(date2)
+    if (yearRef(date1) === yearRef(date2)
+      && monthRef(date1) === monthRef(date2)
+      && dayRef(date1) === dayRef(date2)
+      && timeOfDayRef(date1) === timeOfDayRef(date2)
+      && dayRef(date1) === dayRef(date2)
       && timeOfDayRef(date1) === timeOfDayRef(date2)
       && hourRef(date1) < hourRef(date2)
     ) {
       return -1;
-    } else if (dayRef(date1) === dayRef(date2)
+    } else if (yearRef(date1) === yearRef(date2)
+      && monthRef(date1) === monthRef(date2)
+      && dayRef(date1) === dayRef(date2)
+      && timeOfDayRef(date1) === timeOfDayRef(date2)
+      && dayRef(date1) === dayRef(date2)
       && timeOfDayRef(date1) === timeOfDayRef(date2)
       && hourRef(date1) > hourRef(date2)
       ) {
@@ -55,13 +73,21 @@ export default function timeSort (dateArray: any[]) {
     };
 
     // sorts by minute sixth
-    if (dayRef(date1) === dayRef(date2)
+    if (yearRef(date1) === yearRef(date2)
+      && monthRef(date1) === monthRef(date2)
+      && dayRef(date1) === dayRef(date2)
+      && timeOfDayRef(date1) === timeOfDayRef(date2)
+      && dayRef(date1) === dayRef(date2)
       && timeOfDayRef(date1) === timeOfDayRef(date2)
       && hourRef(date1) === hourRef(date2)
       && minuteRef(date1) < minuteRef(date2)
     ) {
       return -1;
-    } else if (dayRef(date1) === dayRef(date2)
+    } else if (yearRef(date1) === yearRef(date2)
+      && monthRef(date1) === monthRef(date2)
+      && dayRef(date1) === dayRef(date2)
+      && timeOfDayRef(date1) === timeOfDayRef(date2)
+      && dayRef(date1) === dayRef(date2)
       && timeOfDayRef(date1) === timeOfDayRef(date2)
       && hourRef(date1) === hourRef(date2)
       && minuteRef(date1) > minuteRef(date2)
@@ -70,20 +96,28 @@ export default function timeSort (dateArray: any[]) {
     }
 
     // sorts by second seventh
-    if (hourRef(date1) === hourRef(date2)
+    if (yearRef(date1) === yearRef(date2)
+      && monthRef(date1) === monthRef(date2)
       && dayRef(date1) === dayRef(date2)
       && timeOfDayRef(date1) === timeOfDayRef(date2)
+      && dayRef(date1) === dayRef(date2)
+      && timeOfDayRef(date1) === timeOfDayRef(date2)
+      && hourRef(date1) === hourRef(date2)
       && minuteRef(date1) === minuteRef(date2)
       && secondsRef(date1) < secondsRef(date2)
     ) {
       return -1;
-    } else if (hourRef(date1) === hourRef(date2)
+    } else if (yearRef(date1) === yearRef(date2)
+      && monthRef(date1) === monthRef(date2)
       && dayRef(date1) === dayRef(date2)
       && timeOfDayRef(date1) === timeOfDayRef(date2)
+      && dayRef(date1) === dayRef(date2)
+      && timeOfDayRef(date1) === timeOfDayRef(date2)
+      && hourRef(date1) === hourRef(date2)
       && minuteRef(date1) === minuteRef(date2)
       && secondsRef(date1) > secondsRef(date2)
-    ) {
-      return 1;
+      ) {
+        return 1;
     };
 
     return 0;

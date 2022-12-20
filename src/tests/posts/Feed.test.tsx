@@ -8,7 +8,7 @@ describe('unit tests for Feed', () => {
   // props, objects, and functions for Edit Profile component
 
   test('renders the correct items', () => {
-    render(<Feed sortType={"New"} />);
+    render(<Feed sortedData={"New"} />);
 
     
   });

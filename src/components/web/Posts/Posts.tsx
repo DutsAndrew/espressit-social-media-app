@@ -1,75 +1,100 @@
 import React, { useState } from "react";
 import Feed from "./Feed";
-import dropDown from '../../../assets/chevron-down.svg';
+import SortNav from "./SortNav";
 import '../../../styles/Posts.css';
+import timeSort from "../../../scripts/timeSort";
 
 const Posts = (): JSX.Element => {
 
   // controller to use algorithms for sorting feed based on new, most popular, and posts that the user has contributed to
 
+  // sort by new on default
   const [sortType, setSortType] = useState({type: "New"});
 
-  const [dropDownMenu, setDropDownMenu] = useState({open: false});
+  const [sortedData, setSortedData] = useState({});
 
-  const handleSortClick = (): void => {
-    const sortDropDown = document.querySelector('.sort-menu-drop-down');
-    if (dropDownMenu.open === true) {
-      setDropDownMenu({
-        open: false
-      });
-      sortDropDown?.classList.remove('sort-drop-down-open');
-      return;
-    };
-    if (dropDownMenu.open === false) {
-      setDropDownMenu({
-        open: true
-      });
-      sortDropDown?.classList.add('sort-drop-down-open');
-      return;
-    };
-  };
-
-  const handleSortType = (type: string): void => {
-    setDropDownMenu({
-      open: false
-    });
+  const handleSortChange = (type: string): void => {
     setSortType({
       type: type
     });
   };
 
-  if (dropDownMenu.open === false) {
-    return (
-      <div className="posts-container" >
-        <div className="sort-by-container" onClick={handleSortClick} >
-          <p className="sort-by-text">Sort by:</p>
-          <img className="sort-menu-drop-down" src={dropDown} alt="chevron arrow" style={{width: "4vw", height: "4vh"}} onClick={handleSortClick} ></img>
-          <button type="button" className="sort-by-new" onClick={() => handleSortType(sortType.type) }>{sortType.type}</button>
-        </div>
-        <Feed sortType={sortType.type} />
-      </div>
-    );
-  };
+  const fakePosts = [
+    {
+      title: "Rant: Specialty Cafés should really train their baristas well",
+      body: "I just had possibly one of the worst cups of filters in my life. I ordered a cup of Ethiopian coffee from a new specialty cafe that opened up near me. I was quite excited since the next closest one was around 7 km away. I saw that they had a gooseneck kettle and a V60, so I thought it couldn’t be that bad. The barista haphazardly chucked a heaped measuring cup full of coarse coffee into the V60. Then they poured all the water straight into the V60. The result was an overly hot cup, completely lacking in complexity, with an extremely unpleasant sourness, not acidity, but sourness. It was really a let down.",
+      account: "usernameis2",
+      time: "3 days ago",
+      views: 1200,
+      likes: 432,
+      dislikes: 108,
+      comments: [
+        {
+          account: "darthmeowcakes",
+          time: "14 hr. ago",
+          comment: "I get the let down but this is every single industry ever. People should be trained properly and (this one gets forgotten a lot) management should support the workers not cutting corners and continuing education.",
+          likes: 282,
+          dislikes: 0,
+        },
+        {
+          account: "disneyscoffee",
+          time: "9 hr. ago",
+          comment: "As a teacher (and former barista), I will say that even when given multiple opportunities to advance one's skills and training, there are a growing number of people who simply don't care enough about what they learn in training to actually apply it consistently or at all. Those who do care tend to pour their hearts into their craft, but apathy is more common than passion.",
+          likes: 86,
+          dislikes: 2,
+        },
+        {
+          account: "noodelsaregood",
+          time: "17 hr. ago",
+          comment: "If the Barista isn't well trained, it's not a speciality coffee shop... It's a money grab...",
+          likes: 509,
+          dislikes: 105,
+        },
+      ],
+    },
+    {
+      title: "Need some advice, first time venturing into speciality coffee",
+      body: "I've just bought my first Aeropress and have made the decision to slowly venture into the coffee world in aims of brewing nicer coffee, and so far it has been an interesting journey I'm learning quite a lot. However interestingly, I have found that there is a lot of terminology used that isn't really explained properly anywhere and just sort of assumes that you know it. Admittedly, I mainly hear this terminology from watching James Hoffmans videos, but I wanted to ask if anyone knows any sources I can go or perhaps a youtuber than explains all the commonly used coffee terminology such as: bloom, drawdown, immersion, percolation, steep, agitation and so on so forth. On another note: This has been asked quite a lot I'm aware, but what is your current go-to roaster or choice of beans? I'm overwhelmed for choice at the moment and not sure how to differentiate. Location is UK, London and I don't have a local roaster/cafe that I can try so it will be an online order. Appreciate the help!",
+      account: "usernameis1",
+      time: "4 hr. ago",
+      views: 201,
+      likes: 73,
+      dislikes: 12,
+      comments: [
+        {
+          account: "2basnes",
+          time: "51 min. ago",
+          comment: "Start using your gear. Everything that is important will become clear soon enough, everything else is just a noise.",
+        },
+      ],
+    },
+  ];
+ 
+  (function fakeDates () {
+    const dateArray: any[] = [];
+    const date1: any = new Date().toLocaleString();
   
+    dateArray.push(date1);
 
-  if (dropDownMenu.open === true) {
-    return (
-      <div className="posts-container" >
-        <div className="sort-by-container" onClick={handleSortClick} >
-          <p className="sort-by-text">Sort by:</p>
-          <img className="sort-menu-drop-down" src={dropDown} alt="chevron arrow" style={{width: "4vw", height: "4vh"}} onClick={handleSortClick} ></img>
-          <button type="button" className="sort-by-button" onClick={() => handleSortType("New")} >New</button>
-          <button type="button" className="sort-by-button" onClick={() => handleSortType("Hot")} >Hot</button>
-          <button type="button" className="sort-by-button" onClick={() => handleSortType("Contributed")} >Contributed</button>
-          <button type="button" className="sort-by-button" onClick={() => handleSortType("Controversial")} >Controversial</button>
-        </div>
-        <Feed sortType={sortType.type} />
-      </div>
-    );
-  };
+    setTimeout(() => {
+      const date2 = new Date().toLocaleString();
+      dateArray.push(date2);
+    }, 1000);
+
+    const date3 = new Date(1995, 8, 17, 3, 24, 10).toLocaleString();
+    const date4 = new Date(2022, 10, 3, 10, 3, 8).toLocaleString();
+    dateArray.push(date3, date4);
+
+    console.log(dateArray);
+    const results = timeSort(dateArray);
+    console.log(results);
+  })();
 
   return (
-    <p>Error, please try again</p>
+    <div className="posts-container" >
+      <SortNav handleSortChange={handleSortChange} sortType={sortType} />
+      <Feed sortedData={fakePosts} />
+    </div>
   );
 };
 
