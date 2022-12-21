@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, FC } from "react";
 import Feed from "./Feed";
 import SortNav from "./SortNav";
 import '../../../styles/Posts.css';
 import timeSort from "../../../scripts/timeSort";
 import ViewPost from "./ViewPost";
+import { PostProps } from "../../../types/interfaces";
 
-const Posts = (): JSX.Element => {
+const Posts: FC<PostProps> = (props): JSX.Element => {
+
+  const { user } = props;
+
+  console.log(user, typeof user);
+  if (typeof user === 'string') {
+    console.log(user.length);
+  };
 
     // fetch posts from db
   // sort db based on sortType

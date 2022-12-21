@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { AccountDisplayProps } from "../../types/interfaces";
 import chevron from '../../assets/chevron-down.svg';
 import '../../styles/account.css';
+import { User } from "firebase/auth";
 
 const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
@@ -50,13 +51,16 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
   };
 
-  if (currentUser.displayName !== null) {
+  // user has to be logged in to reach this component, so type is switched to only User for render
+  const userRef = currentUser as User;
+
+  if (userRef.displayName !== null) {
     return (
       <div className="profile-container" onClick={accountDropDown} role="menu" >
         <p className="logged-in-as-text" role="paragraph">Logged in as:</p>
         <div className="img-name-container">
-          <img className="profile-img" referrerPolicy="no-referrer" src={currentUser.photoURL} alt="profile" ></img>
-          <p className="profile-text" >{currentUser.displayName}</p>
+          <img className="profile-img" referrerPolicy="no-referrer" src={userRef.photoURL as string} alt="profile" ></img>
+          <p className="profile-text" >{userRef.displayName}</p>
           <img className="account-menu-button" src={chevron} alt="chevron" ></img>
         </div>
       </div>
@@ -66,12 +70,13 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       <div className="profile-container" onClick={accountDropDown} role="menu" >
         <p className="logged-in-as-text" role="paragraph" >Logged in as:</p>
         <div className="img-name-container">
-          <p className="profile-text">{currentUser.email}</p>
+          <p className="profile-text">{userRef.email}</p>
           <img className="account-menu-button" src={chevron} alt="chevron" ></img>
         </div>
       </div>
     );
   };
+
 };
 
 export default AccountDisplay;

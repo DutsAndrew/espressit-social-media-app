@@ -4,7 +4,7 @@ import { User } from "firebase/auth";
 interface HeaderProps {
   handleSignUp: MouseEventHandler<HTMLParagraphElement>,
   handleLogIn: MouseEventHandler<HTMLParagraphElement>,
-  currentUser: any,
+  currentUser: string | User,
   signOut: Function,
   toggleEditProfilePage: Function,
 };
@@ -24,8 +24,8 @@ interface CreateAccountProps {
 
 interface userState {
   formCompleted: boolean,
-  currentUser: any,
-  errorStatus: string | object,
+  currentUser: string | User,
+  errorStatus: string | User,
 };
 
 interface LogInProps {
@@ -35,18 +35,18 @@ interface LogInProps {
 };
 
 interface AccountDisplayProps {
-  currentUser: any,
+  currentUser: string | User,
   signOut: Function,
   toggleEditProfilePage: Function,
 };
 
 interface EditProfileProps {
-  currentUser: any,
+  currentUser: string | User,
   toggleEditProfilePage: Function,
 };
 
 interface HomePageWebProps {
-  currentUser: any,
+  currentUser: string | User,
 }
 
 interface postType {
@@ -62,6 +62,10 @@ interface TextFormProps {
 interface PostNavProps {
   handlePostType: Function,
 }
+
+interface PostProps {
+  user: string | User,
+};
 
 interface FeedProps {
   sortedData: Object,
@@ -93,6 +97,7 @@ export {
   type TextFormProps,
   type PostNavProps,
   type HomePageWebProps,
+  type PostProps,
   type FeedProps,
   type SortNavProps,
   type ViewPostProps,

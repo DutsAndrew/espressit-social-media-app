@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import EditProfile from "../../components/auth/EditProfile";
+import { User } from 'firebase/auth';
 
 describe('unit tests for Edit Profile', () => {
 
@@ -9,7 +10,7 @@ describe('unit tests for Edit Profile', () => {
   const currentUserMock = {
     name: "Drew",
     email: "drewit97@gmail.com",
-  };
+  } as unknown as User;
 
   const toggleEditProfilePageMock = jest.fn();
 

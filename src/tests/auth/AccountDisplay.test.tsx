@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import AccountDisplay from '../../components/auth/AccountDisplay';
+import { User } from 'firebase/auth';
 
 describe('unit test for account display', () => {
 
@@ -11,12 +12,13 @@ describe('unit test for account display', () => {
     displayName: "Jim Halpert",
     email: "ladyGaga93@gmail.com",
     photoURL: "this is not a real link",
-  };
+  } as User ;
   const userMockWithoutDisplayName = {
     displayName: null,
     email: "ladyGaga93@gmail.com",
     photoURL: undefined,
-  };
+  } as unknown as User ;
+
   const signOutMock = jest.fn();
   const editProfileMock = jest.fn();
 

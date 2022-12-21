@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { EditProfileProps } from '../../types/interfaces';
+import { User } from "firebase/auth";
 
 const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
 
@@ -24,6 +25,10 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
 
   // fetch firebase user data to check for variables below and then validate on what already exists and add it to page
 
+  
+  // user has to be logged in to reach this component, so type is switched to only User for render
+  const userRef = currentUser as User;
+
   return (
     <form className="edit-profile-form" onSubmit={handleProfileEdit}>
       <button type="button" className="return-to-main-page-button" onClick={handleReturnToMain} >
@@ -35,7 +40,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         <input id="first-name-input"
           name="first-name"
           className="edit-profile-input"
-          placeholder={currentUser.displayName ? currentUser.email : "Not Set"}
+          placeholder={userRef?.displayName ? `${userRef.email}` : "Not Set"}
           data-testid="first-name" >
         </input>
         <label htmlFor="last-name" className="edit-profile-label">Last Name:</label>

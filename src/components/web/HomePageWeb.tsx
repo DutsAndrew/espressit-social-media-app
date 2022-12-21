@@ -12,7 +12,7 @@ const HomePageWeb: FC<HomePageWebProps> = (props): JSX.Element => {
   if (typeof currentUser === 'string') {
    return (
     <div className="home-page-web">
-      <Posts />
+      <Posts user={currentUser} />
     </div>
    );
   };
@@ -20,7 +20,7 @@ const HomePageWeb: FC<HomePageWebProps> = (props): JSX.Element => {
   return (
     <div className="home-page-web">
       <CreatePostWeb />
-      <Posts />
+      <Posts user={currentUser} />
     </div>
   );
 };
