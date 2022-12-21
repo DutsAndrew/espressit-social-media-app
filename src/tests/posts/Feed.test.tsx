@@ -95,14 +95,17 @@ describe('unit tests for Feed', () => {
   ];
 
   const viewPostMock = jest.fn();
+  const handleUpVoteMock = jest.fn();
+  const handleDownVoteMock = jest.fn();
+  const handleFavoriteMock = jest.fn();
 
-  test('renders all upvote, downvote, comment, and save buttons for two posts', () => {
-    render(<Feed sortedData={fakePosts} viewPost={viewPostMock} />);
+  test('renders all upvote, downvote, comment, and save svgs for two posts', () => {
+    render(<Feed sortedData={fakePosts} handleViewPost={viewPostMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
     expect(screen.getAllByRole("img").length).toBeGreaterThanOrEqual(8);
   });
 
-  test('renders headers and body text for two posts', () => {
-    render(<Feed sortedData={fakePosts} viewPost={viewPostMock} />);
+  test('renders headers and body text for posts', () => {
+    render(<Feed sortedData={fakePosts} handleViewPost={viewPostMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
 
     expect(screen.getByRole("heading", { name: "Rant: Specialty Cafés should really train their baristas well"})).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "I just had possibly one of the worst cups of filters in my life. I ordered a cup of Ethiopian coffee from a new specialty cafe that opened up near me. I was quite excited since the next closest one was around 7 km away. I saw that they had a gooseneck kettle and a V60, so I thought it couldn’t be that bad. The barista haphazardly chucked a heaped measuring cup full of coarse coffee into the V60. T..."})).toBeInTheDocument();
@@ -111,6 +114,36 @@ describe('unit tests for Feed', () => {
     expect(screen.getByRole("heading", { name: "I've just bought my first Aeropress and have made the decision to slowly venture into the coffee world in aims of brewing nicer coffee, and so far it has been an interesting journey I'm learning quite a lot. However interestingly, I have found that there is a lot of terminology used that isn't really explained properly anywhere and just sort of assumes that you know it. Admittedly, I mainly hear t..."})).toBeInTheDocument();
   });
 
-  // CREATE TESTS FOR UPVOTE, DOWNVOTE, SAVE, COMMENT, VIEWPOST USER FUNCTIONALITY
+  test('upvote calls handleUpVote on click', () => {
+    render(<Feed sortedData={fakePosts} handleViewPost={viewPostMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
+
+    const upVoteArrow = screen.getAllByAltText("upvote arrow")[0];
+    userEvent.click(upVoteArrow);
+    expect(handleUpVoteMock).toHaveBeenCalled();
+  });
+
+  test('downvote calls handleDownVote on click', () => {
+    render(<Feed sortedData={fakePosts} handleViewPost={viewPostMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
+
+    const downVoteArrow = screen.getAllByAltText("downvote arrow")[1];
+    userEvent.click(downVoteArrow);
+    expect(handleDownVoteMock).toHaveBeenCalled();
+  });
+
+  test('user click on comment SVG sends user to viewPost component', () => {
+    render(<Feed sortedData={fakePosts} handleViewPost={viewPostMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
+
+    const commentBox = screen.getAllByAltText("comment box")[0];
+    userEvent.click(commentBox);
+    expect(viewPostMock).toHaveBeenCalled();
+  });
+
+  test('user click on favorite SVG calls handleFavorite on click', () => {
+    render(<Feed sortedData={fakePosts} handleViewPost={viewPostMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
+
+    const saveIcon = screen.getAllByAltText("save icon")[0];
+    userEvent.click(saveIcon);
+    expect(handleFavoriteMock).toHaveBeenCalled();
+  });
   
 });

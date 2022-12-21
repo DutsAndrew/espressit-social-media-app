@@ -65,7 +65,10 @@ interface PostNavProps {
 
 interface FeedProps {
   sortedData: Object,
-  viewPost: Function,
+  handleViewPost: Function,
+  handleUpVote: Function,
+  handleDownVote: Function,
+  handleFavoritePost: Function,
 };
 
 interface SortNavProps {

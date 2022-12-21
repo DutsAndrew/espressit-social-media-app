@@ -124,40 +124,70 @@ const Posts = (): JSX.Element => {
     post: {},
   });
 
-  const viewPost = (index: number): void => {
+  const handleViewPost = (index: number): void => {
     setCurrentlyViewing({
       post: sortedData.data[index],
     });
   };
+
+  const handleFavoritePost = (index: number): void => {
+    console.log('favoriting');
+  };
+
+  const handleUpVote = (post: Object): void => {
+    const dataRef = sortedData.data;
+    const indexRef = dataRef.indexOf(post as any);
+
+    let postToChange = dataRef[indexRef];
+    postToChange.likes += 1;
+    dataRef[indexRef] = postToChange;
+
+    setSortedData({
+      data: dataRef,
+    });
+  };
+
+  const handleDownVote = (post: Object): void => {
+    const dataRef = sortedData.data;
+    const indexRef = dataRef.indexOf(post as any);
+
+    let postToChange = dataRef[indexRef];
+    postToChange.likes -= 1;
+    dataRef[indexRef] = postToChange;
+
+    setSortedData({
+      data: dataRef,
+    });
+  };
  
-  (function fakeDates () {
-    const dateArray: any[] = [];
-    const date1: any = new Date().toLocaleString();
+  // (function fakeDates () {
+  //   const dateArray: any[] = [];
+  //   const date1: any = new Date().toLocaleString();
   
-    dateArray.push(date1);
+  //   dateArray.push(date1);
 
-    setTimeout(() => {
-      const date2 = new Date().toLocaleString();
-      dateArray.push(date2);
-    }, 1000);
+  //   setTimeout(() => {
+  //     const date2 = new Date().toLocaleString();
+  //     dateArray.push(date2);
+  //   }, 1000);
 
-    const date3 = new Date(1995, 8, 17, 3, 24, 10).toLocaleString();
-    const date4 = new Date(2022, 10, 3, 10, 3, 8).toLocaleString();
-    dateArray.push(date3, date4);
+  //   const date3 = new Date(1995, 8, 17, 3, 24, 10).toLocaleString();
+  //   const date4 = new Date(2022, 10, 3, 10, 3, 8).toLocaleString();
+  //   dateArray.push(date3, date4);
 
-    const results = timeSort(dateArray);
-  })();
+  //   const results = timeSort(dateArray);
+  // })();
 
-  useEffect(() => {
-    console.log(currentlyViewing);
-  }, [currentlyViewing]);
+  // useEffect(() => {
+  //   console.log(currentlyViewing);
+  // }, [currentlyViewing]);
 
   // if a post isn't being viewed return feed
   if (Object.keys(currentlyViewing.post).length === 0) {
     return (
       <div className="posts-container" >
         <SortNav handleSortChange={handleSortChange} sortType={sortType} />
-        <Feed sortedData={fakePosts} viewPost={viewPost} />
+        <Feed sortedData={sortedData.data} handleViewPost={handleViewPost} handleUpVote={handleUpVote} handleDownVote={handleDownVote} handleFavoritePost={handleFavoritePost} />
       </div>
     );
   } else {
