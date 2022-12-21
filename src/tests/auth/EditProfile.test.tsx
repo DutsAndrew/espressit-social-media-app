@@ -16,7 +16,11 @@ describe('unit tests for Edit Profile', () => {
 
   test('renders the correct items', () => {
 
-    render(<EditProfile currentUser={currentUserMock} toggleEditProfilePage={toggleEditProfilePageMock} />);
+    render(
+      <EditProfile currentUser={currentUserMock}
+        toggleEditProfilePage={toggleEditProfilePageMock}
+      />
+    );
 
     const closeBtn = screen.getByRole("button", { name: "Return To Home"});
     const submitInfoBtn = screen.getByRole("button", { name: "Submit Information"});
@@ -41,7 +45,11 @@ describe('unit tests for Edit Profile', () => {
 
   test('form is submitted on Submit Information click', () => {
 
-    render(<EditProfile currentUser={currentUserMock} toggleEditProfilePage={toggleEditProfilePageMock} />);
+    render(
+      <EditProfile currentUser={currentUserMock}
+        toggleEditProfilePage={toggleEditProfilePageMock}
+      />
+    );
 
     const submitInfoBtn = screen.getByRole("button", { name: "Submit Information"});
     const firstNameInput = screen.getByTestId("first-name");

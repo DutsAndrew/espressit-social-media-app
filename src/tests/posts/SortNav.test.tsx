@@ -11,17 +11,28 @@ describe('unit test for SortNav', () => {
   };
 
   test('renders the correct items', () => {
-    render(<SortNav handleSortChange={handleSortChangeMock} sortType={sortTypeMock} />);
+
+    render(
+      <SortNav handleSortChange={handleSortChangeMock}
+        sortType={sortTypeMock}
+      />
+    );
 
     const sortText = screen.getByText("Sort by:");
     const sortBtn = screen.getByRole("button", { name: "New"});
 
     expect(sortText).toBeInTheDocument();
     expect(sortBtn).toBeInTheDocument();
+
   });
 
   test('chevron arrow click renders sort by buttons when not open and closes them when open', () => {
-    render(<SortNav handleSortChange={handleSortChangeMock} sortType={sortTypeMock} />);
+
+    render(
+      <SortNav handleSortChange={handleSortChangeMock}
+        sortType={sortTypeMock}
+      />
+    );
 
     const chevronArrow = screen.getByRole("img");
     expect(chevronArrow).toBeInTheDocument();
@@ -33,10 +44,16 @@ describe('unit test for SortNav', () => {
 
     userEvent.click(chevronArrow);
     expect(hotBtn).not.toBeInTheDocument();
+
   });
 
   test('sort type is displayed after new sort selection', () => {
-    render(<SortNav handleSortChange={handleSortChangeMock} sortType={sortTypeMock} />);
+
+    render(
+      <SortNav handleSortChange={handleSortChangeMock}
+        sortType={sortTypeMock}
+      />
+    );
 
     const newBtn = screen.getByText("New");
     const chevronArrow = screen.getByRole("img");
@@ -51,6 +68,7 @@ describe('unit test for SortNav', () => {
     userEvent.click(controversialBtn);
 
     expect(screen.queryByText("Controversial")).not.toBeInTheDocument();
+    
   });
 
 });

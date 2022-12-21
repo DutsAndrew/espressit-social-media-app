@@ -10,7 +10,13 @@ describe('unit test for create account form', () => {
   const signUpMock = jest.fn();
 
   test('create account form elements are rendered', () => {
-    render(<CreateAccount createAccountWithEmailAndPassword={createAccMock} handleSignUp={signUpMock} />);
+
+    render(
+      <CreateAccount createAccountWithEmailAndPassword={createAccMock}
+        handleSignUp={signUpMock}
+      />
+    );
+
     const closeFormBtn = screen.getByRole('button', { name: "X Close Form"});
     const submitFormBtn = screen.getByRole('button', { name: "Submit"});
     const formFieldset = screen.getByRole('group', { name: "Create an account:"});
@@ -23,10 +29,17 @@ describe('unit test for create account form', () => {
     expect(emailTextBox).toBeInTheDocument();
     expect(passwordLabel).toBeInTheDocument();
     expect(passwordConfirmLabel).toBeInTheDocument();
+
   });
 
   test('create account is called on form completion', () => {
-    render(<CreateAccount createAccountWithEmailAndPassword={createAccMock} handleSignUp={signUpMock} />);
+
+    render(
+      <CreateAccount createAccountWithEmailAndPassword={createAccMock}
+        handleSignUp={signUpMock}
+      />
+    );
+    
     const emailInput = screen.getByRole("textbox", { name: "*Email:"});
     const passwordInput = screen.getByTestId("password-input");
     const confirmPasswordInput = screen.getByTestId("confirm-password-input");
@@ -39,6 +52,7 @@ describe('unit test for create account form', () => {
     expect(screen.getAllByDisplayValue("Strawberries9210*")).toHaveLength(2);
     userEvent.click(submitFormBtn);
     expect(createAccMock).toBeCalled();
+    
   });
 
 });

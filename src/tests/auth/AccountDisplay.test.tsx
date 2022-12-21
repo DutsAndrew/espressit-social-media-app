@@ -12,18 +12,24 @@ describe('unit test for account display', () => {
     displayName: "Jim Halpert",
     email: "ladyGaga93@gmail.com",
     photoURL: "this is not a real link",
-  } as User ;
+  } as User;
+
   const userMockWithoutDisplayName = {
     displayName: null,
     email: "ladyGaga93@gmail.com",
     photoURL: undefined,
-  } as unknown as User ;
+  } as unknown as User;
 
   const signOutMock = jest.fn();
   const editProfileMock = jest.fn();
 
   test('Account Display renders correct elements when user has a display name', () => {
-    render(<AccountDisplay currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
+
+    render(<AccountDisplay currentUser={userMock}
+      signOut={signOutMock}
+      toggleEditProfilePage={editProfileMock} />
+    );
+
     const loggdInText = screen.getByRole('paragraph');
     expect(loggdInText).toBeInTheDocument();
     const profileImg = screen.getAllByRole('img')[0];
@@ -32,20 +38,36 @@ describe('unit test for account display', () => {
     expect(chevronSVG).toBeInTheDocument();
     const userName = screen.getByText(/Jim Halpert/i);
     expect(userName).toBeInTheDocument();
+
   });
 
   test('Account display renders correct elements when user has just an email on login', () => {
-    render(<AccountDisplay currentUser={userMockWithoutDisplayName} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
+
+    render(
+      <AccountDisplay currentUser={userMock}
+        signOut={signOutMock}
+        toggleEditProfilePage={editProfileMock}
+      />
+    );
+
     const loggdInText = screen.getByRole('paragraph');
     expect(loggdInText).toBeInTheDocument();
     const chevronSVG = screen.getAllByRole('img')[0];
     expect(chevronSVG).toBeInTheDocument();
     const userName = screen.getByText(/ladyGaga93@gmail.com/i);
     expect(userName).toBeInTheDocument();
+
   });
   
   test('drop down menu open and closes', () => {
-    render(<AccountDisplay currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
+
+    render(
+      <AccountDisplay currentUser={userMock}
+        signOut={signOutMock}
+        toggleEditProfilePage={editProfileMock}
+      />
+    );
+    
     const accountContainer = screen.getByRole("menu");
     userEvent.click(accountContainer);
     expect(screen.getByText(/Sign Out/i)).toBeInTheDocument();
@@ -53,10 +75,18 @@ describe('unit test for account display', () => {
     userEvent.click(accountContainer);
     expect(screen.queryByText(/Sign Out/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/Edit Profile/i)).not.toBeInTheDocument();
+
   });
   
   test('sign out and edit profile are called on click', () => {
-    const { container } = render(<AccountDisplay currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
+
+    render(
+      <AccountDisplay currentUser={userMock}
+        signOut={signOutMock}
+        toggleEditProfilePage={editProfileMock}
+      />
+    );
+
     const accountContainer = screen.getByRole("menu");
     userEvent.click(accountContainer);
     const signOutBtn = screen.getByText(/Sign Out/i);
@@ -66,6 +96,7 @@ describe('unit test for account display', () => {
     const editProfileBtn = screen.getByText(/Edit Profile/i);
     userEvent.click(editProfileBtn);
     expect(editProfileMock).toBeCalled();
+
   });
   
 });
