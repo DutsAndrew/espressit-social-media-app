@@ -10,6 +10,8 @@ describe('unit tests for ViewPost', () => {
       title: "Rant: Specialty Cafés should really train their baristas well",
       body: "I just had possibly one of the worst cups of filters in my life. I ordered a cup of Ethiopian coffee from a new specialty cafe that opened up near me. I was quite excited since the next closest one was around 7 km away. I saw that they had a gooseneck kettle and a V60, so I thought it couldn’t be that bad. The barista haphazardly chucked a heaped measuring cup full of coarse coffee into the V60. Then they poured all the water straight into the V60. The result was an overly hot cup, completely lacking in complexity, with an extremely unpleasant sourness, not acidity, but sourness. It was really a let down.",
       account: "usernameis2",
+      link: "",
+      img: "",
       time: "3 days ago",
       views: 1200,
       likes: 400,
@@ -64,8 +66,12 @@ describe('unit tests for ViewPost', () => {
     },
   };
 
+  const handleUpVoteMock = jest.fn();
+  const handleDownVoteMock = jest.fn();
+  const handleFavoriteMock = jest.fn();
+
   test('post information is displayed', () => {
-    render(<ViewPost viewing={postMock} />);
+    render(<ViewPost viewing={postMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
 
     // post information is displayed
     expect(screen.getByRole("heading", { name: "Rant: Specialty Cafés should really train their baristas well"})).toBeInTheDocument();
@@ -77,7 +83,7 @@ describe('unit tests for ViewPost', () => {
   });
 
   test('comment information is displayed', () => {
-    render(<ViewPost viewing={postMock} />);
+    render(<ViewPost viewing={postMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
 
     expect(screen.getByText("darthmeowcakes")).toBeInTheDocument();
     expect(screen.getByText("14 hr. ago")).toBeInTheDocument();
@@ -86,17 +92,17 @@ describe('unit tests for ViewPost', () => {
   });
 
   test('if dislikes are present, likes do not show negative', () => {
-    render(<ViewPost viewing={postMock} />);
+    render(<ViewPost viewing={postMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
     expect(screen.getByText(0)).toBeInTheDocument();
   });
 
   test('views of post are displayed', () => {
-    render(<ViewPost viewing={postMock} />);
+    render(<ViewPost viewing={postMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
     expect(screen.getByText(1200)).toBeInTheDocument();
   });
 
   test('on user post upvote, post upvote count is changed', () => {
-    render(<ViewPost viewing={postMock} />);
+    render(<ViewPost viewing={postMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
 
     const upVotePost = screen.getByTestId("post-upvote-test");
     userEvent.click(upVotePost);
@@ -104,7 +110,7 @@ describe('unit tests for ViewPost', () => {
   });
 
   test('on user post downvote, post downvote count is changed', () => {
-    render(<ViewPost viewing={postMock} />);
+    render(<ViewPost viewing={postMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
 
     const downVotePost = screen.getByTestId("post-downvote-test");
     userEvent.click(downVotePost);
@@ -112,7 +118,7 @@ describe('unit tests for ViewPost', () => {
   });
 
   test('on user comment upvote, comment upvote count is changed', () => {
-    render(<ViewPost viewing={postMock} />);
+    render(<ViewPost viewing={postMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
 
     const upVoteComment = screen.getByTestId("comment-upvote-test");
     userEvent.click(upVoteComment);
@@ -120,7 +126,7 @@ describe('unit tests for ViewPost', () => {
   });
 
   test('on user post downvote, comment downvote count is changed', () => {
-    render(<ViewPost viewing={postMock} />);
+    render(<ViewPost viewing={postMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
 
     const downVoteComment = screen.getByTestId("comment-downvote-test");
     userEvent.click(downVoteComment);
@@ -128,7 +134,7 @@ describe('unit tests for ViewPost', () => {
   });
 
   test('user can type in add comment box', () => {
-    render(<ViewPost viewing={postMock} />);
+    render(<ViewPost viewing={postMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
 
     const addCommentBox = screen.getByPlaceholderText("Add Comment");
     expect(addCommentBox).toBeInTheDocument();
@@ -137,7 +143,7 @@ describe('unit tests for ViewPost', () => {
   });
 
   test('user comment on submit is added to comment list', () => {
-    render(<ViewPost viewing={postMock} />);
+    render(<ViewPost viewing={postMock} handleUpVote={handleUpVoteMock} handleDownVote={handleDownVoteMock} handleFavoritePost={handleFavoriteMock} />);
 
     const addCommentBox = screen.getByPlaceholderText("Add Comment");
     userEvent.type(addCommentBox, "I disagree");

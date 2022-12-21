@@ -188,8 +188,15 @@ const WebApp = () => {
   if (signUpStatus.signUp === true) {
     return (
       <div className="app-web">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
-        <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword} handleSignUp={handleSignUp} />
+        <Header handleSignUp={handleSignUp}
+          handleLogIn={handleLogIn}
+          currentUser={userStatus.currentUser}
+          signOut={signOut}
+          toggleEditProfilePage={toggleEditProfilePage}
+        />
+        <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword}
+          handleSignUp={handleSignUp}
+        />
       </div>
     );
   };
@@ -197,8 +204,16 @@ const WebApp = () => {
   if (logInStatus.logIn === true) {
     return (
       <div className="app-web">
-        <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
-        <LogIn signInUser={signInUser} handleLogIn={handleLogIn} signInWithGoogleAccount={signInWithGoogleAccount} />
+        <Header handleSignUp={handleSignUp}
+          handleLogIn={handleLogIn}
+          currentUser={userStatus.currentUser}
+          signOut={signOut}
+          toggleEditProfilePage={toggleEditProfilePage}
+        />
+        <LogIn signInUser={signInUser}
+          handleLogIn={handleLogIn}
+          signInWithGoogleAccount={signInWithGoogleAccount}
+        />
       </div>
     );
   };
@@ -206,15 +221,27 @@ const WebApp = () => {
   if (editProfileRequested.status === true) {
    return (
     <div className="app-web">
-      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
-      <EditProfile currentUser={userStatus.currentUser} toggleEditProfilePage={toggleEditProfilePage} />
+      <Header handleSignUp={handleSignUp}
+        handleLogIn={handleLogIn}
+        currentUser={userStatus.currentUser}
+        signOut={signOut}
+        toggleEditProfilePage={toggleEditProfilePage}
+      />
+      <EditProfile currentUser={userStatus.currentUser}
+        toggleEditProfilePage={toggleEditProfilePage}
+      />
     </div>
    )
   };
 
   return (
     <div className="app-web">
-      <Header handleSignUp={handleSignUp} handleLogIn={handleLogIn} currentUser={userStatus.currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
+      <Header handleSignUp={handleSignUp}
+        handleLogIn={handleLogIn}
+        currentUser={userStatus.currentUser}
+        signOut={signOut}
+        toggleEditProfilePage={toggleEditProfilePage}
+      />
       <HomePageWeb currentUser={userStatus.currentUser} />
     </div>
   );

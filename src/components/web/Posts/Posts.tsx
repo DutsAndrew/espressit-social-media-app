@@ -10,12 +10,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
   const { user } = props;
 
-  console.log(user, typeof user);
-  if (typeof user === 'string') {
-    console.log(user.length);
-  };
-
-    // fetch posts from db
+  // fetch posts from db
   // sort db based on sortType
   // create map function to map sortedData to feed
     // listeners for each post
@@ -30,6 +25,8 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
       title: "Rant: Specialty Cafés should really train their baristas well",
       body: "I just had possibly one of the worst cups of filters in my life. I ordered a cup of Ethiopian coffee from a new specialty cafe that opened up near me. I was quite excited since the next closest one was around 7 km away. I saw that they had a gooseneck kettle and a V60, so I thought it couldn’t be that bad. The barista haphazardly chucked a heaped measuring cup full of coarse coffee into the V60. Then they poured all the water straight into the V60. The result was an overly hot cup, completely lacking in complexity, with an extremely unpleasant sourness, not acidity, but sourness. It was really a let down.",
       account: "usernameis2",
+      link: "",
+      img: "",
       time: "3 days ago",
       views: 1200,
       likes: 432,
@@ -86,6 +83,8 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
       title: "Need some advice, first time venturing into speciality coffee",
       body: "I've just bought my first Aeropress and have made the decision to slowly venture into the coffee world in aims of brewing nicer coffee, and so far it has been an interesting journey I'm learning quite a lot. However interestingly, I have found that there is a lot of terminology used that isn't really explained properly anywhere and just sort of assumes that you know it. Admittedly, I mainly hear this terminology from watching James Hoffmans videos, but I wanted to ask if anyone knows any sources I can go or perhaps a youtuber than explains all the commonly used coffee terminology such as: bloom, drawdown, immersion, percolation, steep, agitation and so on so forth. On another note: This has been asked quite a lot I'm aware, but what is your current go-to roaster or choice of beans? I'm overwhelmed for choice at the moment and not sure how to differentiate. Location is UK, London and I don't have a local roaster/cafe that I can try so it will be an online order. Appreciate the help!",
       account: "usernameis1",
+      link: "",
+      img: "",
       time: "4 hr. ago",
       views: 201,
       likes: 73,
@@ -194,13 +193,24 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
   if (Object.keys(currentlyViewing.post).length === 0) {
     return (
       <div className="posts-container" >
-        <SortNav handleSortChange={handleSortChange} sortType={sortType} />
-        <Feed sortedData={sortedData.data} handleViewPost={handleViewPost} handleUpVote={handleUpVote} handleDownVote={handleDownVote} handleFavoritePost={handleFavoritePost} />
+        <SortNav handleSortChange={handleSortChange}
+          sortType={sortType}
+        />
+        <Feed sortedData={sortedData.data}
+          handleViewPost={handleViewPost}
+          handleUpVote={handleUpVote}
+          handleDownVote={handleDownVote}
+          handleFavoritePost={handleFavoritePost}
+        />
       </div>
     );
   } else {
     return (
-      <ViewPost viewing={currentlyViewing.post} />
+      <ViewPost viewing={currentlyViewing.post}
+        handleUpVote={handleUpVote}
+        handleDownVote={handleDownVote}
+        handleFavoritePost={handleFavoritePost}
+      />
     );
   };
 };

@@ -81,8 +81,24 @@ interface SortNavProps {
 };
 
 interface ViewPostProps {
-  viewing: {},
+  viewing: Object,
+  handleUpVote: Function,
+  handleDownVote: Function,
+  handleFavoritePost: Function,
 };
+
+type Post = {
+  account: string,
+  body: string,
+  comments: any[],
+  dislikes: number,
+  likes: number,
+  time: string,
+  title: string,
+  views: number,
+  whoDisliked: any[],
+  whoLiked: any[],
+}
 
 export {
   type HeaderProps,
@@ -101,4 +117,5 @@ export {
   type FeedProps,
   type SortNavProps,
   type ViewPostProps,
+  type Post,
 };

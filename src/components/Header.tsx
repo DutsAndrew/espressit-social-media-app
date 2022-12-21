@@ -78,7 +78,10 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
           </Title>
         </LogoWrapper>
         <AccountWrapper>
-          <AccountDisplay currentUser={currentUser} signOut={signOut} toggleEditProfilePage={toggleEditProfilePage} />
+          <AccountDisplay currentUser={currentUser}
+            signOut={signOut}
+            toggleEditProfilePage={toggleEditProfilePage} 
+          />
         </AccountWrapper>
       </HeaderWrapper>
   );

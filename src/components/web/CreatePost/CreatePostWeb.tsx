@@ -65,7 +65,14 @@ const CreatePostWeb = (): JSX.Element => {
   if (postData.status === true && postData.type === "text") {
     return (
       <>
-        <button className="close-form-button" type="button" onClick={handleCloseForm} ><img className="close-button-svg" src={closeItem} alt="close svg" ></img></button>
+        <button className="close-form-button"
+          type="button"
+          onClick={handleCloseForm} >
+          <img className="close-button-svg"
+            src={closeItem}
+            alt="close svg" >
+          </img>
+        </button>
         <PostNav handlePostType={handlePostType} />
         <TextForm handleFormSubmission={handleFormSubmission} />
       </>
@@ -75,10 +82,21 @@ const CreatePostWeb = (): JSX.Element => {
   if (postData.status === true && postData.type === "img") {
     return (
       <>
-        <button className="close-form-button" type="button" onClick={handleCloseForm} ><img className="close-button-svg" src={closeItem} alt="close svg" ></img></button>
+        <button className="close-form-button"
+          type="button"
+          onClick={handleCloseForm} >
+          <img className="close-button-svg"
+            src={closeItem}
+            alt="close svg" >
+          </img>
+        </button>
         <PostNav handlePostType={handlePostType} />
         <div className="create-post-img-container">
-          <input className="insert-image-input" type="file" accept="/image/*" onChange={handleInsertImage} ></input>
+          <input className="insert-image-input"
+            type="file"
+            accept="/image/*"
+            onChange={handleInsertImage} >
+          </input>
         </div>
         <TextForm handleFormSubmission={handleFormSubmission} />
       </>
@@ -88,10 +106,21 @@ const CreatePostWeb = (): JSX.Element => {
   if (postData.status === true && postData.type === "link") {
     return (
       <>
-        <button className="close-form-button" type="button" onClick={handleCloseForm} ><img className="close-button-svg" src={closeItem} alt="close svg" ></img></button>
+        <button className="close-form-button"
+          type="button"
+          onClick={handleCloseForm} >
+          <img className="close-button-svg"
+            src={closeItem}
+            alt="close svg" >
+          </img>
+        </button>
         <PostNav handlePostType={handlePostType} />
         <div className="create-post-link-container">
-          <input className="insert-link-input" type="url" placeholder="Insert Link here" onChange={handleInsertLink} ></input>
+          <input className="insert-link-input"
+            type="url"
+            placeholder="Insert Link here"
+            onChange={handleInsertLink} >
+          </input>
         </div>
         <p className="error-text-post-input"></p>
         <TextForm handleFormSubmission={handleFormSubmission} />

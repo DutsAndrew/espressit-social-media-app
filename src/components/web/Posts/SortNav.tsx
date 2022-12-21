@@ -37,8 +37,17 @@ const SortNav: FC<SortNavProps> = (props): JSX.Element => {
     return (
       <div className="sort-by-container" onClick={handleSortClick} >
         <p className="sort-by-text">Sort by:</p>
-        <img className="sort-menu-drop-down" src={dropDown} alt="chevron arrow" style={{width: "4vw", height: "4vh"}} onClick={handleSortClick} ></img>
-        <button type="button" className="sort-by-new" onClick={() => handleSortType(sortType.type) }>{sortType.type}</button>
+        <img className="sort-menu-drop-down"
+          src={dropDown}
+          alt="chevron arrow"
+          style={{width: "4vw", height: "4vh"}}
+          onClick={handleSortClick} >
+        </img>
+        <button type="button"
+          className="sort-by-new"
+          onClick={() => handleSortType(sortType.type) }>
+          {sortType.type}
+        </button>
       </div>
     );
   };
@@ -48,11 +57,32 @@ const SortNav: FC<SortNavProps> = (props): JSX.Element => {
     return (
       <div className="sort-by-container" onClick={handleSortClick} >
         <p className="sort-by-text">Sort by:</p>
-        <img className="sort-menu-drop-down" src={dropDown} alt="chevron arrow" style={{width: "4vw", height: "4vh"}} onClick={handleSortClick} ></img>
-        <button type="button" className="sort-by-button" onClick={() => handleSortType("New")} >New</button>
-        <button type="button" className="sort-by-button" onClick={() => handleSortType("Hot")} >Hot</button>
-        <button type="button" className="sort-by-button" onClick={() => handleSortType("Contributed")} >Contributed</button>
-        <button type="button" className="sort-by-button" onClick={() => handleSortType("Controversial")} >Controversial</button>
+        <img className="sort-menu-drop-down"
+          src={dropDown}
+          alt="chevron arrow"
+          style={{width: "4vw", height: "4vh"}}
+          onClick={handleSortClick} >
+        </img>
+        <button type="button"
+          className="sort-by-button"
+          onClick={() => handleSortType("New")}>
+          New
+        </button>
+        <button type="button"
+          className="sort-by-button"
+          onClick={() => handleSortType("Hot")} >
+          Hot
+        </button>
+        <button type="button"
+          className="sort-by-button"
+          onClick={() => handleSortType("Contributed")} >
+          Contributed
+        </button>
+        <button type="button"
+          className="sort-by-button"
+          onClick={() => handleSortType("Controversial")} >
+          Controversial
+        </button>
       </div>
     );
   };
