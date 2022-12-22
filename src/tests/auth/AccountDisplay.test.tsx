@@ -44,7 +44,7 @@ describe('unit test for account display', () => {
   test('Account display renders correct elements when user has just an email on login', () => {
 
     render(
-      <AccountDisplay currentUser={userMock}
+      <AccountDisplay currentUser={userMockWithoutDisplayName}
         signOut={signOutMock}
         toggleEditProfilePage={editProfileMock}
       />
@@ -54,7 +54,7 @@ describe('unit test for account display', () => {
     expect(loggdInText).toBeInTheDocument();
     const chevronSVG = screen.getAllByRole('img')[0];
     expect(chevronSVG).toBeInTheDocument();
-    const userName = screen.getByText(/ladyGaga93@gmail.com/i);
+    const userName = screen.getByText("ladyGaga93@gmail.com");
     expect(userName).toBeInTheDocument();
 
   });

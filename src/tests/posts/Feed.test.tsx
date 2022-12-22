@@ -108,8 +108,8 @@ describe('unit tests for Feed', () => {
     render(
       <Feed sortedData={fakePosts}
         handleViewPost={viewPostMock}
-        handleUpVote={handleUpVoteMock}
-        handleDownVote={handleDownVoteMock}
+        handleUpVotePost={handleUpVoteMock}
+        handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoriteMock}
       />
     );
@@ -123,8 +123,8 @@ describe('unit tests for Feed', () => {
     render(
       <Feed sortedData={fakePosts}
         handleViewPost={viewPostMock}
-        handleUpVote={handleUpVoteMock}
-        handleDownVote={handleDownVoteMock}
+        handleUpVotePost={handleUpVoteMock}
+        handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoriteMock}
       />
     );
@@ -152,14 +152,15 @@ describe('unit tests for Feed', () => {
     render(
       <Feed sortedData={fakePosts}
         handleViewPost={viewPostMock}
-        handleUpVote={handleUpVoteMock}
-        handleDownVote={handleDownVoteMock}
+        handleUpVotePost={handleUpVoteMock}
+        handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoriteMock}
       />
     );
 
     const upVoteArrow = screen.getAllByAltText("upvote arrow")[0];
     userEvent.click(upVoteArrow);
+
     expect(handleUpVoteMock).toHaveBeenCalled();
 
   });
@@ -169,14 +170,15 @@ describe('unit tests for Feed', () => {
     render(
       <Feed sortedData={fakePosts}
         handleViewPost={viewPostMock}
-        handleUpVote={handleUpVoteMock}
-        handleDownVote={handleDownVoteMock}
+        handleUpVotePost={handleUpVoteMock}
+        handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoriteMock}
       />
     );
 
     const downVoteArrow = screen.getAllByAltText("downvote arrow")[1];
     userEvent.click(downVoteArrow);
+
     expect(handleDownVoteMock).toHaveBeenCalled();
 
   });
@@ -186,14 +188,15 @@ describe('unit tests for Feed', () => {
     render(
       <Feed sortedData={fakePosts}
         handleViewPost={viewPostMock}
-        handleUpVote={handleUpVoteMock}
-        handleDownVote={handleDownVoteMock}
+        handleUpVotePost={handleUpVoteMock}
+        handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoriteMock}
       />
     );
 
     const commentBox = screen.getAllByAltText("comment box")[0];
     userEvent.click(commentBox);
+
     expect(viewPostMock).toHaveBeenCalled();
 
   });
@@ -203,14 +206,15 @@ describe('unit tests for Feed', () => {
     render(
       <Feed sortedData={fakePosts}
         handleViewPost={viewPostMock}
-        handleUpVote={handleUpVoteMock}
-        handleDownVote={handleDownVoteMock}
+        handleUpVotePost={handleUpVoteMock}
+        handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoriteMock}
       />
     );
 
     const saveIcon = screen.getAllByAltText("save icon")[0];
     userEvent.click(saveIcon);
+    
     expect(handleFavoriteMock).toHaveBeenCalled();
     
   });

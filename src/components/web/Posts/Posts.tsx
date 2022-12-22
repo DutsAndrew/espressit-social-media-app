@@ -4,7 +4,7 @@ import SortNav from "./SortNav";
 import '../../../styles/Posts.css';
 import timeSort from "../../../scripts/timeSort";
 import ViewPost from "./ViewPost";
-import { PostProps } from "../../../types/interfaces";
+import { Post, PostProps } from "../../../types/interfaces";
 
 const Posts: FC<PostProps> = (props): JSX.Element => {
 
@@ -137,11 +137,17 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     });
   };
 
-  const handleFavoritePost = (index: number): void => {
-    console.log('favoriting');
+  const handleStopViewingPost = (): void => {
+    setCurrentlyViewing({
+      post: {},
+    });
   };
 
-  const handleUpVote = (post: Object): void => {
+  const handleFavoritePost = (post: Post): void => {
+    console.log('favoriting:', post);
+  };
+
+  const handleUpVotePost = (post: Object): void => {
     const dataRef = sortedData.data;
     const indexRef = dataRef.indexOf(post as any);
 
@@ -154,7 +160,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     });
   };
 
-  const handleDownVote = (post: Object): void => {
+  const handleDownVotePost = (post: Object): void => {
     const dataRef = sortedData.data;
     const indexRef = dataRef.indexOf(post as any);
 
@@ -165,6 +171,14 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     setSortedData({
       data: dataRef,
     });
+  };
+
+  const handleUpVoteComment = (comment: Object): void => {
+
+  };
+
+  const handleDownVoteComment = (comment: Object): void => {
+
   };
  
   // (function fakeDates () {
@@ -198,8 +212,8 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
         />
         <Feed sortedData={sortedData.data}
           handleViewPost={handleViewPost}
-          handleUpVote={handleUpVote}
-          handleDownVote={handleDownVote}
+          handleUpVotePost={handleUpVotePost}
+          handleDownVotePost={handleDownVotePost}
           handleFavoritePost={handleFavoritePost}
         />
       </div>
@@ -207,9 +221,12 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
   } else {
     return (
       <ViewPost viewing={currentlyViewing.post}
-        handleUpVote={handleUpVote}
-        handleDownVote={handleDownVote}
+        handleUpVotePost={handleUpVotePost}
+        handleDownVotePost={handleDownVotePost}
         handleFavoritePost={handleFavoritePost}
+        handleStopViewingPost={handleStopViewingPost}
+        handleUpVoteComment={handleUpVoteComment}
+        handleDownVoteComment={handleDownVoteComment}
       />
     );
   };

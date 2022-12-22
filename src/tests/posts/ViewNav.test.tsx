@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import ViewPost from "../../components/web/Posts/ViewPost";
+import ViewNav from '../../components/web/Posts/ViewNav';
 
-describe('unit tests for ViewPost', () => {
+describe('unit tests for ViewNav component', () => {
 
   const postMock = {
     title: "Rant: Specialty Cafés should really train their baristas well",
@@ -66,70 +66,76 @@ describe('unit tests for ViewPost', () => {
 
   const handleUpVoteMock = jest.fn();
   const handleDownVoteMock = jest.fn();
-  const handleFavoriteMock = jest.fn();
+  const handleFavoritePostMock = jest.fn();
   const handleStopViewingPostMock = jest.fn();
-  const handleUpVoteCommentMock = jest.fn();
-  const handleDownVoteCommentMock = jest.fn();
 
-  test('post information is displayed', () => {
+  test('renders basic elements on load', () => {
 
     render(
-      <ViewPost viewing={postMock}
+      <ViewNav viewing={postMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
-        handleFavoritePost={handleFavoriteMock}
+        handleFavoritePost={handleFavoritePostMock}
         handleStopViewingPost={handleStopViewingPostMock}
-        handleUpVoteComment={handleUpVoteCommentMock}
-        handleDownVoteComment={handleDownVoteCommentMock}
       />
     );
 
-    // post information is displayed
-    expect(screen.getByRole("heading", { name: "Rant: Specialty Cafés should really train their baristas well"})).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "I just had possibly one of the worst cups of filters in my life. I ordered a cup of Ethiopian coffee from a new specialty cafe that opened up near me. I was quite excited since the next closest one was around 7 km away. I saw that they had a gooseneck kettle and a V60, so I thought it couldn’t be that bad. The barista haphazardly chucked a heaped measuring cup full of coarse coffee into the V60. T..."})).toBeInTheDocument();
-    expect(screen.getByText(/usernameis2/i)).toBeInTheDocument();
-    expect(screen.getByText(/3 days ago/i)).toBeInTheDocument();
-
-    // is the post upvote/downvote counts displayed?
-    expect(screen.getByText(324)).toBeInTheDocument();
-
-    // is views on post displayed?
-    expect(screen.getByText(1200)).toBeInTheDocument();
-  });
-
-  test('if dislikes are present, likes do not show negative', () => {
-
-    render(
-      <ViewPost viewing={postMock}
-        handleUpVotePost={handleUpVoteMock}
-        handleDownVotePost={handleDownVoteMock}
-        handleFavoritePost={handleFavoriteMock}
-        handleStopViewingPost={handleStopViewingPostMock}
-        handleUpVoteComment={handleUpVoteCommentMock}
-        handleDownVoteComment={handleDownVoteCommentMock}
-      />
-    );
+    expect(screen.getByText("Close")).toBeInTheDocument();
     
-    // second comment in mock should show this behavior
-    expect(screen.getByText(0)).toBeInTheDocument();
-
   });
 
-  test('views of post are displayed', () => {
+  test('user click on upvote or downvote, calls functions to handle them', () => {
 
     render(
-      <ViewPost viewing={postMock}
+      <ViewNav viewing={postMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
-        handleFavoritePost={handleFavoriteMock}
+        handleFavoritePost={handleFavoritePostMock}
         handleStopViewingPost={handleStopViewingPostMock}
-        handleUpVoteComment={handleUpVoteCommentMock}
-        handleDownVoteComment={handleDownVoteCommentMock}
-      />
+      />,
     );
-    
-    expect(screen.getByText(1200)).toBeInTheDocument();
+
+    const upVotePost = screen.getByTestId("post-upvote-test");
+    userEvent.click(upVotePost);
+    expect(handleUpVoteMock).toHaveBeenCalled();
+
+    const downVotePost = screen.getByTestId("post-downvote-test");
+    userEvent.click(downVotePost);
+    expect(handleDownVoteMock).toHaveBeenCalled();
 
   });
-  
+
+  test('user click on favorite calls function to handleFavoritePost', () => {
+
+    render(
+      <ViewNav viewing={postMock}
+        handleUpVotePost={handleUpVoteMock}
+        handleDownVotePost={handleDownVoteMock}
+        handleFavoritePost={handleFavoritePostMock}
+        handleStopViewingPost={handleStopViewingPostMock}
+      />,
+    );
+
+    const favoritePost = screen.getByTestId("post-favorite-test");
+    userEvent.click(favoritePost);
+    expect(handleFavoritePostMock).toHaveBeenCalled();
+
+  });
+
+  test('user click on close View Post calls handleStopViewingPost', () => {
+
+    render(
+      <ViewNav viewing={postMock}
+        handleUpVotePost={handleUpVoteMock}
+        handleDownVotePost={handleDownVoteMock}
+        handleFavoritePost={handleFavoritePostMock}
+        handleStopViewingPost={handleStopViewingPostMock}
+      />,
+    );
+
+    const stopViewing = screen.getByTestId("post-close-test");
+    userEvent.click(stopViewing);
+    expect(handleStopViewingPostMock).toHaveBeenCalled();
+  });
+
 });

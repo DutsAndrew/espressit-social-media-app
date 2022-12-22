@@ -1,49 +1,145 @@
 import React, { FC } from "react";
 import { ViewPostProps } from "../../../types/interfaces";
 import { Post } from "../../../types/interfaces";
-import upVoteSVG from '../../../assets/arrow-up.svg';
-import downVoteSVG from '../../../assets/arrow-down.svg';
-import saveSVG from '../../../assets/save.svg';
-import commentSVG from '../../../assets/comment.svg';
+import '../../../styles/ViewPost.css';
+import ViewNav from "./ViewNav";
+import Comments from "./Comments";
+import AddComment from "./AddComent";
 
 const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
 
-  const { viewing, handleUpVote, handleDownVote, handleFavoritePost } = props
+  const { viewing,
+    handleUpVotePost,
+    handleDownVotePost,
+    handleFavoritePost,
+    handleStopViewingPost,
+    handleUpVoteComment,
+    handleDownVoteComment,
+  } = props
 
   const viewingRef = viewing as Post;
 
-  return (
-    <div className="post-container">
-      <div className="post">
-          <div className="upvote-downvote-container">
-            <img className="upvote-svg"
-              src={upVoteSVG}
-              alt="upvote arrow"
-              style={{width: "3vw", height: "3vh"}}
-              onClick={() => handleUpVote(viewingRef)} >
-            </img>
-            <p className="upvote-count-text">
-              {(viewingRef.likes - viewingRef.dislikes) > 0 ? viewingRef.likes - viewingRef.dislikes : 0}
-            </p>
-            <img className="downvote-svg"
-              src={downVoteSVG}
-              alt="downvote arrow"
-              style={{width: "3vw", height: "3vh"}}
-              onClick={() => handleDownVote(viewingRef)} >
-            </img>
+  const handleAddCommentToPost = () => {
+
+  };
+
+  // when  no img or link are present
+  if (viewingRef.img.length === 0 && viewingRef.link.length === 0) {
+    return (
+      <>
+        <ViewNav viewing={viewing}
+          handleUpVotePost={handleUpVotePost}
+          handleDownVotePost={handleDownVotePost}
+          handleFavoritePost={handleFavoritePost}
+          handleStopViewingPost={handleStopViewingPost}
+        />
+        <div className="post-container">
+          <div className="post">
+            <div className="content-container">
+              <h5 className="post-account-time">
+                {`${viewingRef.account}, ${viewingRef.time}`}
+              </h5>
+              <h1 className="post-title" >
+                {viewingRef.title.length > 75 ? viewingRef.title.slice(0, 75).concat('...') : viewingRef.title}
+              </h1>
+              <h3 className="post-description" >
+                {viewingRef.body.length > 400 ? viewingRef.body.slice(0, 400).concat('...') : viewingRef.body}
+              </h3>
+              <p className="post-views-text">
+                {viewingRef.views}
+              </p>
+            </div>
           </div>
+          <AddComment handleAddCommentToPost={handleAddCommentToPost} />
+          <Comments commentList={viewingRef.comments}
+            handleUpVoteComment={handleUpVoteComment}
+            handleDownVoteComment={handleDownVoteComment}
+          />
+        </div>
+      </>
+    );
+
+    // when img is included
+  } else if (viewingRef.img.length === 0 && viewingRef.link.length !== 0) {
+    return (
+      <>
+        <ViewNav viewing={viewing}
+          handleUpVotePost={handleUpVotePost}
+          handleDownVotePost={handleDownVotePost}
+          handleFavoritePost={handleFavoritePost}
+          handleStopViewingPost={handleStopViewingPost}
+        />
+        <div className="post-container">
+          <div className="post">
+            <div className="content-container">
+              <h5 className="post-account-time">
+                {`${viewingRef.account}, ${viewingRef.time}`}
+              </h5>
+              <h1 className="post-title" >
+                {viewingRef.title.length > 75 ? viewingRef.title.slice(0, 75).concat('...') : viewingRef.title}
+              </h1>
+              <h6 className="post-link">
+                {viewingRef.link}
+              </h6>
+              <h3 className="post-description" >
+                {viewingRef.body.length > 400 ? viewingRef.body.slice(0, 400).concat('...') : viewingRef.body}
+              </h3>
+              <p className="post-views-text">
+                {viewingRef.views}
+              </p>
+            </div>
+          </div>
+          <AddComment handleAddCommentToPost={handleAddCommentToPost} />
+          <Comments commentList={viewingRef.comments}
+            handleUpVoteComment={handleUpVoteComment}
+            handleDownVoteComment={handleDownVoteComment}
+          />
+        </div>
+      </>
+    );
+
+    // when a link is present, but no img
+  } else if (viewingRef.img.length !== 0 && viewingRef.link.length === 0) {
+    return (
+     <>
+      <ViewNav viewing={viewing}
+          handleUpVotePost={handleUpVotePost}
+          handleDownVotePost={handleDownVotePost}
+          handleFavoritePost={handleFavoritePost}
+          handleStopViewingPost={handleStopViewingPost}
+        />
+      <div className="post-container">
+        <div className="post">
           <div className="content-container">
+            <h5 className="post-account-time">
+              {`${viewingRef.account}, ${viewingRef.time}`}
+            </h5>
             <h1 className="post-title" >
               {viewingRef.title.length > 75 ? viewingRef.title.slice(0, 75).concat('...') : viewingRef.title}
             </h1>
-              {/* create conditional render when an img or link is also present as h2s */}
+            <img className="post-img" src={viewingRef.img} alt="user upload"></img>
             <h3 className="post-description" >
               {viewingRef.body.length > 400 ? viewingRef.body.slice(0, 400).concat('...') : viewingRef.body}
             </h3>
+            <p className="post-views-text">
+              {viewingRef.views}
+            </p>
           </div>
+        </div>
+        <AddComment handleAddCommentToPost={handleAddCommentToPost} />
+        <Comments commentList={viewingRef.comments}
+          handleUpVoteComment={handleUpVoteComment}
+          handleDownVoteComment={handleDownVoteComment}
+        />
       </div>
-    </div>
-  );
+     </>
+    );
+  } else {
+    return (
+      <p>Error, we're not sure what happened there :/</p>
+    );
+  };
+  
 };
 
 export default ViewPost;
