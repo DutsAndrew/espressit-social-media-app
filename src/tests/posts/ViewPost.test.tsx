@@ -86,15 +86,12 @@ describe('unit tests for ViewPost', () => {
 
     // post information is displayed
     expect(screen.getByRole("heading", { name: "Rant: Specialty Cafés should really train their baristas well"})).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "I just had possibly one of the worst cups of filters in my life. I ordered a cup of Ethiopian coffee from a new specialty cafe that opened up near me. I was quite excited since the next closest one was around 7 km away. I saw that they had a gooseneck kettle and a V60, so I thought it couldn’t be that bad. The barista haphazardly chucked a heaped measuring cup full of coarse coffee into the V60. T..."})).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "I just had possibly one of the worst cups of filters in my life. I ordered a cup of Ethiopian coffee from a new specialty cafe that opened up near me. I was quite excited since the next closest one was around 7 km away. I saw that they had a gooseneck kettle and a V60, so I thought it couldn’t be that bad. The barista haphazardly chucked a heaped measuring cup full of coarse coffee into the V60. Then they poured all the water straight into the V60. The result was an overly hot cup, completely lacking in complexity, with an extremely unpleasant sourness, not acidity, but sourness. It was really a let down."})).toBeInTheDocument();
     expect(screen.getByText(/usernameis2/i)).toBeInTheDocument();
     expect(screen.getByText(/3 days ago/i)).toBeInTheDocument();
 
     // is the post upvote/downvote counts displayed?
     expect(screen.getByText(324)).toBeInTheDocument();
-
-    // is views on post displayed?
-    expect(screen.getByText(1200)).toBeInTheDocument();
   });
 
   test('if dislikes are present, likes do not show negative', () => {
@@ -128,7 +125,7 @@ describe('unit tests for ViewPost', () => {
       />
     );
     
-    expect(screen.getByText(1200)).toBeInTheDocument();
+    expect(screen.getByText(/1200 Views/i)).toBeInTheDocument();
 
   });
   

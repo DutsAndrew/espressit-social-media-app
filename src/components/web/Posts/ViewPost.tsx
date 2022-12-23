@@ -1,10 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { ViewPostProps } from "../../../types/interfaces";
 import { Post } from "../../../types/interfaces";
 import '../../../styles/ViewPost.css';
 import ViewNav from "./ViewNav";
 import Comments from "./Comments";
 import AddComment from "./AddComent";
+import { create } from "domain";
 
 const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
 
@@ -23,6 +24,25 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
 
   };
 
+  // hides CreatePost component when viewing a post, unmounts when leaving view post
+  useEffect(() => {
+
+    const createPostContainer = document.querySelector('.create-post-container');
+
+    if (createPostContainer) {
+      createPostContainer.classList.remove('create-post-container');
+      createPostContainer.classList.add('hidden-create-post-container');
+    };
+
+    return () => {
+      if (createPostContainer) {
+        createPostContainer.classList.add('create-post-container');
+        createPostContainer.classList.remove('hidden-create-post-container');
+      };
+    };
+    
+  }, []);
+
   // when  no img or link are present
   if (viewingRef.img.length === 0 && viewingRef.link.length === 0) {
     return (
@@ -33,20 +53,23 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
           handleFavoritePost={handleFavoritePost}
           handleStopViewingPost={handleStopViewingPost}
         />
-        <div className="post-container">
-          <div className="post">
-            <div className="content-container">
+        <div className="post-view-container">
+          <div className="post-view">
+            <div className="content-view-container">
               <h5 className="post-account-time">
                 {`${viewingRef.account}, ${viewingRef.time}`}
               </h5>
-              <h1 className="post-title" >
-                {viewingRef.title.length > 75 ? viewingRef.title.slice(0, 75).concat('...') : viewingRef.title}
+              <h1 className="post-view-title" >
+                {viewingRef.title}
               </h1>
-              <h3 className="post-description" >
-                {viewingRef.body.length > 400 ? viewingRef.body.slice(0, 400).concat('...') : viewingRef.body}
+              <h6 className="post-view-link">
+                {viewingRef.link}
+              </h6>
+              <h3 className="post-view-description" >
+                {viewingRef.body}
               </h3>
               <p className="post-views-text">
-                {viewingRef.views}
+                <em>{viewingRef.views} Views</em>
               </p>
             </div>
           </div>
@@ -69,23 +92,23 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
           handleFavoritePost={handleFavoritePost}
           handleStopViewingPost={handleStopViewingPost}
         />
-        <div className="post-container">
-          <div className="post">
-            <div className="content-container">
+        <div className="post-view-container">
+          <div className="post-view">
+            <div className="content-view-container">
               <h5 className="post-account-time">
                 {`${viewingRef.account}, ${viewingRef.time}`}
               </h5>
-              <h1 className="post-title" >
-                {viewingRef.title.length > 75 ? viewingRef.title.slice(0, 75).concat('...') : viewingRef.title}
+              <h1 className="post-view-title" >
+                {viewingRef.title}
               </h1>
-              <h6 className="post-link">
+              <h6 className="post-view-link">
                 {viewingRef.link}
               </h6>
-              <h3 className="post-description" >
-                {viewingRef.body.length > 400 ? viewingRef.body.slice(0, 400).concat('...') : viewingRef.body}
+              <h3 className="post-view-description" >
+                {viewingRef.body}
               </h3>
               <p className="post-views-text">
-                {viewingRef.views}
+                <em>{viewingRef.views} Views</em>
               </p>
             </div>
           </div>
@@ -108,21 +131,23 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
           handleFavoritePost={handleFavoritePost}
           handleStopViewingPost={handleStopViewingPost}
         />
-      <div className="post-container">
-        <div className="post">
-          <div className="content-container">
+       <div className="post-view-container">
+        <div className="post-view">
+          <div className="content-view-container">
             <h5 className="post-account-time">
               {`${viewingRef.account}, ${viewingRef.time}`}
             </h5>
-            <h1 className="post-title" >
-              {viewingRef.title.length > 75 ? viewingRef.title.slice(0, 75).concat('...') : viewingRef.title}
+            <h1 className="post-view-title" >
+              {viewingRef.title}
             </h1>
-            <img className="post-img" src={viewingRef.img} alt="user upload"></img>
-            <h3 className="post-description" >
-              {viewingRef.body.length > 400 ? viewingRef.body.slice(0, 400).concat('...') : viewingRef.body}
+            <h6 className="post-view-link">
+              {viewingRef.link}
+            </h6>
+            <h3 className="post-view-description" >
+              {viewingRef.body}
             </h3>
             <p className="post-views-text">
-              {viewingRef.views}
+              <em>{viewingRef.views} Views</em>
             </p>
           </div>
         </div>

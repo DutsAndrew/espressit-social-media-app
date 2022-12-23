@@ -71,19 +71,19 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
   // if logged in
   return (
     <HeaderWrapper>
-        <LogoWrapper>
-          <img className="espresso-logo" src={espresso} alt="espresso" ></img>
-          <Title>
-            Espressit!
-          </Title>
-        </LogoWrapper>
-        <AccountWrapper>
-          <AccountDisplay currentUser={currentUser}
-            signOut={signOut}
-            toggleEditProfilePage={toggleEditProfilePage} 
-          />
-        </AccountWrapper>
-      </HeaderWrapper>
+      <LogoWrapper>
+        <img className="espresso-logo" src={espresso} alt="espresso" ></img>
+        <Title>
+          Espressit!
+        </Title>
+      </LogoWrapper>
+      <AccountWrapper>
+        <AccountDisplay currentUser={currentUser}
+          signOut={signOut}
+          toggleEditProfilePage={toggleEditProfilePage} 
+        />
+      </AccountWrapper>
+    </HeaderWrapper>
   );
 };
 

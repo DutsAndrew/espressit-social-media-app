@@ -13,16 +13,13 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
       {Array.isArray(commentList) && commentList.map((comment) => {
         return <div className="comment" key={uniqid()}>
           <div className="comment-info">
-            <p className="comment-account-text">
-              {comment.account}
+            <p className="comment-account-time-text">
+              <strong>{comment.account}</strong>, <em>{comment.time}</em>
             </p>
-            <p className="comment-time-text">
-              {comment.time}
+            <p className="comment-text">
+              {comment.comment}
             </p>
           </div>
-          <p className="comment-text">
-            {comment.comment}
-          </p>
           <div className="comment-interaction-container">
             <img className="upvote-svg"
               src={upVoteSVG}

@@ -1,0 +1,192 @@
+
+/* ------------- VIEW NAV -------------- */
+
+.view-nav-container {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 5vh;
+  width: 75vw;
+  margin: 0;
+  margin-top: 1%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(77, 39, 14);
+  color: rgb(253, 255, 246);
+}
+
+.upvote-downvote-view-container {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 10vw;
+  height: 5vh;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.vote-counter-text {
+  margin: 0;
+  font-size: auto;
+}
+
+.favorite-view-svg {
+  filter: invert(99%) sepia(17%) saturate(363%) hue-rotate(31deg) brightness(102%) contrast(101%);
+}
+
+.favorite-view-svg:hover, .upvote-svg:hover, .downvote-svg:hover, .close-view-svg:hover {
+  filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
+  cursor: pointer;
+}
+
+.close-view-container {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0;
+  height: 5vh;
+  width: 10vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-view-svg {
+  filter: invert(99%) sepia(17%) saturate(363%) hue-rotate(31deg) brightness(102%) contrast(101%);
+}
+
+.close-view-text {
+  margin: 0;
+  font-size: auto;
+}
+
+.close-view-container:hover > p {
+  color: rgb(183, 185, 176);
+  cursor: pointer;
+}
+
+.close-view-container:hover > img {
+  filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
+  cursor: pointer;
+}
+
+/* ------------- POST VIEW ------------- */
+
+.post-view-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 75vw;
+  height: auto;
+  margin: 0;
+  color: rgb(253, 255, 246);
+}
+
+.post-view {
+  
+}
+
+.content-view-container {
+  height: auto;
+  width: 75vw;
+  margin: 0;
+}
+
+.post-account-time {
+  font-size: 0.9em;
+}
+
+.post-views-text {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 72vw;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* ---------- ADD COMMENT ----------- */
+
+.add-comment-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 75vw;
+  height: 10vh;
+  gap: 2vw;
+}
+
+.comment-input {
+  width: 60vw;
+  height: 10vh;
+  resize: none;
+  background-color: rgb(253, 255, 246);
+  color: rgb(17, 7, 2);
+  font-size: 1.25em;
+}
+
+.submit-comment-button {
+  width: 8vw;
+  height: 5vh;
+  font-size: 0.75em;
+  background-color: rgb(77, 39, 14);
+  color: rgb(253, 255, 246);
+}
+
+.validation-text {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(35,220,61);
+  width: 70vw;
+  height: auto;
+  font-size: 1.5em;
+}
+
+/* -------- COMMENT LIST --------- */
+
+.comment-list {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 75vw;
+  height: auto;
+}
+
+.comment {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 75vw;
+  margin: 2%;
+}
+
+.comment-info {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0;
+  width: 70vw;
+  height: auto;
+}
+
+.comment-account-time-text, .comment-text {
+  margin: 1%;
+}
+
+.comment-text {
+  height: auto;
+  width: 70vw;
+}
+
+.comment-interaction-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 4.5vw;
+  height: 50%;
+}
+
+.upvote-count-text {
+  margin: 4%;
+}

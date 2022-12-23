@@ -5,8 +5,9 @@
   align-items: center;
   margin: 0;
   width: 100vw;
-  height: 90vh;
+  height: auto;
   overflow-y: scroll;
+  overflow-x: none;
 }
 
 /* CREATE POST STYLES */
@@ -23,6 +24,15 @@
   margin: 0;
   margin-top: 1%;
   background-color: rgb(129, 83, 40);
+}
+
+.hidden-create-post-container {
+  position: none;
+  display: none;
+  width: none;
+  height: none;
+  margin: 0;
+  background-color: none;
 }
 
 .create-post-tamper-img {

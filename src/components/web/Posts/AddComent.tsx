@@ -7,7 +7,14 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
 
   const validateComment = () => {
     const validationText: Element | null = document.querySelector('.validation-text');
-    if (validationText) validationText.textContent = "Thank you for contributing! :)";
+
+    if (validationText)  {
+      validationText.textContent = "Thank you for contributing! :)"
+      setTimeout(() => {
+        validationText.textContent = "";
+      }, 5000);
+    };
+   
   };
 
   return (

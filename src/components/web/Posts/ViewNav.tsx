@@ -15,7 +15,7 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
 
   return (
     <div className="view-nav-container">
-      <div className="upvote-downvote-container">
+      <div className="upvote-downvote-view-container">
         <img className="upvote-svg"
           src={upVoteSVG}
           alt="upvote arrow"
@@ -37,14 +37,17 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
       <img className="favorite-view-svg"
         src={favoriteSVG}
         alt="favorite icon"
+        style={{width: "3vw", height: "3vh"}}
         onClick={() => handleFavoritePost(viewingRef)} 
         data-testid="post-favorite-test" >
       </img>
-      <div className="close-view-container">
+      <div className="close-view-container"
+        onClick={() => handleStopViewingPost()}
+      >
         <img className="close-view-svg"
           src={closeSVG}
           alt="close view icon" 
-          onClick={() => handleStopViewingPost()} 
+          style={{width: "3vw", height: "3vh"}}
           data-testid="post-close-test">
         </img>
         <p className="close-view-text">
