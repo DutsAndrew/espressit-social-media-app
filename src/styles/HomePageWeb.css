@@ -50,12 +50,12 @@
   color: rgb(17, 7, 2);
 }
 
-.create-post-insert-img, .create-post-insert-link {
+.create-post-insert-text, .create-post-insert-img, .create-post-insert-link {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 4vw;
-  height: 4vh;
+  height: auto;
   border-radius: 50%;
   background-color: rgb(253, 255, 246);
 }

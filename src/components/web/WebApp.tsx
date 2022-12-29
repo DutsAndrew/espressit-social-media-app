@@ -12,6 +12,7 @@ signInWithPopup,
 import { userState } from '../../types/interfaces';
 import LogIn from '../auth/LogIn';
 import EditProfile from "../auth/EditProfile";
+import ViewFavorites from "../auth/ViewFavorites";
 
 const WebApp = () => {
 
@@ -25,6 +26,7 @@ const WebApp = () => {
   });
 
   const [editProfileRequested, setEditProfileRequested] = useState({status: false});
+  const [viewFavoritesRequested, setViewFavoritesRequested] = useState({status: false});
 
   const handleSignUp = () => {
     if (signUpStatus.signUp === false) {
@@ -185,6 +187,22 @@ const WebApp = () => {
     };
   };
 
+  const toggleViewFavoritesPage = () => {
+    if (viewFavoritesRequested.status === false) {
+      setViewFavoritesRequested({
+        status: true,
+      });
+    } else {
+      setViewFavoritesRequested({
+        status: false,
+      });
+    };
+  };
+
+  const setFavoritePost = () => {
+
+  };
+
   if (signUpStatus.signUp === true) {
     return (
       <div className="app-web">
@@ -193,6 +211,7 @@ const WebApp = () => {
           currentUser={userStatus.currentUser}
           signOut={signOut}
           toggleEditProfilePage={toggleEditProfilePage}
+          toggleViewFavoritesPage={toggleViewFavoritesPage}
         />
         <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword}
           handleSignUp={handleSignUp}
@@ -209,6 +228,7 @@ const WebApp = () => {
           currentUser={userStatus.currentUser}
           signOut={signOut}
           toggleEditProfilePage={toggleEditProfilePage}
+          toggleViewFavoritesPage={toggleViewFavoritesPage}
         />
         <LogIn signInUser={signInUser}
           handleLogIn={handleLogIn}
@@ -226,12 +246,28 @@ const WebApp = () => {
         currentUser={userStatus.currentUser}
         signOut={signOut}
         toggleEditProfilePage={toggleEditProfilePage}
+        toggleViewFavoritesPage={toggleViewFavoritesPage}
       />
       <EditProfile currentUser={userStatus.currentUser}
         toggleEditProfilePage={toggleEditProfilePage}
       />
     </div>
-   )
+   );
+  };
+
+  if (viewFavoritesRequested.status === true) {
+    return (
+      <div className="app-web">
+        <Header handleSignUp={handleSignUp}
+          handleLogIn={handleLogIn}
+          currentUser={userStatus.currentUser}
+          signOut={signOut}
+          toggleEditProfilePage={toggleEditProfilePage}
+          toggleViewFavoritesPage={toggleViewFavoritesPage}
+        />
+        <ViewFavorites />
+      </div>
+     );
   };
 
   return (
@@ -241,8 +277,9 @@ const WebApp = () => {
         currentUser={userStatus.currentUser}
         signOut={signOut}
         toggleEditProfilePage={toggleEditProfilePage}
+        toggleViewFavoritesPage={toggleViewFavoritesPage}
       />
-      <HomePageWeb currentUser={userStatus.currentUser} />
+      <HomePageWeb currentUser={userStatus.currentUser}/>
     </div>
   );
 };

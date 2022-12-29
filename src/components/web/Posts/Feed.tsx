@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { FeedProps } from "../../../types/interfaces";
+import { FeedProps, Post } from "../../../types/interfaces";
 import upVoteSVG from '../../../assets/arrow-up.svg';
 import downVoteSVG from '../../../assets/arrow-down.svg';
 import favoriteSVG from '../../../assets/save.svg';
@@ -11,12 +11,12 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
 
   const { sortedData, handleViewPost, handleUpVotePost, handleDownVotePost, handleFavoritePost } = props;
 
-  const callHandleViewPost = (postIndex: number): void => {
-    handleViewPost(postIndex);
+  const callHandleViewPost = (post: Post): void => {
+    handleViewPost(post);
   };
 
-  const callHandleFavoritePost = (postIndex: number): void => {
-    handleFavoritePost(postIndex);
+  const callHandleFavoritePost = (post: Post): void => {
+    handleFavoritePost(post);
   };
 
   return (
@@ -44,11 +44,11 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
             </div>
             <div className="content-container">
               <h1 className="post-title"
-                onClick={() => callHandleViewPost(sortedData.indexOf(post))} >
+                onClick={() => callHandleViewPost(post)} >
                 {post.title.length > 75 ? post.title.slice(0, 75).concat('...') : post.title}
               </h1>
               <h3 className="post-description"
-                onClick={() => callHandleViewPost(sortedData.indexOf(post))} >
+                onClick={() => callHandleViewPost(post)} >
                 {post.body.length > 400 ? post.body.slice(0, 400).concat('...') : post.body}
               </h3>
               <div className="post-footer-container">
@@ -56,14 +56,14 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                   src={commentSVG}
                   alt="comment box"
                   style={{width: "2vw", height: "2vh"}}
-                  onClick={() => callHandleViewPost(sortedData.indexOf(post))} >
+                  onClick={() => callHandleViewPost(post)} >
                 </img>
                 <p className="post-comment-amount">{post.comments.length}</p>
                 <img className="post-favorite-svg"
                   src={favoriteSVG}
                   alt="save icon"
                   style={{width: "2vw", height: "2vh"}}
-                  onClick={() => callHandleFavoritePost(sortedData.indexOf(post))} >
+                  onClick={() => callHandleFavoritePost(post)} >
                 </img>
               </div>
             </div>
@@ -90,7 +90,7 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
             </div>
             <div className="content-container">
               <h1 className="post-title"
-                onClick={() => callHandleViewPost(sortedData.indexOf(post))} >
+                onClick={() => callHandleViewPost(post)} >
                 {post.title.length > 75 ? post.title.slice(0, 75).concat('...') : post.title}
               </h1>
               <img className="post-image"
@@ -98,7 +98,7 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                 alt="user posted img" >
               </img>
               <h3 className="post-description"
-                onClick={() => callHandleViewPost(sortedData.indexOf(post))} >
+                onClick={() => callHandleViewPost(post)} >
                 {post.body.length > 400 ? post.body.slice(0, 400).concat('...') : post.body}
               </h3>
               <div className="post-footer-container">
@@ -106,14 +106,14 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                   src={commentSVG} 
                   alt="comment box" 
                   style={{width: "2vw", height: "2vh"}}
-                  onClick={() => callHandleViewPost(sortedData.indexOf(post))} >
+                  onClick={() => callHandleViewPost(post)} >
                 </img>
                 <p className="post-comment-amount">{post.comments.length}</p>
                 <img className="post-favorite-svg"
                   src={favoriteSVG}
                   alt="save icon"
                   style={{width: "2vw", height: "2vh"}}
-                  onClick={() => callHandleFavoritePost(sortedData.indexOf(post))} >
+                  onClick={() => callHandleFavoritePost(post)} >
                 </img>
               </div>
             </div>
@@ -140,12 +140,12 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
             </div>
             <div className="content-container">
               <h1 className="post-title"
-                onClick={() => callHandleViewPost(sortedData.indexOf(post))} >
+                onClick={() => callHandleViewPost(post)} >
                 {post.title.length > 75 ? post.title.slice(0, 75).concat('...') : post.title}
               </h1>
               <h6 className="post-link">{post.link}</h6>
               <h3 className="post-description"
-                onClick={() => callHandleViewPost(sortedData.indexOf(post))} >
+                onClick={() => callHandleViewPost(post)} >
                 {post.body.length > 400 ? post.body.slice(0, 400).concat('...') : post.body}
               </h3>
               <div className="post-footer-container">
@@ -153,14 +153,14 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                   src={commentSVG}
                   alt="comment box"
                   style={{width: "2vw", height: "2vh"}}
-                  onClick={() => callHandleViewPost(sortedData.indexOf(post))} >
+                  onClick={() => callHandleViewPost(post)} >
                 </img>
                 <p className="post-comment-amount">{post.comments.length}</p>
                 <img className="post-favorite-svg"
                   src={favoriteSVG}
                   alt="save icon"
                   style={{width: "2vw", height: "2vh"}}
-                  onClick={() => callHandleFavoritePost(sortedData.indexOf(post))} >
+                  onClick={() => callHandleFavoritePost(post)} >
                 </img>
               </div>
             </div>

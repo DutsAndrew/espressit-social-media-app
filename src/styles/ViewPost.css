@@ -131,6 +131,10 @@
   color: rgb(253, 255, 246);
 }
 
+.submit-comment-button:hover {
+  cursor: pointer;
+}
+
 .validation-text {
   display: flex;
   flex-flow: row nowrap;

@@ -48,7 +48,7 @@
   margin-right: 1%;
 }
 
-.upvote-svg:hover, .downvote-svg:hover, .post-comment-svg:hover, .post-save-svg:hover {
+.upvote-svg:hover, .downvote-svg:hover, .post-comment-svg:hover, .post-favorite-svg:hover {
   filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
   cursor: pointer;
 }
@@ -100,6 +100,6 @@
   margin-right: 2vw;
 }
 
-.post-comment-svg, .post-save-svg, .upvote-svg, .downvote-svg {
+.post-comment-svg, .post-favorite-svg, .upvote-svg, .downvote-svg {
   filter: invert(94%) sepia(9%) saturate(372%) hue-rotate(60deg) brightness(107%) contrast(105%);
 }

@@ -6,7 +6,7 @@ import { User } from "firebase/auth";
 
 const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
-  const { currentUser, signOut, toggleEditProfilePage } = props;
+  const { currentUser, signOut, toggleEditProfilePage, toggleViewFavoritesPage } = props;
 
   const accountDropDown = (e: React.MouseEvent) => {
 
@@ -15,6 +15,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
     const dropDownMenu = document.querySelector('.account-drop-down-menu');
     const chevronButton = document.querySelector('.account-menu-button');
     const profileText = document.querySelector('.profile-text');
+
     if (!dropDownMenu) {
       chevronButton?.classList.add('drop-down-active');
       profileText?.classList.add('drop-down-text-active');
@@ -27,10 +28,16 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       const editProfile = document.createElement('p');
         editProfile.classList.add('edit-profile-text');
         editProfile.textContent = 'Edit Profile';
+      const favoritePosts = document.createElement('p');
+        favoritePosts.classList.add('view-favorite-text');
+        favoritePosts.textContent = 'View Favorites';
+
       dropDownMenu.appendChild(signOut);
       dropDownMenu.appendChild(editProfile);
+      dropDownMenu.appendChild(favoritePosts);
       profileContainer?.appendChild(dropDownMenu);
     };
+
     if (dropDownMenu) {
       dropDownMenu?.remove()
       chevronButton?.classList.remove('drop-down-active');
@@ -38,7 +45,9 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       profileText?.classList.remove('drop-down-text-active');
     };
 
+
     const target = e.target as Element;
+
     if (target.classList.contains('sign-out-text')) {
       signOut();
       return;
@@ -48,6 +57,11 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       toggleEditProfilePage();
       return;
     };
+
+    if (target.classList.contains('view-favorite-text')) {
+      toggleViewFavoritesPage();
+      return;
+    }
 
   };
 

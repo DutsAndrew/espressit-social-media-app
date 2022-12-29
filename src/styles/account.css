@@ -56,10 +56,10 @@
 }
 
 .account-drop-down-menu {
-  height: 10vh;
-  width: 12vw;
+  height: 15vh;
+  width: 14vw;
   margin: 0;
-  margin-top: 20vh;
+  margin-top: 25vh;
   margin-left: 15vw;
   display: flex;
   justify-content: center;
@@ -73,13 +73,13 @@
   box-shadow: 0.25em 0.12em 0.12em #37251b;
 }
 
-.account-drop-down-menu:hover .sign-out-text:hover, .account-drop-down-menu:hover .edit-profile-text:hover {
+.account-drop-down-menu:hover .sign-out-text:hover, .account-drop-down-menu:hover .edit-profile-text:hover, .view-favorite-text:hover {
   cursor: pointer;
   color:#DABE99;
   transform: scale(0.90);
 }
 
-.sign-out-text, .edit-profile-text {
+.sign-out-text, .edit-profile-text, .view-favorite-text {
   margin: 1vh;
   font-size: 1em;
 }

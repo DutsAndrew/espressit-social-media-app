@@ -131,9 +131,9 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     post: {},
   });
 
-  const handleViewPost = (index: number): void => {
+  const handleViewPost = (post: Post): void => {
     setCurrentlyViewing({
-      post: sortedData.data[index],
+      post: post,
     });
   };
 
@@ -143,11 +143,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     });
   };
 
-  const handleFavoritePost = (post: Post): void => {
-    console.log('favoriting:', post);
-  };
-
-  const handleUpVotePost = (post: Object): void => {
+  const handleUpVotePost = (post: Post): void => {
     const dataRef = sortedData.data;
     const indexRef = dataRef.indexOf(post as any);
 
@@ -160,7 +156,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     });
   };
 
-  const handleDownVotePost = (post: Object): void => {
+  const handleDownVotePost = (post: Post): void => {
     const dataRef = sortedData.data;
     const indexRef = dataRef.indexOf(post as any);
 
@@ -173,12 +169,45 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     });
   };
 
-  const handleUpVoteComment = (comment: Object): void => {
+  const handleFavoritePost = (post: Post) => {
+    // will take in the post data as an an argument, save to db under users favoritedPosts array
+    console.log('favoriting post', post);
+  };
 
+  const handleUpVoteComment = (comment: Object): void => {
+    const dataRef = sortedData.data;
+    const postIndexRef = dataRef.indexOf(currentlyViewing.post as any);
+
+    let postToChange = dataRef[postIndexRef];
+    const commentIndexRef = postToChange.comments.indexOf(comment as any)
+    
+    let commentToChange = postToChange.comments[commentIndexRef];
+    commentToChange.likes += 1;
+
+    postToChange.comments[commentIndexRef] = commentToChange;
+    dataRef[postIndexRef] = postToChange;
+
+    setSortedData({
+      data: dataRef,
+    });
   };
 
   const handleDownVoteComment = (comment: Object): void => {
+    const dataRef = sortedData.data;
+    const postIndexRef = dataRef.indexOf(currentlyViewing.post as any);
 
+    let postToChange = dataRef[postIndexRef];
+    const commentIndexRef = postToChange.comments.indexOf(comment as any)
+    
+    let commentToChange = postToChange.comments[commentIndexRef];
+    commentToChange.likes -= 1;
+
+    postToChange.comments[commentIndexRef] = commentToChange;
+    dataRef[postIndexRef] = postToChange;
+
+    setSortedData({
+      data: dataRef,
+    });
   };
  
   // (function fakeDates () {
@@ -223,10 +252,10 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
       <ViewPost viewing={currentlyViewing.post}
         handleUpVotePost={handleUpVotePost}
         handleDownVotePost={handleDownVotePost}
-        handleFavoritePost={handleFavoritePost}
         handleStopViewingPost={handleStopViewingPost}
         handleUpVoteComment={handleUpVoteComment}
         handleDownVoteComment={handleDownVoteComment}
+        handleFavoritePost={handleFavoritePost}
       />
     );
   };

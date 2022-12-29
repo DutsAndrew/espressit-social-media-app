@@ -22,12 +22,14 @@ describe('unit test for account display', () => {
 
   const signOutMock = jest.fn();
   const editProfileMock = jest.fn();
+  const viewFavoitesMock = jest.fn();
 
   test('Account Display renders correct elements when user has a display name', () => {
 
     render(<AccountDisplay currentUser={userMock}
       signOut={signOutMock}
-      toggleEditProfilePage={editProfileMock} />
+      toggleEditProfilePage={editProfileMock} 
+      toggleViewFavoritesPage={viewFavoitesMock} />
     );
 
     const loggdInText = screen.getByRole('paragraph');
@@ -43,11 +45,10 @@ describe('unit test for account display', () => {
 
   test('Account display renders correct elements when user has just an email on login', () => {
 
-    render(
-      <AccountDisplay currentUser={userMockWithoutDisplayName}
-        signOut={signOutMock}
-        toggleEditProfilePage={editProfileMock}
-      />
+    render(<AccountDisplay currentUser={userMock}
+      signOut={signOutMock}
+      toggleEditProfilePage={editProfileMock} 
+      toggleViewFavoritesPage={viewFavoitesMock} />
     );
 
     const loggdInText = screen.getByRole('paragraph');
@@ -61,11 +62,10 @@ describe('unit test for account display', () => {
   
   test('drop down menu open and closes', () => {
 
-    render(
-      <AccountDisplay currentUser={userMock}
-        signOut={signOutMock}
-        toggleEditProfilePage={editProfileMock}
-      />
+    render(<AccountDisplay currentUser={userMock}
+      signOut={signOutMock}
+      toggleEditProfilePage={editProfileMock} 
+      toggleViewFavoritesPage={viewFavoitesMock} />
     );
     
     const accountContainer = screen.getByRole("menu");
@@ -80,11 +80,10 @@ describe('unit test for account display', () => {
   
   test('sign out and edit profile are called on click', () => {
 
-    render(
-      <AccountDisplay currentUser={userMock}
-        signOut={signOutMock}
-        toggleEditProfilePage={editProfileMock}
-      />
+    render(<AccountDisplay currentUser={userMock}
+      signOut={signOutMock}
+      toggleEditProfilePage={editProfileMock} 
+      toggleViewFavoritesPage={viewFavoitesMock} />
     );
 
     const accountContainer = screen.getByRole("menu");

@@ -7,6 +7,7 @@ interface HeaderProps {
   currentUser: string | User,
   signOut: Function,
   toggleEditProfilePage: Function,
+  toggleViewFavoritesPage: Function,
 };
 
 interface SignUpProps {
@@ -38,6 +39,7 @@ interface AccountDisplayProps {
   currentUser: string | User,
   signOut: Function,
   toggleEditProfilePage: Function,
+  toggleViewFavoritesPage: Function,
 };
 
 interface EditProfileProps {

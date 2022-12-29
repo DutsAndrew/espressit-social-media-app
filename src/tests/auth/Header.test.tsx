@@ -11,15 +11,18 @@ describe('unit test for header', () => {
   const logInMock = jest.fn();
   const signOutMock = jest.fn();
   const editProfileMock = jest.fn();
+  const viewFavoitesMock = jest.fn();
   const userMock = "Bob Dillon" as unknown as User;
 
   test('renders header, title', () => {
+
     render(
       <Header handleSignUp={signUpMock}
         handleLogIn={logInMock}
         currentUser={userMock}
         signOut={signOutMock}
         toggleEditProfilePage={editProfileMock}
+        toggleViewFavoritesPage={viewFavoitesMock}
       />
     );
 
@@ -28,7 +31,15 @@ describe('unit test for header', () => {
   });
 
   test('header matches snapshot', () => {
-    const { container } = render(<Header handleSignUp={signUpMock} handleLogIn={logInMock} currentUser={userMock} signOut={signOutMock} toggleEditProfilePage={editProfileMock} />);
+    const { container } = render(
+      <Header handleSignUp={signUpMock}
+        handleLogIn={logInMock}
+        currentUser={userMock}
+        signOut={signOutMock}
+        toggleEditProfilePage={editProfileMock}
+        toggleViewFavoritesPage={viewFavoitesMock}
+      />
+    );
     expect(container).toMatchSnapshot();
   });
 
@@ -40,6 +51,7 @@ describe('unit test for header', () => {
         currentUser={userMock}
         signOut={signOutMock}
         toggleEditProfilePage={editProfileMock}
+        toggleViewFavoritesPage={viewFavoitesMock}
       />
     );
 
@@ -57,6 +69,7 @@ describe('unit test for header', () => {
         currentUser={userMock}
         signOut={signOutMock}
         toggleEditProfilePage={editProfileMock}
+        toggleViewFavoritesPage={viewFavoitesMock}
       />
     );
 
@@ -73,6 +86,7 @@ describe('unit test for header', () => {
         currentUser={userMock}
         signOut={signOutMock}
         toggleEditProfilePage={editProfileMock}
+        toggleViewFavoritesPage={viewFavoitesMock}
       />
     );
 

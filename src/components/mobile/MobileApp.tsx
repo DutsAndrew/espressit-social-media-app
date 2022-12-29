@@ -38,6 +38,10 @@ const MobileApp = () => {
 
   }
 
+  const toggleViewFavoritesPage = () => {
+
+  };
+
   return (
     <div className="app-mobile">
         <Header handleSignUp={handleSignUp}
@@ -45,6 +49,7 @@ const MobileApp = () => {
           currentUser={userStatus.currentUser}
           signOut={signOut}
           toggleEditProfilePage={toggleEditProfilePage}
+          toggleViewFavoritesPage={toggleViewFavoritesPage}
         />
         <HomePageMobile />
     </div>
