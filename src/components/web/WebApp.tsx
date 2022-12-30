@@ -177,6 +177,11 @@ const WebApp = () => {
 
   const toggleEditProfilePage = () => {
     if (editProfileRequested.status === false) {
+      if (viewFavoritesRequested.status === true) {
+        setViewFavoritesRequested({
+          status: false,
+        });
+      };
       setEditProfileRequested({
         status: true,
       });
@@ -189,6 +194,11 @@ const WebApp = () => {
 
   const toggleViewFavoritesPage = () => {
     if (viewFavoritesRequested.status === false) {
+      if (editProfileRequested.status === true) {
+        setEditProfileRequested({
+          status: false
+        });
+      };
       setViewFavoritesRequested({
         status: true,
       });

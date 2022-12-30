@@ -115,6 +115,16 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
       </button>
       <fieldset id="create-account-fieldset" >
         <legend>Create an account:</legend>
+        <label htmlFor="username-input" >*Username:</label>
+        <input id="username-input" 
+          placeholder="MischievousJack92"
+          onChange={handleFormChange}
+          minLength={2}
+          maxLength={10}
+          type="text"
+          required>
+        </input>
+        <p id="username-input-error" className ="error-msg" ></p>
         <label htmlFor="email-input" >*Email:</label>
         <input id="email-input" 
           placeholder="JohnWick92@gmail.com"

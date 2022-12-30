@@ -42,6 +42,27 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         <legend className="edit-profile-legend" >
           Profile Information:
         </legend>
+        <label htmlFor="user-name"
+          className="edit-profile-label">
+          **Username:
+        </label>
+        <input id="user-name-input"
+          name="user-name"
+          className="edit-profile-input"
+          data-testid="username"
+          required >
+        </input>
+        <label htmlFor="email"
+          className="edit-profile-label">
+          **Email:
+        </label>
+        <input id="email-input"
+          name="email"
+          className="edit-profile-input" 
+          placeholder={userRef?.email ? `${userRef?.email}` : "Not Set"} 
+          data-testid="email"
+          required >
+        </input>
         <label htmlFor="first-name"
           className="edit-profile-label">
           First Name:
@@ -49,35 +70,18 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         <input id="first-name-input"
           name="first-name"
           className="edit-profile-input"
-          placeholder={userRef?.displayName ? `${userRef.email}` : "Not Set"}
+          placeholder={userRef?.displayName ? `${userRef?.displayName.split(' ')[0]}` : "Not Set"}
           data-testid="first-name" >
         </input>
         <label htmlFor="last-name"
-          className="edit-profile-label">
+          className="edit-profile-label" >
           Last Name:
         </label>
         <input id="last-name-input"
           name="last-name"
           className="edit-profile-input"
+          placeholder={userRef?.displayName ? `${userRef?.displayName.split(' ')[1]}` : "Not Set"} 
           data-testid="last-name" >
-        </input>
-        <label htmlFor="user-name"
-          className="edit-profile-label">
-          Username:
-        </label>
-        <input id="user-name-input"
-          name="user-name"
-          className="edit-profile-input"
-          data-testid="username" >
-        </input>
-        <label htmlFor="email"
-          className="edit-profile-label">
-          Email:
-        </label>
-        <input id="email-input"
-          name="email"
-          className="edit-profile-input" 
-          data-testid="email" >
         </input>
         <button type="submit"
           className="submit-profile-button">

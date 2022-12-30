@@ -80,6 +80,12 @@
   font-size: clamp(0.5em, 0.9em, 1.25em);
 }
 
+.post-img {
+  width: 100%;
+  height: auto;
+  margin: 2%;
+}
+
 .post-footer-container {
   width: 70vw;
   height: 3vh;

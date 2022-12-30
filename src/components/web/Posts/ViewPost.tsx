@@ -5,7 +5,6 @@ import '../../../styles/ViewPost.css';
 import ViewNav from "./ViewNav";
 import Comments from "./Comments";
 import AddComment from "./AddComent";
-import { create } from "domain";
 
 const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
 

@@ -115,6 +115,10 @@ type Post = {
   whoLiked: any[],
 };
 
+type PostData = {
+  data: any[],
+};
+
 interface CommentsProps {
   commentList: {
     account: string;
@@ -152,6 +156,7 @@ export {
   type ViewPostProps,
   type ViewNavProps,
   type Post,
+  type PostData,
   type CommentsProps,
   type AddCommentProps,
 };
