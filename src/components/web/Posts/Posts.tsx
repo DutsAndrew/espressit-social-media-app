@@ -103,36 +103,44 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     const indexRef: number = dataRef.indexOf(post as any);
     let postToChange = dataRef[indexRef];
 
-    // prevents duplicate like
-    if (postToChange.whoLiked.includes(userRef.uid)) {
-      return;
-    } else {
+    // check if user already downvoted, if so, remove downvote and accept upvote
+    if (postToChange.whoDisliked.includes(userRef.uid)) {
 
-      // check if user already downvoted, if so, remove downvote and accept upvote
-      if (postToChange.whoDisliked.includes(userRef.uid)) {
-        const removeUserId = postToChange.whoDisliked.filter((uid: string) => uid !== userRef.uid);
-        postToChange.whoDisliked = removeUserId;
-      };
+      const removeUserId = postToChange.whoDisliked.filter((uid: string) => uid !== userRef.uid);
+      postToChange.whoDisliked = removeUserId;
+      postToChange.likes += 2;
+      postToChange.whoLiked.push(userRef.uid);
+
+    } else if (postToChange.whoLiked.includes(userRef.uid)) {
+
+      const removeUserId = postToChange.whoLiked.filter((uid: string) => uid !== userRef.uid);
+      postToChange.whoLiked = removeUserId;
+      postToChange.likes -= 1;
+
+    } else {
 
       postToChange.likes += 1;
       postToChange.whoLiked.push(userRef.uid);
-      dataRef[indexRef] = postToChange;
 
-      (async function fetchPosts() {
-        const postRef = await doc(db, "posts", post.pid);
-        await updateDoc(postRef, {
-          likes: postToChange.likes,
-          whoDisliked: postToChange.whoDisliked,
-          whoLiked: [...postToChange.whoLiked],
-        });
-      })();
-
-      setSortedData({
-        data: dataRef,
-      });
-
-      return;
     };
+
+    dataRef[indexRef] = postToChange;
+
+    (async function fetchPosts() {
+      const postRef = await doc(db, "posts", post.pid);
+      await updateDoc(postRef, {
+        likes: postToChange.likes,
+        whoDisliked: postToChange.whoDisliked,
+        whoLiked: [...postToChange.whoLiked],
+      });
+    })();
+
+    setSortedData({
+      data: dataRef,
+    });
+
+    return;
+
   };
 
   const handleDownVotePost = (post: Post, e: React.MouseEvent<HTMLImageElement, MouseEvent>): void => {
@@ -147,36 +155,43 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     const indexRef: number = dataRef.indexOf(post as any);
     let postToChange = dataRef[indexRef];
 
-    // prevents duplicate like
-    if (postToChange.whoDisliked.includes(userRef.uid)) {
-      return;
-    } else {
+    // check if user already upvoted, if so, remove upvote and accept downvote
+    if (postToChange.whoLiked.includes(userRef.uid)) {
 
-      // check if user already upvoted, if so, remove upvote and accept downvote
-      if (postToChange.whoLiked.includes(userRef.uid)) {
-        const removeUserId = postToChange.whoLiked.filter((uid: string) => uid !== userRef.uid);
-        postToChange.whoLiked = removeUserId;
-      };
+      const removeUserId = postToChange.whoLiked.filter((uid: string) => uid !== userRef.uid);
+      postToChange.whoLiked = removeUserId;
+      postToChange.dislikes += 2;
+      postToChange.whoDisliked.push(userRef.uid);
+
+    } else if (postToChange.whoDisliked.includes(userRef.uid)) {
+
+      const removeUserId = postToChange.whoDisliked.filter((uid: string) => uid !== userRef.uid);
+      postToChange.whoDisliked = removeUserId;
+      postToChange.dislikes -= 1;
+
+    } else {
 
       postToChange.dislikes += 1;
       postToChange.whoDisliked.push(userRef.uid);
-      dataRef[indexRef] = postToChange;
 
-      (async function fetchPosts() {
-        const postRef = await doc(db, "posts", post.pid);
-        await updateDoc(postRef, {
-          dislikes: postToChange.dislikes,
-          whoDisliked: [...postToChange.whoDisliked],
-          whoLiked: postToChange.whoLiked,
-        });
-      })();
-
-      setSortedData({
-        data: dataRef,
-      });
-
-      return;
     };
+
+    dataRef[indexRef] = postToChange;
+
+    (async function fetchPosts() {
+      const postRef = await doc(db, "posts", post.pid);
+      await updateDoc(postRef, {
+        dislikes: postToChange.dislikes,
+        whoDisliked: [...postToChange.whoDisliked],
+        whoLiked: postToChange.whoLiked,
+      });
+    })();
+
+    setSortedData({
+      data: dataRef,
+    });
+
+    return;
 
   };
 

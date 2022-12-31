@@ -77,6 +77,20 @@ interface FeedProps {
   handleFavoritePost: Function,
 };
 
+interface VoteContainerProps {
+  post: Post,
+  whoLiked: any[],
+  whoDisliked: any[],
+  handleUpVotePost: Function,
+  handleDownVotePost: Function,
+};
+
+interface ContentContainerProps {
+  post: Post,
+  handleViewPost: Function,
+  handleFavoritePost: Function,
+};
+
 interface SortNavProps {
   handleSortChange: Function,
   sortType: { type: string; },
@@ -153,6 +167,8 @@ export {
   type HomePageWebProps,
   type PostProps,
   type FeedProps,
+  type VoteContainerProps,
+  type ContentContainerProps,
   type SortNavProps,
   type ViewPostProps,
   type ViewNavProps,
