@@ -108,6 +108,7 @@ type Post = {
   img: string,
   likes: number,
   link: string,
+  pid: string,
   time: string,
   title: string,
   views: number,

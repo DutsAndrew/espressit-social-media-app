@@ -36,6 +36,13 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       dropDownMenu.appendChild(editProfile);
       dropDownMenu.appendChild(favoritePosts);
       profileContainer?.appendChild(dropDownMenu);
+
+      setTimeout(() => {
+        dropDownMenu?.remove()
+        chevronButton?.classList.remove('drop-down-active');
+        chevronButton?.classList.add('account-menu-button');
+        profileText?.classList.remove('drop-down-text-active');
+      }, 5000);
     };
 
     if (dropDownMenu) {

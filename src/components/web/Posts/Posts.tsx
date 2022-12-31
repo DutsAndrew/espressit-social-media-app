@@ -5,10 +5,11 @@ import '../../../styles/Posts.css';
 import timeSort from "../../../scripts/timeSort";
 import ViewPost from "./ViewPost";
 import { Post, PostProps, PostData } from "../../../types/interfaces";
+import { User } from "firebase/auth";
 
 // firebase imports
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, updateDoc } from "firebase/firestore";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
@@ -16,6 +17,8 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 const Posts: FC<PostProps> = (props): JSX.Element => {
 
   const { user } = props;
+
+  console.log(user);
 
   // firebaseConfig
   const firebaseConfig = {
@@ -92,34 +95,75 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
   const handleUpVotePost = (post: Post): void => {
 
-    // NEED TO ADD USER TO WHOLIKED ARRAY TO PREVENT DUPLICATE LIKE
+    // exits upVote if user isn't signed in
+    const userRef = user as User;
+    if (!userRef.uid) {
+      return;
+    };
 
-    const dataRef = sortedData.data;
-    const indexRef = dataRef.indexOf(post as any);
-
+    const dataRef: any[] = sortedData.data;
+    const indexRef: number = dataRef.indexOf(post as any);
     let postToChange = dataRef[indexRef];
-    postToChange.likes += 1;
-    dataRef[indexRef] = postToChange;
 
-    setSortedData({
-      data: dataRef,
-    });
+    // prevents duplicate like
+    if (postToChange.whoLiked.includes(userRef.uid)) {
+      return;
+    } else {
+      postToChange.likes += 1;
+      postToChange.whoLiked.push(userRef.uid);
+      dataRef[indexRef] = postToChange;
+
+      (async function fetchPosts() {
+        const postRef = await doc(db, "posts", post.pid);
+        await updateDoc(postRef, {
+          likes: postToChange.likes,
+          whoLiked: [...postToChange.whoLiked, userRef.uid],
+        });
+      })();
+
+      setSortedData({
+        data: dataRef,
+      });
+
+      return;
+    };
   };
 
   const handleDownVotePost = (post: Post): void => {
 
-    // NEED TO ADD USER TO WHODISLIKED ARRAY TO PREVENT DUPLICATE DISLIKE
+    // exits upVote if user isn't signed in
+    const userRef = user as User;
+    if (!userRef.uid) {
+      return;
+    };
 
-    const dataRef = sortedData.data;
-    const indexRef = dataRef.indexOf(post as any);
-
+    const dataRef: any[] = sortedData.data;
+    const indexRef: number = dataRef.indexOf(post as any);
     let postToChange = dataRef[indexRef];
-    postToChange.likes -= 1;
-    dataRef[indexRef] = postToChange;
 
-    setSortedData({
-      data: dataRef,
-    });
+    // prevents duplicate like
+    if (postToChange.whoDisliked.includes(userRef.uid)) {
+      return;
+    } else {
+      postToChange.dislikes += 1;
+      postToChange.whoDisliked.push(userRef.uid);
+      dataRef[indexRef] = postToChange;
+
+      (async function fetchPosts() {
+        const postRef = await doc(db, "posts", post.pid);
+        await updateDoc(postRef, {
+          dislikes: postToChange.dislikes,
+          whoDisliked: [...postToChange.whoLiked, userRef.uid],
+        });
+      })();
+
+      setSortedData({
+        data: dataRef,
+      });
+
+      return;
+    };
+
   };
 
   const handleFavoritePost = (post: Post) => {

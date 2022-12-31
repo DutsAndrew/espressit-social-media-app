@@ -56,10 +56,10 @@
 }
 
 .account-drop-down-menu {
-  height: 15vh;
+  height: 10vh;
   width: 14vw;
   margin: 0;
-  margin-top: 25vh;
+  margin-top: 20vh;
   margin-left: 15vw;
   display: flex;
   justify-content: center;
@@ -80,7 +80,7 @@
 }
 
 .sign-out-text, .edit-profile-text, .view-favorite-text {
-  margin: 1vh;
+  margin: 0.5vh;
   font-size: 1em;
 }
 
