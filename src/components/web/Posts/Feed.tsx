@@ -6,20 +6,10 @@ import favoriteSVG from '../../../assets/save.svg';
 import commentSVG from '../../../assets/comment.svg';
 import uniqid from 'uniqid';
 import '../../../styles/Feed.css';
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import LoadingBar from "./LoadingBar";
 
 const Feed: FC<FeedProps> = (props): JSX.Element => {
 
   const { sortedData, handleViewPost, handleUpVotePost, handleDownVotePost, handleFavoritePost } = props;
-
-  const [loadingBar, setLoadingBar] = useState({
-    active: false,
-  });
-
-  const [imgRetrieved, setImgRetrieved] = useState({
-    status: false,
-  });
 
   const callHandleViewPost = (post: Post): void => {
     handleViewPost(post);
@@ -28,40 +18,6 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
   const callHandleFavoritePost = (post: Post): void => {
     handleFavoritePost(post);
   };
-
-  // fetch img if post has img ref
-  useEffect(() => {
-    (function fetchImgFromCloudStore() {
-      const dataRef = sortedData as any;
-      dataRef.forEach((post: any): void => {
-        if (post.img.length !== 0) {
-          setLoadingBar({
-            active: true,
-          });
-          const storage = getStorage();
-          getDownloadURL(ref(storage, post.img))
-            .then((url) => {
-              setImgRetrieved({
-                status: true,
-              });
-              post.img = url;
-              return;
-            })
-            .catch((error) => {
-              console.log(error);
-              return;
-            });
-          };
-      });
-    })();
-  }, []);
-
-  if (imgRetrieved.status === false && loadingBar.active === true) {
-    return (
-      <LoadingBar />
-    );
-  };
-
 
   return (
     <div className="feed-container">
@@ -145,6 +101,7 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
               </h3>
               <a className="post-link"
                 href={post.link} >
+                {post.link.slice(0, 50)}
               </a>
               <div className="post-footer-container">
                 <img className="post-comment-svg"
@@ -191,7 +148,8 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
               </h1>
               <img className="post-img"
                 src={post.img}
-                alt="user post" >
+                alt="user post"
+                onClick={() => callHandleViewPost(post)} >
               </img>
               <h3 className="post-description"
                 onClick={() => callHandleViewPost(post)} >
@@ -242,7 +200,8 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
               </h1>
               <img className="post-img"
                 src={post.img}
-                alt="user post" >
+                alt="user post"
+                onClick={() => callHandleViewPost(post)} >
               </img>
               <h3 className="post-description"
                 onClick={() => callHandleViewPost(post)} >
@@ -250,6 +209,7 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
               </h3>
               <a className="post-link"
                 href={post.link} >
+                {post.link.slice(0, 50)}
               </a>
               <div className="post-footer-container">
                 <img className="post-comment-svg"

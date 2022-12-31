@@ -9,7 +9,8 @@ import { Post, PostProps, PostData } from "../../../types/interfaces";
 // firebase imports
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore"; 
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 
 const Posts: FC<PostProps> = (props): JSX.Element => {
@@ -53,14 +54,19 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
   // fetch all posts from db
   useEffect(() => {
     const dataArray: any[] = [];
+
     (async function queryDB() {
+
       const postsQuerySnapshot = await getDocs(collection(db, "posts"));
+
       postsQuerySnapshot.forEach((doc) => {
         dataArray.push(doc.data());
       });
-    setSortedData({
-      data: dataArray,
-    });
+
+      setSortedData({
+        data: dataArray,
+      });
+
     })();
   }, []);
 
