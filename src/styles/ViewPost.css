@@ -33,7 +33,7 @@
   filter: invert(99%) sepia(17%) saturate(363%) hue-rotate(31deg) brightness(102%) contrast(101%);
 }
 
-.favorite-view-svg:hover, .upvote-svg:hover, .downvote-svg:hover, .close-view-svg:hover {
+.favorite-view-svg:hover, .close-view-svg:hover {
   filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
   cursor: pointer;
 }

@@ -150,7 +150,6 @@ const WebApp = () => {
           setLogInStatus({
             logIn: false,
           });
-          console.log(user);
         };
       })
       .catch((error) => {

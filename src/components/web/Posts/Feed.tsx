@@ -11,12 +11,29 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
 
   const { sortedData, handleViewPost, handleUpVotePost, handleDownVotePost, handleFavoritePost } = props;
 
+  const [voteAnimation, setVoteAnimation] = useState({
+    active: false,
+  });
+
   const callHandleViewPost = (post: Post): void => {
     handleViewPost(post);
   };
 
   const callHandleFavoritePost = (post: Post): void => {
     handleFavoritePost(post);
+  };
+
+  const activateVoteAnimation = (e: React.MouseEvent<HTMLImageElement, MouseEvent>): void => {
+
+    const targetEl = e.target as Element;
+
+    targetEl.classList.remove('voting');
+    setTimeout(() => {
+      targetEl.classList.add('voting');
+    }, 0);
+
+    return;
+
   };
 
   return (
@@ -31,7 +48,12 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                 src={upVoteSVG}
                 alt="upvote arrow"
                 style={{width: "3vw", height: "3vh"}}
-                onClick={() => handleUpVotePost(post)} >
+                onClick={(e) => {
+                  activateVoteAnimation(e);
+                  setTimeout(() => {
+                    handleUpVotePost(post, e);
+                  }, 500);
+                }} >
               </img>
               <p className="upvote-count-text">
                 {(post.likes - post.dislikes) > 0 ? post.likes - post.dislikes : 0}
@@ -40,7 +62,12 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                 src={downVoteSVG}
                 alt="downvote arrow"
                 style={{width: "3vw", height: "3vh"}}
-                onClick={() => handleDownVotePost(post)} >
+                onClick={(e) => {
+                  activateVoteAnimation(e);
+                  setTimeout(() => {
+                    handleDownVotePost(post, e);
+                  }, 500);
+                }} >
               </img>
             </div>
             <div className="content-container">
@@ -78,7 +105,12 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                 src={upVoteSVG}
                 alt="upvote arrow"
                 style={{width: "3vw", height: "3vh"}}
-                onClick={() => handleUpVotePost(post)} >
+                onClick={(e) => {
+                  activateVoteAnimation(e);
+                  setTimeout(() => {
+                    handleUpVotePost(post, e);
+                  }, 500);
+                }} >
               </img>
               <p className="upvote-count-text">
                 {(post.likes - post.dislikes) > 0 ? post.likes - post.dislikes : 0}
@@ -87,7 +119,12 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                 src={downVoteSVG}
                 alt="downvote arrow"
                 style={{width: "3vw", height: "3vh"}}
-                onClick={() => handleDownVotePost(post)} >
+                onClick={(e) => {
+                  activateVoteAnimation(e);
+                  setTimeout(() => {
+                    handleDownVotePost(post, e);
+                  }, 500);
+                }} >
               </img>
             </div>
             <div className="content-container">
@@ -129,7 +166,12 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                 src={upVoteSVG}
                 alt="upvote arrow"
                 style={{width: "3vw", height: "3vh"}}
-                onClick={() => handleUpVotePost(post)} >
+                onClick={(e) => {
+                  activateVoteAnimation(e);
+                  setTimeout(() => {
+                    handleUpVotePost(post, e);
+                  }, 500);
+                }} >
               </img>
               <p className="upvote-count-text">
                 {(post.likes - post.dislikes) > 0 ? post.likes - post.dislikes : 0}
@@ -138,7 +180,12 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                 src={downVoteSVG}
                 alt="downvote arrow"
                 style={{width: "3vw", height: "3vh"}}
-                onClick={() => handleDownVotePost(post)} >
+                onClick={(e) => {
+                  activateVoteAnimation(e);
+                  setTimeout(() => {
+                    handleDownVotePost(post, e);
+                  }, 500);
+                }} >
               </img>
             </div>
             <div className="content-container">
@@ -181,7 +228,12 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                 src={upVoteSVG}
                 alt="upvote arrow"
                 style={{width: "3vw", height: "3vh"}}
-                onClick={() => handleUpVotePost(post)} >
+                onClick={(e) => {
+                  activateVoteAnimation(e);
+                  setTimeout(() => {
+                    handleUpVotePost(post, e);
+                  }, 500);
+                }} >
               </img>
               <p className="upvote-count-text">
                 {(post.likes - post.dislikes) > 0 ? post.likes - post.dislikes : 0}
@@ -190,7 +242,12 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
                 src={downVoteSVG}
                 alt="downvote arrow"
                 style={{width: "3vw", height: "3vh"}}
-                onClick={() => handleDownVotePost(post)} >
+                onClick={(e) => {
+                  activateVoteAnimation(e);
+                  setTimeout(() => {
+                    handleDownVotePost(post, e);
+                  }, 500);
+                }} >
               </img>
             </div>
             <div className="content-container">

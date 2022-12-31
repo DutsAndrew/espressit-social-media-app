@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from "react";
+import React, { useEffect, useState, FC, MouseEventHandler } from "react";
 import Feed from "./Feed";
 import SortNav from "./SortNav";
 import '../../../styles/Posts.css';
@@ -17,8 +17,6 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 const Posts: FC<PostProps> = (props): JSX.Element => {
 
   const { user } = props;
-
-  console.log(user);
 
   // firebaseConfig
   const firebaseConfig = {
@@ -93,7 +91,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     });
   };
 
-  const handleUpVotePost = (post: Post): void => {
+  const handleUpVotePost = (post: Post, e: React.MouseEvent<HTMLImageElement, MouseEvent>): void => {
 
     // exits upVote if user isn't signed in
     const userRef = user as User;
@@ -109,6 +107,13 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     if (postToChange.whoLiked.includes(userRef.uid)) {
       return;
     } else {
+
+      // check if user already downvoted, if so, remove downvote and accept upvote
+      if (postToChange.whoDisliked.includes(userRef.uid)) {
+        const removeUserId = postToChange.whoDisliked.filter((uid: string) => uid !== userRef.uid);
+        postToChange.whoDisliked = removeUserId;
+      };
+
       postToChange.likes += 1;
       postToChange.whoLiked.push(userRef.uid);
       dataRef[indexRef] = postToChange;
@@ -117,7 +122,8 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
         const postRef = await doc(db, "posts", post.pid);
         await updateDoc(postRef, {
           likes: postToChange.likes,
-          whoLiked: [...postToChange.whoLiked, userRef.uid],
+          whoDisliked: postToChange.whoDisliked,
+          whoLiked: [...postToChange.whoLiked],
         });
       })();
 
@@ -129,7 +135,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     };
   };
 
-  const handleDownVotePost = (post: Post): void => {
+  const handleDownVotePost = (post: Post, e: React.MouseEvent<HTMLImageElement, MouseEvent>): void => {
 
     // exits upVote if user isn't signed in
     const userRef = user as User;
@@ -145,6 +151,13 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     if (postToChange.whoDisliked.includes(userRef.uid)) {
       return;
     } else {
+
+      // check if user already upvoted, if so, remove upvote and accept downvote
+      if (postToChange.whoLiked.includes(userRef.uid)) {
+        const removeUserId = postToChange.whoLiked.filter((uid: string) => uid !== userRef.uid);
+        postToChange.whoLiked = removeUserId;
+      };
+
       postToChange.dislikes += 1;
       postToChange.whoDisliked.push(userRef.uid);
       dataRef[indexRef] = postToChange;
@@ -153,7 +166,8 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
         const postRef = await doc(db, "posts", post.pid);
         await updateDoc(postRef, {
           dislikes: postToChange.dislikes,
-          whoDisliked: [...postToChange.whoLiked, userRef.uid],
+          whoDisliked: [...postToChange.whoDisliked],
+          whoLiked: postToChange.whoLiked,
         });
       })();
 
