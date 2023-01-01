@@ -7,13 +7,20 @@ import ContentContainer from "./ContentContainer";
 
 const Feed: FC<FeedProps> = (props): JSX.Element => {
 
-  const { sortedData, handleViewPost, handleUpVotePost, handleDownVotePost, handleFavoritePost } = props;
+  const { user,
+    sortedData,
+    handleViewPost,
+    handleUpVotePost,
+    handleDownVotePost,
+    handleFavoritePost 
+  } = props;
 
   return (
     <div className="feed-container">
       {Array.isArray(sortedData) && sortedData.map((post) => {
         return <div className="post" key={uniqid()}>
           <VoteContainer 
+            user={user}
             post={post}
             whoLiked={post.whoLiked}
             whoDisliked={post.whoDisliked}

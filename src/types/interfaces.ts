@@ -70,6 +70,7 @@ interface PostProps {
 };
 
 interface FeedProps {
+  user: string | User,
   sortedData: Object,
   handleViewPost: Function,
   handleUpVotePost: Function,
@@ -78,6 +79,7 @@ interface FeedProps {
 };
 
 interface VoteContainerProps {
+  user: string | User,
   post: Post,
   whoLiked: any[],
   whoDisliked: any[],

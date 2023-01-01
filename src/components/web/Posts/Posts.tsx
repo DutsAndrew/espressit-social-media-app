@@ -269,10 +269,13 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
   if (Object.keys(currentlyViewing.post).length === 0) {
     return (
       <div className="posts-container" >
-        <SortNav handleSortChange={handleSortChange}
+        <SortNav 
+          handleSortChange={handleSortChange}
           sortType={sortType}
         />
-        <Feed sortedData={sortedData.data}
+        <Feed 
+          user={user}
+          sortedData={sortedData.data}
           handleViewPost={handleViewPost}
           handleUpVotePost={handleUpVotePost}
           handleDownVotePost={handleDownVotePost}
@@ -282,7 +285,8 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     );
   } else {
     return (
-      <ViewPost viewing={currentlyViewing.post}
+      <ViewPost 
+        viewing={currentlyViewing.post}
         handleUpVotePost={handleUpVotePost}
         handleDownVotePost={handleDownVotePost}
         handleStopViewingPost={handleStopViewingPost}

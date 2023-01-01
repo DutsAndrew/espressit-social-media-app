@@ -135,3 +135,16 @@
     transform: scale(1);
   }
 }
+
+.not-upvoted {
+  filter: invert(16%) sepia(23%) saturate(1862%) hue-rotate(344deg) brightness(96%) contrast(95%);
+}
+
+.not-downvoted {
+  filter: invert(16%) sepia(23%) saturate(1862%) hue-rotate(344deg) brightness(96%) contrast(95%);
+}
+
+.upvoted:hover, .downvoted:hover {
+  filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
+  cursor: pointer;
+}

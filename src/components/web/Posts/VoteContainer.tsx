@@ -2,10 +2,17 @@ import React, { FC } from "react";
 import upVoteSVG from '../../../assets/arrow-up.svg';
 import downVoteSVG from '../../../assets/arrow-down.svg';
 import { VoteContainerProps } from "../../../types/interfaces";
+import { User } from "firebase/auth";
 
 const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
 
-  const { post, whoLiked, whoDisliked, handleUpVotePost, handleDownVotePost} = props;
+  const { user,
+    post,
+    whoLiked,
+    whoDisliked,
+    handleUpVotePost,
+    handleDownVotePost
+  } = props;
 
   const activateVoteAnimation = (e: React.MouseEvent<HTMLImageElement, MouseEvent>): void => {
 
@@ -18,6 +25,72 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
 
     return;
 
+  };
+
+  const userRef = user as User;
+
+  if (post.whoLiked.includes(userRef.uid)) {
+    return (
+      <div className="upvote-downvote-container">
+        <img className="upvote-svg"
+          src={upVoteSVG}
+          alt="upvote arrow"
+          style={{width: "3vw", height: "3vh"}}
+          onClick={(e) => {
+            activateVoteAnimation(e);
+            setTimeout(() => {
+              handleUpVotePost(post, e);
+            }, 500);
+          }} >
+        </img>
+        <p className="upvote-count-text">
+          {(post.likes - post.dislikes) > 0 ? post.likes - post.dislikes : 0}
+        </p>
+        <img className="not-upvoted"
+          src={downVoteSVG}
+          alt="downvote arrow"
+          style={{width: "3vw", height: "3vh"}}
+          onClick={(e) => {
+            activateVoteAnimation(e);
+            setTimeout(() => {
+              handleDownVotePost(post, e);
+            }, 500);
+          }} >
+        </img>
+      </div>
+    );
+  };
+
+  if (post.whoDisliked.includes(userRef.uid)) {
+    return (
+      <div className="upvote-downvote-container">
+        <img className="not-downvoted"
+          src={upVoteSVG}
+          alt="upvote arrow"
+          style={{width: "3vw", height: "3vh"}}
+          onClick={(e) => {
+            activateVoteAnimation(e);
+            setTimeout(() => {
+              handleUpVotePost(post, e);
+            }, 500);
+          }} >
+        </img>
+        <p className="upvote-count-text">
+          {(post.likes - post.dislikes) > 0 ? post.likes - post.dislikes : 0}
+        </p>
+        <img className="downvote-svg"
+          src={downVoteSVG}
+          alt="downvote arrow"
+          style={{width: "3vw", height: "3vh"}}
+          onClick={(e) => {
+            activateVoteAnimation(e);
+            setTimeout(() => {
+              handleDownVotePost(post, e);
+            }, 500);
+          }} >
+        </img>
+      </div>
+    );
   };
 
   return (
@@ -47,7 +120,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
           }, 500);
         }} >
       </img>
-      </div>
+    </div>
   );
 };
 

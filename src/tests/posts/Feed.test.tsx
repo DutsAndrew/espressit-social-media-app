@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import Feed from "../../components/web/Posts/Feed";
+import { User } from 'firebase/auth';
 
 describe('unit tests for Feed', () => {
 
@@ -102,11 +103,14 @@ describe('unit tests for Feed', () => {
   const handleUpVoteMock = jest.fn();
   const handleDownVoteMock = jest.fn();
   const handleFavoriteMock = jest.fn();
+  let userMock: User;
 
   test('renders all upvote, downvote, comment, and save svgs for two posts', () => {
 
     render(
-      <Feed sortedData={fakePosts}
+      <Feed 
+        user={userMock}
+        sortedData={fakePosts}
         handleViewPost={viewPostMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
@@ -121,7 +125,9 @@ describe('unit tests for Feed', () => {
   test('renders headers and body text for posts', () => {
 
     render(
-      <Feed sortedData={fakePosts}
+      <Feed 
+        user={userMock}
+        sortedData={fakePosts}
         handleViewPost={viewPostMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
@@ -150,7 +156,9 @@ describe('unit tests for Feed', () => {
   test('upvote calls handleUpVote on click', () => {
 
     render(
-      <Feed sortedData={fakePosts}
+      <Feed 
+        user={userMock}
+        sortedData={fakePosts}
         handleViewPost={viewPostMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
@@ -168,7 +176,9 @@ describe('unit tests for Feed', () => {
   test('downvote calls handleDownVote on click', () => {
 
     render(
-      <Feed sortedData={fakePosts}
+      <Feed 
+        user={userMock}
+        sortedData={fakePosts}
         handleViewPost={viewPostMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
@@ -186,7 +196,9 @@ describe('unit tests for Feed', () => {
   test('user click on comment SVG sends user to viewPost component', () => {
 
     render(
-      <Feed sortedData={fakePosts}
+      <Feed 
+        user={userMock}
+        sortedData={fakePosts}
         handleViewPost={viewPostMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
@@ -204,7 +216,9 @@ describe('unit tests for Feed', () => {
   test('user click on favorite SVG calls handleFavorite on click', () => {
 
     render(
-      <Feed sortedData={fakePosts}
+      <Feed 
+        user={userMock}
+        sortedData={fakePosts}
         handleViewPost={viewPostMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
