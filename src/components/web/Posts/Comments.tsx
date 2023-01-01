@@ -14,7 +14,7 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
         return <div className="comment" key={uniqid()}>
           <div className="comment-info">
             <p className="comment-account-time-text">
-              <strong>{comment.account}</strong>, <em>{comment.time}</em>
+              <strong>{comment.account}</strong>
             </p>
             <p className="comment-text">
               {comment.comment}

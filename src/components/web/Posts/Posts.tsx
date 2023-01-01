@@ -286,6 +286,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
   } else {
     return (
       <ViewPost 
+        user={user}
         viewing={currentlyViewing.post}
         handleUpVotePost={handleUpVotePost}
         handleDownVotePost={handleDownVotePost}

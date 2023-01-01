@@ -8,7 +8,9 @@ import AddComment from "./AddComent";
 
 const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
 
-  const { viewing,
+  const { 
+    user,
+    viewing,
     handleUpVotePost,
     handleDownVotePost,
     handleFavoritePost,
@@ -46,7 +48,9 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
   if (viewingRef.img.length === 0 && viewingRef.link.length === 0) {
     return (
       <>
-        <ViewNav viewing={viewing}
+        <ViewNav 
+          user={user}
+          viewing={viewing}
           handleUpVotePost={handleUpVotePost}
           handleDownVotePost={handleDownVotePost}
           handleFavoritePost={handleFavoritePost}
@@ -56,7 +60,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
           <div className="post-view">
             <div className="content-view-container">
               <h5 className="post-account-time">
-                {`${viewingRef.account}, ${viewingRef.time}`}
+                {`${viewingRef.account}`}
               </h5>
               <h1 className="post-view-title" >
                 {viewingRef.title}
@@ -85,7 +89,9 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
   } else if (viewingRef.img.length === 0 && viewingRef.link.length !== 0) {
     return (
       <>
-        <ViewNav viewing={viewing}
+        <ViewNav 
+          user={user}
+          viewing={viewing}
           handleUpVotePost={handleUpVotePost}
           handleDownVotePost={handleDownVotePost}
           handleFavoritePost={handleFavoritePost}
@@ -95,14 +101,14 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
           <div className="post-view">
             <div className="content-view-container">
               <h5 className="post-account-time">
-                {`${viewingRef.account}, ${viewingRef.time}`}
+                {`${viewingRef.account}`}
               </h5>
               <h1 className="post-view-title" >
                 {viewingRef.title}
               </h1>
-              <h6 className="post-view-link">
+              <a className="post-view-link" href={viewingRef.link}>
                 {viewingRef.link}
-              </h6>
+              </a>
               <h3 className="post-view-description" >
                 {viewingRef.body}
               </h3>
@@ -124,17 +130,19 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
   } else if (viewingRef.img.length !== 0 && viewingRef.link.length === 0) {
     return (
      <>
-      <ViewNav viewing={viewing}
-          handleUpVotePost={handleUpVotePost}
-          handleDownVotePost={handleDownVotePost}
-          handleFavoritePost={handleFavoritePost}
-          handleStopViewingPost={handleStopViewingPost}
-        />
+      <ViewNav 
+        user={user}
+        viewing={viewing}
+        handleUpVotePost={handleUpVotePost}
+        handleDownVotePost={handleDownVotePost}
+        handleFavoritePost={handleFavoritePost}
+        handleStopViewingPost={handleStopViewingPost}
+      />
        <div className="post-view-container">
         <div className="post-view">
           <div className="content-view-container">
             <h5 className="post-account-time">
-              {`${viewingRef.account}, ${viewingRef.time}`}
+              {`${viewingRef.account}`}
             </h5>
             <h1 className="post-view-title" >
               {viewingRef.title}

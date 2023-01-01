@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import ViewPost from "../../components/web/Posts/ViewPost";
+import { User } from 'firebase/auth';
 
 describe('unit tests for ViewPost', () => {
 
@@ -70,11 +71,14 @@ describe('unit tests for ViewPost', () => {
   const handleStopViewingPostMock = jest.fn();
   const handleUpVoteCommentMock = jest.fn();
   const handleDownVoteCommentMock = jest.fn();
+  let userMock: User;
 
   test('post information is displayed', () => {
 
     render(
-      <ViewPost viewing={postMock}
+      <ViewPost 
+        user={userMock}
+        viewing={postMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoriteMock}
@@ -97,7 +101,9 @@ describe('unit tests for ViewPost', () => {
   test('if dislikes are present, likes do not show negative', () => {
 
     render(
-      <ViewPost viewing={postMock}
+      <ViewPost 
+        user={userMock}
+        viewing={postMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoriteMock}
@@ -115,7 +121,9 @@ describe('unit tests for ViewPost', () => {
   test('views of post are displayed', () => {
 
     render(
-      <ViewPost viewing={postMock}
+      <ViewPost 
+        user={userMock}
+        viewing={postMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoriteMock}

@@ -99,6 +99,7 @@ interface SortNavProps {
 };
 
 interface ViewPostProps {
+  user: string | User,
   viewing: Object,
   handleUpVotePost: Function,
   handleDownVotePost: Function,
@@ -109,6 +110,7 @@ interface ViewPostProps {
 };
 
 interface ViewNavProps {
+  user: string | User,
   viewing: Object,
   handleUpVotePost: Function,
   handleDownVotePost: Function,

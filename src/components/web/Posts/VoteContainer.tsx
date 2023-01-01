@@ -46,7 +46,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
         <p className="upvote-count-text">
           {(post.likes - post.dislikes) > 0 ? post.likes - post.dislikes : 0}
         </p>
-        <img className="not-upvoted"
+        <img className="not-downvoted"
           src={downVoteSVG}
           alt="downvote arrow"
           style={{width: "3vw", height: "3vh"}}
@@ -64,7 +64,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
   if (post.whoDisliked.includes(userRef.uid)) {
     return (
       <div className="upvote-downvote-container">
-        <img className="not-downvoted"
+        <img className="not-upvoted"
           src={upVoteSVG}
           alt="upvote arrow"
           style={{width: "3vw", height: "3vh"}}

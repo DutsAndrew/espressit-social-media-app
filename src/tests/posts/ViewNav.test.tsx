@@ -2,6 +2,7 @@ import { render, screen, act } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import ViewNav from '../../components/web/Posts/ViewNav';
+import { User } from 'firebase/auth';
 
 describe('unit tests for ViewNav component', () => {
 
@@ -68,11 +69,14 @@ describe('unit tests for ViewNav component', () => {
   const handleDownVoteMock = jest.fn();
   const handleFavoritePostMock = jest.fn();
   const handleStopViewingPostMock = jest.fn();
+  let userMock: User
 
   test('renders basic elements on load', () => {
 
     render(
-      <ViewNav viewing={postMock}
+      <ViewNav 
+        user={userMock}
+        viewing={postMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoritePostMock}
@@ -87,12 +91,14 @@ describe('unit tests for ViewNav component', () => {
   test('user click on upvote or downvote, calls functions to handle them', () => {
 
     render(
-      <ViewNav viewing={postMock}
+      <ViewNav 
+        user={userMock}
+        viewing={postMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoritePostMock}
         handleStopViewingPost={handleStopViewingPostMock}
-      />,
+      />
     );
 
     const upVotePost = screen.getByTestId("post-upvote-test");
@@ -108,12 +114,14 @@ describe('unit tests for ViewNav component', () => {
   test('user click on favorite calls function to handleFavoritePost', () => {
 
     render(
-      <ViewNav viewing={postMock}
+      <ViewNav 
+        user={userMock}
+        viewing={postMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoritePostMock}
         handleStopViewingPost={handleStopViewingPostMock}
-      />,
+      />
     );
 
     const favoritePost = screen.getByTestId("post-favorite-test");
@@ -125,12 +133,14 @@ describe('unit tests for ViewNav component', () => {
   test('user click on close View Post calls handleStopViewingPost', () => {
 
     render(
-      <ViewNav viewing={postMock}
+      <ViewNav 
+        user={userMock}
+        viewing={postMock}
         handleUpVotePost={handleUpVoteMock}
         handleDownVotePost={handleDownVoteMock}
         handleFavoritePost={handleFavoritePostMock}
         handleStopViewingPost={handleStopViewingPostMock}
-      />,
+      />
     );
 
     const stopViewing = screen.getByTestId("post-close-test");
