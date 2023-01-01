@@ -76,8 +76,13 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
               </p>
             </div>
           </div>
-          <AddComment handleAddCommentToPost={handleAddCommentToPost} />
-          <Comments commentList={viewingRef.comments}
+          <AddComment 
+            viewing={viewing}
+            handleAddCommentToPost={handleAddCommentToPost}
+          />
+          <Comments 
+            viewing={viewing}
+            commentList={viewingRef.comments}
             handleUpVoteComment={handleUpVoteComment}
             handleDownVoteComment={handleDownVoteComment}
           />
@@ -117,8 +122,13 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
               </p>
             </div>
           </div>
-          <AddComment handleAddCommentToPost={handleAddCommentToPost} />
-          <Comments commentList={viewingRef.comments}
+          <AddComment 
+            viewing={viewing}
+            handleAddCommentToPost={handleAddCommentToPost}
+          />
+          <Comments 
+            viewing={viewing}
+            commentList={viewingRef.comments}
             handleUpVoteComment={handleUpVoteComment}
             handleDownVoteComment={handleDownVoteComment}
           />
@@ -158,11 +168,16 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
             </p>
           </div>
         </div>
-        <AddComment handleAddCommentToPost={handleAddCommentToPost} />
-        <Comments commentList={viewingRef.comments}
-          handleUpVoteComment={handleUpVoteComment}
-          handleDownVoteComment={handleDownVoteComment}
-        />
+        <AddComment 
+            viewing={viewing}
+            handleAddCommentToPost={handleAddCommentToPost}
+          />
+          <Comments 
+            viewing={viewing}
+            commentList={viewingRef.comments}
+            handleUpVoteComment={handleUpVoteComment}
+            handleDownVoteComment={handleDownVoteComment}
+          />
       </div>
      </>
     );

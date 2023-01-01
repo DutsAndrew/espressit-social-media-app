@@ -1,12 +1,20 @@
 import React, { FC } from "react";
-import { CommentsProps } from "../../../types/interfaces";
+import { CommentsProps, Post } from "../../../types/interfaces";
 import upVoteSVG from '../../../assets/arrow-up.svg';
 import downVoteSVG from '../../../assets/arrow-down.svg';
 import uniqid from 'uniqid';
 
 const Comments: FC<CommentsProps> = (props): JSX.Element => {
 
-  const { commentList, handleUpVoteComment, handleDownVoteComment } = props;
+  const { 
+    viewing,
+    commentList,
+    handleUpVoteComment,
+    handleDownVoteComment
+  } = props;
+
+  // for saving comment to correct post on firebase
+  const viewingRef = viewing as Post;
 
   return (
     <div className="comment-list">
@@ -25,7 +33,7 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
               src={upVoteSVG}
               alt="upvote arrow"
               style={{width: "3vw", height: "3vh"}}
-              onClick={() => handleUpVoteComment(comment)} 
+              onClick={() => handleUpVoteComment(viewingRef, comment)} 
               data-testid="upvote-test" >
             </img>
             <p className="upvote-count-text">
@@ -35,7 +43,7 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
               src={downVoteSVG}
               alt="downvote arrow"
               style={{width: "3vw", height: "3vh"}}
-              onClick={() => handleDownVoteComment(comment)} 
+              onClick={() => handleDownVoteComment(viewingRef, comment)} 
               data-testid="downvote-test" >
             </img>
           </div>

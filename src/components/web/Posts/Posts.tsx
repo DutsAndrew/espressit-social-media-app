@@ -105,30 +105,26 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
     // check if user already downvoted, if so, remove downvote and accept upvote
     if (postToChange.whoDisliked.includes(userRef.uid)) {
-
       const removeUserId = postToChange.whoDisliked.filter((uid: string) => uid !== userRef.uid);
       postToChange.whoDisliked = removeUserId;
-      postToChange.likes += 2;
+      postToChange.likes += 1;
+      postToChange.dislikes -= 1;
       postToChange.whoLiked.push(userRef.uid);
-
     } else if (postToChange.whoLiked.includes(userRef.uid)) {
-
       const removeUserId = postToChange.whoLiked.filter((uid: string) => uid !== userRef.uid);
       postToChange.whoLiked = removeUserId;
       postToChange.likes -= 1;
-
     } else {
-
       postToChange.likes += 1;
       postToChange.whoLiked.push(userRef.uid);
-
     };
 
     dataRef[indexRef] = postToChange;
 
-    (async function fetchPosts() {
+    (async function updatePost() {
       const postRef = await doc(db, "posts", post.pid);
       await updateDoc(postRef, {
+        dislikes: postToChange.dislikes,
         likes: postToChange.likes,
         whoDisliked: postToChange.whoDisliked,
         whoLiked: [...postToChange.whoLiked],
@@ -157,31 +153,27 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
     // check if user already upvoted, if so, remove upvote and accept downvote
     if (postToChange.whoLiked.includes(userRef.uid)) {
-
       const removeUserId = postToChange.whoLiked.filter((uid: string) => uid !== userRef.uid);
       postToChange.whoLiked = removeUserId;
-      postToChange.dislikes += 2;
+      postToChange.dislikes += 1;
+      postToChange.likes -= 1;
       postToChange.whoDisliked.push(userRef.uid);
-
     } else if (postToChange.whoDisliked.includes(userRef.uid)) {
-
       const removeUserId = postToChange.whoDisliked.filter((uid: string) => uid !== userRef.uid);
       postToChange.whoDisliked = removeUserId;
       postToChange.dislikes -= 1;
-
     } else {
-
       postToChange.dislikes += 1;
       postToChange.whoDisliked.push(userRef.uid);
-
     };
 
     dataRef[indexRef] = postToChange;
 
-    (async function fetchPosts() {
+    (async function updatePost() {
       const postRef = await doc(db, "posts", post.pid);
       await updateDoc(postRef, {
         dislikes: postToChange.dislikes,
+        likes: postToChange.likes,
         whoDisliked: [...postToChange.whoDisliked],
         whoLiked: postToChange.whoLiked,
       });
@@ -201,42 +193,90 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     console.log('favoriting post', post);
   };
 
-  const handleUpVoteComment = (comment: Object): void => {
+  const handleUpVoteComment = (post: Post, comment: Object): void => {
 
-    // NEED TO ADD USER TO WHOLIKED ARRAY TO PREVENT DUPLICATE LIKE
+    const userRef = user as User;
+    if (!userRef.uid) {
+      return;
+    };
 
     const dataRef = sortedData.data;
-    const postIndexRef = dataRef.indexOf(currentlyViewing.post as any);
 
+    const postIndexRef = dataRef.indexOf(currentlyViewing.post as any);
     let postToChange = dataRef[postIndexRef];
+
     const commentIndexRef = postToChange.comments.indexOf(comment as any)
-    
     let commentToChange = postToChange.comments[commentIndexRef];
-    commentToChange.likes += 1;
+
+    if (commentToChange.whoDisliked.includes(userRef.uid)) {
+      const removeUserId = commentToChange.whoDisliked.filter((uid: string) => uid !== userRef.uid);
+      commentToChange.whoDisliked = removeUserId;
+      commentToChange.likes += 1;
+      commentToChange.dislikes -= 1;
+      commentToChange.whoLiked.push(userRef.uid);
+    } else if (commentToChange.whoLiked.includes(userRef.uid)) {
+      const removeUserId = commentToChange.whoLiked.filter((uid: string) => uid !== userRef.uid);
+      commentToChange.whoLiked = removeUserId;
+      commentToChange.likes -= 1;
+    } else {
+      commentToChange.likes += 1;
+      commentToChange.whoLiked.push(userRef.uid);
+    };
 
     postToChange.comments[commentIndexRef] = commentToChange;
     dataRef[postIndexRef] = postToChange;
+
+    (async function updateComment() {
+      const postRef = await doc(db, "posts", post.pid);
+      await updateDoc(postRef, {
+        comments: postToChange.comments,
+      });
+    })();
 
     setSortedData({
       data: dataRef,
     });
   };
 
-  const handleDownVoteComment = (comment: Object): void => {
+  const handleDownVoteComment = (post: Post, comment: Object): void => {
 
-    // NEED TO ADD USER TO WHODISLIKED ARRAY TO PREVENT DUPLICATE DISLIKE
+    const userRef = user as User;
+    if (!userRef.uid) {
+      return;
+    };
 
     const dataRef = sortedData.data;
-    const postIndexRef = dataRef.indexOf(currentlyViewing.post as any);
 
+    const postIndexRef = dataRef.indexOf(currentlyViewing.post as any);
     let postToChange = dataRef[postIndexRef];
+
     const commentIndexRef = postToChange.comments.indexOf(comment as any)
-    
     let commentToChange = postToChange.comments[commentIndexRef];
-    commentToChange.likes -= 1;
+
+    if (commentToChange.whoLiked.includes(userRef.uid)) {
+      const removeUserId = commentToChange.whoLiked.filter((uid: string) => uid !== userRef.uid);
+      commentToChange.whoLiked = removeUserId;
+      commentToChange.dislikes += 1;
+      commentToChange.likes -= 1;
+      commentToChange.whoDisliked.push(userRef.uid);
+    } else if (commentToChange.whoDisliked.includes(userRef.uid)) {
+      const removeUserId = commentToChange.whoDisliked.filter((uid: string) => uid !== userRef.uid);
+      commentToChange.whoDisliked = removeUserId;
+      commentToChange.dislikes -= 1;
+    } else {
+      commentToChange.dislikes += 1;
+      commentToChange.whoDisliked.push(userRef.uid);
+    };
 
     postToChange.comments[commentIndexRef] = commentToChange;
     dataRef[postIndexRef] = postToChange;
+
+    (async function updateComment() {
+      const postRef = await doc(db, "posts", post.pid);
+      await updateDoc(postRef, {
+        comments: postToChange.comments,
+      });
+    })();
 
     setSortedData({
       data: dataRef,

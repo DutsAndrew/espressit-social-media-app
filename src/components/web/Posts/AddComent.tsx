@@ -1,9 +1,15 @@
 import React, { FC } from "react";
-import { AddCommentProps } from "../../../types/interfaces";
+import { AddCommentProps, Post } from "../../../types/interfaces";
 
 const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
 
-  const { handleAddCommentToPost } = props;
+  const { 
+    viewing,
+    handleAddCommentToPost 
+  } = props;
+
+  // for saving comment to correct post on firebase
+  const viewingRef = viewing as Post;
 
   const validateComment = () => {
     const validationText: Element | null = document.querySelector('.validation-text');

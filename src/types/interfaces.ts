@@ -139,6 +139,7 @@ type PostData = {
 };
 
 interface CommentsProps {
+  viewing: Object,
   commentList: {
     account: string;
     time: string;
@@ -153,6 +154,7 @@ interface CommentsProps {
 };
 
 interface AddCommentProps {
+  viewing: Object,
   handleAddCommentToPost: Function,
 };
 
