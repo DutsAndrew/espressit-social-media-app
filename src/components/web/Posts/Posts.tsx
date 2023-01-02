@@ -299,11 +299,8 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
   //   dateArray.push(date3, date4);
 
   //   const results = timeSort(dateArray);
+  //   console.log(date1, results);
   // })();
-
-  // useEffect(() => {
-  //   console.log(currentlyViewing);
-  // }, [currentlyViewing]);
 
   // if a post isn't being viewed return feed
   if (Object.keys(currentlyViewing.post).length === 0) {

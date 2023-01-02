@@ -1,10 +1,16 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ViewPostProps } from "../../../types/interfaces";
 import { Post } from "../../../types/interfaces";
 import '../../../styles/ViewPost.css';
 import ViewNav from "./ViewNav";
 import Comments from "./Comments";
 import AddComment from "./AddComent";
+
+// firebase imports
+import { initializeApp } from "firebase/app";
+import { getDoc, getFirestore, updateDoc } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { User } from "firebase/auth";
 
 const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
 
@@ -20,10 +26,65 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
   } = props
 
   const viewingRef = viewing as Post;
+  const userRef = user as User;
+
+  const [viewingPost, setViewingPost] = useState({
+    post: viewing,
+  });
+
+  // firebaseConfig
+  const firebaseConfig = {
+    apiKey: "AIzaSyDsPecBa3Ch5uDw4UzHiJWAjKEYOKCrNdA",
+    authDomain: "espressit.firebaseapp.com",
+    projectId: "espressit",
+    storageBucket: "espressit.appspot.com",
+    messagingSenderId: "1094129721341",
+    appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
+  };
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
   const handleAddCommentToPost = (scrubbedComment: string): void => {
     (async function saveComment() {
-      
+
+      // gather and set comment data
+      const newComment = {
+        account: userRef.uid,
+        comment: scrubbedComment,
+        dislikes: 0,
+        likes: 1,
+        pid: viewingRef.pid,
+        time: new Date().toLocaleString(),
+        whoDisliked: [],
+        whoLiked: [userRef.uid],
+      };
+
+      // add new comment to comment list
+      const postRef = doc(db, "posts", viewingRef.pid);
+      await updateDoc(postRef, {
+        comments: [...viewingRef.comments, newComment],
+      });
+
+      // update local data to match db for rendering
+      viewingRef.comments = [...viewingRef.comments, newComment];
+      setViewingPost({
+        post: viewingRef,
+      });
+
+      // get user data to save comment to user for deletion or modification later
+      const getUserDBRef = doc(db, "users", userRef.uid);
+      const getUserDBSnap = await getDoc(getUserDBRef);
+
+       // set newComment in user data with other comments
+      if (getUserDBSnap.exists()) {
+        const userDBData = getUserDBSnap.data();
+        console.log(userDBData);
+        const setUserDBRef = doc(db, "users", userRef.uid);
+        await updateDoc(setUserDBRef, {
+          comments: [...userDBData.comments, newComment],
+        });
+      };
     })();
   };
 
