@@ -1,5 +1,6 @@
 import React, { FC, MouseEventHandler } from "react";
 import { CreateAccountProps } from '../../types/interfaces';
+const Filter = require('bad-words');
 
 const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
 
@@ -8,12 +9,13 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
   const usernameFormat: RegExp = /^[a-z]{3,12}$|^[a-z]{3,12}\d{2,4}$/g;
   const mailFormat: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g;
   const passwordFormat: RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g;
+  const filter = new Filter();
 
   const handleFormChange = (e: any): void => {
-    const entryThatChanged: any = e.target;
-    const errorText: any = e.target.nextSibling;
+    const entryThatChanged = e.target as HTMLInputElement;
+    const errorText = e.target.nextSibling;
     if (entryThatChanged && errorText) {
-      if ((entryThatChanged.validity.valid && entryThatChanged.value.match(usernameFormat))
+      if ((entryThatChanged.validity.valid && entryThatChanged.value.match(usernameFormat) && !filter.isProfane(entryThatChanged.value))
         || (entryThatChanged.validity.valid && entryThatChanged.value.match(mailFormat))
         || (entryThatChanged.validity.valid && entryThatChanged.value.match(passwordFormat))
       ) {
@@ -33,6 +35,9 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
         error.classList.add("error", "error-active");
       } else if (!entry.value.match(usernameFormat)) {
         error.textContent = "Your username does not match our rules of: 1) 3-12 lowercase letters or 3-12 lowercase letters and 2-4 numbers, 2) no symbols, 3) no uppercase characters";
+        error.classList.add("error", "error-active");
+      } else if (filter.isProfane(entry.value)) {
+        error.textContent = "We don't allow profanity in usernames, sorry :(";
         error.classList.add("error", "error-active");
       };
       return;

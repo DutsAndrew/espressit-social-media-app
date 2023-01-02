@@ -92,53 +92,73 @@
 
 .edit-profile-form {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
   width: 100vw;
   height: 90vh;
+  overflow-y: scroll;
   background-color: rgb(253, 255, 246);
   color: rgb(17, 7, 2);
 }
 
+.return-to-main-page-button {
+  margin: 0;
+  margin-top: 0.5%;
+}
+
 .edit-profile-fieldset {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
   gap: 1vh;
   margin: 2%;
   width: 50vw;
+  height: 65vh;
   height: auto;
 }
 
 .edit-profile-legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 5vh;
   font-size: 2em;
 }
 
 .edit-profile-label {
-  font-size: 1.25em;
+  font-size: 1.5em;
+  margin: 0;
+  margin-right: auto;
 }
 
 .edit-profile-input {
   width: 50vw;
-  height: 2.5vh;
-  font-size: 1.5em;
+  height: 3vh;
+  font-size: 1.25em;
 }
 
 .return-to-main-page-button, .submit-profile-button {
-  margin: 0;
-  margin-top: 2%;
   width: 20vw;
   height: 3.5vh;
   font-size: 0.95em;
 }
 
 .submit-profile-button {
-  margin-left: 30%;
-  margin-top: 3%;
+  margin: 0;
+  margin-top: 2%;
 }
 
 .delete-account-button, .remove-data-button {
-  width: 50vw;
+  width: 40vw;
   height: 3.5vh;
-  font-size: 1em;
+  font-size: 1.25em;
+}
+
+.return-to-main-page-button, .submit-profile-button, .delete-account-button, .remove-data-button {
+  background-color: #9D6538;
+  border-radius: 4%;
+  color: #DABE99;
 }

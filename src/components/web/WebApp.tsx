@@ -21,8 +21,13 @@ import { setDoc, doc } from "firebase/firestore";
 
 const WebApp = () => {
 
-  const [signUpStatus, setSignUpStatus] = useState({signUp: false});
-  const [logInStatus, setLogInStatus] = useState({logIn: false});
+  const [signUpStatus, setSignUpStatus] = useState({
+    signUp: false
+  });
+
+  const [logInStatus, setLogInStatus] = useState({
+    logIn: false
+  });
 
   const [userStatus, setUserStatus] = useState<userState>({
     formCompleted: false,
@@ -30,8 +35,13 @@ const WebApp = () => {
     errorStatus: '',
   });
 
-  const [editProfileRequested, setEditProfileRequested] = useState({status: false});
-  const [viewFavoritesRequested, setViewFavoritesRequested] = useState({status: false});
+  const [editProfileRequested, setEditProfileRequested] = useState({
+    status: false
+  });
+
+  const [viewFavoritesRequested, setViewFavoritesRequested] = useState({
+    status: false
+  });
 
   const handleSignUp = () => {
     if (signUpStatus.signUp === false) {
@@ -176,7 +186,7 @@ const WebApp = () => {
             logIn: false,
           });
         };
-        
+
       })
       .catch((error) => {
         const errorCode = error.code;
