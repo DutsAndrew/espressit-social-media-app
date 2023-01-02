@@ -2,17 +2,22 @@ import React, { useState } from "react";
 import Header from "../Header";
 import HomePageWeb from "./HomePageWeb";
 import CreateAccount from '../auth/CreateAccount';
-import { initializeApp } from "firebase/app";
-import { getAuth,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword,
-GoogleAuthProvider,
-signInWithPopup,
-} from "firebase/auth";
 import { userState } from '../../types/interfaces';
 import LogIn from '../auth/LogIn';
 import EditProfile from "../auth/EditProfile";
 import ViewFavorites from "../auth/ViewFavorites";
+
+// firbase db imports
+import { 
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 const WebApp = () => {
 
@@ -76,13 +81,17 @@ const WebApp = () => {
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
-  const createAccountWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
+  const createAccountWithEmailAndPassword = async (username: string, email: string, password: string): Promise<void> => {
+
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
+
+        // sync user data with local state
         const user = userCredential.user;
         setUserStatus({
           formCompleted: true,
@@ -92,7 +101,18 @@ const WebApp = () => {
         setSignUpStatus({
           signUp: false,
         });
-        console.log(user);
+
+        // create user instance in db to store username, posts, comments, etc
+        setDoc(doc(db, "users", user.uid), {
+          comments: [],
+          displayName: '',
+          favoritePosts: [],
+          posts: [],
+          profileImg: '',
+          uid: user.uid,
+          username: username,
+        });
+
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -107,9 +127,12 @@ const WebApp = () => {
   };
 
   const signInUser = async (email: string, password: string): Promise<void> => {
+
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
+
+        // sync user with local state
         const user = userCredential.user;
         setUserStatus({
           formCompleted: true,
@@ -119,8 +142,9 @@ const WebApp = () => {
         setLogInStatus({
           logIn: false,
         });
-        console.log(user);
+
       })
+
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -134,6 +158,7 @@ const WebApp = () => {
   };
 
   const signInWithGoogleAccount = async (): Promise<void> => {
+
     await signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -151,6 +176,7 @@ const WebApp = () => {
             logIn: false,
           });
         };
+        
       })
       .catch((error) => {
         const errorCode = error.code;

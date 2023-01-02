@@ -5,14 +5,16 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
 
   const { createAccountWithEmailAndPassword, handleSignUp } = props;
 
-  const mailFormat: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  const passwordFormat: RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/gm;
+  const usernameFormat: RegExp = /^[a-z]{3,12}$|^[a-z]{3,12}\d{2,4}$/g;
+  const mailFormat: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g;
+  const passwordFormat: RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g;
 
   const handleFormChange = (e: any): void => {
     const entryThatChanged: any = e.target;
     const errorText: any = e.target.nextSibling;
     if (entryThatChanged && errorText) {
-      if ((entryThatChanged.validity.valid && entryThatChanged.value.match(mailFormat))
+      if ((entryThatChanged.validity.valid && entryThatChanged.value.match(usernameFormat))
+        || (entryThatChanged.validity.valid && entryThatChanged.value.match(mailFormat))
         || (entryThatChanged.validity.valid && entryThatChanged.value.match(passwordFormat))
       ) {
         errorText.textContent = "";
@@ -24,6 +26,18 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
   };
 
   const showError = (entry: any, error: any): void => {
+
+    if (entry.id === 'username-input') {
+      if (entry.validity.valueMissing) {
+        error.textContent = "You must have a username to create an account";
+        error.classList.add("error", "error-active");
+      } else if (!entry.value.match(usernameFormat)) {
+        error.textContent = "Your username does not match our rules of: 1) 3-12 lowercase letters or 3-12 lowercase letters and 2-4 numbers, 2) no symbols, 3) no uppercase characters";
+        error.classList.add("error", "error-active");
+      };
+      return;
+    };
+
     if (entry.id === 'email-input') {
       if (entry.validity.valueMissing) {
         error.textContent = "You need to enter an email address";
@@ -72,30 +86,40 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
 
   const submitAccountCreationForm = (e: React.FormEvent<HTMLFormElement>): void  => {
     e.preventDefault();
-    // any type is assigned due to issues with validity.valid not working with actual type
-    const emailEntry: any = document.getElementById("email-input");
-    const passwordEntry: any = document.getElementById("password-input");
-    const passwordConfirmEntry: any = document.getElementById("password-confirm-input");
-    const activeErrors: number = document.querySelectorAll('.error-active').length;
+
+    const usernameEntry = (document.getElementById("username-input") as HTMLInputElement);
+    const emailEntry = (document.getElementById("email-input") as HTMLInputElement);
+    const passwordEntry = (document.getElementById("password-input") as HTMLInputElement);
+    const passwordConfirmEntry = (document.getElementById("password-confirm-input") as HTMLInputElement);
+    const activeErrors = document.querySelectorAll('.error-active').length;
+
+    if (usernameEntry) {
+      if (!usernameEntry.validity.valid || !usernameEntry.value.match(usernameFormat)) {
+        showError(usernameEntry, usernameEntry.nextSibling);
+        return;
+      };
+    };
 
     if (emailEntry) {
-      if (!emailEntry.validity.valid) {
+      if (!emailEntry.validity.valid || !emailEntry.value.match(mailFormat)) {
         showError(emailEntry, emailEntry.nextSibling);
         return;
       };
     };
 
     if (passwordEntry) {
-      if (!passwordEntry.validity.valid) {
+      if (!passwordEntry.validity.valid || !passwordEntry.value.match(passwordFormat)) {
         showError(passwordEntry, passwordEntry.nextSibling);
         return;
       };
     };
 
     if (passwordConfirmEntry) {
-      if (!passwordConfirmEntry.validity.valid) {
-        showError(passwordConfirmEntry, passwordConfirmEntry.nextSibling);
-        return;
+      if ((!passwordConfirmEntry.validity.valid || !passwordConfirmEntry.value.match(passwordFormat))
+        && passwordEntry.value === passwordConfirmEntry.value
+        ) {
+          showError(passwordConfirmEntry, passwordConfirmEntry.nextSibling);
+          return;
       };
     };
 
@@ -104,28 +128,40 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
       && passwordConfirmEntry.validity.valid
       && activeErrors === 0
       ) {
-        createAccountWithEmailAndPassword(emailEntry.value, passwordEntry.value);
+        createAccountWithEmailAndPassword(usernameEntry.value, emailEntry.value, passwordEntry.value);
       };
   }
 
   return (
-    <form id="user-creation-form" onSubmit={submitAccountCreationForm}>
-      <button id="close-form-button" onClick={handleSignUp as unknown as MouseEventHandler<HTMLButtonElement>} >
-          X Close Form
+    <form id="user-creation-form"
+      onSubmit={submitAccountCreationForm}>
+      <button id="close-form-button"
+        onClick={handleSignUp as unknown as MouseEventHandler<HTMLButtonElement>} >
+        X Close Form
       </button>
       <fieldset id="create-account-fieldset" >
-        <legend>Create an account:</legend>
-        <label htmlFor="username-input" >*Username:</label>
+        <legend id="create-account-legend">
+          Create an account:
+        </legend>
+        <label htmlFor="username-input" 
+          id="username-label">
+          *Username:
+        </label>
         <input id="username-input" 
           placeholder="MischievousJack92"
           onChange={handleFormChange}
-          minLength={2}
-          maxLength={10}
+          minLength={3}
+          maxLength={16}
           type="text"
           required>
         </input>
-        <p id="username-input-error" className ="error-msg" ></p>
-        <label htmlFor="email-input" >*Email:</label>
+        <p id="username-input-error"
+          className ="error-msg" >
+        </p>
+        <label htmlFor="email-input"
+          id="email-label" >
+          *Email:
+        </label>
         <input id="email-input" 
           placeholder="JohnWick92@gmail.com"
           onChange={handleFormChange}
@@ -134,8 +170,13 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
           type="email"
           required>
         </input>
-        <p id="email-input-error" className ="error-msg" ></p>
-        <label htmlFor="password-input" >*Password:</label>
+        <p id="email-input-error"
+          className ="error-msg" >
+        </p>
+        <label htmlFor="password-input"
+          id="password-label" >
+          *Password:
+        </label>
         <input id="password-input"
           placeholder="********"
           onChange={handleFormChange}
@@ -145,8 +186,13 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
           data-testid="password-input"
           required>
         </input>
-        <p id="password-input-error" className ="error-msg" ></p>
-        <label htmlFor="password-confirm-input" >*Confirm Password:</label>
+        <p id="password-input-error"
+          className ="error-msg" >
+        </p>
+        <label htmlFor="password-confirm-input"
+          id="password-confirm-label" >
+          *Confirm Password:
+        </label>
         <input id="password-confirm-input"
           placeholder="********"
           onChange={handleFormChange}
@@ -156,7 +202,9 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
           data-testid="confirm-password-input"
           required>
         </input>
-        <p id="password-confirm-input-error" className ="error-msg" ></p>
+        <p id="password-confirm-input-error"
+          className ="error-msg" >
+        </p>
         <button id="account-submit"
           type="submit">
             Submit
