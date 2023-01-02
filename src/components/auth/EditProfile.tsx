@@ -1,9 +1,11 @@
 import React, { FC, useEffect, useState, ChangeEventHandler } from "react";
 import { EditProfileProps, UserInstance } from '../../types/interfaces';
 import { User } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { upload } from "@testing-library/user-event/dist/upload";
 const Filter = require('bad-words');
 
 const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
@@ -25,25 +27,24 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
       },
     });
 
-    const [selectedFile, setSelectedFile] = useState();
-    const [isFilePicked, setIsFilePicked] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
+
+  //firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyDsPecBa3Ch5uDw4UzHiJWAjKEYOKCrNdA",
+    authDomain: "espressit.firebaseapp.com",
+    projectId: "espressit",
+    storageBucket: "espressit.appspot.com",
+    messagingSenderId: "1094129721341",
+    appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
+  };
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
 
   useEffect(() => {
-    (async function fetchUserInstance() {
-
-      //firebase config
-      const firebaseConfig = {
-        apiKey: "AIzaSyDsPecBa3Ch5uDw4UzHiJWAjKEYOKCrNdA",
-        authDomain: "espressit.firebaseapp.com",
-        projectId: "espressit",
-        storageBucket: "espressit.appspot.com",
-        messagingSenderId: "1094129721341",
-        appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
-      };
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
-  
+    (async function fetchUserInstance(): Promise<void> {
       // fetch userInstance
       const userInstanceRef = doc(db, "users", userRef.uid);
       const userInstanceSnap = await getDoc(userInstanceRef);
@@ -70,7 +71,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
   const mailFormat: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g;
   const filter = new Filter();
 
-  const handleProfileEditChange = (e: any) => {
+  const handleProfileEditChange = (e: any): void => {
     e.preventDefault();
     const entryThatChanged = e.target;
     const errorText = entryThatChanged.nextSibling as HTMLElement;
@@ -79,13 +80,6 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         && entryThatChanged.validity.valid
         && entryThatChanged.value.match(usernameFormat)
         && !filter.isProfane(entryThatChanged.value))
-
-        || (entryThatChanged.id === "email-edit-input" 
-        && entryThatChanged.validity.valid
-        && entryThatChanged.value.match(mailFormat))
-
-        || (entryThatChanged.id === "profile-picture-edit-input"
-        && entryThatChanged.validity.valid)
       ) {
         errorText.textContent = "";
         errorText.className = "error";
@@ -111,35 +105,16 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
       return;
     };
 
-    if (entry.id === 'email-edit-input') {
-      if (entry.validity.valueMissing) {
-        error.textContent = "You must have an email entered to submit an account edit";
-        error.classList.add("error", "error-active");
-      } else if (!entry.value.match(mailFormat)) {
-        error.textContent = `Your email address doesn't seem to follow the traditional email patterns, please try again`;
-        error.classList.add("error", "error-active");
-      } else if (entry.validity.tooShort) {
-        error.textContent = `Your email should be at least ${entry.minLength} characters; you entered: ${entry.value.length}`;
-        error.classList.add("error", "error-active");
-      } else if (entry.validity.tooLong) {
-        error.textContent = `Your email should be no more than ${entry.maxLength} characters; you entered: ${entry.value.length}`;
-        error.classList.add("error", "error-active");
-      }
-      return;
-    };
-
   };
 
-  const handlePictureChange = (e: any) => {
+  const handlePictureChange = (e: any): void => {
     setSelectedFile(e?.target.files[0]);
-    setIsFilePicked(true);
   };
 
-  const submitProfileEdit = (e: React.FormEvent<HTMLFormElement>): void  => {
+  const validateSubmitRequest = (e: React.FormEvent<HTMLFormElement>): void  => {
     e.preventDefault();
 
     const usernameEntry = (document.getElementById("username-edit-input") as HTMLInputElement);
-    const emailEntry = (document.getElementById("email-edit-input") as HTMLInputElement);
     const activeErrors = document.querySelectorAll('.error-active').length;
 
     if (usernameEntry) {
@@ -149,35 +124,57 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
       };
     };
 
-    if (emailEntry) {
-      if (!emailEntry.validity.valid || !emailEntry.value.match(mailFormat)) {
-        showError(emailEntry, emailEntry.nextSibling);
-        return;
-      };
-    };
-
-    if (emailEntry.validity.valid
+    if (usernameEntry.validity.valid
       && activeErrors === 0
       ) {
-        // createAccountWithEmailAndPassword(usernameEntry.value, emailEntry.value, passwordEntry.value);
+        submitProfileEdits(usernameEntry.value);
       };
-  }
+  };
 
-  const handleReturnToMain = () => {
+  const submitProfileEdits = (newUsername: string): void => {
+    // handle username update
+    if (newUsername.length > 2) {
+      (async function saveNewUsernameToUserInstance() {
+        const userInstanceRef = doc(db, "users", userRef.uid);
+        await updateDoc(userInstanceRef, {
+          username: newUsername,
+        });
+         // call function here to tell WebApp to pull new username for AccountDisplay
+      })();
+    };
+
+    // handle profile picture upload/update
+    if (typeof selectedFile === undefined || typeof selectedFile === 'undefined') {
+      return;
+    };
+
+    if (typeof selectedFile !== undefined ||  typeof selectedFile !== 'undefined') {
+      const storage = getStorage();
+      const storageRef = ref(storage, `images/${(selectedFile as any).name}`);
+      uploadBytes(storageRef, selectedFile)
+        .then((snapshot) => {
+          // download url
+          // save ref to usersInstance of profileImg
+          // call function here to tell WebApp to pull new photo for AccountDisplay
+        })
+    };
+  };
+
+  const handleReturnToMain = (): void => {
     toggleEditProfilePage();
   };
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = (): void => {
 
   };
 
-  const handleRemoveAccountInfo = () => {
+  const handleRemoveAccountInfo = (): void => {
 
   };
 
   return (
     <form className="edit-profile-form"
-      onSubmit={submitProfileEdit}
+      onSubmit={validateSubmitRequest}
     >
       <button type="button"
         className="return-to-main-page-button"
@@ -201,21 +198,6 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
           required >
         </input>
         <p id="username-edit-input-error"
-          className ="error-msg" >
-        </p>
-        <label htmlFor="email"
-          className="edit-profile-label">
-          **Email:
-        </label>
-        <input id="email-edit-input"
-          name="email"
-          className="edit-profile-input" 
-          placeholder={userRef.email ? `${userRef.email}` : "Not Set"} 
-          onChange={handleProfileEditChange}
-          data-testid="email"
-          required >
-        </input>
-        <p id="email-edit-input-error"
           className ="error-msg" >
         </p>
         <label htmlFor="profile-picture"
