@@ -84,6 +84,13 @@
   color: orange;
 }
 
+.post-view-img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-bottom: 4%;
+}
+
 .content-view-container {
   height: auto;
   width: 75vw;

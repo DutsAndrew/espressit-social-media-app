@@ -223,9 +223,10 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
             <h1 className="post-view-title" >
               {viewingRef.title}
             </h1>
-            <h6 className="post-view-link">
-              {viewingRef.link}
-            </h6>
+            <img className="post-view-img"
+              alt="user post"
+              src={viewingRef.img} >
+            </img>
             <h3 className="post-view-description" >
               {viewingRef.body}
             </h3>
