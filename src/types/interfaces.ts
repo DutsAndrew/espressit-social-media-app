@@ -42,6 +42,18 @@ interface AccountDisplayProps {
   toggleViewFavoritesPage: Function,
 };
 
+interface UserInstance {
+  user: {
+    comments: any[],
+    displayName: string,
+    favoritePosts: any[],
+    posts: any[],
+    profileImg: string,
+    uid: string,
+    username: string,
+  },
+};
+
 interface EditProfileProps {
   currentUser: string | User,
   toggleEditProfilePage: Function,
@@ -168,6 +180,7 @@ export {
   type userState,
   type LogInProps,
   type AccountDisplayProps,
+  type UserInstance,
   type EditProfileProps,
   type postType,
   type TextFormProps,

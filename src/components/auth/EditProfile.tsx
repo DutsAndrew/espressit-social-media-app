@@ -1,10 +1,66 @@
-import React, { FC } from "react";
-import { EditProfileProps } from '../../types/interfaces';
+import React, { FC, useEffect, useState } from "react";
+import { EditProfileProps, UserInstance } from '../../types/interfaces';
 import { User } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
 
   const { currentUser, toggleEditProfilePage } = props;
+
+    // converting potential non-auth user to guaranteed firebase auth user
+    const userRef = currentUser as User;
+
+    const [userInstance, setUserInstance] = useState<UserInstance>({
+      user: {
+        comments: [],
+        displayName: "",
+        favoritePosts: [],
+        posts: [],
+        profileImg: "",
+        uid: "",
+        username: "",
+      },
+    });
+
+  useEffect(() => {
+    (async function fetchUserInstance() {
+
+      //firebase config
+      const firebaseConfig = {
+        apiKey: "AIzaSyDsPecBa3Ch5uDw4UzHiJWAjKEYOKCrNdA",
+        authDomain: "espressit.firebaseapp.com",
+        projectId: "espressit",
+        storageBucket: "espressit.appspot.com",
+        messagingSenderId: "1094129721341",
+        appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
+      };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+  
+      // fetch userInstance
+      const userInstanceRef = doc(db, "users", userRef.uid);
+      const userInstanceSnap = await getDoc(userInstanceRef);
+      if (userInstanceSnap.exists()) {
+        const userInstanceData = userInstanceSnap.data();
+  
+        // sync local state with user data
+        setUserInstance({
+          user: {
+            comments: userInstanceData.comments,
+            displayName: userInstanceData.displayName,
+            favoritePosts: userInstanceData.favoritePosts,
+            posts: userInstanceData.posts,
+            profileImg: userInstanceData.profileImg,
+            uid: userInstanceData.uid,
+            username: userInstanceData.username,
+          },
+        });
+      };
+    })();
+  }, []);
 
   const handleProfileEdit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,12 +78,6 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
   const handleRemoveAccountInfo = () => {
 
   };
-
-  // fetch firebase user data to check for variables below and then validate on what already exists and add it to page
-
-  
-  // user has to be logged in to reach this component, so type is switched to only User for render
-  const userRef = currentUser as User;
 
   return (
     <form className="edit-profile-form"
@@ -49,6 +99,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         <input id="user-name-input"
           name="user-name"
           className="edit-profile-input"
+          placeholder={userInstance.user.username ? userInstance.user.username : "anonymous"}
           data-testid="username"
           required >
         </input>
@@ -70,7 +121,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         <input id="first-name-input"
           name="first-name"
           className="edit-profile-input"
-          placeholder={userRef?.displayName ? `${userRef?.displayName.split(' ')[0]}` : "Not Set"}
+          placeholder={userInstance.user.displayName ? `${userInstance.user.displayName.split(' ')[0]}` : "Not Set"}
           data-testid="first-name" >
         </input>
         <label htmlFor="last-name"
@@ -80,7 +131,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         <input id="last-name-input"
           name="last-name"
           className="edit-profile-input"
-          placeholder={userRef?.displayName ? `${userRef?.displayName.split(' ')[1]}` : "Not Set"} 
+          placeholder={userInstance.user.displayName ? `${userInstance.user.displayName.split(' ')[1]}` : "Not Set"} 
           data-testid="last-name" >
         </input>
         <button type="submit"

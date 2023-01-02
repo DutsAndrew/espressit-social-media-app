@@ -1,12 +1,69 @@
-import React, { FC } from "react";
-import { AccountDisplayProps } from "../../types/interfaces";
+import React, { FC, useEffect, useState } from "react";
+import { AccountDisplayProps, UserInstance } from "../../types/interfaces";
 import chevron from '../../assets/chevron-down.svg';
 import '../../styles/account.css';
 import { User } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import anonymousProfile from '../../assets/profile-anonymous.svg';
 
 const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
   const { currentUser, signOut, toggleEditProfilePage, toggleViewFavoritesPage } = props;
+
+  // converting potential non-auth user to guaranteed firebase auth user
+  const userRef = currentUser as User;
+
+  const [userInstance, setUserInstance] = useState<UserInstance>({
+    user: {
+      comments: [],
+      displayName: "",
+      favoritePosts: [],
+      posts: [],
+      profileImg: "",
+      uid: "",
+      username: "",
+    },
+  });
+
+  useEffect(() => {
+    (async function fetchUserInstance() {
+
+      //firebase config
+      const firebaseConfig = {
+        apiKey: "AIzaSyDsPecBa3Ch5uDw4UzHiJWAjKEYOKCrNdA",
+        authDomain: "espressit.firebaseapp.com",
+        projectId: "espressit",
+        storageBucket: "espressit.appspot.com",
+        messagingSenderId: "1094129721341",
+        appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
+      };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+  
+      // fetch userInstance
+      const userInstanceRef = doc(db, "users", userRef.uid);
+      const userInstanceSnap = await getDoc(userInstanceRef);
+      if (userInstanceSnap.exists()) {
+        const userInstanceData = userInstanceSnap.data();
+  
+        // sync local state with user data
+        setUserInstance({
+          user: {
+            comments: userInstanceData.comments,
+            displayName: userInstanceData.displayName,
+            favoritePosts: userInstanceData.favoritePosts,
+            posts: userInstanceData.posts,
+            profileImg: userInstanceData.profileImg,
+            uid: userInstanceData.uid,
+            username: userInstanceData.username,
+          },
+        });
+      };
+    })();
+  }, []);
 
   const accountDropDown = (e: React.MouseEvent) => {
 
@@ -72,10 +129,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
   };
 
-  // user has to be logged in to reach this component, so type is switched to only User for render
-  const userRef = currentUser as User;
-
-  if (userRef.displayName !== null) {
+  if (userInstance.user) {
     return (
       <div className="profile-container"
         onClick={accountDropDown}
@@ -88,11 +142,11 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
         <div className="img-name-container">
           <img className="profile-img"
             referrerPolicy="no-referrer"
-            src={userRef.photoURL as string}
+            src={userInstance.user.profileImg ? userInstance.user.profileImg : anonymousProfile}
             alt="profile" >
           </img>
           <p className="profile-text" >
-            {userRef.displayName}
+            {userInstance.user.username}
           </p>
           <img className="account-menu-button"
             src={chevron}
