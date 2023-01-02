@@ -79,7 +79,6 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
        // set newComment in user data with other comments
       if (getUserDBSnap.exists()) {
         const userDBData = getUserDBSnap.data();
-        console.log(userDBData);
         const setUserDBRef = doc(db, "users", userRef.uid);
         await updateDoc(setUserDBRef, {
           comments: [...userDBData.comments, newComment],
@@ -145,6 +144,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
             handleAddCommentToPost={handleAddCommentToPost}
           />
           <Comments 
+            user={user}
             viewing={viewing}
             commentList={viewingRef.comments}
             handleUpVoteComment={handleUpVoteComment}
@@ -192,6 +192,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
             handleAddCommentToPost={handleAddCommentToPost}
           />
           <Comments 
+            user={user}
             viewing={viewing}
             commentList={viewingRef.comments}
             handleUpVoteComment={handleUpVoteComment}
@@ -239,6 +240,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
             handleAddCommentToPost={handleAddCommentToPost}
           />
           <Comments 
+            user={user}
             viewing={viewing}
             commentList={viewingRef.comments}
             handleUpVoteComment={handleUpVoteComment}

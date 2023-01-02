@@ -139,6 +139,7 @@ type PostData = {
 };
 
 interface CommentsProps {
+  user: string | User,
   viewing: Object,
   commentList: {
     account: string;

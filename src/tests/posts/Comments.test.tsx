@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import Comments from '../../components/web/Posts/Comments';
+import { User } from 'firebase/auth';
 
 describe('unit test for Comments', () => {
 
@@ -108,11 +109,13 @@ describe('unit test for Comments', () => {
 
   const handleUpVoteMock = jest.fn();
   const handleDownVoteMock = jest.fn();
+  let userMock: User;
 
   test('comment information is displayed', () => {
 
     render(
       <Comments 
+        user={userMock}
         viewing={viewingMock}
         commentList={commentMock}
         handleUpVoteComment={handleUpVoteMock}
@@ -131,6 +134,7 @@ describe('unit test for Comments', () => {
 
     render(
       <Comments 
+        user={userMock}
         viewing={viewingMock}
         commentList={commentMock}
         handleUpVoteComment={handleUpVoteMock}
