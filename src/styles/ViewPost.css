@@ -135,15 +135,22 @@
   cursor: pointer;
 }
 
-.validation-text {
+#validation-text {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  background-color: rgb(35,220,61);
   width: 70vw;
   height: auto;
   font-size: 1.5em;
+}
+
+.text-authenticated {
+  background-color: rgb(35,220,61);
+}
+
+.text-not-authenticated {
+  background-color: orangered;
 }
 
 /* -------- COMMENT LIST --------- */

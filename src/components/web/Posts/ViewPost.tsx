@@ -21,8 +21,10 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
 
   const viewingRef = viewing as Post;
 
-  const handleAddCommentToPost = () => {
-
+  const handleAddCommentToPost = (scrubbedComment: string): void => {
+    (async function saveComment() {
+      
+    })();
   };
 
   // hides CreatePost component when viewing a post, unmounts when leaving view post
@@ -77,6 +79,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
             </div>
           </div>
           <AddComment 
+            user={user}
             viewing={viewing}
             handleAddCommentToPost={handleAddCommentToPost}
           />
@@ -123,6 +126,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
             </div>
           </div>
           <AddComment 
+            user={user}
             viewing={viewing}
             handleAddCommentToPost={handleAddCommentToPost}
           />
@@ -169,6 +173,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
           </div>
         </div>
         <AddComment 
+            user={user}
             viewing={viewing}
             handleAddCommentToPost={handleAddCommentToPost}
           />

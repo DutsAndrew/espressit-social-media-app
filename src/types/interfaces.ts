@@ -154,6 +154,7 @@ interface CommentsProps {
 };
 
 interface AddCommentProps {
+  user: string | User,
   viewing: Object,
   handleAddCommentToPost: Function,
 };

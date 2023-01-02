@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import AddComment from "../../components/web/Posts/AddComent";
+import { User } from 'firebase/auth';
 
 describe('unit tests for AddComment', () => {
 
@@ -65,10 +66,13 @@ describe('unit tests for AddComment', () => {
     ],
   };
 
+  let userMock: User;
+
   test('renders the correct items', () => {
 
     render(
       <AddComment 
+        user={userMock}
         viewing={viewingMock}
         handleAddCommentToPost={handleAddCommentToPostMock}
       />
@@ -86,6 +90,7 @@ describe('unit tests for AddComment', () => {
 
     render(
       <AddComment 
+        user={userMock}
         viewing={viewingMock}
         handleAddCommentToPost={handleAddCommentToPostMock}
       />
@@ -101,6 +106,7 @@ describe('unit tests for AddComment', () => {
   
     render(
       <AddComment 
+        user={userMock}
         viewing={viewingMock}
         handleAddCommentToPost={handleAddCommentToPostMock}
       />
