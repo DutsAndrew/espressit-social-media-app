@@ -1,10 +1,9 @@
 import React, { FC, useEffect, useState, ChangeEventHandler } from "react";
 import { EditProfileProps, UserInstance } from '../../types/interfaces';
 import { User } from "firebase/auth";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { upload } from "@testing-library/user-event/dist/upload";
 const Filter = require('bad-words');
 
@@ -149,14 +148,57 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
     };
 
     if (typeof selectedFile !== undefined ||  typeof selectedFile !== 'undefined') {
-      const storage = getStorage();
-      const storageRef = ref(storage, `images/${(selectedFile as any).name}`);
-      uploadBytes(storageRef, selectedFile)
-        .then((snapshot) => {
-          // download url
-          // save ref to usersInstance of profileImg
-          // call function here to tell WebApp to pull new photo for AccountDisplay
-        })
+
+      // remove previous profileImg from storage if there was one
+      (async function removePreviousProfileImg() {
+        const userInstanceRef = doc(db, "users", userRef.uid);
+        const userSnap = await getDoc(userInstanceRef);
+
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          if (userData.profileImg.slice(0, 38) === 'https://firebasestorage.googleapis.com') {
+            // user has a profileImg that was uploaded to firebase and not from Google API
+            const currentProfilePhotoRef = ref(storage, userData.profileImgRef);
+            deleteObject(currentProfilePhotoRef).then(() => {
+              // File deleted successfully, set userInstance to empty string
+              const userInstanceRef = doc(db, "users", userRef.uid);
+                updateDoc(userInstanceRef, {
+                  profileImgRef: "",
+                });
+            }).catch((error) => {
+              alert('we were unable to remove your previous profile picture and therefor did not upload your new picture, please try again later');
+              return;
+            });
+          };
+        };
+      })();
+
+      (async function uploadNewPictureAndSetAsProfilePicture() {
+        const storage = getStorage();
+        const storageRef = ref(storage, `images/${(selectedFile as any).name}`);
+        uploadBytes(storageRef, selectedFile)
+          .then((snapshot) => {
+            // image has been uploaded to the db
+            // download url for uploaded image
+            getDownloadURL(ref(storage, `images/${(selectedFile as any).name}`))
+              .then((url) => {
+                // `url` is the download URL for 'images/${selectedFile.name}'
+                // save url and storageRef to userInstance
+                const userInstanceRef = doc(db, "users", userRef.uid);
+                updateDoc(userInstanceRef, {
+                  profileImg: url,
+                  profileImgRef: `images/${(selectedFile as any).name}`,
+                });
+              })
+              .catch((error) => {
+                alert('your profile picture was uploaded to the database, but we were not able to save it to your profile, please try again later');
+              });
+          })
+          .catch(() => {
+            alert('your image was not uploaded to the server, please try again later');
+            return;
+          });
+      })();
     };
   };
 
