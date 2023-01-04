@@ -9,7 +9,11 @@ const Filter = require('bad-words');
 
 const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
 
-  const { currentUser, toggleEditProfilePage } = props;
+  const { 
+    currentUser,
+    toggleEditProfilePage,
+    returnToMainAfterProfileEdit 
+  } = props;
 
     // converting potential non-auth user to guaranteed firebase auth user
     const userRef = currentUser as User;
@@ -71,9 +75,11 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
   const filter = new Filter();
 
   const handleProfileEditChange = (e: any): void => {
+
     e.preventDefault();
     const entryThatChanged = e.target;
     const errorText = entryThatChanged.nextSibling as HTMLElement;
+
     if (entryThatChanged && errorText) {
       if ((entryThatChanged.id === "username-edit-input"
         && entryThatChanged.validity.valid
@@ -92,7 +98,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
 
     if (entry.id === 'username-edit-input') {
       if (entry.validity.valueMissing) {
-        error.textContent = "You must have a username entered to submit an account edit";
+        error.textContent = "If you are updating your username this input cannot be blank :)";
         error.classList.add("error", "error-active");
       } else if (!entry.value.match(usernameFormat)) {
         error.textContent = "Your username does not match our rules of: 1) 3-12 lowercase letters or 3-12 lowercase letters and 2-4 numbers, 2) no symbols, 3) no uppercase characters";
@@ -116,31 +122,50 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
     const usernameEntry = (document.getElementById("username-edit-input") as HTMLInputElement);
     const activeErrors = document.querySelectorAll('.error-active').length;
 
-    if (usernameEntry) {
+    // validate username edit
+    if (usernameEntry.value.length !== 0) {
+      if (activeErrors !== 0) return;
+
       if (!usernameEntry.validity.valid || !usernameEntry.value.match(usernameFormat)) {
         showError(usernameEntry, usernameEntry.nextSibling);
         return;
       };
-    };
 
-    if (usernameEntry.validity.valid
-      && activeErrors === 0
-      ) {
-        submitProfileEdits(usernameEntry.value);
+      // check if profanity is hidden in username
+      for (let i = 0; i < usernameEntry.value.length; i++) {
+        const usernameText = usernameEntry.value.slice(i);
+        if (filter.isProfane(usernameText)) {
+          const errorText = document.querySelector('#username-edit-input-error');
+          if (errorText) {
+            errorText.textContent = "We don't accept profanity in usernames, sorry :(";
+            errorText.classList.add("error", "error-active");
+            return;
+          };
+        };
       };
+
+      submitNewUsername(usernameEntry.value);
+
+    // validate new picture
+    } else {
+      
+    };
   };
 
-  const submitProfileEdits = (newUsername: string): void => {
-    // handle username update
+  const submitNewUsername = (newUsername: string): void => {
     if (newUsername.length > 2) {
       (async function saveNewUsernameToUserInstance() {
         const userInstanceRef = doc(db, "users", userRef.uid);
         await updateDoc(userInstanceRef, {
           username: newUsername,
         });
-         // call function here to tell WebApp to pull new username for AccountDisplay
       })();
+      // return to home
+      returnToMainAfterProfileEdit();
     };
+  };
+
+  const submitProfileEdits = (newUsername: string): void => {  
 
     // handle profile picture upload/update
     if (typeof selectedFile === undefined || typeof selectedFile === 'undefined') {
@@ -189,6 +214,8 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
                   profileImg: url,
                   profileImgRef: `images/${(selectedFile as any).name}`,
                 });
+                // return to home
+                returnToMainAfterProfileEdit();
               })
               .catch((error) => {
                 alert('your profile picture was uploaded to the database, but we were not able to save it to your profile, please try again later');

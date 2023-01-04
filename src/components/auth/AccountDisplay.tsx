@@ -10,7 +10,12 @@ import anonymousProfile from '../../assets/profile-anonymous.svg';
 
 const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
-  const { currentUser, signOut, toggleEditProfilePage, toggleViewFavoritesPage } = props;
+  const { 
+    currentUser,
+    signOut,
+    toggleEditProfilePage,
+    toggleViewFavoritesPage 
+  } = props;
 
   // converting potential non-auth user to guaranteed firebase auth user
   const userRef = currentUser as User;

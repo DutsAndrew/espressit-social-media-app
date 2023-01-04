@@ -48,7 +48,14 @@ const AccountWrapper = styled.div `
 
 const Header: FC<HeaderProps> = (props): JSX.Element => {
 
-  const { handleSignUp, handleLogIn, currentUser, signOut, toggleEditProfilePage, toggleViewFavoritesPage } = props;
+  const { 
+    handleSignUp,
+    handleLogIn,
+    currentUser,
+    signOut,
+    toggleEditProfilePage,
+    toggleViewFavoritesPage 
+  } = props;
 
   // if user isn't logged in
   if (typeof currentUser === 'string') {

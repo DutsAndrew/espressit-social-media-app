@@ -151,6 +151,10 @@
   margin-top: 2%;
 }
 
+.return-to-main-page-button:hover, .submit-profile-button:hover, .delete-account-button:hover, .remove-data-button:hover {
+  cursor: pointer;
+}
+
 .delete-account-button, .remove-data-button {
   width: 40vw;
   height: 3.5vh;

@@ -4,7 +4,11 @@ import google from '../../assets/google-logo.svg';
 
 const LogIn: FC<LogInProps> = (props): JSX.Element => {
 
-  const { signInUser, handleLogIn, signInWithGoogleAccount } = props;
+  const { 
+    signInUser,
+    handleLogIn,
+    signInWithGoogleAccount
+  } = props;
 
   const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

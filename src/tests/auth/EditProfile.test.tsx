@@ -13,12 +13,14 @@ describe('unit tests for Edit Profile', () => {
   } as unknown as User;
 
   const toggleEditProfilePageMock = jest.fn();
+  const retunToMainMock = jest.fn();
 
   test('renders the correct items', () => {
 
     render(
       <EditProfile currentUser={currentUserMock}
         toggleEditProfilePage={toggleEditProfilePageMock}
+        returnToMainAfterProfileEdit={retunToMainMock}
       />
     );
 
@@ -48,6 +50,7 @@ describe('unit tests for Edit Profile', () => {
     render(
       <EditProfile currentUser={currentUserMock}
         toggleEditProfilePage={toggleEditProfilePageMock}
+        returnToMainAfterProfileEdit={retunToMainMock}
       />
     );
 

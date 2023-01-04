@@ -227,6 +227,12 @@ const WebApp = () => {
     };
   };
 
+  const returnToMainAfterProfileEdit = () => {
+    setEditProfileRequested({
+      status: false,
+    });
+  };
+
   const toggleViewFavoritesPage = () => {
     if (viewFavoritesRequested.status === false) {
       if (editProfileRequested.status === true) {
@@ -295,6 +301,7 @@ const WebApp = () => {
       />
       <EditProfile currentUser={userStatus.currentUser}
         toggleEditProfilePage={toggleEditProfilePage}
+        returnToMainAfterProfileEdit={returnToMainAfterProfileEdit}
       />
     </div>
    );

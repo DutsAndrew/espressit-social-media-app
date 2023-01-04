@@ -57,6 +57,7 @@ interface UserInstance {
 interface EditProfileProps {
   currentUser: string | User,
   toggleEditProfilePage: Function,
+  returnToMainAfterProfileEdit: Function,
 };
 
 interface HomePageWebProps {
