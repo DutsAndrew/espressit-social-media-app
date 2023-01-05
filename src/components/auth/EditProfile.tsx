@@ -178,7 +178,6 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         const currentProfilePhotoRef = ref(storage, userData.imgURLRef);
         deleteObject(currentProfilePhotoRef).then(() => {
           // File deleted successfully, set userInstance to empty string
-          const userInstanceRef = doc(db, "users", userRef.uid);
             updateDoc(userInstanceRef, {
               imgURLRef: "",
             });
@@ -260,7 +259,12 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
   };
 
   const handleRemoveAccountInfo = (): void => {
-
+    const userInstanceRef = doc(db, "users", userRef.uid);
+      updateDoc(userInstanceRef, {
+        comments: [],
+        favoritePosts: [],
+        posts: [],
+    });
   };
 
   return (
