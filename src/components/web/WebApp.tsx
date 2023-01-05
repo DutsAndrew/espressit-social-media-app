@@ -100,16 +100,13 @@ const WebApp = () => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
-
+        console.log('user created');
         // sync user data with local state
         const user = userCredential.user;
         setUserStatus({
           formCompleted: true,
           currentUser: user,
           errorStatus: '',
-        });
-        setSignUpStatus({
-          signUp: false,
         });
 
         // create user instance in db to store username, posts, comments, etc
@@ -118,9 +115,14 @@ const WebApp = () => {
           displayName: '',
           favoritePosts: [],
           posts: [],
-          profileImg: '',
+          imgURL: '',
+          imgURLRef: '',
           uid: user.uid,
           username: username,
+        });
+
+        setSignUpStatus({
+          signUp: false,
         });
 
       })

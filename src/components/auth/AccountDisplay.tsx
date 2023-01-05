@@ -26,7 +26,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       displayName: "",
       favoritePosts: [],
       posts: [],
-      profileImg: "",
+      imgURL: "",
       uid: "",
       username: "",
     },
@@ -61,7 +61,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
             displayName: userInstanceData.displayName,
             favoritePosts: userInstanceData.favoritePosts,
             posts: userInstanceData.posts,
-            profileImg: userInstanceData.profileImg,
+            imgURL: userInstanceData.imgURL,
             uid: userInstanceData.uid,
             username: userInstanceData.username,
           },
@@ -147,7 +147,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
         <div className="img-name-container">
           <img className="profile-img"
             referrerPolicy="no-referrer"
-            src={userInstance.user.profileImg ? userInstance.user.profileImg : anonymousProfile}
+            src={userInstance.user.imgURL ? userInstance.user.imgURL : anonymousProfile}
             alt="profile" >
           </img>
           <p className="profile-text" >

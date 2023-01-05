@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from "react";
+import React, { FC, MouseEventHandler, KeyboardEvent } from "react";
 import { CreateAccountProps } from '../../types/interfaces';
 const Filter = require('bad-words');
 
@@ -89,7 +89,7 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
     };
   };
 
-  const submitAccountCreationForm = (e: React.FormEvent<HTMLFormElement>): void  => {
+  const submitAccountCreationForm = (e: any): void  => {
     e.preventDefault();
 
     const usernameEntry = (document.getElementById("username-input") as HTMLInputElement);
@@ -135,11 +135,11 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
       ) {
         createAccountWithEmailAndPassword(usernameEntry.value, emailEntry.value, passwordEntry.value);
       };
-  }
+  };
 
   return (
     <form id="user-creation-form"
-      onSubmit={submitAccountCreationForm}>
+      onKeyDown={(e) => e.key === "Enter" ? e.preventDefault() : null} >
       <button id="close-form-button"
         onClick={handleSignUp as unknown as MouseEventHandler<HTMLButtonElement>} >
         X Close Form
@@ -200,7 +200,7 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
         </label>
         <input id="password-confirm-input"
           placeholder="********"
-          onChange={handleFormChange}
+          onChange={(e) => handleFormChange(e)}
           minLength={8}
           maxLength={127}
           type="password"
@@ -211,7 +211,8 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
           className ="error-msg" >
         </p>
         <button id="account-submit"
-          type="submit">
+          type="button"
+          onClick={(e) => submitAccountCreationForm(e)}>
             Submit
         </button>
       </fieldset>

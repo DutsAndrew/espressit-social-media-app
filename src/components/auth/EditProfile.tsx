@@ -1,10 +1,9 @@
-import React, { FC, useEffect, useState, ChangeEventHandler } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { EditProfileProps, UserInstance } from '../../types/interfaces';
-import { User } from "firebase/auth";
-import { doc, getDoc, updateDoc, getFirestore } from "firebase/firestore";
+import { User, getAuth, deleteUser, reload } from "firebase/auth";
+import { doc, getDoc, updateDoc, getFirestore, deleteDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
-import { upload } from "@testing-library/user-event/dist/upload";
 const Filter = require('bad-words');
 
 const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
@@ -24,7 +23,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         displayName: "",
         favoritePosts: [],
         posts: [],
-        profileImg: "",
+        imgURL: "",
         uid: "",
         username: "",
       },
@@ -61,7 +60,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
             displayName: userInstanceData.displayName,
             favoritePosts: userInstanceData.favoritePosts,
             posts: userInstanceData.posts,
-            profileImg: userInstanceData.profileImg,
+            imgURL: userInstanceData.imgURL,
             uid: userInstanceData.uid,
             username: userInstanceData.username,
           },
@@ -124,6 +123,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
 
     // validate username edit
     if (usernameEntry.value.length !== 0) {
+
       if (activeErrors !== 0) return;
 
       if (!usernameEntry.validity.valid || !usernameEntry.value.match(usernameFormat)) {
@@ -145,12 +145,13 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
       };
 
       submitNewUsername(usernameEntry.value);
-
-    // validate new picture
-    } else {
-      
     };
-  };
+
+    // validate picture
+    if (selectedFile !== undefined) {
+      uploadNewProfileImg();
+    };
+  }
 
   const submitNewUsername = (newUsername: string): void => {
     if (newUsername.length > 2) {
@@ -165,7 +166,31 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
     };
   };
 
-  const submitProfileEdits = (newUsername: string): void => {  
+  // remove previous imgURL from storage if there was one
+  async function removePreviousProfileImg() {
+    const userInstanceRef = doc(db, "users", userRef.uid);
+    const userSnap = await getDoc(userInstanceRef);
+
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
+      if (userData.imgURL.slice(0, 38) === 'https://firebasestorage.googleapis.com') {
+        // user has a imgURL that was uploaded to firebase and not from Google API
+        const currentProfilePhotoRef = ref(storage, userData.imgURLRef);
+        deleteObject(currentProfilePhotoRef).then(() => {
+          // File deleted successfully, set userInstance to empty string
+          const userInstanceRef = doc(db, "users", userRef.uid);
+            updateDoc(userInstanceRef, {
+              imgURLRef: "",
+            });
+        }).catch((error) => {
+          alert('we were unable to remove your previous profile picture and therefor did not upload your new picture, please try again later');
+          return;
+        });
+      };
+    };
+  };
+
+  const uploadNewProfileImg = (): void => {  
 
     // handle profile picture upload/update
     if (typeof selectedFile === undefined || typeof selectedFile === 'undefined') {
@@ -174,29 +199,8 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
 
     if (typeof selectedFile !== undefined ||  typeof selectedFile !== 'undefined') {
 
-      // remove previous profileImg from storage if there was one
-      (async function removePreviousProfileImg() {
-        const userInstanceRef = doc(db, "users", userRef.uid);
-        const userSnap = await getDoc(userInstanceRef);
-
-        if (userSnap.exists()) {
-          const userData = userSnap.data();
-          if (userData.profileImg.slice(0, 38) === 'https://firebasestorage.googleapis.com') {
-            // user has a profileImg that was uploaded to firebase and not from Google API
-            const currentProfilePhotoRef = ref(storage, userData.profileImgRef);
-            deleteObject(currentProfilePhotoRef).then(() => {
-              // File deleted successfully, set userInstance to empty string
-              const userInstanceRef = doc(db, "users", userRef.uid);
-                updateDoc(userInstanceRef, {
-                  profileImgRef: "",
-                });
-            }).catch((error) => {
-              alert('we were unable to remove your previous profile picture and therefor did not upload your new picture, please try again later');
-              return;
-            });
-          };
-        };
-      })();
+      // remove previous imgURL from storage if there was one
+      removePreviousProfileImg();
 
       (async function uploadNewPictureAndSetAsProfilePicture() {
         const storage = getStorage();
@@ -211,8 +215,8 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
                 // save url and storageRef to userInstance
                 const userInstanceRef = doc(db, "users", userRef.uid);
                 updateDoc(userInstanceRef, {
-                  profileImg: url,
-                  profileImgRef: `images/${(selectedFile as any).name}`,
+                  imgURL: url,
+                  imgURLRef: `images/${(selectedFile as any).name}`,
                 });
                 // return to home
                 returnToMainAfterProfileEdit();
@@ -233,8 +237,26 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
     toggleEditProfilePage();
   };
 
-  const handleDeleteAccount = (): void => {
+  const handleDeleteAccount = async (): Promise<void> => {
+    const auth = getAuth();
+    const user = auth.currentUser;
 
+    await removePreviousProfileImg();
+
+    await deleteDoc(doc(db, "users", userRef.uid)).then(() => {
+      // userInstance deleted
+    }).catch((error) => {
+      alert('We were not able to remove your posts, comments, etc; please reach out to dutsandrew@gmail.com to resolve this issue');
+    })
+
+    await deleteUser((user as User)).then(() => {
+      // User deleted.
+    }).catch((error) => {
+      alert('We were not able to delete your account, please try again later!');
+    });
+    
+    returnToMainAfterProfileEdit();
+    window.location.reload();
   };
 
   const handleRemoveAccountInfo = (): void => {
@@ -263,8 +285,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
           className="edit-profile-input"
           placeholder={userInstance.user.username ? userInstance.user.username : "anonymous"}
           onChange={handleProfileEditChange}
-          data-testid="username"
-          required >
+          data-testid="username" >
         </input>
         <p id="username-edit-input-error"
           className ="error-msg" >

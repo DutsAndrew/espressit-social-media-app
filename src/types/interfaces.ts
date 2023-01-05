@@ -19,7 +19,7 @@ interface SignInProps {
 };
 
 interface CreateAccountProps {
-  createAccountWithEmailAndPassword: (username: string, email: string, password: string) => Promise<void>,
+  createAccountWithEmailAndPassword: Function,
   handleSignUp: MouseEventHandler<HTMLParagraphElement>,
 };
 
@@ -48,7 +48,7 @@ interface UserInstance {
     displayName: string,
     favoritePosts: any[],
     posts: any[],
-    profileImg: string,
+    imgURL: string,
     uid: string,
     username: string,
   },
