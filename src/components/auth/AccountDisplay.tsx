@@ -68,7 +68,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
         });
       };
     })();
-  }, []);
+  });
 
   const accountDropDown = (e: React.MouseEvent) => {
 
