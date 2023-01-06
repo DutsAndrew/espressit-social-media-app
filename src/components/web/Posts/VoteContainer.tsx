@@ -29,7 +29,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
 
   const userRef = user as User;
 
-  if (post.whoLiked.includes(userRef.uid)) {
+  if (whoLiked.includes(userRef.uid)) {
     return (
       <div className="upvote-downvote-container">
         <img className="upvote-svg"
@@ -61,7 +61,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
     );
   };
 
-  if (post.whoDisliked.includes(userRef.uid)) {
+  if (whoDisliked.includes(userRef.uid)) {
     return (
       <div className="upvote-downvote-container">
         <img className="not-upvoted"

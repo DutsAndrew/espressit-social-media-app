@@ -134,9 +134,9 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
       await updateDoc(userInstanceRef, {
         posts: [...getUserInstanceSnap.data().posts, post],
       });
-      await setDoc(doc(db, "posts", id), {
+      await setDoc(doc(db, "posts", id),
         post,
-      });
+      );
     };
 
   };
@@ -193,9 +193,9 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
                 await updateDoc(userInstanceRef, {
                   posts: [...getUserInstanceSnap.data().posts, post],
                 });
-                await setDoc(doc(db, "posts", id), {
+                await setDoc(doc(db, "posts", id),
                   post,
-                });
+                );
               };
 
             })();
@@ -246,9 +246,9 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
       await updateDoc(userInstanceRef, {
         posts: [...getUserInstanceSnap.data().posts, post],
       });
-      await setDoc(doc(db, "posts", id), {
+      await setDoc(doc(db, "posts", id),
         post,
-      });
+      );
     };
 
   };

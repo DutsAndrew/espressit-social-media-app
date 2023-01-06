@@ -233,6 +233,7 @@ const WebApp = () => {
     setEditProfileRequested({
       status: false,
     });
+    signOut();
   };
 
   const toggleViewFavoritesPage = () => {

@@ -137,10 +137,12 @@ interface ViewNavProps {
 
 type Post = {
   account: string,
+  author: string,
   body: string,
   comments: any[],
   dislikes: number,
-  img: string,
+  imgURL: string,
+  imgURLRef: string,
   likes: number,
   link: string,
   pid: string,

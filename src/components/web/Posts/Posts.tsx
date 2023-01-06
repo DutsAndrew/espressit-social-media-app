@@ -62,6 +62,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
       postsQuerySnapshot.forEach((doc) => {
         dataArray.push(doc.data());
+        console.log(doc.data());
       });
 
       setSortedData({

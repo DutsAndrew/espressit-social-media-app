@@ -15,7 +15,7 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
     handleFavoritePost(post);
   };
 
-  if (post.img.length === 0 && post.link.length === 0) {
+  if (post.imgURL.length === 0 && post.link.length === 0) {
     return (
       <div className="content-container">
         <h1 className="post-title"
@@ -45,7 +45,7 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
     );
   };
 
-  if (post.link.length !== 0 && post.img.length === 0) {
+  if (post.link.length !== 0 && post.imgURL.length === 0) {
     return (
       <div className="content-container">
         <h1 className="post-title"
@@ -79,7 +79,7 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
     );
   };
 
-  if (post.link.length === 0 && post.img.length !== 0) {
+  if (post.link.length === 0 && post.imgURL.length !== 0) {
     return (
       <div className="content-container">
         <h1 className="post-title"
@@ -87,7 +87,7 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
           {post.title.length > 75 ? post.title.slice(0, 75).concat('...') : post.title}
         </h1>
         <img className="post-img"
-          src={post.img}
+          src={post.imgURL}
           alt="user post"
           onClick={() => callHandleViewPost(post)} >
         </img>
@@ -114,7 +114,7 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
     );
   };
 
-  if  (post.link.length !== 0 && post.img.length !== 0) {
+  if  (post.link.length !== 0 && post.imgURL.length !== 0) {
     return (
       <div className="content-container">
         <h1 className="post-title"
@@ -122,7 +122,7 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
           {post.title.length > 75 ? post.title.slice(0, 75).concat('...') : post.title}
         </h1>
         <img className="post-img"
-          src={post.img}
+          src={post.imgURL}
           alt="user post"
           onClick={() => callHandleViewPost(post)} >
         </img>

@@ -107,7 +107,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
   }, []);
 
   // when  no img or link are present
-  if (viewingRef.img.length === 0 && viewingRef.link.length === 0) {
+  if (viewingRef.imgURL.length === 0 && viewingRef.link.length === 0) {
     return (
       <>
         <ViewNav 
@@ -155,7 +155,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
     );
 
     // when img is included
-  } else if (viewingRef.img.length === 0 && viewingRef.link.length !== 0) {
+  } else if (viewingRef.imgURL.length === 0 && viewingRef.link.length !== 0) {
     return (
       <>
         <ViewNav 
@@ -203,7 +203,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
     );
 
     // when a link is present, but no img
-  } else if (viewingRef.img.length !== 0 && viewingRef.link.length === 0) {
+  } else if (viewingRef.imgURL.length !== 0 && viewingRef.link.length === 0) {
     return (
      <>
       <ViewNav 
@@ -225,7 +225,7 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
             </h1>
             <img className="post-view-img"
               alt="user post"
-              src={viewingRef.img} >
+              src={viewingRef.imgURL} >
             </img>
             <h3 className="post-view-description" >
               {viewingRef.body}
