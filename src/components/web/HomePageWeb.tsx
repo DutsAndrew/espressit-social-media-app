@@ -19,7 +19,7 @@ const HomePageWeb: FC<HomePageWebProps> = (props): JSX.Element => {
 
   return (
     <div className="home-page-web">
-      <CreatePostWeb />
+      <CreatePostWeb user={currentUser} />
       <Posts user={currentUser} />
     </div>
   );

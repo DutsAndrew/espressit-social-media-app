@@ -8,7 +8,7 @@ const TextForm: FC<TextFormProps> = (props): JSX.Element => {
   return (
     <div className="create-post-text-container">
       <form className="create-post-form"
-        onSubmit={handleFormSubmission}
+        onSubmit={(e) => handleFormSubmission(e)}
       >
         <fieldset className="create-post-fieldset">
           <label htmlFor="text-body-input"
@@ -17,7 +17,7 @@ const TextForm: FC<TextFormProps> = (props): JSX.Element => {
           </label>
           <textarea id="text-body-input"
             className="text-body-input"
-            placeholder="So there I was... Fighting the spiders" >
+            placeholder="So there I was... fighting the spiders" >
           </textarea>
           <button className="post-submit-button"
             type="submit">

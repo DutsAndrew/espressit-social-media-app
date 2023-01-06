@@ -64,6 +64,10 @@ interface HomePageWebProps {
   currentUser: string | User,
 }
 
+interface CreatePostProps {
+  user: string | User,
+};
+
 interface postType {
   text?: boolean,
   img?: boolean,
@@ -187,6 +191,7 @@ export {
   type TextFormProps,
   type PostNavProps,
   type HomePageWebProps,
+  type CreatePostProps,
   type PostProps,
   type FeedProps,
   type VoteContainerProps,
