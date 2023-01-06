@@ -11,7 +11,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "fire
 
 const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
 
-  const { user } = props;
+  const { user, fetchNewPost } = props;
 
   const [postData, setPostData] = useState({
     status: false,
@@ -128,7 +128,7 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
         title: titleOfPost,
         views: 0,
         whoDisliked: [],
-        whoLiked: [],
+        whoLiked: [userRef.uid],
       };
 
       await updateDoc(userInstanceRef, {
@@ -138,6 +138,8 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
         post,
       );
     };
+
+    fetchNewPost();
 
   };
 
@@ -187,7 +189,7 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
                   title: titleOfPost,
                   views: 0,
                   whoDisliked: [],
-                  whoLiked: [],
+                  whoLiked: [userRef.uid],
                 };
 
                 await updateDoc(userInstanceRef, {
@@ -197,6 +199,8 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
                   post,
                 );
               };
+
+              fetchNewPost();
 
             })();
 
@@ -240,7 +244,7 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
         title: titleOfPost,
         views: 0,
         whoDisliked: [],
-        whoLiked: [],
+        whoLiked: [userRef.uid],
       };
 
       await updateDoc(userInstanceRef, {
@@ -250,6 +254,8 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
         post,
       );
     };
+
+    fetchNewPost();
 
   };
 

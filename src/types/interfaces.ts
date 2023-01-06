@@ -66,6 +66,7 @@ interface HomePageWebProps {
 
 interface CreatePostProps {
   user: string | User,
+  fetchNewPost: Function,
 };
 
 interface postType {
@@ -84,6 +85,8 @@ interface PostNavProps {
 
 interface PostProps {
   user: string | User,
+  newPostStatus: boolean,
+  newPostFetched: Function,
 };
 
 interface FeedProps {

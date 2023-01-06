@@ -16,7 +16,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 const Posts: FC<PostProps> = (props): JSX.Element => {
 
-  const { user } = props;
+  const { user, newPostStatus, newPostFetched } = props;
 
   // firebaseConfig
   const firebaseConfig = {
@@ -71,6 +71,30 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
     })();
   }, []);
+
+  // grab new post from db
+  useEffect(() => {
+    if (newPostStatus === true) {
+      const dataArray: any[] = [];
+
+      (async function queryDB() {
+
+        const postsQuerySnapshot = await getDocs(collection(db, "posts"));
+
+        postsQuerySnapshot.forEach((doc) => {
+          dataArray.push(doc.data());
+          console.log(doc.data());
+        });
+
+        setSortedData({
+          data: dataArray,
+        });
+
+      })();
+
+      newPostFetched();
+    };
+  }, [newPostStatus]);
 
   const handleSortChange = (type: string): void => {
     setSortType({
