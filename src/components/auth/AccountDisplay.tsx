@@ -14,7 +14,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
     currentUser,
     signOut,
     toggleEditProfilePage,
-    toggleViewFavoritesPage 
+    toggleViewContributionsPage 
   } = props;
 
   // converting potential non-auth user to guaranteed firebase auth user
@@ -128,7 +128,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
     };
 
     if (target.classList.contains('view-favorite-text')) {
-      toggleViewFavoritesPage();
+      toggleViewContributionsPage();
       return;
     }
 

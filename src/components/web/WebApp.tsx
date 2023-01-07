@@ -5,7 +5,7 @@ import CreateAccount from '../auth/CreateAccount';
 import { userState } from '../../types/interfaces';
 import LogIn from '../auth/LogIn';
 import EditProfile from "../auth/EditProfile";
-import ViewFavorites from "../auth/ViewFavorites";
+import ViewContributions from "../auth/ViewContributions";
 
 // firbase db imports
 import { 
@@ -236,7 +236,7 @@ const WebApp = () => {
     signOut();
   };
 
-  const toggleViewFavoritesPage = () => {
+  const toggleViewContributionsPage = () => {
     if (viewFavoritesRequested.status === false) {
       if (editProfileRequested.status === true) {
         setEditProfileRequested({
@@ -265,7 +265,7 @@ const WebApp = () => {
           currentUser={userStatus.currentUser}
           signOut={signOut}
           toggleEditProfilePage={toggleEditProfilePage}
-          toggleViewFavoritesPage={toggleViewFavoritesPage}
+          toggleViewContributionsPage={toggleViewContributionsPage}
         />
         <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword}
           handleSignUp={handleSignUp}
@@ -282,7 +282,7 @@ const WebApp = () => {
           currentUser={userStatus.currentUser}
           signOut={signOut}
           toggleEditProfilePage={toggleEditProfilePage}
-          toggleViewFavoritesPage={toggleViewFavoritesPage}
+          toggleViewContributionsPage={toggleViewContributionsPage}
         />
         <LogIn signInUser={signInUser}
           handleLogIn={handleLogIn}
@@ -300,7 +300,7 @@ const WebApp = () => {
         currentUser={userStatus.currentUser}
         signOut={signOut}
         toggleEditProfilePage={toggleEditProfilePage}
-        toggleViewFavoritesPage={toggleViewFavoritesPage}
+        toggleViewContributionsPage={toggleViewContributionsPage}
       />
       <EditProfile currentUser={userStatus.currentUser}
         toggleEditProfilePage={toggleEditProfilePage}
@@ -318,9 +318,12 @@ const WebApp = () => {
           currentUser={userStatus.currentUser}
           signOut={signOut}
           toggleEditProfilePage={toggleEditProfilePage}
-          toggleViewFavoritesPage={toggleViewFavoritesPage}
+          toggleViewContributionsPage={toggleViewContributionsPage}
         />
-        <ViewFavorites />
+        <ViewContributions
+          currentUser={userStatus.currentUser}
+          toggleViewContributionsPage={toggleViewContributionsPage}
+        />
       </div>
      );
   };
@@ -332,7 +335,7 @@ const WebApp = () => {
         currentUser={userStatus.currentUser}
         signOut={signOut}
         toggleEditProfilePage={toggleEditProfilePage}
-        toggleViewFavoritesPage={toggleViewFavoritesPage}
+        toggleViewContributionsPage={toggleViewContributionsPage}
       />
       <HomePageWeb currentUser={userStatus.currentUser}/>
     </div>

@@ -22,14 +22,14 @@ describe('unit test for account display', () => {
 
   const signOutMock = jest.fn();
   const editProfileMock = jest.fn();
-  const viewFavoitesMock = jest.fn();
+  const toggleViewContributionsPageMock = jest.fn();
 
   test('Account Display renders correct elements when user has a display name', () => {
 
     render(<AccountDisplay currentUser={userMock}
       signOut={signOutMock}
       toggleEditProfilePage={editProfileMock} 
-      toggleViewFavoritesPage={viewFavoitesMock} />
+      toggleViewContributionsPage={toggleViewContributionsPageMock} />
     );
 
     const loggdInText = screen.getByRole('paragraph');
@@ -48,7 +48,7 @@ describe('unit test for account display', () => {
     render(<AccountDisplay currentUser={userMock}
       signOut={signOutMock}
       toggleEditProfilePage={editProfileMock} 
-      toggleViewFavoritesPage={viewFavoitesMock} />
+      toggleViewContributionsPage={toggleViewContributionsPageMock} />
     );
 
     const loggdInText = screen.getByRole('paragraph');
@@ -65,7 +65,7 @@ describe('unit test for account display', () => {
     render(<AccountDisplay currentUser={userMock}
       signOut={signOutMock}
       toggleEditProfilePage={editProfileMock} 
-      toggleViewFavoritesPage={viewFavoitesMock} />
+      toggleViewContributionsPage={toggleViewContributionsPageMock} />
     );
     
     const accountContainer = screen.getByRole("menu");
@@ -83,7 +83,7 @@ describe('unit test for account display', () => {
     render(<AccountDisplay currentUser={userMock}
       signOut={signOutMock}
       toggleEditProfilePage={editProfileMock} 
-      toggleViewFavoritesPage={viewFavoitesMock} />
+      toggleViewContributionsPage={toggleViewContributionsPageMock} />
     );
 
     const accountContainer = screen.getByRole("menu");

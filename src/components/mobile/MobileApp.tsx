@@ -38,7 +38,7 @@ const MobileApp = () => {
 
   }
 
-  const toggleViewFavoritesPage = () => {
+  const toggleViewContributionsPage = () => {
 
   };
 
@@ -49,7 +49,7 @@ const MobileApp = () => {
           currentUser={userStatus.currentUser}
           signOut={signOut}
           toggleEditProfilePage={toggleEditProfilePage}
-          toggleViewFavoritesPage={toggleViewFavoritesPage}
+          toggleViewContributionsPage={toggleViewContributionsPage}
         />
         <HomePageMobile />
     </div>

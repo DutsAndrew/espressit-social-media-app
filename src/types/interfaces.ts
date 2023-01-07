@@ -7,7 +7,7 @@ interface HeaderProps {
   currentUser: string | User,
   signOut: Function,
   toggleEditProfilePage: Function,
-  toggleViewFavoritesPage: Function,
+  toggleViewContributionsPage: Function,
 };
 
 interface SignUpProps {
@@ -39,7 +39,7 @@ interface AccountDisplayProps {
   currentUser: string | User,
   signOut: Function,
   toggleEditProfilePage: Function,
-  toggleViewFavoritesPage: Function,
+  toggleViewContributionsPage: Function,
 };
 
 interface UserInstance {
@@ -58,6 +58,15 @@ interface EditProfileProps {
   currentUser: string | User,
   toggleEditProfilePage: Function,
   returnToMainAfterProfileEdit: Function,
+};
+
+interface ViewContributionsProps {
+  currentUser: string | User,
+  toggleViewContributionsPage: Function,
+};
+
+interface ViewContributionsDbData {
+  data: any[],
 };
 
 interface HomePageWebProps {
@@ -203,6 +212,8 @@ export {
   type AccountDisplayProps,
   type UserInstance,
   type EditProfileProps,
+  type ViewContributionsProps,
+  type ViewContributionsDbData,
   type postType,
   type TextFormProps,
   type PostNavProps,

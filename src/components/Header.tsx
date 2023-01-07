@@ -54,7 +54,7 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
     currentUser,
     signOut,
     toggleEditProfilePage,
-    toggleViewFavoritesPage 
+    toggleViewContributionsPage 
   } = props;
 
   // if user isn't logged in
@@ -88,7 +88,7 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
         <AccountDisplay currentUser={currentUser}
           signOut={signOut}
           toggleEditProfilePage={toggleEditProfilePage} 
-          toggleViewFavoritesPage={toggleViewFavoritesPage}
+          toggleViewContributionsPage={toggleViewContributionsPage}
         />
       </AccountWrapper>
     </HeaderWrapper>
