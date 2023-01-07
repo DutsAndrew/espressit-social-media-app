@@ -156,6 +156,17 @@ type Post = {
   whoLiked: any[],
 };
 
+type Comment = {
+  account: string;
+  author: string;
+  time: string;
+  comment: string;
+  likes: number;
+  dislikes: number;
+  whoLiked: string[];
+  whoDisliked: string[];
+}
+
 type PostData = {
   data: any[],
 };
@@ -205,6 +216,7 @@ export {
   type ViewPostProps,
   type ViewNavProps,
   type Post,
+  type Comment,
   type PostData,
   type CommentsProps,
   type AddCommentProps,

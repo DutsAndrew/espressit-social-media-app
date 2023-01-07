@@ -49,40 +49,46 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
     (async function saveComment() {
 
       // gather and set comment data
-      const newComment = {
-        account: userRef.uid,
-        comment: scrubbedComment,
-        dislikes: 0,
-        likes: 1,
-        pid: viewingRef.pid,
-        time: new Date().toLocaleString(),
-        whoDisliked: [],
-        whoLiked: [userRef.uid],
-      };
+      const userInstanceRef = doc(db, "users", userRef.uid);
+      const getUserInstanceSnap = await getDoc(userInstanceRef);
 
-      // add new comment to comment list
-      const postRef = doc(db, "posts", viewingRef.pid);
-      await updateDoc(postRef, {
-        comments: [...viewingRef.comments, newComment],
-      });
+      if (getUserInstanceSnap.exists()) {
+        const newComment = {
+          account: getUserInstanceSnap.data().username,
+          author: userRef.uid,
+          comment: scrubbedComment,
+          dislikes: 0,
+          likes: 1,
+          pid: viewingRef.pid,
+          time: new Date().toLocaleString(),
+          whoDisliked: [],
+          whoLiked: [userRef.uid],
+        };
 
-      // update local data to match db for rendering
-      viewingRef.comments = [...viewingRef.comments, newComment];
-      setViewingPost({
-        post: viewingRef,
-      });
-
-      // get user data to save comment to user for deletion or modification later
-      const getUserDBRef = doc(db, "users", userRef.uid);
-      const getUserDBSnap = await getDoc(getUserDBRef);
-
-       // set newComment in user data with other comments
-      if (getUserDBSnap.exists()) {
-        const userDBData = getUserDBSnap.data();
-        const setUserDBRef = doc(db, "users", userRef.uid);
-        await updateDoc(setUserDBRef, {
-          comments: [...userDBData.comments, newComment],
+        // add new comment to comment list
+        const postRef = doc(db, "posts", viewingRef.pid);
+        await updateDoc(postRef, {
+          comments: [...viewingRef.comments, newComment],
         });
+
+        // update local data to match db for rendering
+        viewingRef.comments = [...viewingRef.comments, newComment];
+        setViewingPost({
+          post: viewingRef,
+        });
+
+        // get user data to save comment to user for deletion or modification later
+        const getUserDBRef = doc(db, "users", userRef.uid);
+        const getUserDBSnap = await getDoc(getUserDBRef);
+
+        // set newComment in user data with other comments
+        if (getUserDBSnap.exists()) {
+          const userDBData = getUserDBSnap.data();
+          const setUserDBRef = doc(db, "users", userRef.uid);
+          await updateDoc(setUserDBRef, {
+            comments: [...userDBData.comments, newComment],
+          });
+        };
       };
     })();
   };

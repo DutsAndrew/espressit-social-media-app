@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { CommentsProps, Post } from "../../../types/interfaces";
+import { CommentsProps, Post, Comment } from "../../../types/interfaces";
 import upVoteSVG from '../../../assets/arrow-up.svg';
 import downVoteSVG from '../../../assets/arrow-down.svg';
 import uniqid from 'uniqid';
@@ -19,9 +19,24 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
   const viewingRef = viewing as Post;
   const userRef = user as User;
 
+  // default is to sort by most likes
+  const sortedComments = commentList.sort(function compareLikes(a, b): any {
+
+    if (a.likes > b.likes) {
+      return -1;
+    };
+
+    if (a.likes < b.likes) {
+      return 1;
+    };
+
+    return 0;
+
+  });
+
   return (
     <div className="comment-list">
-      {Array.isArray(commentList) && commentList.map((comment) => {
+      {Array.isArray(sortedComments) && commentList.map((comment) => {
 
         if (comment.whoLiked.includes(userRef.uid)) {
           return <div className="comment" key={uniqid()}>
