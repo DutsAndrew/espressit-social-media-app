@@ -90,13 +90,13 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       const editProfile = document.createElement('p');
         editProfile.classList.add('edit-profile-text');
         editProfile.textContent = 'Edit Profile';
-      const favoritePosts = document.createElement('p');
-        favoritePosts.classList.add('view-favorite-text');
-        favoritePosts.textContent = 'View Favorites';
+      const viewContributions = document.createElement('p');
+        viewContributions.classList.add('view-contributions-text');
+        viewContributions.textContent = 'View Contributions';
 
       dropDownMenu.appendChild(signOut);
       dropDownMenu.appendChild(editProfile);
-      dropDownMenu.appendChild(favoritePosts);
+      dropDownMenu.appendChild(viewContributions);
       profileContainer?.appendChild(dropDownMenu);
 
       setTimeout(() => {
@@ -127,7 +127,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       return;
     };
 
-    if (target.classList.contains('view-favorite-text')) {
+    if (target.classList.contains('view-contributions-text')) {
       toggleViewContributionsPage();
       return;
     }

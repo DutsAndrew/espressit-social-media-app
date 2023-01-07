@@ -73,13 +73,13 @@
   box-shadow: 0.25em 0.12em 0.12em #37251b;
 }
 
-.account-drop-down-menu:hover .sign-out-text:hover, .account-drop-down-menu:hover .edit-profile-text:hover, .view-favorite-text:hover {
+.account-drop-down-menu:hover .sign-out-text:hover, .account-drop-down-menu:hover .edit-profile-text:hover, .view-contributions-text:hover {
   cursor: pointer;
   color:#DABE99;
   transform: scale(0.90);
 }
 
-.sign-out-text, .edit-profile-text, .view-favorite-text {
+.sign-out-text, .edit-profile-text, .view-contributions-text {
   margin: 0.5vh;
   font-size: 1em;
 }
