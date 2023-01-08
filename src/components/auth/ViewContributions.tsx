@@ -158,7 +158,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
               key={uniqid()}>
               <p 
                 className="view-contributions-post-text">
-                {post.title}
+                {post.title.length > 75 ? post.title.slice(0, 75).concat('...') : post.title}
               </p>
               <img 
                 className="view-contributions-post-delete-svg"
@@ -211,7 +211,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
               key={uniqid()}>
               <p 
                 className="view-contributions-comment-text">
-                {comment.comment}
+                {comment.comment.length > 75 ? comment.comment.slice(0, 75).concat('...') : comment.comment}
               </p>
               <img 
                 className="view-contributions-comment-delete-svg"
@@ -264,7 +264,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
               key={uniqid()}>
               <p 
                 className="view-contributions-favorite-text">
-                {favorite.title}
+                {favorite.title.length > 75 ? favorite.title.slice(0, 75).concat('...') : favorite.title}
               </p>
               <img 
                 className="view-contributions-favorite-delete-svg"

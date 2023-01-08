@@ -21,6 +21,12 @@
   color: #DABE99;
 }
 
+.view-contributions-prompt {
+  color: rgb(253, 255, 246);
+  margin: 0;
+  font-size: 2em;
+}
+
 .contributions-nav {
   display: flex;
   flex-flow: row nowrap;
@@ -56,6 +62,7 @@
   align-items: center;
   width: 75vw;
   height: 90vh;
+  gap: 1vh;
 }
 
 .view-contributions-post:hover, .view-contributions-comments:hover, .view-contributions-favorite:hover {
@@ -76,8 +83,9 @@
   justify-content: flex-start;
   align-items: center;
   width: 75vw;
-  height: 15vh;
+  height: auto;
   color: rgb(253, 255, 246);
+  background-color: rgb(1, 1, 0, 1);
 }
 
 .view-contributions-post-text, .view-contributions-comment-text, .view-contributions-favorite-text {
@@ -85,7 +93,7 @@
   margin: 0;
   margin: 2%;
   width: 72vw;
-  height: 15vh;
+  height: auto;
 }
 
 .view-contributions-post-text:hover, .view-contributions-comment-text:hover, .view-contributions-favorite-text:hover {
