@@ -17,7 +17,9 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
   });
 
   const [dbData, setDbData] = useState<ViewContributionsDbData>({
-    data: [],
+    posts: [],
+    comments: [],
+    favorites: [],
   });
 
   useEffect(() => {
@@ -32,51 +34,35 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
         messagingSenderId: "1094129721341",
         appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
       };
+
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
       const userRef = currentUser as User;
-      const postRef = doc(db, "users", userRef.uid);
-      const postSnap = await getDoc(postRef);
-      if (postSnap.exists()) {
+      const userInstanceRef = doc(db, "users", userRef.uid);
+      const userInstanceSnap = await getDoc(userInstanceRef);
+      if (userInstanceSnap.exists()) {
+        
         // save posts, comments, favorites to local state for use
+        const posts = userInstanceSnap.data().posts;
+        const comments = userInstanceSnap.data().comments;
+        const favorites = userInstanceSnap.data().favoritePosts;
+
+        setDbData({
+          posts: posts,
+          comments: comments,
+          favorites: favorites,
+        });
+
       };
 
     })();
   }, []);
 
   const handleViewChange = (change: string): void => {
-
-    fetchDataFromFirebase(change);
-
     setViewing({
       current: change,
     });
-
-  };
-
-  const fetchDataFromFirebase = (change: string): void => {
-
-    if (change === "posts") {
-      setDbData({
-        data: postMock,
-      });
-      return;
-    };
-
-    if (change === "comments") {
-      setDbData({
-        data: commentsMock,
-      });
-      return;
-    };
-
-    if (change === "favorites") {
-      setDbData({
-        data: favoritesMock,
-      });
-      return;
-    };
 
   };
 
@@ -167,7 +153,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
         </div>
         <div 
           className="view-contributions-posts-container">
-          {Array.isArray(dbData.data) && dbData.data.map((post) => {
+          {Array.isArray(dbData.posts) && dbData.posts.map((post) => {
             return <div className="view-contributions-post"
               key={uniqid()}>
               <p 
@@ -220,7 +206,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
         </div>
         <div 
           className="view-contributions-comments-container">
-          {Array.isArray(dbData.data) && dbData.data.map((comment) => {
+          {Array.isArray(dbData.comments) && dbData.comments.map((comment) => {
             return <div className="view-contributions-comments"
               key={uniqid()}>
               <p 
@@ -273,7 +259,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
         </div>
         <div 
           className="view-contributions-favorites-container">
-          {Array.isArray(dbData.data) && dbData.data.map((favorite) => {
+          {Array.isArray(dbData.favorites) && dbData.favorites.map((favorite) => {
             return <div className="view-contributions-favorite"
               key={uniqid()}>
               <p 

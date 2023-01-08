@@ -66,7 +66,9 @@ interface ViewContributionsProps {
 };
 
 interface ViewContributionsDbData {
-  data: any[],
+  posts: any[],
+  comments: any[],
+  favorites: any[],
 };
 
 interface HomePageWebProps {
