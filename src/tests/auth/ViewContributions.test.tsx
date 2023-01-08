@@ -5,6 +5,7 @@ import ViewContributions from '../../components/auth/ViewContributions';
 
 describe('unit test for ViewContributions', () => {
 
+  // REPLACE DB QUERIES WITH THIS DATA IN VIEWCONTRIBUTIONS COMPONENT FOR TESTING
   const postMock = [
     {
       title: "This is a post",

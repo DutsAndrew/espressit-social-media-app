@@ -9,7 +9,7 @@ import { User } from "firebase/auth";
 
 // firebase imports
 import { initializeApp } from "firebase/app";
-import { getFirestore, updateDoc } from "firebase/firestore";
+import { getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
@@ -210,10 +210,31 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
   };
 
-  const handleFavoritePost = (post: Post) => {
-    // will take in the post data as an an argument, save to db under users favoritePosts array
-    // ADD VALIDAITON TO PREVENT DUPLICATE FAVORITING
-    console.log('favoriting post', post);
+  const handleFavoritePost = async (post: Post): Promise<void> => {
+    
+    const userRef = user as User;
+    const userInstanceRef = doc(db, "users", userRef.uid);
+    const userInstanceSnap = await getDoc(userInstanceRef);
+
+    if (userInstanceSnap.exists()) {
+      const favorites = userInstanceSnap.data().favoritePosts;
+      const isItFavorited = favorites.find((favorite: Post) => favorite.pid === post.pid);
+
+      if (isItFavorited !== undefined) {
+        // the item is already favorited
+        alert('looks like you already favorited this post, we\'re aborting this action');
+        return;
+      };
+
+      if (isItFavorited === undefined) {
+        await updateDoc(userInstanceRef, {
+          favoritePosts: [...favorites, post],
+        });
+      };
+
+    } else {
+      alert('we could not retrieve your favorites at this time, please try again later');
+    };
   };
 
   const handleUpVoteComment = (post: Post, comment: Object): void => {

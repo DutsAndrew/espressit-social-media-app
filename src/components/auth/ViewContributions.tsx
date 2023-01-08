@@ -1,7 +1,12 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ViewContributionsProps, ViewContributionsDbData } from "../../types/interfaces";
 import deleteSVG from '../../assets/delete.svg';
 import uniqid from 'uniqid';
+import '../../styles/ViewContributions.css';
+import { doc, getDoc } from "firebase/firestore";
+import { User } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
 
@@ -15,30 +20,30 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
     data: [],
   });
 
-  const postMock = [
-    {
-      title: "This is a post",
-    },
-    {
-      title: "This is a post as well",
-    },
-  ];
-  const commentsMock = [
-    {
-      comment: "This is a comment",
-    },
-    {
-      comment: "This is also a comment",
-    },
-  ];
-  const favoritesMock = [
-    {
-      title: "This is a favorited post",
-    },
-    {
-      title: "This is also a favorited post",
-    },
-  ];
+  useEffect(() => {
+    // query db for posts, comments, and favorites on mount
+    (async function fetchDataFromDb() {
+      // Initialize Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyDsPecBa3Ch5uDw4UzHiJWAjKEYOKCrNdA",
+        authDomain: "espressit.firebaseapp.com",
+        projectId: "espressit",
+        storageBucket: "espressit.appspot.com",
+        messagingSenderId: "1094129721341",
+        appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
+      };
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      const userRef = currentUser as User;
+      const postRef = doc(db, "users", userRef.uid);
+      const postSnap = await getDoc(postRef);
+      if (postSnap.exists()) {
+        // save posts, comments, favorites to local state for use
+      };
+
+    })();
+  }, []);
 
   const handleViewChange = (change: string): void => {
 
