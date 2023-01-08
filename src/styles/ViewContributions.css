@@ -1,0 +1,107 @@
+.view-contributions-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+  margin: 0;
+  margin-top: 1%;
+  gap: 5vh;
+  overflow-y: scroll;
+  overflow-x: none;
+}
+
+.close-view-contributions-button {
+  width: 20vw;
+  height: 4vh;
+  font-size: 1em;
+  background-color: #9D6538;
+  border-radius: 4%;
+  color: #DABE99;
+}
+
+.contributions-nav {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100vw;
+  height: 10vh;
+  color: rgb(253, 255, 246);
+}
+
+.contributions-post-selector, .contributions-comments-selector, .contributions-favorites-selector {
+  font-size: 1.75em;
+  margin: 0;
+}
+
+.contributions-post-selector:hover, .contributions-comments-selector:hover, .contributions-favorites-selector:hover {
+  transform: scale(1.2);
+}
+
+.contributions-post-selector:hover, .contributions-comments-selector:hover, .contributions-favorites-selector:hover {
+  cursor: pointer;
+}
+
+.contributions-nav-divider {
+  margin: 0;
+  font-size: 1.75em;
+}
+
+.view-contributions-posts-container, .view-contributions-comments-container, .view-contributions-favorites-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 75vw;
+  height: 90vh;
+}
+
+.view-contributions-post:hover, .view-contributions-comments:hover, .view-contributions-favorite:hover {
+  box-shadow: 10px 5px 5px black;
+  background-color: rgb(21, 11, 10, 1);
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  margin-bottom: 1vh;
+  transform: scale(1.01);
+}
+
+.view-contributions-post, .view-contributions-comments, .view-contributions-favorite {
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  width: 75vw;
+  height: 15vh;
+  color: rgb(253, 255, 246);
+}
+
+.view-contributions-post-text, .view-contributions-comment-text, .view-contributions-favorite-text {
+  font-size: 1.25em;
+  margin: 0;
+  margin: 2%;
+  width: 72vw;
+  height: 15vh;
+}
+
+.view-contributions-post-text:hover, .view-contributions-comment-text:hover, .view-contributions-favorite-text:hover {
+  cursor: pointer;
+  font-size: 1.5em;
+}
+
+.view-contributions-post-delete-svg, .view-contributions-comment-delete-svg, .view-contributions-favorite-delete-svg {
+  width: 3vw;
+  height: 3vh;
+  margin: 0;
+  margin: 2%;
+  filter: invert(94%) sepia(9%) saturate(372%) hue-rotate(60deg) brightness(107%) contrast(105%);
+}
+
+.view-contributions-post-delete-svg:hover, .view-contributions-comment-delete-svg:hover, .view-contributions-favorite-delete-svg:hover {
+  filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
+  cursor: pointer;
+}
