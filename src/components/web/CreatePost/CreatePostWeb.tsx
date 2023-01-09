@@ -161,66 +161,65 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
         .then((snapshot) => {
           // image has been uploaded to the db
           // download url for uploaded image
+          getDownloadURL(ref(storage, `postImgs/${(selectedFile as any).name}`))
+            .then((url) => {
+              // `url` is the download URL for 'images/${selectedFile.name}'
+              // save url and storageRef to post
+              (async function setPostDataWithImgURL() {
+
+                const userInstanceRef = doc(db, "users", userRef.uid);
+                const getUserInstanceSnap = await getDoc(userInstanceRef);
+    
+                if (getUserInstanceSnap.exists()) {
+
+                  const post = {
+                    account: userRef.uid,
+                    author: getUserInstanceSnap.data().username,
+                    body: bodyOfPost,
+                    comments: [],
+                    dislikes: 0,
+                    imgURL: url,
+                    imgURLRef: `postImgs/${(selectedFile as any).name}`,
+                    likes: 1,
+                    link: '',
+                    pid: id,
+                    time: new Date().toLocaleString(),
+                    title: titleOfPost,
+                    views: 0,
+                    whoDisliked: [],
+                    whoLiked: [userRef.uid],
+                  };
+
+                  await updateDoc(userInstanceRef, {
+                    posts: [...getUserInstanceSnap.data().posts, post],
+                  });
+                  await setDoc(doc(db, "posts", id),
+                    post,
+                  );
+                };
+
+                fetchNewPost();
+
+              })();
+
+            })
+            .catch((error) => {
+              alert('We were not able to attach the picture you uploaded to your post, please try again later');
+              deleteObject(storageRef)
+                .then(() => {
+                  // File deleted successfully
+                })
+                .catch((error) => {
+                  alert('We were not able to delete the picture you uploaded and it is not connected to anything, please reach out to dutsandrew@gmail.com if you see this message');
+                  return;
+                });
+            });
         })
         .catch(() => {
           alert('your image was not uploaded to the server so we cancelled the post upload, please try again later');
           return;
         });
 
-        getDownloadURL(ref(storage, `images/${(selectedFile as any).name}`))
-          .then((url) => {
-            // `url` is the download URL for 'images/${selectedFile.name}'
-            // save url and storageRef to post
-
-            (async function setPostDataWithImgURL() {
-
-              const userInstanceRef = doc(db, "users", userRef.uid);
-              const getUserInstanceSnap = await getDoc(userInstanceRef);
-  
-              if (getUserInstanceSnap.exists()) {
-
-                const post = {
-                  account: userRef.uid,
-                  author: getUserInstanceSnap.data().username,
-                  body: bodyOfPost,
-                  comments: [],
-                  dislikes: 0,
-                  imgURL: url,
-                  imgURLRef: `images/${(selectedFile as any).name}`,
-                  likes: 1,
-                  link: '',
-                  pid: id,
-                  time: new Date().toLocaleString(),
-                  title: titleOfPost,
-                  views: 0,
-                  whoDisliked: [],
-                  whoLiked: [userRef.uid],
-                };
-
-                await updateDoc(userInstanceRef, {
-                  posts: [...getUserInstanceSnap.data().posts, post],
-                });
-                await setDoc(doc(db, "posts", id),
-                  post,
-                );
-              };
-
-              fetchNewPost();
-
-            })();
-
-          })
-          .catch((error) => {
-            alert('We were not able to attach the picture you uploaded to your post, please try again later');
-            deleteObject(storageRef)
-              .then(() => {
-                // File deleted successfully
-              })
-              .catch((error) => {
-                alert('We were not able to delete the picture you uploaded and it is not connected to anything, please reach out to dutsandrew@gmail.com if you see this message');
-                return;
-              });
-          });
     };
 
   };
