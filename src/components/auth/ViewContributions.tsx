@@ -1,12 +1,12 @@
-import React, { FC, useEffect, useState } from "react";
-import { ViewContributionsProps, ViewContributionsDbData } from "../../types/interfaces";
+import React, { FC, useEffect, useState, MouseEvent } from "react";
+import { ViewContributionsProps, ViewContributionsDbData, Post } from "../../types/interfaces";
 import deleteSVG from '../../assets/delete.svg';
 import uniqid from 'uniqid';
 import '../../styles/ViewContributions.css';
 import { doc, getDoc } from "firebase/firestore";
 import { User } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, updateDoc } from "firebase/firestore";
 
 const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
 
@@ -66,20 +66,54 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
 
   };
 
-  const handleDeleteEvent = (type: string, itemToDelete: Object): void => {
+  const handleDeleteEvent = async (type: string, itemToDelete: Object, e: MouseEvent): Promise<void> => {
 
-    if (type === "post") {
-      return;
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDsPecBa3Ch5uDw4UzHiJWAjKEYOKCrNdA",
+      authDomain: "espressit.firebaseapp.com",
+      projectId: "espressit",
+      storageBucket: "espressit.appspot.com",
+      messagingSenderId: "1094129721341",
+      appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
     };
 
-    if (type === "comment") {
-      return;
-    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-    if (type === "favorite") {
-      return;
-    };
+    const userRef = currentUser as User;
 
+    const userInstanceRef = doc(db, "users", userRef.uid);
+    const userInstanceSnap = await getDoc(userInstanceRef);
+
+    if (userInstanceSnap.exists()) {
+      // access granted to userInstance
+
+      if (type === "post") {
+        return;
+      };
+  
+      if (type === "comment") {
+        return;
+      };
+  
+      if (type === "favorite") {
+        const favoritesList: any[] = userInstanceSnap.data().favoritePosts;
+        const filteredList: any[] = favoritesList.filter((element: Post) => element.pid !== (itemToDelete as Post).pid);
+
+          await updateDoc(userInstanceRef, {
+            favoritePosts: filteredList,
+          });
+
+          setDbData({
+            posts: dbData.posts,
+            comments: dbData.comments,
+            favorites: filteredList,
+          });
+
+          return;
+        };
+      };
   };
 
   if (viewing.current.length === 0) {
@@ -164,7 +198,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
                 className="view-contributions-post-delete-svg"
                 alt="delete icon"
                 src={deleteSVG}
-                onClick={() => handleDeleteEvent('post', post)} >
+                onClick={(e) => handleDeleteEvent('post', post, e)} >
               </img>
             </div>
           })}
@@ -217,7 +251,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
                 className="view-contributions-comment-delete-svg"
                 alt="delete icon"
                 src={deleteSVG}
-                onClick={() => handleDeleteEvent('comment', comment)} >
+                onClick={(e) => handleDeleteEvent('comment', comment, e)} >
               </img>
             </div>
           })}
@@ -270,7 +304,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
                 className="view-contributions-favorite-delete-svg"
                 alt="delete icon"
                 src={deleteSVG}
-                onClick={() => handleDeleteEvent('favorite', favorite)} >
+                onClick={(e) => handleDeleteEvent('favorite', favorite, e)} >
               </img>
             </div>
           })}
