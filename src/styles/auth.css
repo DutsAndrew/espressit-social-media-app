@@ -90,32 +90,55 @@
   grid-column: 3 / 4;
   background-color: #ad6d2f;
   color: #37251b;
-  width: 25vw;
+  width: 50vw;
   height: 50vh;
   font-size: 1.25em;
   justify-items: center;
   align-items: center;
   justify-content: center;
   align-content: center;
+  margin: 0;
+  margin-top: 5%;
   margin-bottom: 1%;
 }
 
 #sign-in-fieldset {
   display: flex;
   flex-flow: column nowrap;
+  align-items: flex-start;
   height: auto;
+  width: 45vw;
+  margin: 0;
+  margin-top: 5%;
+}
+
+.sign-in-legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45vw;
+  height: 3vh;
+  font-size: 1em;
+  font-weight: bolder;
 }
 
 #email-login, #password-login {
-  margin-bottom: 30%;
+  width: 45vw;
+  height: 3vh;
+  margin: 0;
+  margin-bottom: 5%;
 }
 
 #sign-in-button {
-  width: 20vw;
-  height: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  margin: auto;
+  width: 15vw;
+  height: 4vh;
   color: #e4bc84;
   background-color: #37251b;
-  margin-bottom: 1%;
 }
 
 /* EXTERNAL LOGIN STYLES */

@@ -33,7 +33,10 @@ const LogIn: FC<LogInProps> = (props): JSX.Element => {
         X Close Form
       </button>
       <fieldset id="sign-in-fieldset" >
-        <legend>Sign In:</legend>
+        <legend 
+          className="sign-in-legend">
+          Sign In:
+        </legend>
         <label htmlFor="email-login" >
           *Email:
         </label>
