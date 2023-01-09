@@ -172,8 +172,9 @@ type Comment = {
   author: string;
   time: string;
   comment: string;
-  likes: number;
   dislikes: number;
+  likes: number;
+  pid: string;
   whoLiked: string[];
   whoDisliked: string[];
 }
