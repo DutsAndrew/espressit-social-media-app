@@ -253,10 +253,6 @@ const WebApp = () => {
     };
   };
 
-  const setFavoritePost = () => {
-
-  };
-
   if (signUpStatus.signUp === true) {
     return (
       <div className="app-web">

@@ -84,22 +84,27 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const storage = getStorage(app);
 
     const titleOfPost: string | null = (document.querySelector('.create-post-text-input') as HTMLInputElement).value;
     const bodyOfPost: string | null = (document.querySelector('#text-body-input') as HTMLInputElement).value;
 
     if (postData.type === "text") {
       createPostTypeText(userRef, db, titleOfPost, bodyOfPost);
+      handleCloseForm();
+      return;
     };
 
     if (postData.type === "img") {
       createPostTypeImg(userRef, db, titleOfPost, bodyOfPost);
+      handleCloseForm();
+      return;
     };
 
     if (postData.type === "link") {
       const linkOfPost: string | null = (document.querySelector('.insert-link-input') as HTMLInputElement).value;
       createPostTypeLink(userRef, db, titleOfPost, bodyOfPost, linkOfPost);
+      handleCloseForm();
+      return;
     };
 
   };
