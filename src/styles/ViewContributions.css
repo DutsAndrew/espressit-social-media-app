@@ -95,6 +95,11 @@
   height: auto;
 }
 
+.view-contributions-none-text {
+  color: rgb(253, 255, 246);
+  font-size: 1em;
+}
+
 .view-contributions-post-text:hover, .view-contributions-comment-text:hover, .view-contributions-favorite-text:hover {
   cursor: pointer;
   font-size: 1.5em;

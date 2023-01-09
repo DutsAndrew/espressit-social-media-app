@@ -201,162 +201,288 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
   };
 
   if (viewing.current === "posts") {
-    return (
-      <div className="view-contributions-container">
-        <button 
-          className="close-view-contributions-button"
-          onClick={() => toggleViewContributionsPage()} >
-          Return to Home
-        </button>
-        <div className="contributions-nav">
-          <h2 
-            className="contributions-post-selector"
-            onClick={() => handleViewChange("posts")} >
-            Posts
-          </h2>
-          <p className="contributions-nav-divider">
-            |
-          </p>
-          <h2 
-            className="contributions-comments-selector"
-            onClick={() => handleViewChange("comments")} >
-            Comments
-          </h2>
-          <p className="contributions-nav-divider">
-            |
-          </p>
-          <h2 
-            className="contributions-favorites-selector" 
-            onClick={() => handleViewChange("favorites")} >
-            Favorites
-          </h2>
-        </div>
-        <div 
-          className="view-contributions-posts-container">
-          {Array.isArray(dbData.posts) && dbData.posts.map((post) => {
-            return <div className="view-contributions-post"
-              key={uniqid()}>
-              <p 
-                className="view-contributions-post-text">
-                {post.title.length > 75 ? post.title.slice(0, 75).concat('...') : post.title}
+    if (dbData.posts.length === 0) {
+      return (
+          <div className="view-contributions-container">
+            <button 
+              className="close-view-contributions-button"
+              onClick={() => toggleViewContributionsPage()} >
+              Return to Home
+            </button>
+            <div className="contributions-nav">
+              <h2 
+                className="contributions-post-selector"
+                onClick={() => handleViewChange("posts")} >
+                Posts
+              </h2>
+              <p className="contributions-nav-divider">
+                |
               </p>
-              <img 
-                className="view-contributions-post-delete-svg"
-                alt="delete icon"
-                src={deleteSVG}
-                onClick={() => handleDeleteEvent('post', post)} >
-              </img>
+              <h2 
+                className="contributions-comments-selector"
+                onClick={() => handleViewChange("comments")} >
+                Comments
+              </h2>
+              <p className="contributions-nav-divider">
+                |
+              </p>
+              <h2 
+                className="contributions-favorites-selector" 
+                onClick={() => handleViewChange("favorites")} >
+                Favorites
+              </h2>
             </div>
-          })}
+            <div 
+              className="view-contributions-posts-container">
+              <p
+                className="view-contributions-none-text">
+                You don't have any contributions of this category, go make some!
+              </p>
+            </div>
+          </div>
+      );
+    } else {
+      return (
+        <div className="view-contributions-container">
+          <button 
+            className="close-view-contributions-button"
+            onClick={() => toggleViewContributionsPage()} >
+            Return to Home
+          </button>
+          <div className="contributions-nav">
+            <h2 
+              className="contributions-post-selector"
+              onClick={() => handleViewChange("posts")} >
+              Posts
+            </h2>
+            <p className="contributions-nav-divider">
+              |
+            </p>
+            <h2 
+              className="contributions-comments-selector"
+              onClick={() => handleViewChange("comments")} >
+              Comments
+            </h2>
+            <p className="contributions-nav-divider">
+              |
+            </p>
+            <h2 
+              className="contributions-favorites-selector" 
+              onClick={() => handleViewChange("favorites")} >
+              Favorites
+            </h2>
+          </div>
+          <div 
+            className="view-contributions-posts-container">
+            {Array.isArray(dbData.posts) && dbData.posts.map((post) => {
+              return <div className="view-contributions-post"
+                key={uniqid()}>
+                <p 
+                  className="view-contributions-post-text">
+                  {post.title.length > 75 ? post.title.slice(0, 75).concat('...') : post.title}
+                </p>
+                <img 
+                  className="view-contributions-post-delete-svg"
+                  alt="delete icon"
+                  src={deleteSVG}
+                  onClick={() => handleDeleteEvent('post', post)} >
+                </img>
+              </div>
+            })}
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
   };
 
   if (viewing.current === "comments") {
-    return (
-      <div className="view-contributions-container">
-        <button 
-          className="close-view-contributions-button"
-          onClick={() => toggleViewContributionsPage()} >
-          Return to Home
-        </button>
-        <div className="contributions-nav">
-          <h2 
-            className="contributions-post-selector"
-            onClick={() => handleViewChange("posts")} >
-            Posts
-          </h2>
-          <p className="contributions-nav-divider">
-            |
-          </p>
-          <h2 
-            className="contributions-comments-selector"
-            onClick={() => handleViewChange("comments")} >
-            Comments
-          </h2>
-          <p className="contributions-nav-divider">
-            |
-          </p>
-          <h2 
-            className="contributions-favorites-selector" 
-            onClick={() => handleViewChange("favorites")} >
-            Favorites
-          </h2>
+    if (dbData.comments.length === 0) {
+      return (
+        <div className="view-contributions-container">
+          <button 
+            className="close-view-contributions-button"
+            onClick={() => toggleViewContributionsPage()} >
+            Return to Home
+          </button>
+          <div className="contributions-nav">
+            <h2 
+              className="contributions-post-selector"
+              onClick={() => handleViewChange("posts")} >
+              Posts
+            </h2>
+            <p className="contributions-nav-divider">
+              |
+            </p>
+            <h2 
+              className="contributions-comments-selector"
+              onClick={() => handleViewChange("comments")} >
+              Comments
+            </h2>
+            <p className="contributions-nav-divider">
+              |
+            </p>
+            <h2 
+              className="contributions-favorites-selector" 
+              onClick={() => handleViewChange("favorites")} >
+              Favorites
+            </h2>
+          </div>
+          <div 
+            className="view-contributions-posts-container">
+            <p
+              className="view-contributions-none-text">
+              You don't have any contributions of this category, go make some!
+            </p>
+          </div>
         </div>
-        <div 
-          className="view-contributions-comments-container">
-          {Array.isArray(dbData.comments) && dbData.comments.map((comment) => {
-            return <div className="view-contributions-comments"
-              key={uniqid()}>
-              <p 
-                className="view-contributions-comment-text">
-                {comment.comment.length > 75 ? comment.comment.slice(0, 75).concat('...') : comment.comment}
-              </p>
-              <img 
-                className="view-contributions-comment-delete-svg"
-                alt="delete icon"
-                src={deleteSVG}
-                onClick={() => handleDeleteEvent('comment', comment)} >
-              </img>
-            </div>
-          })}
+      );
+    } else {
+      return (
+        <div className="view-contributions-container">
+          <button 
+            className="close-view-contributions-button"
+            onClick={() => toggleViewContributionsPage()} >
+            Return to Home
+          </button>
+          <div className="contributions-nav">
+            <h2 
+              className="contributions-post-selector"
+              onClick={() => handleViewChange("posts")} >
+              Posts
+            </h2>
+            <p className="contributions-nav-divider">
+              |
+            </p>
+            <h2 
+              className="contributions-comments-selector"
+              onClick={() => handleViewChange("comments")} >
+              Comments
+            </h2>
+            <p className="contributions-nav-divider">
+              |
+            </p>
+            <h2 
+              className="contributions-favorites-selector" 
+              onClick={() => handleViewChange("favorites")} >
+              Favorites
+            </h2>
+          </div>
+          <div 
+            className="view-contributions-comments-container">
+            {Array.isArray(dbData.comments) && dbData.comments.map((comment) => {
+              return <div className="view-contributions-comments"
+                key={uniqid()}>
+                <p 
+                  className="view-contributions-comment-text">
+                  {comment.comment.length > 75 ? comment.comment.slice(0, 75).concat('...') : comment.comment}
+                </p>
+                <img 
+                  className="view-contributions-comment-delete-svg"
+                  alt="delete icon"
+                  src={deleteSVG}
+                  onClick={() => handleDeleteEvent('comment', comment)} >
+                </img>
+              </div>
+            })}
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
   };
 
   if (viewing.current === "favorites") {
-    return (
-      <div className="view-contributions-container">
-        <button 
-          className="close-view-contributions-button"
-          onClick={() => toggleViewContributionsPage()} >
-          Return to Home
-        </button>
-        <div className="contributions-nav">
-          <h2 
-            className="contributions-post-selector"
-            onClick={() => handleViewChange("posts")} >
-            Posts
-          </h2>
-          <p className="contributions-nav-divider">
-            |
-          </p>
-          <h2 
-            className="contributions-comments-selector"
-            onClick={() => handleViewChange("comments")} >
-            Comments
-          </h2>
-          <p className="contributions-nav-divider">
-            |
-          </p>
-          <h2 
-            className="contributions-favorites-selector" 
-            onClick={() => handleViewChange("favorites")} >
-            Favorites
-          </h2>
+    if (dbData.favorites.length === 0) {
+      return (
+        <div className="view-contributions-container">
+          <button 
+            className="close-view-contributions-button"
+            onClick={() => toggleViewContributionsPage()} >
+            Return to Home
+          </button>
+          <div className="contributions-nav">
+            <h2 
+              className="contributions-post-selector"
+              onClick={() => handleViewChange("posts")} >
+              Posts
+            </h2>
+            <p className="contributions-nav-divider">
+              |
+            </p>
+            <h2 
+              className="contributions-comments-selector"
+              onClick={() => handleViewChange("comments")} >
+              Comments
+            </h2>
+            <p className="contributions-nav-divider">
+              |
+            </p>
+            <h2 
+              className="contributions-favorites-selector" 
+              onClick={() => handleViewChange("favorites")} >
+              Favorites
+            </h2>
+          </div>
+          <div 
+            className="view-contributions-posts-container">
+            <p
+              className="view-contributions-none-text">
+              You don't have any contributions of this category, go make some!
+            </p>
+          </div>
         </div>
-        <div 
-          className="view-contributions-favorites-container">
-          {Array.isArray(dbData.favorites) && dbData.favorites.map((favorite) => {
-            return <div className="view-contributions-favorite"
-              key={uniqid()}>
-              <p 
-                className="view-contributions-favorite-text">
-                {favorite.title.length > 75 ? favorite.title.slice(0, 75).concat('...') : favorite.title}
-              </p>
-              <img 
-                className="view-contributions-favorite-delete-svg"
-                alt="delete icon"
-                src={deleteSVG}
-                onClick={() => handleDeleteEvent('favorite', favorite)} >
-              </img>
-            </div>
-          })}
+      );
+    } else {
+      return (
+        <div className="view-contributions-container">
+          <button 
+            className="close-view-contributions-button"
+            onClick={() => toggleViewContributionsPage()} >
+            Return to Home
+          </button>
+          <div className="contributions-nav">
+            <h2 
+              className="contributions-post-selector"
+              onClick={() => handleViewChange("posts")} >
+              Posts
+            </h2>
+            <p className="contributions-nav-divider">
+              |
+            </p>
+            <h2 
+              className="contributions-comments-selector"
+              onClick={() => handleViewChange("comments")} >
+              Comments
+            </h2>
+            <p className="contributions-nav-divider">
+              |
+            </p>
+            <h2 
+              className="contributions-favorites-selector" 
+              onClick={() => handleViewChange("favorites")} >
+              Favorites
+            </h2>
+          </div>
+          <div 
+            className="view-contributions-favorites-container">
+            {Array.isArray(dbData.favorites) && dbData.favorites.map((favorite) => {
+              return <div className="view-contributions-favorite"
+                key={uniqid()}>
+                <p 
+                  className="view-contributions-favorite-text">
+                  {favorite.title.length > 75 ? favorite.title.slice(0, 75).concat('...') : favorite.title}
+                </p>
+                <img 
+                  className="view-contributions-favorite-delete-svg"
+                  alt="delete icon"
+                  src={deleteSVG}
+                  onClick={() => handleDeleteEvent('favorite', favorite)} >
+                </img>
+              </div>
+            })}
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
   };
 
   return (
