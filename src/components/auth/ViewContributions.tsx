@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState, MouseEvent } from "react";
 import { ViewContributionsProps, ViewContributionsDbData, Post, Comment } from "../../types/interfaces";
 import uniqid from 'uniqid';
-import '../../styles/ViewContributions.css';
+import '../../styles/auth/ViewContributions.css';
 import deleteSVG from '../../assets/delete.svg';
 import { deleteDoc, doc, DocumentData, DocumentSnapshot, getDoc } from "firebase/firestore";
 import { User } from "firebase/auth";

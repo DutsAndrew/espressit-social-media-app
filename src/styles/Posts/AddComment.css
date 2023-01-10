@@ -1,0 +1,48 @@
+.add-comment-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 75vw;
+  height: 10vh;
+  gap: 2vw;
+}
+
+.comment-input {
+  width: 60vw;
+  height: 10vh;
+  resize: none;
+  background-color: rgb(253, 255, 246);
+  color: rgb(17, 7, 2);
+  font-size: 1.25em;
+}
+
+.submit-comment-button {
+  width: 8vw;
+  height: 5vh;
+  font-size: 0.75em;
+  background-color: rgb(77, 39, 14);
+  color: rgb(253, 255, 246);
+}
+
+.submit-comment-button:hover {
+  cursor: pointer;
+}
+
+#validation-text {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 70vw;
+  height: auto;
+  font-size: 1.5em;
+}
+
+.text-authenticated {
+  background-color: rgb(35,220,61);
+}
+
+.text-not-authenticated {
+  background-color: orangered;
+}

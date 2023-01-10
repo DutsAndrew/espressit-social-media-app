@@ -1,0 +1,39 @@
+.post-view-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 75vw;
+  height: auto;
+  margin: 0;
+  color: rgb(253, 255, 246);
+}
+
+.post-view-link {
+  color: orange;
+}
+
+.post-view-img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-bottom: 4%;
+}
+
+.content-view-container {
+  height: auto;
+  width: 75vw;
+  margin: 0;
+}
+
+.post-account-time {
+  font-size: 0.9em;
+}
+
+.post-views-text {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 72vw;
+  justify-content: flex-end;
+  align-items: center;
+}

@@ -8,6 +8,7 @@ import { doc, setDoc, updateDoc, getFirestore, Firestore, getDoc } from "firebas
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import closeItem from '../../assets/close.svg';
+import '../../styles/CreatePost/CreatePost.css';
 
 const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
 

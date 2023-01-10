@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { ContentContainerProps, Post } from "../../types/interfaces";
 import favoriteSVG from '../../assets/save.svg';
 import commentSVG from '../../assets/comment.svg';
+import '../../styles/Posts/ContentContainer.css';
 
 const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
 

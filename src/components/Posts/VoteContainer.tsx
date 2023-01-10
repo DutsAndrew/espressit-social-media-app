@@ -3,6 +3,7 @@ import upVoteSVG from '../../assets/arrow-up.svg';
 import downVoteSVG from '../../assets/arrow-down.svg';
 import { VoteContainerProps } from "../../types/interfaces";
 import { User } from "firebase/auth";
+import '../../styles/Posts/VoteContainer.css';
 
 const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
 

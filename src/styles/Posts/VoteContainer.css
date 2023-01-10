@@ -1,0 +1,18 @@
+/* UPVOTE/DOWNVOTE STYLING IS IN APP.CSS SINCE IT'S SHARED WITH COMMENTS COMPONENT */
+
+.upvote-downvote-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: auto;
+  width: 5vw;
+  margin: 0;
+  margin-top: 2.5vh;
+  margin-right: 1%;
+}
+
+.upvote-svg:hover, .downvote-svg:hover, .post-comment-svg:hover, .post-favorite-svg:hover {
+  filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
+  cursor: pointer;
+}

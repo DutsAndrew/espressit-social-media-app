@@ -1,5 +1,6 @@
 import React, { FC, MouseEventHandler, KeyboardEvent } from "react";
 import { CreateAccountProps } from '../../types/interfaces';
+import '../../styles/auth/CreateAccount.css';
 const Filter = require('bad-words');
 
 const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {

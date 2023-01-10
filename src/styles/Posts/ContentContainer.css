@@ -1,0 +1,72 @@
+.content-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  flex: auto;
+  height: auto;
+  width: 50vw;
+  margin: 0;
+  margin-bottom: 1%;
+  margin-right: 1%;
+  gap: 1.5vh;
+}
+
+.post-title:hover, .post-description:hover, .post-img:hover {
+  cursor: pointer;
+}
+
+.post-title {
+  display: flex;
+  align-items: center;
+  height: auto;
+  width: 50vw;
+  font-size: clamp(1.25em, 1.5em, 1.75em);
+  margin: 0;
+}
+
+.post-description {
+  height: auto;
+  width: 50vw;
+  margin: 0;
+  display: flex;
+  font-size: clamp(0.5em, 0.9em, 1.25em);
+}
+
+.post-link {
+  width: 50vw;
+  height: auto;
+  margin: 0;
+  color: rgb(253, 255, 246);
+}
+
+.post-img {
+  width: 40vw;
+  height: auto;
+  margin: 0;
+  margin-bottom: 4%;
+}
+
+.post-footer-container {
+  width: 60vw;
+  height: 3vh;
+  gap: 1vw;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.post-comment-amount {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto;
+  height: 3vh;
+  margin: 0;
+  margin-right: 2vw;
+}
+
+.post-comment-svg, .post-favorite-svg, .upvote-svg, .downvote-svg {
+  filter: invert(94%) sepia(9%) saturate(372%) hue-rotate(60deg) brightness(107%) contrast(105%);
+}

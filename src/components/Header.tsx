@@ -1,7 +1,7 @@
 import React, { FC, lazy, Suspense } from "react";
 import { HeaderProps } from "../types/interfaces";
+import '../styles/auth/auth.css';
 import styled from 'styled-components'
-import '../styles/auth.css';
 import espresso from '../assets/espresso.svg';
 import LoadingBar from "./LoadingBar";
 

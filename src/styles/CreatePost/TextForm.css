@@ -1,0 +1,56 @@
+.create-post-text-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 65vw;
+  height: 50vh;
+  margin: 0;
+  margin-top: 2%;
+}
+
+.create-post-form {
+  background-color: rgb(129, 83, 40);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 65vw;
+  height: 50vh;
+}
+
+.create-post-fieldset {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  gap: 1vh;
+  width: 65vw;
+  height: 50vh;
+  border: 1px solid rgb(253, 255, 246);
+}
+
+.text-body-label {
+  color: rgb(17, 7, 2);
+  font-size: 1.25em;
+}
+
+.text-body-input {
+  resize: none;
+  width: 62vw;
+  height: 40vh;
+  margin: 0;
+  font-size: 1.75em;
+  overflow-y: scroll;
+  overflow-x: none;
+  color: rgb(17, 7, 2);
+  background-color: rgb(253, 255, 246);
+}
+
+.post-submit-button {
+  width: 10vw;
+  height: 3vh;
+  font-size: 1em;
+  background-color: rgb(253, 255, 246);
+  color: rgb(17, 7, 2);
+}

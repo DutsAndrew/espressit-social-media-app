@@ -21,8 +21,36 @@ button {
   
 }
 
-.home-page-mobile {
+/* UPVOTE/DOWNVOTE STYLING USED IN VOTE CONTAINER AND COMMENTS */
+/* VOTING ANIMATION FOR UPVOTE/DOWNVOTES */
 
+.voting {
+  animation: voted 0.5s;
+}
+
+@keyframes voted {
+  from {
+    filter: invert(0%) sepia(-81%) saturate(282%) hue-rotate(-30deg) brightness(17%) contrast(15%);
+    transform: scale(2);
+  }
+
+  to {
+    filter: invert(94%) sepia(9%) saturate(372%) hue-rotate(60deg) brightness(107%) contrast(105%);
+    transform: scale(1);
+  }
+}
+
+.not-upvoted {
+  filter: invert(16%) sepia(23%) saturate(1862%) hue-rotate(344deg) brightness(96%) contrast(95%);
+}
+
+.not-downvoted {
+  filter: invert(16%) sepia(23%) saturate(1862%) hue-rotate(344deg) brightness(96%) contrast(95%);
+}
+
+.not-upvoted:hover, .not-downvoted:hover {
+  filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
+  cursor: pointer;
 }
 
 /* LOADING BAR FOR LAZY LOADING */

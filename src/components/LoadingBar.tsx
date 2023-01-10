@@ -1,4 +1,6 @@
 import React from "react";
+import '../styles/LoadingBar.css';
+
 
 const LoadingBar = () => {
   return (

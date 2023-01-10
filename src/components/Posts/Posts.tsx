@@ -2,7 +2,7 @@ import React, { useEffect, useState, FC, lazy, Suspense } from "react";
 import Feed from "./Feed";
 import SortNav from "./SortNav";
 import LoadingBar from "../LoadingBar";
-import '../../styles/Posts.css';
+import '../../styles/Posts/Posts.css';
 import timeSort from "../../scripts/timeSort";
 import { Post, PostProps, PostData } from "../../types/interfaces";
 import { User } from "firebase/auth";

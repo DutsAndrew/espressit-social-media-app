@@ -4,6 +4,7 @@ import { User, getAuth, deleteUser, reload } from "firebase/auth";
 import { doc, getDoc, updateDoc, getFirestore, deleteDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+import '../../styles/auth/EditProfile.css';
 const Filter = require('bad-words');
 
 const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {

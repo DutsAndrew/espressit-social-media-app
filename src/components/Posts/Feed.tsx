@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useState } from "react";
 import { FeedProps, Post } from "../../types/interfaces";
 import uniqid from 'uniqid';
-import '../../styles/Feed.css';
+import '../../styles/Posts/Feed.css';
 import VoteContainer from "./VoteContainer";
 import ContentContainer from "./ContentContainer";
+import '../../styles/Posts/Feed.css';
 
 const Feed: FC<FeedProps> = (props): JSX.Element => {
 

@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
 import { AccountDisplayProps, UserInstance } from "../../types/interfaces";
-import '../../styles/account.css';
 import { User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import anonymousProfile from '../../assets/profile-anonymous.svg';
 import chevron from '../../assets/chevron-down.svg';
+import '../../styles/auth/AccountDisplay.css';
 
 const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 

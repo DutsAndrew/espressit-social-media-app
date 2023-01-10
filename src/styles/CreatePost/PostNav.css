@@ -1,0 +1,44 @@
+.create-post-container {
+  position: sticky;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 70vw;
+  height: 5vh;
+  gap: 1vw;
+  margin: 0;
+  margin-top: 1%;
+  background-color: rgb(129, 83, 40);
+}
+
+.create-post-tamper-img {
+  width: 3vw;
+  height: 3vh;
+  border-radius: 50%;
+  filter: invert(3%) sepia(29%) saturate(5201%) hue-rotate(19deg) brightness(85%) contrast(105%);
+}
+
+.create-post-text-input {
+  width: 45vw;
+  height: 3vh;
+  font-size: 1.25em;
+  background-color: rgb(253, 255, 246);
+  color: rgb(17, 7, 2);
+}
+
+.create-post-insert-text, .create-post-insert-img, .create-post-insert-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 4vh;
+  border-radius: 50%;
+  background-color: rgb(253, 255, 246);
+}
+
+.create-post-svg {
+  width: auto;
+  height: 3vh;
+  filter: invert(3%) sepia(29%) saturate(5201%) hue-rotate(19deg) brightness(85%) contrast(105%);
+}

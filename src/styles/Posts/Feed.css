@@ -1,0 +1,30 @@
+.feed-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+  margin: 0;
+  margin-top: 1%;
+  gap: 5vh;
+  overflow-y: scroll;
+  overflow-x: none;
+}
+
+.post {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 65vw;
+  height: auto;
+  margin: 0;
+  border-left: solid rgb(253, 255, 246, 0.1);
+  border-bottom: solid black;
+  border-top: solid black;
+}
+
+.post:hover {
+  box-shadow: 10px 5px 5px black;
+}

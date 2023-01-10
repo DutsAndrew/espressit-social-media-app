@@ -1,0 +1,60 @@
+/* hidden create post activated in Post if user isn't signed in */
+.hidden-create-post-container {
+  position: none;
+  display: none;
+  width: none;
+  height: none;
+  margin: 0;
+  background-color: none;
+}
+
+.close-form-button {
+  width: 4vw;
+  height: 4vh;
+  margin: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(253, 255, 246);
+}
+
+.close-button-svg {
+  filter: invert(3%) sepia(29%) saturate(5201%) hue-rotate(19deg) brightness(85%) contrast(105%);
+  width: 3vw;
+  height: 3vh;
+}
+
+/* INSERT IMG/LINK CONTAINER ITEMS */
+
+.create-post-img-container, .create-post-link-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 65vw;
+  height: auto;
+  margin: 0;
+  margin-top: 2%;
+}
+
+.insert-image-input, .insert-link-input {
+  width: 40vw;
+  height: auto;
+  font-size: 1em;
+  color: rgb(253, 255, 246);
+  background-color: rgb(129, 83, 40);
+}
+
+.insert-link-input {
+  height: 3vh;
+}
+
+.insert-link-input::placeholder {
+  color: rgb(253, 255, 246);
+}
+
+.error-text-post-input {
+  width: 65vw;
+  height: auto;
+  color: white;
+}

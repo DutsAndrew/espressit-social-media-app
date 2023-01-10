@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from "react";
 import { ViewPostProps } from "../../types/interfaces";
 import { Post } from "../../types/interfaces";
-import '../../styles/ViewPost.css';
 import ViewNav from "./ViewNav";
 import Comments from "./Comments";
 import AddComment from "./AddComent";
+import '../../styles/Posts/ViewPost.css';
 
 // firebase imports
 import { initializeApp } from "firebase/app";

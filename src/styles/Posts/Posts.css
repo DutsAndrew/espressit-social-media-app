@@ -1,14 +1,10 @@
-.home-page-web {
+.posts-container {
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
+  color: white;
   margin: 0;
-  width: 100vw;
   height: auto;
-  overflow-y: scroll;
-  overflow-x: none;
+  width: 100vw;
 }
-
-/* CREATE POST STYLES */
-

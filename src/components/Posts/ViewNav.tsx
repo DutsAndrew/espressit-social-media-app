@@ -6,6 +6,7 @@ import downVoteSVG from '../../assets/arrow-down.svg';
 import { ViewNavProps } from "../../types/interfaces";
 import { Post } from "../../types/interfaces";
 import { User } from "firebase/auth";
+import '../../styles/Posts/ViewNav.css';
 
 const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
 

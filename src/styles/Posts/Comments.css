@@ -1,0 +1,48 @@
+/* UPVOTE/DOWNVOTE STYLING IS IN APP.CSS SINCE IT'S SHARED WITH VOTE CONTAINER COMPONENT */
+
+.comment-list {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 75vw;
+  height: auto;
+}
+
+.comment {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 75vw;
+  margin: 2%;
+}
+
+.comment-info {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0;
+  width: 70vw;
+  height: auto;
+}
+
+.comment-account-time-text, .comment-text {
+  margin: 1%;
+}
+
+.comment-text {
+  height: auto;
+  width: 70vw;
+}
+
+.comment-interaction-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 4.5vw;
+  height: 50%;
+}
+
+.upvote-count-text {
+  margin: 4%;
+}

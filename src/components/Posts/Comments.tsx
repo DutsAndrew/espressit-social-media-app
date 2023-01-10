@@ -4,6 +4,7 @@ import upVoteSVG from '../../assets/arrow-up.svg';
 import downVoteSVG from '../../assets/arrow-down.svg';
 import uniqid from 'uniqid';
 import { User } from "firebase/auth";
+import '../../styles/Posts/Comments.css';
 
 const Comments: FC<CommentsProps> = (props): JSX.Element => {
 
