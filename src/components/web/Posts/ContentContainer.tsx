@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 import { ContentContainerProps, Post } from "../../../types/interfaces";
-const favoriteSVG = require('../../../assets/save.svg') as string;
-const commentSVG = require('../../../assets/comment.svg') as string;
-
+import favoriteSVG from '../../../assets/save.svg';
+import commentSVG from '../../../assets/comment.svg';
 
 const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
 

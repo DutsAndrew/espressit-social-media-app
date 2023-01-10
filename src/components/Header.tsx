@@ -3,7 +3,7 @@ import { HeaderProps } from "../types/interfaces";
 import AccountDisplay from "./auth/AccountDisplay";
 import styled from 'styled-components'
 import '../styles/auth.css';
-const espresso = require('../assets/espresso.svg') as string;
+import espresso from '../assets/espresso.svg';
 
 const HeaderWrapper = styled.div `
   width: 100vw;

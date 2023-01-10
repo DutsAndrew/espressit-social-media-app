@@ -5,8 +5,8 @@ import { User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-const anonymousProfile = require('../../assets/profile-anonymous.svg') as string;
-const chevron = require('../../assets/chevron-down.svg') as string;
+import anonymousProfile from '../../assets/profile-anonymous.svg';
+import chevron from '../../assets/chevron-down.svg';
 
 const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
 
