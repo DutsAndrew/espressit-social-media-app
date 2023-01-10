@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import ViewPost from "../../components/web/Posts/ViewPost";
+import ViewPost from 'components/Posts/ViewPost';
 import { User } from 'firebase/auth';
 
 describe('unit tests for ViewPost', () => {

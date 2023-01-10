@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { TextFormProps } from '../../../types/interfaces';
+import { TextFormProps } from '../../types/interfaces';
 
 const TextForm: FC<TextFormProps> = (props): JSX.Element => {
 

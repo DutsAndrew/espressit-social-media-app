@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { AddCommentProps, Post } from "../../../types/interfaces";
+import { AddCommentProps, Post } from "../../types/interfaces";
 const Filter = require('bad-words');
 
 const AddComment: FC<AddCommentProps> = (props): JSX.Element => {

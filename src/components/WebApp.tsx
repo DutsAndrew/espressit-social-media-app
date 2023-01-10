@@ -1,8 +1,8 @@
 import React, { useState, Suspense, lazy } from "react";
-import Header from "../Header";
+import Header from "./Header";
 import HomePageWeb from "./HomePageWeb";
-import LoadingBar from "../LoadingBar";
-import { userState } from '../../types/interfaces';
+import LoadingBar from "./LoadingBar";
+import { userState } from "types/interfaces";
 
 // firbase db imports
 import { 
@@ -17,10 +17,10 @@ import { getFirestore } from "firebase/firestore";
 import { setDoc, doc } from "firebase/firestore";
 
 // lazy imports for anything that doesn't render on load
-const CreateAccount = lazy(() => import('../auth/CreateAccount'));
-const LogIn = lazy(() => import('../auth/LogIn'));
-const EditProfile = lazy(() => import('../auth/EditProfile'));
-const ViewContributions = lazy(() => import('../auth/ViewContributions'));
+const CreateAccount = lazy(() => import('./auth/CreateAccount'));
+const LogIn = lazy(() => import('./auth/LogIn'));
+const EditProfile = lazy(() => import('./auth/EditProfile'));
+const ViewContributions = lazy(() => import('./auth/ViewContributions'));
 
 const WebApp = () => {
 

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import Feed from "../../components/web/Posts/Feed";
+import Feed from 'components/Posts/Feed';
 import { User } from 'firebase/auth';
 
 describe('unit tests for Feed', () => {

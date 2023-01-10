@@ -1,9 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, lazy, Suspense } from "react";
 import { HeaderProps } from "../types/interfaces";
-import AccountDisplay from "./auth/AccountDisplay";
 import styled from 'styled-components'
 import '../styles/auth.css';
 import espresso from '../assets/espresso.svg';
+import LoadingBar from "./LoadingBar";
+
+const AccountDisplay = lazy(() => import('./auth/AccountDisplay'));
 
 const HeaderWrapper = styled.div `
   width: 100vw;
@@ -77,21 +79,23 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
 
   // if logged in
   return (
-    <HeaderWrapper>
-      <LogoWrapper>
-        <img className="espresso-logo" src={espresso} alt="espresso" ></img>
-        <Title>
-          Espressit!
-        </Title>
-      </LogoWrapper>
-      <AccountWrapper>
-        <AccountDisplay currentUser={currentUser}
-          signOut={signOut}
-          toggleEditProfilePage={toggleEditProfilePage} 
-          toggleViewContributionsPage={toggleViewContributionsPage}
-        />
-      </AccountWrapper>
-    </HeaderWrapper>
+    <Suspense fallback={<LoadingBar/>}>
+      <HeaderWrapper>
+        <LogoWrapper>
+          <img className="espresso-logo" src={espresso} alt="espresso" ></img>
+          <Title>
+            Espressit!
+          </Title>
+        </LogoWrapper>
+        <AccountWrapper>
+          <AccountDisplay currentUser={currentUser}
+            signOut={signOut}
+            toggleEditProfilePage={toggleEditProfilePage} 
+            toggleViewContributionsPage={toggleViewContributionsPage}
+          />
+        </AccountWrapper>
+      </HeaderWrapper>
+    </Suspense>
   );
 };
 

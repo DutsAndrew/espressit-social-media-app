@@ -1,11 +1,10 @@
 import React, { FC } from "react";
-import commentSVG from '../../../assets/comment.svg';
-import favoriteSVG from '../../../assets/save.svg';
-import closeSVG from '../../../assets/close.svg';
-import upVoteSVG from '../../../assets/arrow-up.svg';
-import downVoteSVG from '../../../assets/arrow-down.svg';
-import { ViewNavProps } from "../../../types/interfaces";
-import { Post } from "../../../types/interfaces";
+import favoriteSVG from '../../assets/save.svg';
+import closeSVG from '../../assets/close.svg';
+import upVoteSVG from '../../assets/arrow-up.svg';
+import downVoteSVG from '../../assets/arrow-down.svg';
+import { ViewNavProps } from "../../types/interfaces";
+import { Post } from "../../types/interfaces";
 import { User } from "firebase/auth";
 
 const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {

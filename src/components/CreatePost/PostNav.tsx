@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import imgSVG from '../../../assets/image.svg';
-import linkSVG from '../../../assets/link.svg';
-import tamperSVG from '../../../assets/tamper.svg';
-import textSVG from '../../../assets/text.svg';
-import { PostNavProps } from '../../../types/interfaces';
+import imgSVG from '../../assets/image.svg';
+import linkSVG from '../../assets/link.svg';
+import tamperSVG from '../../assets/tamper.svg';
+import textSVG from '../../assets/text.svg';
+import { PostNavProps } from '../../types/interfaces';
 
 const PostNav: FC<PostNavProps> = (props): JSX.Element => {
 

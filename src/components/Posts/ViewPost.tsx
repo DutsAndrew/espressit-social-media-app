@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
-import { ViewPostProps } from "../../../types/interfaces";
-import { Post } from "../../../types/interfaces";
-import '../../../styles/ViewPost.css';
+import { ViewPostProps } from "../../types/interfaces";
+import { Post } from "../../types/interfaces";
+import '../../styles/ViewPost.css';
 import ViewNav from "./ViewNav";
 import Comments from "./Comments";
 import AddComment from "./AddComent";

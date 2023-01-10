@@ -1,4 +1,4 @@
-import SortNav from "../../components/web/Posts/SortNav";
+import SortNav from 'components/Posts/SortNav';
 import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";

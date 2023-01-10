@@ -1,7 +1,7 @@
 import { render, screen, act } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import ViewNav from '../../components/web/Posts/ViewNav';
+import ViewNav from 'components/Posts/ViewNav';
 import { User } from 'firebase/auth';
 
 describe('unit tests for ViewNav component', () => {

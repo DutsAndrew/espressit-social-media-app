@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import Posts from "../../components/web/Posts/Posts";
+import Posts from 'components/Posts/Posts';
 
 describe('unit tests for Posts', () => {
 

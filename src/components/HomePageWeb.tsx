@@ -1,8 +1,8 @@
 import React, { FC, useState, lazy, Suspense } from "react";
-import '../../styles/HomePageWeb.css';
-import { HomePageWebProps } from "../../types/interfaces";
+import '../styles/HomePageWeb.css';
+import { HomePageWebProps } from "types/interfaces";
 import Posts from "./Posts/Posts";
-import LoadingBar from "../LoadingBar";
+import LoadingBar from "./LoadingBar";
 
 // lazy load for anything that doesn't render on the first load
 const CreatePostWeb = lazy(() => import('./CreatePost/CreatePostWeb'));

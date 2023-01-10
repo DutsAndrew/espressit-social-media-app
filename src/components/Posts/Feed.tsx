@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
-import { FeedProps, Post } from "../../../types/interfaces";
+import { FeedProps, Post } from "../../types/interfaces";
 import uniqid from 'uniqid';
-import '../../../styles/Feed.css';
+import '../../styles/Feed.css';
 import VoteContainer from "./VoteContainer";
 import ContentContainer from "./ContentContainer";
 

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import Comments from '../../components/web/Posts/Comments';
+import Comments from 'components/Posts/Comments';
 import { User } from 'firebase/auth';
 
 describe('unit test for Comments', () => {

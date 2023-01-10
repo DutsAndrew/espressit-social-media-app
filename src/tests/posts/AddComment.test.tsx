@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import AddComment from "../../components/web/Posts/AddComent";
+import AddComment from 'components/Posts/AddComent';
 import { User } from 'firebase/auth';
 
 describe('unit tests for AddComment', () => {

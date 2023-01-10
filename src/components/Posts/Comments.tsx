@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { CommentsProps, Post, Comment } from "../../../types/interfaces";
-import upVoteSVG from '../../../assets/arrow-up.svg';
-import downVoteSVG from '../../../assets/arrow-down.svg';
+import { CommentsProps, Post, Comment } from "../../types/interfaces";
+import upVoteSVG from '../../assets/arrow-up.svg';
+import downVoteSVG from '../../assets/arrow-down.svg';
 import uniqid from 'uniqid';
 import { User } from "firebase/auth";
 

@@ -1,6 +1,6 @@
 import React, { useState, FC } from "react";
-import dropDown from '../../../assets/chevron-down.svg';
-import { SortNavProps } from '../../../types/interfaces';
+import dropDown from '../../assets/chevron-down.svg';
+import { SortNavProps } from '../../types/interfaces';
 
 const SortNav: FC<SortNavProps> = (props): JSX.Element => {
 
