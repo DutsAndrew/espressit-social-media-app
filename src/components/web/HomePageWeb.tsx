@@ -1,8 +1,10 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, lazy, Suspense } from "react";
 import '../../styles/HomePageWeb.css';
-import CreatePostWeb from "./CreatePost/CreatePostWeb";
 import { HomePageWebProps } from "../../types/interfaces";
 import Posts from "./Posts/Posts";
+
+// lazy load for anything that doesn't render on the first load
+const CreatePostWeb = lazy(() => import('./CreatePost/CreatePostWeb'));
 
 const HomePageWeb: FC<HomePageWebProps> = (props): JSX.Element => {
 
@@ -39,10 +41,12 @@ const HomePageWeb: FC<HomePageWebProps> = (props): JSX.Element => {
 
   return (
     <div className="home-page-web">
-      <CreatePostWeb
-        user={currentUser}
-        fetchNewPost={fetchNewPost}
-      />
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <CreatePostWeb
+          user={currentUser}
+          fetchNewPost={fetchNewPost}
+        />
+      </Suspense>
       <Posts
         user={currentUser}
         newPostStatus={newPost.status}

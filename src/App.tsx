@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { lazy, Suspense} from 'react';
 import './styles/App.css';
-import WebApp from './components/web/WebApp';
-import MobileApp from './components/mobile/MobileApp';
+
+const WebApp = lazy(() => import('./components/web/WebApp'));
+const MobileApp = lazy(() => import('./components/mobile/MobileApp'));
 
 const App = () => {
 
@@ -11,11 +12,15 @@ const App = () => {
 
   if ("ontouchstart" in document.documentElement && (isMobileCheck || isMobileCheck2)) {
     return (
-      <MobileApp />
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <MobileApp />
+      </Suspense>
     );
   } else {
     return (
-      <WebApp />
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <WebApp />
+      </Suspense>
     );
   };
   

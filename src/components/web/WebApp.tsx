@@ -1,11 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import Header from "../Header";
 import HomePageWeb from "./HomePageWeb";
-import CreateAccount from '../auth/CreateAccount';
 import { userState } from '../../types/interfaces';
-import LogIn from '../auth/LogIn';
-import EditProfile from "../auth/EditProfile";
-import ViewContributions from "../auth/ViewContributions";
 
 // firbase db imports
 import { 
@@ -18,6 +14,12 @@ import {
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { setDoc, doc } from "firebase/firestore";
+
+// lazy imports for anything that doesn't render on load
+const CreateAccount = lazy(() => import('../auth/CreateAccount'));
+const LogIn = lazy(() => import('../auth/LogIn'));
+const EditProfile = lazy(() => import('../auth/EditProfile'));
+const ViewContributions = lazy(() => import('../auth/ViewContributions'));
 
 const WebApp = () => {
 
@@ -263,9 +265,11 @@ const WebApp = () => {
           toggleEditProfilePage={toggleEditProfilePage}
           toggleViewContributionsPage={toggleViewContributionsPage}
         />
-        <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword}
-          handleSignUp={handleSignUp}
-        />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword}
+            handleSignUp={handleSignUp}
+          />
+        </Suspense>
       </div>
     );
   };
@@ -280,10 +284,12 @@ const WebApp = () => {
           toggleEditProfilePage={toggleEditProfilePage}
           toggleViewContributionsPage={toggleViewContributionsPage}
         />
-        <LogIn signInUser={signInUser}
-          handleLogIn={handleLogIn}
-          signInWithGoogleAccount={signInWithGoogleAccount}
-        />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <LogIn signInUser={signInUser}
+            handleLogIn={handleLogIn}
+            signInWithGoogleAccount={signInWithGoogleAccount}
+          />
+        </Suspense>
       </div>
     );
   };
@@ -298,10 +304,12 @@ const WebApp = () => {
         toggleEditProfilePage={toggleEditProfilePage}
         toggleViewContributionsPage={toggleViewContributionsPage}
       />
-      <EditProfile currentUser={userStatus.currentUser}
-        toggleEditProfilePage={toggleEditProfilePage}
-        returnToMainAfterProfileEdit={returnToMainAfterProfileEdit}
-      />
+      <Suspense fallback={<h1>Loading...</h1>} >
+        <EditProfile currentUser={userStatus.currentUser}
+          toggleEditProfilePage={toggleEditProfilePage}
+          returnToMainAfterProfileEdit={returnToMainAfterProfileEdit}
+        />
+      </Suspense>
     </div>
    );
   };
@@ -316,10 +324,12 @@ const WebApp = () => {
           toggleEditProfilePage={toggleEditProfilePage}
           toggleViewContributionsPage={toggleViewContributionsPage}
         />
-        <ViewContributions
-          currentUser={userStatus.currentUser}
-          toggleViewContributionsPage={toggleViewContributionsPage}
-        />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <ViewContributions
+            currentUser={userStatus.currentUser}
+            toggleViewContributionsPage={toggleViewContributionsPage}
+          />
+        </Suspense>
       </div>
      );
   };

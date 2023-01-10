@@ -1,9 +1,8 @@
-import React, { useEffect, useState, FC, MouseEventHandler } from "react";
+import React, { useEffect, useState, FC, lazy, Suspense } from "react";
 import Feed from "./Feed";
 import SortNav from "./SortNav";
 import '../../../styles/Posts.css';
 import timeSort from "../../../scripts/timeSort";
-import ViewPost from "./ViewPost";
 import { Post, PostProps, PostData } from "../../../types/interfaces";
 import { User } from "firebase/auth";
 
@@ -12,6 +11,9 @@ import { initializeApp } from "firebase/app";
 import { getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+// lazy load for anything that isn't needed on first load
+const ViewPost = lazy(() => import('./ViewPost'));
 
 
 const Posts: FC<PostProps> = (props): JSX.Element => {
@@ -366,16 +368,18 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     );
   } else {
     return (
-      <ViewPost 
-        user={user}
-        viewing={currentlyViewing.post}
-        handleUpVotePost={handleUpVotePost}
-        handleDownVotePost={handleDownVotePost}
-        handleStopViewingPost={handleStopViewingPost}
-        handleUpVoteComment={handleUpVoteComment}
-        handleDownVoteComment={handleDownVoteComment}
-        handleFavoritePost={handleFavoritePost}
-      />
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <ViewPost 
+          user={user}
+          viewing={currentlyViewing.post}
+          handleUpVotePost={handleUpVotePost}
+          handleDownVotePost={handleDownVotePost}
+          handleStopViewingPost={handleStopViewingPost}
+          handleUpVoteComment={handleUpVoteComment}
+          handleDownVoteComment={handleDownVoteComment}
+          handleFavoritePost={handleFavoritePost}
+        />
+      </Suspense>
     );
   };
 };
