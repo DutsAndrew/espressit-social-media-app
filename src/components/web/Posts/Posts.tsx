@@ -1,6 +1,7 @@
 import React, { useEffect, useState, FC, lazy, Suspense } from "react";
 import Feed from "./Feed";
 import SortNav from "./SortNav";
+import LoadingBar from "../../LoadingBar";
 import '../../../styles/Posts.css';
 import timeSort from "../../../scripts/timeSort";
 import { Post, PostProps, PostData } from "../../../types/interfaces";
@@ -368,7 +369,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     );
   } else {
     return (
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<LoadingBar/>}>
         <ViewPost 
           user={user}
           viewing={currentlyViewing.post}

@@ -1,6 +1,8 @@
 import React, { lazy, Suspense} from 'react';
 import './styles/App.css';
+import LoadingBar from './components/LoadingBar';
 
+// lazy loading for anything not needed on first load
 const WebApp = lazy(() => import('./components/web/WebApp'));
 const MobileApp = lazy(() => import('./components/mobile/MobileApp'));
 
@@ -10,15 +12,15 @@ const App = () => {
   const isMobileCheck = window.matchMedia("(pointer:coarse)").matches;
   const isMobileCheck2 = window.matchMedia("(any-pointer:coarse)").matches;
 
-  if ("ontouchstart" in document.documentElement && (isMobileCheck || isMobileCheck2)) {
+  if ("ontouchstart" in document.documentElement || isMobileCheck || isMobileCheck2) {
     return (
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<LoadingBar/>}>
         <MobileApp />
       </Suspense>
     );
   } else {
     return (
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<LoadingBar/>}>
         <WebApp />
       </Suspense>
     );

@@ -1,6 +1,7 @@
 import React, { useState, Suspense, lazy } from "react";
 import Header from "../Header";
 import HomePageWeb from "./HomePageWeb";
+import LoadingBar from "../LoadingBar";
 import { userState } from '../../types/interfaces';
 
 // firbase db imports
@@ -265,7 +266,7 @@ const WebApp = () => {
           toggleEditProfilePage={toggleEditProfilePage}
           toggleViewContributionsPage={toggleViewContributionsPage}
         />
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<LoadingBar/>}>
           <CreateAccount createAccountWithEmailAndPassword={createAccountWithEmailAndPassword}
             handleSignUp={handleSignUp}
           />
@@ -284,7 +285,7 @@ const WebApp = () => {
           toggleEditProfilePage={toggleEditProfilePage}
           toggleViewContributionsPage={toggleViewContributionsPage}
         />
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<LoadingBar/>}>
           <LogIn signInUser={signInUser}
             handleLogIn={handleLogIn}
             signInWithGoogleAccount={signInWithGoogleAccount}
@@ -304,7 +305,7 @@ const WebApp = () => {
         toggleEditProfilePage={toggleEditProfilePage}
         toggleViewContributionsPage={toggleViewContributionsPage}
       />
-      <Suspense fallback={<h1>Loading...</h1>} >
+      <Suspense fallback={<LoadingBar/>} >
         <EditProfile currentUser={userStatus.currentUser}
           toggleEditProfilePage={toggleEditProfilePage}
           returnToMainAfterProfileEdit={returnToMainAfterProfileEdit}
@@ -324,7 +325,7 @@ const WebApp = () => {
           toggleEditProfilePage={toggleEditProfilePage}
           toggleViewContributionsPage={toggleViewContributionsPage}
         />
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<LoadingBar/>}>
           <ViewContributions
             currentUser={userStatus.currentUser}
             toggleViewContributionsPage={toggleViewContributionsPage}
