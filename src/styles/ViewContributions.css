@@ -20,6 +20,10 @@
   color: #DABE99;
 }
 
+.close-view-contributions-button:hover {
+  cursor: pointer;
+}
+
 .view-contributions-prompt {
   color: rgb(253, 255, 246);
   margin: 0;

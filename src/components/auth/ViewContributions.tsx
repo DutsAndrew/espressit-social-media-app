@@ -236,7 +236,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
               className="view-contributions-posts-container">
               <p
                 className="view-contributions-none-text">
-                You don't have any contributions of this category, go make some!
+                You don't have any contributions in this category, go make some!
               </p>
             </div>
           </div>
@@ -331,7 +331,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
             className="view-contributions-posts-container">
             <p
               className="view-contributions-none-text">
-              You don't have any contributions of this category, go make some!
+              You don't have any contributions in this category, go make some!
             </p>
           </div>
         </div>
@@ -426,7 +426,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
             className="view-contributions-posts-container">
             <p
               className="view-contributions-none-text">
-              You don't have any contributions of this category, go make some!
+              You don't have any contributions in this category, go make some!
             </p>
           </div>
         </div>

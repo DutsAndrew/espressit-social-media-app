@@ -54,14 +54,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 4vw;
-  height: auto;
+  width: auto;
+  height: 4vh;
   border-radius: 50%;
   background-color: rgb(253, 255, 246);
 }
 
 .create-post-svg {
-  width: 3vw;
+  width: auto;
   height: 3vh;
   filter: invert(3%) sepia(29%) saturate(5201%) hue-rotate(19deg) brightness(85%) contrast(105%);
 }
