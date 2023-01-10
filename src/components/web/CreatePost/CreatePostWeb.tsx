@@ -1,5 +1,4 @@
 import React, { useEffect, useState, FC } from "react";
-import closeItem from '../../../assets/close.svg';
 import { CreatePostProps, postType } from '../../../types/interfaces';
 import TextForm from "./TextForm";
 import PostNav from "./PostNav";
@@ -8,6 +7,7 @@ import { User } from "firebase/auth";
 import { doc, setDoc, updateDoc, getFirestore, Firestore, getDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+const closeItem = require('../../../assets/close.svg');
 
 const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
 

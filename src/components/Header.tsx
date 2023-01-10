@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import styled from 'styled-components'
-import '../styles/auth.css';
-import espresso from '../assets/espresso.svg';
 import { HeaderProps } from "../types/interfaces";
 import AccountDisplay from "./auth/AccountDisplay";
+import styled from 'styled-components'
+import '../styles/auth.css';
+const espresso = require('../assets/espresso.svg') as string;
 
 const HeaderWrapper = styled.div `
   width: 100vw;

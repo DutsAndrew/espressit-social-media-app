@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { LogInProps } from '../../types/interfaces';
-import google from '../../assets/google-logo.svg';
+const google = require('../../assets/google-logo.svg');
 
 const LogIn: FC<LogInProps> = (props): JSX.Element => {
 

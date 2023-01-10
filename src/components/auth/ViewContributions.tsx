@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState, MouseEvent } from "react";
 import { ViewContributionsProps, ViewContributionsDbData, Post, Comment } from "../../types/interfaces";
-import deleteSVG from '../../assets/delete.svg';
 import uniqid from 'uniqid';
 import '../../styles/ViewContributions.css';
 import { deleteDoc, doc, DocumentData, DocumentSnapshot, getDoc } from "firebase/firestore";
 import { User } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getFirestore, updateDoc } from "firebase/firestore";
+const deleteSVG = require('../../assets/delete.svg');
 
 const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
 
