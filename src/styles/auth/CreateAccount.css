@@ -6,15 +6,10 @@
   grid-column: 1 / 2;
   background-color: #ad6d2f;
   color: #37251b;
-  width: 50vw;
-  height: 75vh;
-  font-size: 1.25em;
   justify-items: center;
   align-items: center;
   justify-content: center;
   align-content: space-evenly;
-  margin: 0;
-  margin-top: 1%;
 }
 
 #create-account-fieldset {
@@ -22,9 +17,6 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  height: 65vh;
-  width: 45vw;
-  margin: 0;
 }
 
 #create-account-legend {
@@ -46,8 +38,6 @@
 }
 
 #username-input, #email-input, #password-input, #password-confirm-input {
-  width: 45vw;
-  height: 4vh;
   font-size: 1em;
 }
 
@@ -57,8 +47,72 @@
   align-items: center;
   font-size: 1em;
   margin: 0;
-  width: 20vw;
-  height: 5vh;
   color: #e4bc84;
   background-color: #37251b;
+}
+
+/* MOBILE / WEB DIFFERENTIAL STYLING */
+
+@media (max-width: 600px) {
+
+  #user-creation-form {
+    width: 85vw;
+    height: 85vh;
+    font-size: 1.25em;
+    margin: 0;
+    margin-top: 5%;
+  }
+
+  #create-account-fieldset {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    height: 75vh;
+    width: 75vw;
+    margin: 0;
+  }
+
+  #username-input, #email-input, #password-input, #password-confirm-input {
+    width: 70vw;
+    height: 5vh;
+  }
+
+  #account-submit {
+    width: 30vw;
+    height: 5vh;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  #user-creation-form {
+    width: 50vw;
+    height: 75vh;
+    font-size: 1.25em;
+    margin: 0;
+    margin-top: 1%;
+  }
+
+  #create-account-fieldset {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    height: 65vh;
+    width: 45vw;
+    margin: 0;
+  }
+
+  #username-input, #email-input, #password-input, #password-confirm-input {
+    width: 45vw;
+    height: 4vh;
+  }
+
+  #account-submit {
+    width: 20vw;
+    height: 5vh;
+  }
+
 }

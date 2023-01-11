@@ -1,9 +1,23 @@
 /* used in both Create Account and Log In */
-#close-form-button {
-  width: 15vw;
-  height: 3vh;
-  color: #e4bc84;
-  background-color: #37251b;
+
+@media (max-width: 600px) {
+  #close-form-button {
+    width: 40vw;
+    height: 5vh;
+    font-size: 1em;
+    color: #e4bc84;
+    background-color: #37251b;
+  }
+}
+
+@media (min-width: 601px) {
+  #close-form-button {
+    width: 20vw;
+    height: 5vh;
+    font-size: 1em;
+    color: #e4bc84;
+    background-color: #37251b;
+  }
 }
 
 /* SIGNUP AND SIGN IN TEXT STYLING */
