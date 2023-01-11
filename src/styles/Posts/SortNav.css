@@ -1,8 +1,9 @@
 .sort-by-container {
-  width: 75vw;
+  width: 100vw;
   height: 3vh;
   margin: 0;
   margin-top: 1%;
+  margin-left: 4%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
@@ -10,9 +11,11 @@
 }
 
 .sort-by-text {
+  display: flex;
+  align-items: center;
   font-size: 1em;
   width: auto;
-  height: 2vh;
+  height: 2.75vh;
   margin: 0;
 }
 
@@ -36,7 +39,7 @@
   justify-content: center;
   align-items: center;
   width: auto;
-  height: 2vh;
+  height: 2.75vh;
   margin: 0;
   margin-left: 1%;
   background-color: rgb(253, 255, 246);

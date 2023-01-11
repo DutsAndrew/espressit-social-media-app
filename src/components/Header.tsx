@@ -27,7 +27,7 @@ const LogoWrapper = styled.div `
 `;
 
 const Title = styled.p `
-  width: 5vw;
+  width: auto;
   height: 10vh;
   font-size: 2em;
   margin: 0;

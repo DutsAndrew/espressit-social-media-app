@@ -3,8 +3,10 @@ button {
 }
 
 .espresso-logo {
-  width: 5vw;
+  width: auto;
   height: 5vh;
+  margin: 0;
+  margin-left: 5%;
 }
 
 .app-web {
