@@ -6,13 +6,17 @@ import '../../styles/Posts/ContentContainer.css';
 
 const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
 
-  const { post, handleViewPost, handleFavoritePost } = props;
+  const { user, post, handleViewPost, handleFavoritePost } = props;
 
   const callHandleViewPost = (post: Post): void => {
     handleViewPost(post);
   };
 
   const callHandleFavoritePost = (post: Post): void => {
+    if (typeof user === "string") {
+      alert('you must be signed in to favorite a post');
+      return;
+    }
     handleFavoritePost(post);
   };
 

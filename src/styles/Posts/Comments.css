@@ -1,19 +1,81 @@
 /* UPVOTE/DOWNVOTE STYLING IS IN APP.CSS SINCE IT'S SHARED WITH VOTE CONTAINER COMPONENT */
 
+@media (max-width: 600px) {
+
+  .comment-list {
+    width: 95vw;
+    margin: 0;
+    margin-bottom: 10%;
+  }
+
+  .comment {
+    width: 90vw;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .comment-info {
+    width: 90vw;
+  }
+
+  .comment-account-time-text, .comment-text {
+    width: 90vw;
+    height: auto;
+  }
+
+  .comment-interaction-container {
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    height: auto;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  .comment-list {
+    width: 75vw;
+  }
+
+  .comment {
+    width: 75vw;
+    flex-flow: row-reverse nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .comment-info {
+    width: 70vw;
+  }
+
+  .comment-account-time-text, .comment-text {
+    width: 90vw;
+    height: auto;
+  }
+
+  .comment-interaction-container {
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 4.5vw;
+    height: 50%;
+  }
+
+}
+
 .comment-list {
   display: flex;
   flex-flow: column nowrap;
-  width: 75vw;
+  align-items: center;
   height: auto;
 }
 
 .comment {
   display: flex;
-  flex-flow: row-reverse nowrap;
-  justify-content: center;
-  align-items: center;
   height: auto;
-  width: 75vw;
   margin: 2%;
 }
 
@@ -21,7 +83,6 @@
   display: flex;
   flex-flow: column nowrap;
   margin: 0;
-  width: 70vw;
   height: auto;
 }
 
@@ -36,11 +97,6 @@
 
 .comment-interaction-container {
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  width: 4.5vw;
-  height: 50%;
 }
 
 .upvote-count-text {

@@ -3,8 +3,6 @@
 .upvote-downvote-container {
   display: flex;
   margin: 0;
-  margin-top: 2.5vh;
-  margin-right: 1%;
 }
 
 .upvote-svg:hover, .downvote-svg:hover, .post-comment-svg:hover, .post-favorite-svg:hover {
@@ -37,6 +35,8 @@
     align-items: center;
     height: auto;
     width: 5vw;
+    margin-top: 2.5vh;
+    margin-right: 1%;
   }
 
   #svg-upvote, #svg-downvote, .not-upvoted, .not-downvoted {

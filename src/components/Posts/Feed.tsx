@@ -29,6 +29,7 @@ const Feed: FC<FeedProps> = (props): JSX.Element => {
             handleDownVotePost={handleDownVotePost}
           />
           <ContentContainer
+            user={user}
             post={post}
             handleViewPost={handleViewPost}
             handleFavoritePost={handleFavoritePost}

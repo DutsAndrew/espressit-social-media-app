@@ -50,20 +50,22 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
               </p>
             </div>
             <div className="comment-interaction-container">
-              <img className="upvote-svg"
+              <img 
+                id="svg-upvote"
+                className="upvote-svg"
                 src={upVoteSVG}
                 alt="upvote arrow"
-                style={{width: "3vw", height: "3vh"}}
                 onClick={() => handleUpVoteComment(viewingRef, comment)} 
                 data-testid="upvote-test" >
               </img>
               <p className="upvote-count-text">
                 {(comment.likes - comment.dislikes) > 0 ? comment.likes - comment.dislikes : 0}
               </p>
-              <img className="not-downvoted"
+              <img 
+                id="svg-downvote"
+                className="not-downvoted"
                 src={downVoteSVG}
                 alt="downvote arrow"
-                style={{width: "3vw", height: "3vh"}}
                 onClick={() => handleDownVoteComment(viewingRef, comment)} 
                 data-testid="downvote-test" >
               </img>
@@ -82,20 +84,22 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
               </p>
             </div>
             <div className="comment-interaction-container">
-              <img className="not-upvoted"
+              <img 
+                id="svg-upvote"
+                className="not-upvoted"
                 src={upVoteSVG}
                 alt="upvote arrow"
-                style={{width: "3vw", height: "3vh"}}
                 onClick={() => handleUpVoteComment(viewingRef, comment)} 
                 data-testid="upvote-test" >
               </img>
               <p className="upvote-count-text">
                 {(comment.likes - comment.dislikes) > 0 ? comment.likes - comment.dislikes : 0}
               </p>
-              <img className="downvote-svg"
+              <img 
+                id="svg-downvote"
+                className="downvote-svg"
                 src={downVoteSVG}
                 alt="downvote arrow"
-                style={{width: "3vw", height: "3vh"}}
                 onClick={() => handleDownVoteComment(viewingRef, comment)} 
                 data-testid="downvote-test" >
               </img>
@@ -113,20 +117,22 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
             </p>
           </div>
           <div className="comment-interaction-container">
-            <img className="upvote-svg"
+            <img 
+              id="svg-upvote"
+              className="upvote-svg"
               src={upVoteSVG}
               alt="upvote arrow"
-              style={{width: "3vw", height: "3vh"}}
               onClick={() => handleUpVoteComment(viewingRef, comment)} 
               data-testid="upvote-test" >
             </img>
             <p className="upvote-count-text">
               {(comment.likes - comment.dislikes) > 0 ? comment.likes - comment.dislikes : 0}
             </p>
-            <img className="downvote-svg"
+            <img 
+              id="svg-downvote"
+              className="downvote-svg"
               src={downVoteSVG}
               alt="downvote arrow"
-              style={{width: "3vw", height: "3vh"}}
               onClick={() => handleDownVoteComment(viewingRef, comment)} 
               data-testid="downvote-test" >
             </img>

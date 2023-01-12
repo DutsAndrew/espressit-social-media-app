@@ -3,10 +3,15 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  width: 75vw;
   height: auto;
   margin: 0;
   color: rgb(253, 255, 246);
+}
+
+.post-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .post-view-link {
@@ -22,7 +27,6 @@
 
 .content-view-container {
   height: auto;
-  width: 75vw;
   margin: 0;
 }
 
@@ -33,7 +37,46 @@
 .post-views-text {
   display: flex;
   flex-flow: row nowrap;
-  width: 72vw;
   justify-content: flex-end;
   align-items: center;
+}
+
+@media (max-width: 600px) {
+
+  .post-view-container {
+    width: 95vw;
+  }
+
+  .post-view {
+    width: 95vw;
+  }
+
+  .content-view-container {
+    width: 90vw;
+  }
+
+  .post-views-text {
+    width: 90vw;
+  }
+
+}
+
+@media(min-width: 601px) {
+
+  .post-view-container {
+    width: 75vw;
+  }
+
+  .post-view {
+    width: 75vw;
+  }
+
+  .content-view-container {
+    width: 75vw;
+  }
+
+  .post-views-text {
+    width: 72vw;
+  }
+
 }

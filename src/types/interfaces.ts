@@ -119,6 +119,7 @@ interface VoteContainerProps {
 };
 
 interface ContentContainerProps {
+  user: string | User,
   post: Post,
   handleViewPost: Function,
   handleFavoritePost: Function,

@@ -7,7 +7,8 @@ import '../../styles/Posts/VoteContainer.css';
 
 const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
 
-  const { user,
+  const { 
+    user,
     post,
     whoLiked,
     whoDisliked,
@@ -28,6 +29,30 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
 
   };
 
+  const handleVoteEvent = (vote: string, e: any): void => {
+
+    activateVoteAnimation(e);
+
+    if (typeof user === "string") {
+      alert('you must be signed in to change vote count');
+      return;
+    }
+    
+    if (vote === "upvote") {
+      setTimeout(() => {
+        handleUpVotePost(post, e);
+      }, 500);
+      return;
+    };
+
+    if (vote === "downvote") {
+      setTimeout(() => {
+        handleDownVotePost(post, e);
+      }, 500);
+      return;
+    };
+  };
+
   const userRef = user as User;
 
   if (whoLiked.includes(userRef.uid)) {
@@ -39,10 +64,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
           src={upVoteSVG}
           alt="upvote arrow"
           onClick={(e) => {
-            activateVoteAnimation(e);
-            setTimeout(() => {
-              handleUpVotePost(post, e);
-            }, 500);
+            handleVoteEvent("upvote", e);
           }} >
         </img>
         <p className="upvote-count-text">
@@ -54,10 +76,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
           src={downVoteSVG}
           alt="downvote arrow"
           onClick={(e) => {
-            activateVoteAnimation(e);
-            setTimeout(() => {
-              handleDownVotePost(post, e);
-            }, 500);
+            handleVoteEvent("downvote", e);
           }} >
         </img>
       </div>
@@ -73,10 +92,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
           src={upVoteSVG}
           alt="upvote arrow"
           onClick={(e) => {
-            activateVoteAnimation(e);
-            setTimeout(() => {
-              handleUpVotePost(post, e);
-            }, 500);
+            handleVoteEvent("upvote", e);
           }} >
         </img>
         <p className="upvote-count-text">
@@ -88,10 +104,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
           src={downVoteSVG}
           alt="downvote arrow"
           onClick={(e) => {
-            activateVoteAnimation(e);
-            setTimeout(() => {
-              handleDownVotePost(post, e);
-            }, 500);
+            handleVoteEvent("downvote", e);
           }} >
         </img>
       </div>
@@ -106,10 +119,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
         src={upVoteSVG}
         alt="upvote arrow"
         onClick={(e) => {
-          activateVoteAnimation(e);
-          setTimeout(() => {
-            handleUpVotePost(post, e);
-          }, 500);
+          handleVoteEvent("upvote", e);
         }} >
       </img>
       <p className="upvote-count-text">
@@ -121,10 +131,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
         src={downVoteSVG}
         alt="downvote arrow"
         onClick={(e) => {
-          activateVoteAnimation(e);
-          setTimeout(() => {
-            handleDownVotePost(post, e);
-          }, 500);
+          handleVoteEvent("downvote", e);
         }} >
       </img>
     </div>
