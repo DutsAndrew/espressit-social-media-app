@@ -80,7 +80,7 @@ color: rgb(138, 109, 76);
 `;
 
 const AccountWrapperMobile = styled.div `
-width: 40vw;
+width: 45vw;
 height: 10vh;
 font-size: 1em;
 display: flex;

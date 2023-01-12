@@ -7,14 +7,11 @@
   height: 90vh;
   margin: 0;
   margin-top: 1%;
-  gap: 5vh;
   overflow-y: scroll;
   overflow-x: none;
 }
 
 .close-view-contributions-button {
-  width: 20vw;
-  height: 4vh;
   font-size: 1em;
   background-color: #9D6538;
   color: #DABE99;
@@ -63,8 +60,6 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  width: 75vw;
-  height: 90vh;
   gap: 1vh;
 }
 
@@ -85,7 +80,6 @@
   align-content: center;
   justify-content: flex-start;
   align-items: center;
-  width: 75vw;
   height: auto;
   color: rgb(253, 255, 246);
   background-color: rgb(1, 1, 0, 1);
@@ -110,8 +104,6 @@
 }
 
 .view-contributions-post-delete-svg, .view-contributions-comment-delete-svg, .view-contributions-favorite-delete-svg {
-  width: 3vw;
-  height: 3vh;
   margin: 0;
   margin: 2%;
   filter: invert(94%) sepia(9%) saturate(372%) hue-rotate(60deg) brightness(107%) contrast(105%);
@@ -120,4 +112,58 @@
 .view-contributions-post-delete-svg:hover, .view-contributions-comment-delete-svg:hover, .view-contributions-favorite-delete-svg:hover {
   filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+  .view-contributions-container {
+    gap: 1.5vh;
+  }
+
+  .close-view-contributions-button {
+    width: 40vw;
+    height: 5vh;
+  }
+
+  .view-contributions-posts-container, .view-contributions-comments-container, .view-contributions-favorites-container {
+    width: 95vw;
+    height: 90vh;
+  }
+
+  .view-contributions-post, .view-contributions-comments, .view-contributions-favorite {
+    width: 90vw;
+  }
+
+  .view-contributions-post-delete-svg, .view-contributions-comment-delete-svg, .view-contributions-favorite-delete-svg {
+    width: 5vw;
+    height: auto;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  .view-contributions-container {
+    gap: 5vh;
+  }
+
+  .close-view-contributions-button {
+    width: 20vw;
+    height: 4vh;
+  }
+
+  .view-contributions-posts-container, .view-contributions-comments-container, .view-contributions-favorites-container {
+    width: 75vw;
+    height: 90vh;
+  }
+
+  .view-contributions-post, .view-contributions-comments, .view-contributions-favorite {
+    width: 75vw;
+  }
+
+  .view-contributions-post-delete-svg, .view-contributions-comment-delete-svg, .view-contributions-favorite-delete-svg {
+    width: 3vw;
+    height: 3vh;
+  }
+
 }
