@@ -78,6 +78,8 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
     const chevronButton = document.querySelector('.account-menu-button');
     const profileText = document.querySelector('.profile-text');
     const homePage = document.querySelector('#home-page-web');
+
+    let timer;
       
     if (!dropDownMenu) {
 
@@ -105,7 +107,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       dropDownMenu.appendChild(viewContributions);
       profileContainer?.appendChild(dropDownMenu);
 
-      setTimeout(() => {
+      timer = setTimeout(() => {
 
         dropDownMenu?.remove()
         chevronButton?.classList.remove('drop-down-active');
@@ -115,13 +117,14 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
         // if on mobile remove hidden home page to interact with feed/posts again
         homePage?.classList.remove('home-page-web-hidden');
         homePage?.classList.add('home-page-web');
-        
+
       }, 5000);
 
     };
 
     if (dropDownMenu) {
 
+      clearTimeout(timer);
       dropDownMenu?.remove()
 
       chevronButton?.classList.remove('drop-down-active');

@@ -326,7 +326,7 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         <button type="button"
           className="remove-data-button"
           onClick={handleRemoveAccountInfo}>
-          Remove all: comments, posts, and favorites
+          Remove all Contributions
         </button>
       </fieldset>
     </form>

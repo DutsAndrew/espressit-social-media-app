@@ -1,3 +1,72 @@
+@media (max-width: 600px) {
+
+  .edit-profile-fieldset {
+    width: 95vw;
+  }
+
+  .edit-profile-legend {
+    width: 95vw;
+    font-size: 1.25em;
+  }
+
+  .return-to-main-page-button, .submit-profile-button {
+    width: 55vw;
+    height: 5vh;
+    font-size: 0.9em;
+  }
+
+  .edit-profile-label {
+    font-size: 1em;
+  }
+
+  .edit-profile-input {
+    width: 90vw;
+    height: 5vh;
+    font-size: 1.25em;
+  }
+
+  .delete-account-button, .remove-data-button {
+    width: 90vw;
+    height: 5vh;
+    font-size: 0.75em;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  .edit-profile-fieldset {
+    width: 50vw;
+  }
+
+  .edit-profile-legend {
+    width: 50vw;
+    font-size: 2em;
+  }
+
+  .return-to-main-page-button, .submit-profile-button {
+    width: 20vw;
+    height: 3.5vh;
+    font-size: 0.95em;
+  }
+
+  .edit-profile-label {
+    font-size: 1.5em;
+  }
+
+  .edit-profile-input {
+    width: 50vw;
+    height: 3vh;
+    font-size: 1.25em;
+  }
+
+  .delete-account-button, .remove-data-button {
+    width: 40vw;
+    height: 3.5vh;
+  }
+
+}
+
 .edit-profile-form {
   display: flex;
   flex-flow: column nowrap;
@@ -22,8 +91,6 @@
   align-items: center;
   gap: 1vh;
   margin: 2%;
-  width: 50vw;
-  height: 65vh;
   height: auto;
 }
 
@@ -31,27 +98,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50vw;
   height: 5vh;
-  font-size: 2em;
 }
 
 .edit-profile-label {
-  font-size: 1.5em;
   margin: 0;
   margin-right: auto;
-}
-
-.edit-profile-input {
-  width: 50vw;
-  height: 3vh;
-  font-size: 1.25em;
-}
-
-.return-to-main-page-button, .submit-profile-button {
-  width: 20vw;
-  height: 3.5vh;
-  font-size: 0.95em;
 }
 
 .submit-profile-button {
@@ -63,10 +115,12 @@
   cursor: pointer;
 }
 
-.delete-account-button, .remove-data-button {
-  width: 40vw;
-  height: 3.5vh;
+.delete-account-button {
   font-size: 1.25em;
+}
+
+.remove-data-button {
+  font-size: 1em;
 }
 
 .return-to-main-page-button, .submit-profile-button, .delete-account-button, .remove-data-button {

@@ -19,6 +19,15 @@
     height: 3.75vh;
   }
 
+  .account-drop-down-menu {
+    height: 20vh;
+    width: 40vw;
+    margin: 0;
+    margin-top: 30vh;
+    margin-left: -10vw;
+    font-size: 0.9em;
+  }
+
 }
 
 @media (min-width: 601px) {
@@ -35,6 +44,14 @@
   .profile-img {
     width: auto;
     height: 5vh;
+  }
+
+  .account-drop-down-menu {
+    height: 10vh;
+    width: 14vw;
+    margin: 0;
+    margin-top: 20vh;
+    margin-left: 15vw;
   }
 
 }
@@ -90,11 +107,6 @@
 }
 
 .account-drop-down-menu {
-  height: 10vh;
-  width: 14vw;
-  margin: 0;
-  margin-top: 20vh;
-  margin-left: 15vw;
   display: flex;
   justify-content: center;
   align-items: center;
