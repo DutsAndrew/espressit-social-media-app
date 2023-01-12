@@ -11,7 +11,6 @@ import { User } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 // lazy load for anything that isn't needed on first load
 const ViewPost = lazy(() => import('./ViewPost'));
@@ -32,15 +31,6 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-
-  // sort db based on sortType
-  // create map function to map sortedData to feed
-    // listeners for each post
-      // upvote and downvote clicks
-      // comment, and favorite clicks
-      // comment click will auto trigger viewComment
-      // any click on post will send user to viewPost version of post
-      // there will be no share click to avoid potential problem with page linking and db query issues
 
   // sort by new on default
   const [sortType, setSortType] = useState({type: "New"});
@@ -116,11 +106,12 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     });
   };
 
-  const handleUpVotePost = (post: Post, e: React.MouseEvent<HTMLImageElement, MouseEvent>): void => {
+  const handleUpVotePost = (post: Post): void => {
 
     // exits upVote if user isn't signed in
     const userRef = user as User;
     if (!userRef.uid) {
+      alert('you need to be signed in to interact with this');
       return;
     };
 
@@ -164,11 +155,12 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
   };
 
-  const handleDownVotePost = (post: Post, e: React.MouseEvent<HTMLImageElement, MouseEvent>): void => {
+  const handleDownVotePost = (post: Post): void => {
 
     // exits upVote if user isn't signed in
     const userRef = user as User;
     if (!userRef.uid) {
+      alert('you need to be signed in to interact with this');
       return;
     };
 
@@ -213,8 +205,14 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
   };
 
   const handleFavoritePost = async (post: Post): Promise<void> => {
-    
+
     const userRef = user as User;
+
+    if (!userRef.uid) {
+      alert('you need to be signed in to interact with this');
+      return;
+    };
+    
     const userInstanceRef = doc(db, "users", userRef.uid);
     const userInstanceSnap = await getDoc(userInstanceRef);
 
@@ -243,6 +241,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
     const userRef = user as User;
     if (!userRef.uid) {
+      alert('you need to be signed in to interact with this');
       return;
     };
 
@@ -288,6 +287,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
     const userRef = user as User;
     if (!userRef.uid) {
+      alert('you need to be signed in to interact with this');
       return;
     };
 
