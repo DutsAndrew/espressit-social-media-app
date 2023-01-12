@@ -39,7 +39,7 @@
     width: 5vw;
   }
 
-  #svg-upvote, #svg-downvote {
+  #svg-upvote, #svg-downvote, .not-upvoted, .not-downvoted {
     width: 3vw;
     height: 3vh;
   }

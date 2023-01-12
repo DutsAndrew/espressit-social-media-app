@@ -1,8 +1,6 @@
 .view-nav-container {
   display: flex;
   flex-flow: row nowrap;
-  height: 5vh;
-  width: 75vw;
   margin: 0;
   margin-top: 1%;
   justify-content: space-between;
@@ -14,8 +12,6 @@
 .upvote-downvote-view-container {
   display: flex;
   flex-flow: row nowrap;
-  width: 10vw;
-  height: 5vh;
   margin: 0;
   justify-content: center;
   align-items: center;
@@ -39,8 +35,6 @@
   display: flex;
   flex-flow: row nowrap;
   margin: 0;
-  height: 5vh;
-  width: 10vw;
   justify-content: center;
   align-items: center;
 }
@@ -62,4 +56,62 @@
 .close-view-container:hover > img {
   filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+  .view-nav-container {
+    height: 5vh;
+    width: 90vw;
+  }
+
+  .upvote-downvote-view-container {
+    width: 25vw;
+    height: 5vh;
+  }
+
+  .favorite-view-svg {
+    width: 6vw;
+    height: auto;
+  }
+
+  .close-view-container {
+    height: 5vh;
+    width: 25vw;
+  }
+
+  .close-view-svg {
+    width: 5vw;
+    height: auto;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  .view-nav-container {
+    height: 5vh;
+    width: 75vw;
+  }
+
+  .upvote-downvote-view-container {
+    width: 10vw;
+    height: 5vh;
+  }
+
+  .favorite-view-svg {
+    width: 3vw;
+    height: 3vh;
+  }
+
+  .close-view-container {
+    height: 5vh;
+    width: 10vw;
+  }
+
+  .close-view-svg {
+    width: 3vw;
+    height: 3vh;
+  }
+
 }

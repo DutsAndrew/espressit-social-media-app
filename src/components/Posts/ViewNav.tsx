@@ -26,20 +26,22 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
     return (
       <div className="view-nav-container">
         <div className="upvote-downvote-view-container">
-          <img className="upvote-svg"
+          <img 
+            id="svg-upvote"
+            className="upvote-svg"
             src={upVoteSVG}
             alt="upvote arrow"
-            style={{width: "3vw", height: "3vh"}}
             onClick={() => handleUpVotePost(viewing)} 
             data-testid="post-upvote-test" >
           </img>
           <p className="vote-counter-text">
             {(viewingRef.likes - viewingRef.dislikes) > 0 ? viewingRef.likes - viewingRef.dislikes : 0}
           </p>
-          <img className="not-downvoted"
+          <img 
+            id="svg-downvote"
+            className="not-downvoted"
             src={downVoteSVG}
             alt="downvote arrow"
-            style={{width: "3vw", height: "3vh"}}
             onClick={() => handleDownVotePost(viewing)} 
             data-testid="post-downvote-test" >
           </img>
@@ -47,7 +49,6 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
         <img className="favorite-view-svg"
           src={favoriteSVG}
           alt="favorite icon"
-          style={{width: "3vw", height: "3vh"}}
           onClick={() => handleFavoritePost(viewingRef)} 
           data-testid="post-favorite-test" >
         </img>
@@ -57,7 +58,6 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
           <img className="close-view-svg"
             src={closeSVG}
             alt="close view icon" 
-            style={{width: "3vw", height: "3vh"}}
             data-testid="post-close-test">
           </img>
           <p className="close-view-text">
@@ -72,20 +72,22 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
    return (
     <div className="view-nav-container">
       <div className="upvote-downvote-view-container">
-        <img className="not-upvoted"
+        <img 
+          id="svg-upvote"
+          className="not-upvoted"
           src={upVoteSVG}
           alt="upvote arrow"
-          style={{width: "3vw", height: "3vh"}}
           onClick={() => handleUpVotePost(viewing)} 
           data-testid="post-upvote-test" >
         </img>
         <p className="vote-counter-text">
           {(viewingRef.likes - viewingRef.dislikes) > 0 ? viewingRef.likes - viewingRef.dislikes : 0}
         </p>
-        <img className="downvote-svg"
+        <img 
+          id="svg-downvote"
+          className="downvote-svg"
           src={downVoteSVG}
           alt="downvote arrow"
-          style={{width: "3vw", height: "3vh"}}
           onClick={() => handleDownVotePost(viewing)} 
           data-testid="post-downvote-test" >
         </img>
@@ -93,7 +95,6 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
       <img className="favorite-view-svg"
         src={favoriteSVG}
         alt="favorite icon"
-        style={{width: "3vw", height: "3vh"}}
         onClick={() => handleFavoritePost(viewingRef)} 
         data-testid="post-favorite-test" >
       </img>
@@ -103,7 +104,6 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
         <img className="close-view-svg"
           src={closeSVG}
           alt="close view icon" 
-          style={{width: "3vw", height: "3vh"}}
           data-testid="post-close-test">
         </img>
         <p className="close-view-text">
@@ -117,20 +117,22 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
   return (
     <div className="view-nav-container">
       <div className="upvote-downvote-view-container">
-        <img className="upvote-svg"
+        <img 
+          id="svg-upvote"
+          className="upvote-svg"
           src={upVoteSVG}
           alt="upvote arrow"
-          style={{width: "3vw", height: "3vh"}}
           onClick={() => handleUpVotePost(viewing)} 
           data-testid="post-upvote-test" >
         </img>
         <p className="vote-counter-text">
           {(viewingRef.likes - viewingRef.dislikes) > 0 ? viewingRef.likes - viewingRef.dislikes : 0}
         </p>
-        <img className="downvote-svg"
+        <img 
+          id="svg-downvote"
+          className="downvote-svg"
           src={downVoteSVG}
           alt="downvote arrow"
-          style={{width: "3vw", height: "3vh"}}
           onClick={() => handleDownVotePost(viewing)} 
           data-testid="post-downvote-test" >
         </img>
@@ -138,7 +140,6 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
       <img className="favorite-view-svg"
         src={favoriteSVG}
         alt="favorite icon"
-        style={{width: "3vw", height: "3vh"}}
         onClick={() => handleFavoritePost(viewingRef)} 
         data-testid="post-favorite-test" >
       </img>
@@ -148,7 +149,6 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
         <img className="close-view-svg"
           src={closeSVG}
           alt="close view icon" 
-          style={{width: "3vw", height: "3vh"}}
           data-testid="post-close-test">
         </img>
         <p className="close-view-text">
