@@ -1,5 +1,4 @@
 .sort-by-container {
-  width: 100vw;
   height: 3vh;
   margin: 0;
   margin-top: 1%;
@@ -48,4 +47,20 @@
 
 .sort-by-button:hover {
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+  .sort-by-container {
+    width: 100vw;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  .sort-by-container {
+    width: 65vw;
+  }
+
 }

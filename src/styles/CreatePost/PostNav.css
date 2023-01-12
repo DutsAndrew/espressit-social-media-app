@@ -4,8 +4,6 @@
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  width: 70vw;
-  height: 5vh;
   gap: 1vw;
   margin: 0;
   margin-top: 1%;
@@ -13,8 +11,6 @@
 }
 
 .create-post-tamper-img {
-  width: 3vw;
-  height: 3vh;
   border-radius: 50%;
   filter: invert(3%) sepia(29%) saturate(5201%) hue-rotate(19deg) brightness(85%) contrast(105%);
 }
@@ -41,4 +37,32 @@
   width: auto;
   height: 3vh;
   filter: invert(3%) sepia(29%) saturate(5201%) hue-rotate(19deg) brightness(85%) contrast(105%);
+}
+
+@media (max-width: 600px) {
+
+  .create-post-container {
+    width: 95vw;
+    height: 5vh;
+  }
+
+  .create-post-tamper-img {
+    width: 5vw;
+    height: auto;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  .create-post-container {
+    width: 70vw;
+    height: 5vh;
+  }
+
+  .create-post-tamper-img {
+    width: 3vw;
+    height: 3vh;
+  }
+  
 }
