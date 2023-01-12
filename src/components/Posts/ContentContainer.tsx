@@ -31,14 +31,12 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
           <img className="post-comment-svg"
             src={commentSVG}
             alt="comment box"
-            style={{width: "2vw", height: "2vh"}}
             onClick={() => callHandleViewPost(post)} >
           </img>
           <p className="post-comment-amount">{post.comments.length}</p>
           <img className="post-favorite-svg"
             src={favoriteSVG}
             alt="save icon"
-            style={{width: "2vw", height: "2vh"}}
             onClick={() => callHandleFavoritePost(post)} >
           </img>
         </div>
@@ -65,14 +63,12 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
           <img className="post-comment-svg"
             src={commentSVG} 
             alt="comment box" 
-            style={{width: "2vw", height: "2vh"}}
             onClick={() => callHandleViewPost(post)} >
           </img>
           <p className="post-comment-amount">{post.comments.length}</p>
           <img className="post-favorite-svg"
             src={favoriteSVG}
             alt="save icon"
-            style={{width: "2vw", height: "2vh"}}
             onClick={() => callHandleFavoritePost(post)} >
           </img>
         </div>
@@ -100,14 +96,12 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
           <img className="post-comment-svg"
             src={commentSVG}
             alt="comment box"
-            style={{width: "2vw", height: "2vh"}}
             onClick={() => callHandleViewPost(post)} >
           </img>
           <p className="post-comment-amount">{post.comments.length}</p>
           <img className="post-favorite-svg"
             src={favoriteSVG}
             alt="save icon"
-            style={{width: "2vw", height: "2vh"}}
             onClick={() => callHandleFavoritePost(post)} >
           </img>
         </div>
@@ -139,14 +133,12 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
           <img className="post-comment-svg"
             src={commentSVG}
             alt="comment box"
-            style={{width: "2vw", height: "2vh"}}
             onClick={() => callHandleViewPost(post)} >
           </img>
           <p className="post-comment-amount">{post.comments.length}</p>
           <img className="post-favorite-svg"
             src={favoriteSVG}
             alt="save icon"
-            style={{width: "2vw", height: "2vh"}}
             onClick={() => callHandleFavoritePost(post)} >
           </img>
         </div>

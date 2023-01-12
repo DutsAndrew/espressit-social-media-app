@@ -6,7 +6,7 @@
   width: 100vw;
   height: auto;
   margin: 0;
-  margin-top: 1%;
+  margin-top: 2%;
   gap: 5vh;
   overflow-y: scroll;
   overflow-x: none;
@@ -14,11 +14,6 @@
 
 .post {
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: flex-start;
-  width: 65vw;
-  height: auto;
   margin: 0;
   border-left: solid rgb(253, 255, 246, 0.1);
   border-bottom: solid black;
@@ -27,4 +22,35 @@
 
 .post:hover {
   box-shadow: 10px 5px 5px black;
+}
+
+@media (max-width: 600px) {
+
+  .feed-container {
+    margin-bottom: 10%;
+  }
+
+  .post {
+    width: 95vw;
+    height: auto;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  .feed-container {
+    margin-bottom: 5%;
+  }
+
+  .post {
+    width: 65vw;
+    height: auto;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
 }

@@ -2,11 +2,6 @@
 
 .upvote-downvote-container {
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  height: auto;
-  width: 5vw;
   margin: 0;
   margin-top: 2.5vh;
   margin-right: 1%;
@@ -15,4 +10,38 @@
 .upvote-svg:hover, .downvote-svg:hover, .post-comment-svg:hover, .post-favorite-svg:hover {
   filter: invert(74%) sepia(0%) saturate(352%) hue-rotate(40deg) brightness(87%) contrast(85%);
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+  .upvote-downvote-container {
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 75vw;
+    height: auto;
+  }
+
+  #svg-upvote, #svg-downvote {
+    width: 8vw;
+    height: auto;
+  }
+
+}
+
+@media (min-width: 601px) {
+  
+  .upvote-downvote-container {
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    height: auto;
+    width: 5vw;
+  }
+
+  #svg-upvote, #svg-downvote {
+    width: 3vw;
+    height: 3vh;
+  }
+
 }
