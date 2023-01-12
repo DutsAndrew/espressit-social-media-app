@@ -30,7 +30,10 @@ const HomePageWeb: FC<HomePageWebProps> = (props): JSX.Element => {
   // removes CreatePost components if user is not signed in
   if (typeof currentUser === 'string') {
    return (
-    <div className="home-page-web">
+    <div 
+      id="home-page-web"
+      className="home-page-web" 
+    >
       <Posts
         user={currentUser}
         newPostStatus={newPost.status}
@@ -41,7 +44,10 @@ const HomePageWeb: FC<HomePageWebProps> = (props): JSX.Element => {
   };
 
   return (
-    <div className="home-page-web">
+    <div 
+      id="home-page-web"
+      className="home-page-web" 
+    >
       <Suspense fallback={<LoadingBar/>}>
         <CreatePostWeb
           user={currentUser}

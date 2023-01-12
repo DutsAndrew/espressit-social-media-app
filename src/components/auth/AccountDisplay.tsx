@@ -77,8 +77,14 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
     const dropDownMenu = document.querySelector('.account-drop-down-menu');
     const chevronButton = document.querySelector('.account-menu-button');
     const profileText = document.querySelector('.profile-text');
-
+    const homePage = document.querySelector('#home-page-web');
+      
     if (!dropDownMenu) {
+
+      // if on mobile hide home page to be able to interact with drop down
+      homePage?.classList.remove('home-page-web');
+      homePage?.classList.add('home-page-web-hidden');
+
       chevronButton?.classList.add('drop-down-active');
       profileText?.classList.add('drop-down-text-active');
       const dropDownMenu = document.createElement('div');
@@ -100,18 +106,32 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
       profileContainer?.appendChild(dropDownMenu);
 
       setTimeout(() => {
+
         dropDownMenu?.remove()
         chevronButton?.classList.remove('drop-down-active');
         chevronButton?.classList.add('account-menu-button');
         profileText?.classList.remove('drop-down-text-active');
+
+        // if on mobile remove hidden home page to interact with feed/posts again
+        homePage?.classList.remove('home-page-web-hidden');
+        homePage?.classList.add('home-page-web');
+        
       }, 5000);
+
     };
 
     if (dropDownMenu) {
+
       dropDownMenu?.remove()
+
       chevronButton?.classList.remove('drop-down-active');
       chevronButton?.classList.add('account-menu-button');
       profileText?.classList.remove('drop-down-text-active');
+
+      // if on mobile remove hidden home page to interact with feed/posts again
+      homePage?.classList.remove('home-page-web-hidden');
+      homePage?.classList.add('home-page-web');
+
     };
 
 
@@ -130,7 +150,7 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
     if (target.classList.contains('view-contributions-text')) {
       toggleViewContributionsPage();
       return;
-    }
+    };
 
   };
 
