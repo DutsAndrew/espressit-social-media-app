@@ -6,8 +6,6 @@
   grid-column: 3 / 4;
   background-color: #ad6d2f;
   color: #37251b;
-  width: 50vw;
-  height: 50vh;
   font-size: 1.25em;
   justify-items: center;
   align-items: center;
@@ -23,7 +21,6 @@
   flex-flow: column nowrap;
   align-items: flex-start;
   height: auto;
-  width: 45vw;
   margin: 0;
   margin-top: 5%;
 }
@@ -32,17 +29,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45vw;
-  height: 3vh;
   font-size: 1em;
+  height: 3vh;
   font-weight: bolder;
 }
 
 #email-login, #password-login {
-  width: 45vw;
-  height: 3vh;
   margin: 0;
   margin-bottom: 5%;
+  font-size: 1em;
 }
 
 #sign-in-button {
@@ -51,8 +46,6 @@
   align-items: center;
   font-size: 1em;
   margin: auto;
-  width: 15vw;
-  height: 4vh;
   color: #e4bc84;
   background-color: #37251b;
 }
@@ -70,14 +63,77 @@
 }
 
 #google-sign-in-button {
-  width: 15vw;
-  height: 4vh;
   color: #e4bc84;
   background-color: #37251b;
+  font-size: 1em;
   margin-top: 4%;
   margin-bottom: 1%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
   align-items: center;
+}
+
+@media (max-width: 600px) {
+
+  #sign-in-form {
+    width: 75vw;
+    height: 50vh;
+  }
+
+  #sign-in-fieldset {
+    width: 65vw;
+  }
+
+  .sign-in-legend {
+    width: 65vw;
+  }
+
+  #email-login, #password-login {
+    width: 60vw;
+    height: 5vh;
+  }
+
+  #sign-in-button {
+    width: 30vw;
+    height: 5vh;
+  }
+
+  #google-sign-in-button {
+    width: 40vw;
+    height: 5vh;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  #sign-in-form {
+    width: 50vw;
+    height: 50vh;
+  }
+
+  #sign-in-fieldset {
+    width: 45vw;
+  }
+
+  .sign-in-legend {
+    width: 45vw;
+  }
+
+  #email-login, #password-login {
+    width: 45vw;
+    height: 3vh;
+  }
+
+  #sign-in-button {
+    width: 15vw;
+    height: 4vh;
+  }
+
+  #google-sign-in-button {
+    width: 25vw;
+    height: 4vh;
+  }
+
 }
