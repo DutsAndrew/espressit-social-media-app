@@ -1,0 +1,78 @@
+@media (max-width: 600px) {
+
+  .add-username-form {
+    width: 95vw;
+    height: 50vh;
+  }
+
+  .label-add-username {
+    width: 90vw;
+    height: 5vh;
+  }
+  
+  .input-add-username {
+    width: 90vw;
+    height: 5vh;
+  }
+  
+  .return-from-username-button, .submit-username-button {
+    width: 30vw;
+    height: 5vh;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  .add-username-form {
+    width: 65vw;
+    height: 40vh;
+  }
+
+  .label-add-username {
+    width: 60vw;
+    height: 5vh;
+  }
+  
+  .input-add-username {
+    width: 60vw;
+    height: 5vh;
+  }
+  
+  .return-from-username-button, .submit-username-button {
+    width: 15vw;
+    height: 4vh;
+  }
+
+}
+
+.add-username-form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  margin-top: 2%;
+  gap: 1vh;
+}
+
+.label-add-username {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: 1.5em;
+  color: rgb(253, 255, 246);
+}
+
+.input-add-username {
+  background-color: rgb(253, 255, 246);
+  color: rgb(17, 7, 2);
+  font-size: 1em;
+}
+
+.return-from-username-button, .submit-username-button {
+  background-color: #9D6538;
+  color: #DABE99;
+  font-size: 1em;
+}

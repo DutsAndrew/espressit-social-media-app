@@ -35,6 +35,11 @@ interface LogInProps {
   signInWithGoogleAccount: () => Promise<void>,
 };
 
+interface AddUsernameProps {
+  createUserInstanceAfterGoogleSignIn: Function,
+  toggleAddUsernamePage: Function,
+};
+
 interface AccountDisplayProps {
   currentUser: string | User,
   signOut: Function,
@@ -213,6 +218,7 @@ export {
   type CreateAccountProps,
   type userState,
   type LogInProps,
+  type AddUsernameProps,
   type AccountDisplayProps,
   type UserInstance,
   type EditProfileProps,

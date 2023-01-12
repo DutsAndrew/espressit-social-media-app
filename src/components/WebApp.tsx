@@ -11,11 +11,13 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  User,
 } from "firebase/auth";
 
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, getDoc } from "firebase/firestore";
 import { setDoc, doc } from "firebase/firestore";
+import AddUsername from "./auth/AddUsername";
 
 // lazy imports for anything that doesn't render on load
 const CreateAccount = lazy(() => import('./auth/CreateAccount'));
@@ -45,6 +47,10 @@ const WebApp = () => {
 
   const [viewFavoritesRequested, setViewFavoritesRequested] = useState({
     status: false
+  });
+
+  const [addUsername, setAddUsername] = useState({
+    status: false,
   });
 
   const handleSignUp = () => {
@@ -183,15 +189,33 @@ const WebApp = () => {
           const token = credential.accessToken;
           // The signed-in user info.
           const user = result.user;
+
           setUserStatus({
             formCompleted: true,
             currentUser: user,
             errorStatus: '',
           });
+
           setLogInStatus({
             logIn: false,
           });
-        };
+
+          // check if userInstance has been created
+          (async function fetchUserInstance() {
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
+
+            if (userSnap.exists()) {
+              // userInstance has already been created
+              return;
+
+            } else {
+              // there is no userInstace
+              toggleAddUsernamePage();
+            };
+          })();
+
+        };        
 
       })
       .catch((error) => {
@@ -206,6 +230,32 @@ const WebApp = () => {
         });
         alert(`${errorCode}, ${errorMessage}; ${email}, ${credential} please try again`);
       });
+  };
+
+  const createUserInstanceAfterGoogleSignIn = async (username: string): Promise<void> => {
+
+    // create user instance in db to store username, posts, comments, etc
+    await setDoc(doc(db, "users", (userStatus.currentUser as User).uid), {
+      comments: [],
+      displayName: '',
+      favoritePosts: [],
+      posts: [],
+      imgURL: '',
+      imgURLRef: '',
+      uid: (userStatus.currentUser as User).uid,
+      username: username,
+    })
+
+      .then(() => {
+        toggleAddUsernamePage();
+        alert('we have added your username, please sign back in');
+        signOut();
+      })
+      .catch(() => {
+        alert('we were not able to save your username, please try again later');
+        signOut();
+      });
+
   };
 
   const signOut = () => {
@@ -255,6 +305,38 @@ const WebApp = () => {
         status: false,
       });
     };
+  };
+
+  const toggleAddUsernamePage = () => {
+    if (addUsername.status === true) {
+      setAddUsername({
+        status: false,
+      });
+    } else {
+      setAddUsername({
+        status: true,
+      });
+    };
+  };
+
+  if (addUsername.status === true) {
+    return (
+      <div className="app-web">
+        <Header handleSignUp={handleSignUp}
+          handleLogIn={handleLogIn}
+          currentUser={userStatus.currentUser}
+          signOut={signOut}
+          toggleEditProfilePage={toggleEditProfilePage}
+          toggleViewContributionsPage={toggleViewContributionsPage}
+        />
+        <Suspense fallback={<LoadingBar/>}>
+          <AddUsername
+            createUserInstanceAfterGoogleSignIn={createUserInstanceAfterGoogleSignIn}
+            toggleAddUsernamePage={toggleAddUsernamePage}
+          />
+        </Suspense>
+      </div>
+    );
   };
 
   if (signUpStatus.signUp === true) {
