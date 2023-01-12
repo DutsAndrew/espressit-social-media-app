@@ -17,13 +17,13 @@ import {
 import { initializeApp } from "firebase/app";
 import { getFirestore, getDoc } from "firebase/firestore";
 import { setDoc, doc } from "firebase/firestore";
-import AddUsername from "./auth/AddUsername";
 
 // lazy imports for anything that doesn't render on load
 const CreateAccount = lazy(() => import('./auth/CreateAccount'));
 const LogIn = lazy(() => import('./auth/LogIn'));
 const EditProfile = lazy(() => import('./auth/EditProfile'));
 const ViewContributions = lazy(() => import('./auth/ViewContributions'));
+const AddUsername = lazy(() => import('./auth/AddUsername'));
 
 const WebApp = () => {
 
