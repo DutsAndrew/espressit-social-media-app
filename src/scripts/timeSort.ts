@@ -1,9 +1,14 @@
-export default function timeSort (dateArray: any[]) {
+import { Post } from "types/interfaces";
+
+export default function timeSort (postsArray: any[]) {
 
   // FORMAT FOR SORTING:
     // "MM/DD/YYYY, HH:MM:SS AM/PM"
 
-  const sortedArray = dateArray.sort((date1, date2): number => {
+  const sortedArray = postsArray.sort((post1: Post, post2: Post): number => {
+
+    const date1 = post1.time;
+    const date2 = post2.time;
 
     // sorts by year first
     if (yearRef(date1) < yearRef(date2)) {
@@ -124,18 +129,19 @@ export default function timeSort (dateArray: any[]) {
   });
 
   return sortedArray;
+
 };
 
 const yearRef = function (date: any): number {
-  return Number(date.split('/')[0]);
+  return Number(date.split(',')[0].split('/')[2]);
 };
 
 const monthRef = function (date: any): number {
-  return Number(date.split('/')[1]);
+  return Number(date.split(',')[0].split('/')[0]);
 };
 
 const dayRef = function (date: any): number {
-  return Number(date.split('/')[2].split(',')[0]);
+  return Number(date.split(',')[0].split('/')[1]);
 };
 
 const timeOfDayRef = function (date: any): string {

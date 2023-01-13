@@ -4,13 +4,21 @@ import SortNav from "./SortNav";
 import LoadingBar from "../LoadingBar";
 import '../../styles/Posts/Posts.css';
 import timeSort from "../../scripts/timeSort";
+import hotSort from "scripts/hotSort";
+import contributedSort from "scripts/contributedSort";
+import controversialSort from "scripts/controversialSort";
 import { Post, PostProps, PostData } from "../../types/interfaces";
-import { User } from "firebase/auth";
 
 // firebase imports
+import { User } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getDoc, getFirestore, updateDoc } from "firebase/firestore";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { getDoc,
+  getFirestore,
+  updateDoc,
+  collection,
+  doc,
+  getDocs
+} from "firebase/firestore";
 
 // lazy load for anything that isn't needed on first load
 const ViewPost = lazy(() => import('./ViewPost'));
@@ -56,8 +64,10 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
         dataArray.push(doc.data());
       });
 
+      const sortedData = dataSortController(dataArray);
+
       setSortedData({
-        data: dataArray,
+        data: sortedData,
       });
 
     })();
@@ -76,8 +86,10 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
           dataArray.push(doc.data());
         });
 
+        const sortedData = dataSortController(dataArray);
+
         setSortedData({
-          data: dataArray,
+          data: sortedData,
         });
 
       })();
@@ -85,6 +97,50 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
       newPostFetched();
     };
   }, [newPostStatus]);
+
+  // resort data on sort change
+  useEffect(() => {
+
+    const data: any[] = sortedData.data;
+
+    if (typeof user === "string" && sortType.type === "Contributed") {
+      alert('can\'t sort by contributed if you are not logged in :)');
+      return;
+    };
+
+    const reSortedData = dataSortController(data);
+
+    setSortedData({
+      data: reSortedData,
+    });
+
+  }, [sortType]);
+
+  const dataSortController = (data: any[]): any[] => {
+
+    if (sortType.type === "New") {
+      const newArray = timeSort(data);
+      return newArray;
+    };
+
+    if (sortType.type === "Hot") {
+      const hotArray = hotSort(data);
+      return hotArray;
+    };
+
+    if (sortType.type === "Contributed") {
+      const contributedArray = contributedSort(data, user);
+      return contributedArray;
+    };
+
+    if (sortType.type === "Controversial") {
+      const controversialArray = controversialSort(data);
+      return controversialArray;
+    };
+
+    return [];
+
+  };
 
   const handleSortChange = (type: string): void => {
     setSortType({
@@ -328,25 +384,6 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
       data: dataRef,
     });
   };
- 
-  // (function fakeDates () {
-  //   const dateArray: any[] = [];
-  //   const date1: any = new Date().toLocaleString();
-  
-  //   dateArray.push(date1);
-
-  //   setTimeout(() => {
-  //     const date2 = new Date().toLocaleString();
-  //     dateArray.push(date2);
-  //   }, 1000);
-
-  //   const date3 = new Date(1995, 8, 17, 3, 24, 10).toLocaleString();
-  //   const date4 = new Date(2022, 10, 3, 10, 3, 8).toLocaleString();
-  //   dateArray.push(date3, date4);
-
-  //   const results = timeSort(dateArray);
-  //   console.log(date1, results);
-  // })();
 
   // if a post isn't being viewed return feed
   if (Object.keys(currentlyViewing.post).length === 0) {
