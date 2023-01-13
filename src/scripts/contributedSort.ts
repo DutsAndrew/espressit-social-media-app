@@ -1,7 +1,7 @@
 import { User } from "firebase/auth";
 import { Post } from "types/interfaces";
 
-const contributedSort = (postsArray: any[], user: string | User): any[] => {
+export default function contributedSort(postsArray: any[], user: string | User): any[] {
 
   const sortedArray = postsArray.sort((post1: Post, post2: Post): number => {
 
@@ -44,10 +44,6 @@ const contributedSort = (postsArray: any[], user: string | User): any[] => {
 
   });
 
-  console.log(sortedArray);
-
   return sortedArray;
 
 };
-
-export default contributedSort;
