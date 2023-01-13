@@ -286,6 +286,7 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
         await updateDoc(userInstanceRef, {
           favoritePosts: [...favorites, post],
         });
+        alert('post has been added to your favorites!');
       };
 
     } else {
