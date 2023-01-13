@@ -96,6 +96,21 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
   // hides CreatePost component when viewing a post, unmounts when leaving view post
   useEffect(() => {
 
+    // increment view count on post
+    (async function incrementViewsOnPost() {
+
+      const postRef = doc(db, "posts", viewingRef.pid);
+      const postSnap = await getDoc(postRef);
+
+      if (postSnap.exists()) {
+        const post = postSnap.data();
+        await updateDoc(postRef, {
+          views: post.views += 1,
+        });
+      };
+      
+    })();
+
     const createPostContainer = document.querySelector('.create-post-container');
 
     if (createPostContainer) {
