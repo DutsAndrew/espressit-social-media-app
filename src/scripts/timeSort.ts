@@ -11,19 +11,19 @@ export default function timeSort (postsArray: any[]) {
     const date2 = post2.time;
 
     // sorts by year first
-    if (yearRef(date1) < yearRef(date2)) {
+    if (yearRef(date1) > yearRef(date2)) {
       return -1;
-    } else if (yearRef(date1) > yearRef(date2)) {
+    } else if (yearRef(date1) < yearRef(date2)) {
       return 1;
     };
 
     // sorts by month second
     if (yearRef(date1) === yearRef(date2)
-      && monthRef(date1) < monthRef(date2)
+      && monthRef(date1) > monthRef(date2)
     ) {
       return -1;
     } else if (yearRef(date1) === yearRef(date2)
-      && monthRef(date1) > monthRef(date2)
+      && monthRef(date1) < monthRef(date2)
       ) {
         return 1;
     };
@@ -31,7 +31,7 @@ export default function timeSort (postsArray: any[]) {
     // sorts by day third
     if (yearRef(date1) === yearRef(date2)
       && monthRef(date1) === monthRef(date2)
-      && dayRef(date1) < dayRef(date2)
+      && dayRef(date1) > dayRef(date2)
     ) {
       return -1;
     } else if (yearRef(date1) === yearRef(date2)
@@ -63,7 +63,7 @@ export default function timeSort (postsArray: any[]) {
       && timeOfDayRef(date1) === timeOfDayRef(date2)
       && dayRef(date1) === dayRef(date2)
       && timeOfDayRef(date1) === timeOfDayRef(date2)
-      && hourRef(date1) < hourRef(date2)
+      && hourRef(date1) > hourRef(date2)
     ) {
       return -1;
     } else if (yearRef(date1) === yearRef(date2)
@@ -72,7 +72,7 @@ export default function timeSort (postsArray: any[]) {
       && timeOfDayRef(date1) === timeOfDayRef(date2)
       && dayRef(date1) === dayRef(date2)
       && timeOfDayRef(date1) === timeOfDayRef(date2)
-      && hourRef(date1) > hourRef(date2)
+      && hourRef(date1) < hourRef(date2)
       ) {
         return 1;
     };
@@ -85,7 +85,7 @@ export default function timeSort (postsArray: any[]) {
       && dayRef(date1) === dayRef(date2)
       && timeOfDayRef(date1) === timeOfDayRef(date2)
       && hourRef(date1) === hourRef(date2)
-      && minuteRef(date1) < minuteRef(date2)
+      && minuteRef(date1) > minuteRef(date2)
     ) {
       return -1;
     } else if (yearRef(date1) === yearRef(date2)
@@ -95,7 +95,7 @@ export default function timeSort (postsArray: any[]) {
       && dayRef(date1) === dayRef(date2)
       && timeOfDayRef(date1) === timeOfDayRef(date2)
       && hourRef(date1) === hourRef(date2)
-      && minuteRef(date1) > minuteRef(date2)
+      && minuteRef(date1) < minuteRef(date2)
       ) {
         return 1;
     }
@@ -109,7 +109,7 @@ export default function timeSort (postsArray: any[]) {
       && timeOfDayRef(date1) === timeOfDayRef(date2)
       && hourRef(date1) === hourRef(date2)
       && minuteRef(date1) === minuteRef(date2)
-      && secondsRef(date1) < secondsRef(date2)
+      && secondsRef(date1) > secondsRef(date2)
     ) {
       return -1;
     } else if (yearRef(date1) === yearRef(date2)
@@ -120,7 +120,7 @@ export default function timeSort (postsArray: any[]) {
       && timeOfDayRef(date1) === timeOfDayRef(date2)
       && hourRef(date1) === hourRef(date2)
       && minuteRef(date1) === minuteRef(date2)
-      && secondsRef(date1) > secondsRef(date2)
+      && secondsRef(date1) < secondsRef(date2)
       ) {
         return 1;
     };
