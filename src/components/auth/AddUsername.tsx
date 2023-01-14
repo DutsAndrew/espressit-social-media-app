@@ -8,8 +8,8 @@ const AddUsername: FC<AddUsernameProps> = (props): JSX.Element => {
 
   const { createUserInstanceAfterGoogleSignIn, toggleAddUsernamePage } = props;
 
-  const filter = new Filter();
-  const usernameFormat: RegExp = /^[a-z]{3,12}$|^[a-z]{3,12}\d{2,4}$/g;
+  const filter = new Filter(),
+        usernameFormat: RegExp = /^[a-z]{3,12}$|^[a-z]{3,12}\d{2,4}$/g;
 
   const validateUsername = (): void => {
     let input = (document.querySelector('.input-add-username') as HTMLInputElement).value;
@@ -23,12 +23,11 @@ const AddUsername: FC<AddUsernameProps> = (props): JSX.Element => {
   const handleUsernameSubmit = (e: any): void => {
     e.preventDefault();
 
-    let input = (document.querySelector('.input-add-username') as HTMLInputElement).value;
-    const target = (document.querySelector('.input-add-username') as HTMLInputElement);
+    const input = (document.querySelector('.input-add-username') as HTMLInputElement).value,
+          target = (document.querySelector('.input-add-username') as HTMLInputElement);
 
     if (filter.isProfane(input)) {
       alert('we don\'t allow profane language');
-      input = '';
       return;
     } else if (!filter.isProfane(input) && target.validity.valid && input.match(usernameFormat)) {
       createUserInstanceAfterGoogleSignIn(input);

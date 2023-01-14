@@ -7,14 +7,16 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
 
   const { createAccountWithEmailAndPassword, handleSignUp } = props;
 
-  const usernameFormat: RegExp = /^[a-z]{3,12}$|^[a-z]{3,12}\d{2,4}$/g;
-  const mailFormat: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g;
-  const passwordFormat: RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g;
-  const filter = new Filter();
+  const usernameFormat: RegExp = /^[a-z]{3,12}$|^[a-z]{3,12}\d{2,4}$/g,
+        mailFormat: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g,
+        passwordFormat: RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g,
+        filter = new Filter();
 
   const handleFormChange = (e: any): void => {
-    const entryThatChanged = e.target as HTMLInputElement;
-    const errorText = e.target.nextSibling;
+
+    const entryThatChanged = e.target as HTMLInputElement,
+          errorText = e.target.nextSibling;
+
     if (entryThatChanged && errorText) {
       if ((entryThatChanged.validity.valid && entryThatChanged.value.match(usernameFormat) && !filter.isProfane(entryThatChanged.value))
         || (entryThatChanged.validity.valid && entryThatChanged.value.match(mailFormat))
@@ -26,6 +28,7 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
         showError(entryThatChanged, errorText);
       };
     };
+
   };
 
   const showError = (entry: any, error: any): void => {
@@ -93,11 +96,11 @@ const CreateAccount: FC<CreateAccountProps> = (props): JSX.Element => {
   const submitAccountCreationForm = (e: any): void  => {
     e.preventDefault();
 
-    const usernameEntry = (document.getElementById("username-input") as HTMLInputElement);
-    const emailEntry = (document.getElementById("email-input") as HTMLInputElement);
-    const passwordEntry = (document.getElementById("password-input") as HTMLInputElement);
-    const passwordConfirmEntry = (document.getElementById("password-confirm-input") as HTMLInputElement);
-    const activeErrors = document.querySelectorAll('.error-active').length;
+    const usernameEntry = (document.getElementById("username-input") as HTMLInputElement),
+          emailEntry = (document.getElementById("email-input") as HTMLInputElement),
+          passwordEntry = (document.getElementById("password-input") as HTMLInputElement),
+          passwordConfirmEntry = (document.getElementById("password-confirm-input") as HTMLInputElement),
+          activeErrors = document.querySelectorAll('.error-active').length;
 
     if (usernameEntry) {
       if (!usernameEntry.validity.valid || !usernameEntry.value.match(usernameFormat)) {

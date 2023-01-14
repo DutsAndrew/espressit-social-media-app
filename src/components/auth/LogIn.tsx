@@ -12,14 +12,18 @@ const LogIn: FC<LogInProps> = (props): JSX.Element => {
   } = props;
 
   const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+
     e.preventDefault();
-    const emailEntry: any = document.querySelector('#email-login');
-    const passwordEntry: any = document.querySelector('#password-login');
+
+    const emailEntry: any = document.querySelector('#email-login'),
+          passwordEntry: any = document.querySelector('#password-login');
+
     if (emailEntry && passwordEntry) {
       if (emailEntry.validity.valid && passwordEntry.validity.valid) {
         signInUser(emailEntry.value, passwordEntry.value);
       };
     };
+
   };
 
   const handleGoogleSignIn = (): void => {

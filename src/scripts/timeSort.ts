@@ -7,8 +7,8 @@ export default function timeSort (postsArray: any[]) {
 
   const sortedArray = postsArray.sort((post1: Post, post2: Post): number => {
 
-    const date1 = post1.time;
-    const date2 = post2.time;
+    const date1 = post1.time,
+          date2 = post2.time;
 
     // sorts by year first
     if (yearRef(date1) > yearRef(date2)) {

@@ -19,8 +19,8 @@ const ViewNav: FC<ViewNavProps> = (props): JSX.Element => {
     handleStopViewingPost 
   } = props;
 
-  const viewingRef = viewing as Post;
-  const userRef = user as User;
+  const viewingRef = viewing as Post,
+        userRef = user as User;
 
   if (viewingRef.whoLiked.includes(userRef.uid)) {
     return (

@@ -28,32 +28,31 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
         uid: "",
         username: "",
       },
-    });
+    }),
+          [selectedFile, setSelectedFile] = useState();
 
-  const [selectedFile, setSelectedFile] = useState();
-
-  //firebase config
-  const firebaseConfig = {
+    //firebase config
+    const firebaseConfig = {
     apiKey: "AIzaSyDsPecBa3Ch5uDw4UzHiJWAjKEYOKCrNdA",
     authDomain: "espressit.firebaseapp.com",
     projectId: "espressit",
     storageBucket: "espressit.appspot.com",
     messagingSenderId: "1094129721341",
     appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
-  };
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const storage = getStorage(app);
+    },
+    app = initializeApp(firebaseConfig),
+    db = getFirestore(app),
+    storage = getStorage(app);
 
   useEffect(() => {
     (async function fetchUserInstance(): Promise<void> {
       // fetch userInstance
       const userInstanceRef = doc(db, "users", userRef.uid);
       const userInstanceSnap = await getDoc(userInstanceRef);
+
       if (userInstanceSnap.exists()) {
+
         const userInstanceData = userInstanceSnap.data();
-  
         // sync local state with user data
         setUserInstance({
           user: {
@@ -66,17 +65,18 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
             username: userInstanceData.username,
           },
         });
+
       };
     })();
   }, []);
 
-  const usernameFormat: RegExp = /^[a-z]{3,12}$|^[a-z]{3,12}\d{2,4}$/g;
-  const mailFormat: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g;
-  const filter = new Filter();
+  const usernameFormat: RegExp = /^[a-z]{3,12}$|^[a-z]{3,12}\d{2,4}$/g,
+        filter = new Filter();
 
   const handleProfileEditChange = (e: any): void => {
 
     e.preventDefault();
+
     const entryThatChanged = e.target;
     const errorText = entryThatChanged.nextSibling as HTMLElement;
 
@@ -119,14 +119,12 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
   const validateSubmitRequest = (e: React.FormEvent<HTMLFormElement>): void  => {
     e.preventDefault();
 
-    const usernameEntry = (document.getElementById("username-edit-input") as HTMLInputElement);
-    const activeErrors = document.querySelectorAll('.error-active').length;
+    const usernameEntry = (document.getElementById("username-edit-input") as HTMLInputElement),
+          activeErrors = document.querySelectorAll('.error-active').length;
 
     // validate username edit
     if (usernameEntry.value.length !== 0) {
-
       if (activeErrors !== 0) return;
-
       if (!usernameEntry.validity.valid || !usernameEntry.value.match(usernameFormat)) {
         showError(usernameEntry, usernameEntry.nextSibling);
         return;
@@ -134,15 +132,17 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
 
       // check if profanity is hidden in username
       for (let i = 0; i < usernameEntry.value.length; i++) {
-        const usernameText = usernameEntry.value.slice(i);
+        const usernameText = usernameEntry.value.slice(i),
+              errorText = document.querySelector('#username-edit-input-error');
+
         if (filter.isProfane(usernameText)) {
-          const errorText = document.querySelector('#username-edit-input-error');
           if (errorText) {
             errorText.textContent = "We don't accept profanity in usernames, sorry :(";
             errorText.classList.add("error", "error-active");
             return;
           };
         };
+
       };
 
       submitNewUsername(usernameEntry.value);
@@ -155,26 +155,33 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
   }
 
   const submitNewUsername = (newUsername: string): void => {
+
     if (newUsername.length > 2) {
+
       (async function saveNewUsernameToUserInstance() {
         const userInstanceRef = doc(db, "users", userRef.uid);
         await updateDoc(userInstanceRef, {
           username: newUsername,
         });
       })();
+
       // return to home
       returnToMainAfterProfileEdit();
+
     };
   };
 
   // remove previous imgURL from storage if there was one
   async function removePreviousProfileImg() {
-    const userInstanceRef = doc(db, "users", userRef.uid);
-    const userSnap = await getDoc(userInstanceRef);
+
+    const userInstanceRef = doc(db, "users", userRef.uid),
+          userSnap = await getDoc(userInstanceRef);
 
     if (userSnap.exists()) {
+
       const userData = userSnap.data();
       if (userData.imgURL.slice(0, 38) === 'https://firebasestorage.googleapis.com') {
+
         // user has a imgURL that was uploaded to firebase and not from Google API
         const currentProfilePhotoRef = ref(storage, userData.imgURLRef);
         deleteObject(currentProfilePhotoRef).then(() => {
@@ -182,11 +189,13 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
             updateDoc(userInstanceRef, {
               imgURLRef: "",
             });
+
         }).catch((error) => {
           alert('we were unable to remove your previous profile picture and therefor did not upload your new picture, please try again later');
           return;
         });
       };
+
     };
   };
 
@@ -198,13 +207,13 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
     };
 
     if (typeof selectedFile !== undefined ||  typeof selectedFile !== 'undefined') {
-
       // remove previous imgURL from storage if there was one
       removePreviousProfileImg();
 
       (async function uploadNewPictureAndSetAsProfilePicture() {
-        const storage = getStorage();
-        const storageRef = ref(storage, `images/${(selectedFile as any).name}`);
+        const storage = getStorage(),
+              storageRef = ref(storage, `images/${(selectedFile as any).name}`);
+
         uploadBytes(storageRef, selectedFile)
           .then((snapshot) => {
             // image has been uploaded to the db
@@ -238,8 +247,8 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
   };
 
   const handleDeleteAccount = async (): Promise<void> => {
-    const auth = getAuth();
-    const user = auth.currentUser;
+    const auth = getAuth(),
+          user = auth.currentUser;
 
     await removePreviousProfileImg();
 
@@ -260,12 +269,14 @@ const EditProfile: FC<EditProfileProps> = (props): JSX.Element => {
   };
 
   const handleRemoveAccountInfo = (): void => {
+
     const userInstanceRef = doc(db, "users", userRef.uid);
       updateDoc(userInstanceRef, {
         comments: [],
         favoritePosts: [],
         posts: [],
     });
+    
   };
 
   return (

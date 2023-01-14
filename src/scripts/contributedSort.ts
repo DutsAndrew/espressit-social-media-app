@@ -5,18 +5,16 @@ export default function contributedSort(postsArray: any[], user: string | User):
 
   const sortedArray = postsArray.sort((post1: Post, post2: Post): number => {
 
-    const userRef = user as User;
+    const userRef = user as User,
+          whoLiked1 = post1.whoLiked,
+          whoDisliked1 = post1.whoDisliked,
+          commented1 = post1.comments,
+          whoLiked2 = post2.whoLiked,
+          whoDisliked2 = post2.whoDisliked,
+          commented2 = post2.comments;
 
-    const whoLiked1 = post1.whoLiked;
-    const whoDisliked1 = post1.whoDisliked;
-    const commented1 = post1.comments;
-
-    const whoLiked2 = post2.whoLiked;
-    const whoDisliked2 = post2.whoDisliked;
-    const commented2 = post2.comments;
-
-    let isUserInComments1: boolean = false;
-    let isUserInComments2: boolean = false;
+    let isUserInComments1: boolean = false,
+        isUserInComments2: boolean = false;
 
     commented1.forEach((comment) => {
       if (comment.author === userRef.uid) {

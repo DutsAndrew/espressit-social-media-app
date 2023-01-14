@@ -10,7 +10,9 @@ const SortNav: FC<SortNavProps> = (props): JSX.Element => {
   const [dropDownMenu, setDropDownMenu] = useState({open: false});
 
   const handleSortClick = (): void => {
+
     const sortDropDown = document.querySelector('.sort-menu-drop-down');
+
     if (dropDownMenu.open === true) {
       setDropDownMenu({
         open: false
@@ -18,6 +20,7 @@ const SortNav: FC<SortNavProps> = (props): JSX.Element => {
       sortDropDown?.classList.remove('sort-drop-down-open');
       return;
     };
+
     if (dropDownMenu.open === false) {
       setDropDownMenu({
         open: true
@@ -25,6 +28,7 @@ const SortNav: FC<SortNavProps> = (props): JSX.Element => {
       sortDropDown?.classList.add('sort-drop-down-open');
       return;
     };
+
   };
 
   const handleSortType = (type: string): void => {

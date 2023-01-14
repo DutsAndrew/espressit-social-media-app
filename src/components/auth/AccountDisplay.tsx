@@ -45,12 +45,12 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
         appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
       };
       // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
-  
-      // fetch userInstance
-      const userInstanceRef = doc(db, "users", userRef.uid);
-      const userInstanceSnap = await getDoc(userInstanceRef);
+      const app = initializeApp(firebaseConfig),
+            db = getFirestore(app),
+            // fetch userInstance
+            userInstanceRef = doc(db, "users", userRef.uid),
+            userInstanceSnap = await getDoc(userInstanceRef);
+
       if (userInstanceSnap.exists()) {
         const userInstanceData = userInstanceSnap.data();
   
@@ -73,11 +73,11 @@ const AccountDisplay: FC<AccountDisplayProps> = (props): JSX.Element => {
   const accountDropDown = (e: React.MouseEvent) => {
 
     // open and closes drop down menu
-    const profileContainer = document.querySelector('.profile-container');
-    const dropDownMenu = document.querySelector('.account-drop-down-menu');
-    const chevronButton = document.querySelector('.account-menu-button');
-    const profileText = document.querySelector('.profile-text');
-    const homePage = document.querySelector('#home-page-web');
+    const profileContainer = document.querySelector('.profile-container'),
+          dropDownMenu = document.querySelector('.account-drop-down-menu'),
+          chevronButton = document.querySelector('.account-menu-button'),
+          profileText = document.querySelector('.profile-text'),
+          homePage = document.querySelector('#home-page-web');
 
     let timer;
       

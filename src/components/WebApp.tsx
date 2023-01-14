@@ -19,74 +19,81 @@ import { getFirestore, getDoc } from "firebase/firestore";
 import { setDoc, doc } from "firebase/firestore";
 
 // lazy imports for anything that doesn't render on load
-const CreateAccount = lazy(() => import('./auth/CreateAccount'));
-const LogIn = lazy(() => import('./auth/LogIn'));
-const EditProfile = lazy(() => import('./auth/EditProfile'));
-const ViewContributions = lazy(() => import('./auth/ViewContributions'));
-const AddUsername = lazy(() => import('./auth/AddUsername'));
+const CreateAccount = lazy(() => import('./auth/CreateAccount')),
+      LogIn = lazy(() => import('./auth/LogIn')),
+      EditProfile = lazy(() => import('./auth/EditProfile')),
+      ViewContributions = lazy(() => import('./auth/ViewContributions')),
+      AddUsername = lazy(() => import('./auth/AddUsername'));
 
 const WebApp = () => {
 
   const [signUpStatus, setSignUpStatus] = useState({
-    signUp: false
-  });
-
-  const [logInStatus, setLogInStatus] = useState({
-    logIn: false
-  });
-
-  const [userStatus, setUserStatus] = useState<userState>({
-    formCompleted: false,
-    currentUser: '',
-    errorStatus: '',
-  });
-
-  const [editProfileRequested, setEditProfileRequested] = useState({
-    status: false
-  });
-
-  const [viewFavoritesRequested, setViewFavoritesRequested] = useState({
-    status: false
-  });
-
-  const [addUsername, setAddUsername] = useState({
-    status: false,
-  });
+          signUp: false
+        }),
+        [logInStatus, setLogInStatus] = useState({
+          logIn: false
+        }),
+        [userStatus, setUserStatus] = useState<userState>({
+          formCompleted: false,
+          currentUser: '',
+          errorStatus: '',
+        }),
+        [editProfileRequested, setEditProfileRequested] = useState({
+          status: false
+        }),
+        [viewFavoritesRequested, setViewFavoritesRequested] = useState({
+          status: false
+        }),
+        [addUsername, setAddUsername] = useState({
+          status: false,
+        });
 
   const handleSignUp = () => {
+
     if (signUpStatus.signUp === false) {
+
       if (logInStatus.logIn === true) {
         setLogInStatus({
           logIn: false,
         });
       };
+
       setSignUpStatus({
         signUp: true,
       });
       return;
+
     } else {
+
       setSignUpStatus({
         signUp: false,
       });
+      return;
     };
   };
 
   const handleLogIn = () => {
+
     if (logInStatus.logIn === false) {
+
       if (signUpStatus.signUp === true) {
         setSignUpStatus({
           signUp: false,
         });
       };
+
       setLogInStatus({
         logIn: true,
       });
       return;
+
     } else {
+
       setLogInStatus({
         logIn: false,
       });
       return;
+
     };
   };
 
@@ -97,20 +104,18 @@ const WebApp = () => {
     storageBucket: "espressit.appspot.com",
     messagingSenderId: "1094129721341",
     appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
-  };
-
+  },
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
+  app = initializeApp(firebaseConfig),
+  db = getFirestore(app),
+  auth = getAuth(app),
+  provider = new GoogleAuthProvider();
 
   const createAccountWithEmailAndPassword = async (username: string, email: string, password: string): Promise<void> => {
 
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
-        console.log('user created');
         // sync user data with local state
         const user = userCredential.user;
         setUserStatus({
@@ -137,14 +142,17 @@ const WebApp = () => {
 
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+
+        const errorCode = error.code,
+              errorMessage = error.message;
+
         setUserStatus({
           formCompleted: false,
           currentUser: 'not found',
           errorStatus: `${errorCode}, ${errorMessage}`,
         });
         alert(`${errorCode}, ${errorMessage}, please try again`);
+
       });
   };
 
@@ -168,14 +176,17 @@ const WebApp = () => {
       })
 
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+
+        const errorCode = error.code,
+              errorMessage = error.message;
+
         setUserStatus({
           formCompleted: false,
           currentUser: 'not found',
           errorStatus: `${errorCode}, ${errorMessage}`,
         });
         alert(`${errorCode}, ${errorMessage}, please try again`);
+
       });
   };
 
@@ -185,10 +196,11 @@ const WebApp = () => {
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
+
         if (credential) {
-          const token = credential.accessToken;
           // The signed-in user info.
-          const user = result.user;
+          const token = credential.accessToken,
+                user = result.user;
 
           setUserStatus({
             formCompleted: true,
@@ -219,16 +231,19 @@ const WebApp = () => {
 
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
+
+        const errorCode = error.code,
+              errorMessage = error.message,
+              email = error.customData.email,
+              credential = GoogleAuthProvider.credentialFromError(error);
+
         setUserStatus({
           formCompleted: false,
           currentUser: 'not found',
           errorStatus: `${errorCode}, ${errorMessage}`,
         });
         alert(`${errorCode}, ${errorMessage}; ${email}, ${credential} please try again`);
+
       });
   };
 
@@ -269,6 +284,7 @@ const WebApp = () => {
   const toggleEditProfilePage = () => {
     if (editProfileRequested.status === false) {
       if (viewFavoritesRequested.status === true) {
+
         setViewFavoritesRequested({
           status: false,
         });
@@ -276,10 +292,13 @@ const WebApp = () => {
       setEditProfileRequested({
         status: true,
       });
+
     } else {
+
       setEditProfileRequested({
         status: false,
       });
+
     };
   };
 
@@ -293,29 +312,38 @@ const WebApp = () => {
   const toggleViewContributionsPage = () => {
     if (viewFavoritesRequested.status === false) {
       if (editProfileRequested.status === true) {
+
         setEditProfileRequested({
           status: false
         });
       };
+
       setViewFavoritesRequested({
         status: true,
       });
+
     } else {
+
       setViewFavoritesRequested({
         status: false,
       });
+
     };
   };
 
   const toggleAddUsernamePage = () => {
     if (addUsername.status === true) {
+
       setAddUsername({
         status: false,
       });
+
     } else {
+
       setAddUsername({
         status: true,
       });
+
     };
   };
 

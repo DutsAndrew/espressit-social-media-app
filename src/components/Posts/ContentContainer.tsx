@@ -13,11 +13,14 @@ const ContentContainer: FC<ContentContainerProps> = (props): JSX.Element => {
   };
 
   const callHandleFavoritePost = (post: Post): void => {
+
     if (typeof user === "string") {
       alert('you must be signed in to favorite a post');
       return;
-    }
+    };
+
     handleFavoritePost(post);
+
   };
 
   if (post.imgURL.length === 0 && post.link.length === 0) {

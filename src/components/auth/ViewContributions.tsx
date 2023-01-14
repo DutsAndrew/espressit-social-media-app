@@ -14,9 +14,8 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
 
   const [viewing, setViewing] = useState({
     current: '',
-  });
-
-  const [dbData, setDbData] = useState<ViewContributionsDbData>({
+  }),
+  [dbData, setDbData] = useState<ViewContributionsDbData>({
     posts: [],
     comments: [],
     favorites: [],
@@ -30,20 +29,20 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
     storageBucket: "espressit.appspot.com",
     messagingSenderId: "1094129721341",
     appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  },
+  app = initializeApp(firebaseConfig),
+  db = getFirestore(app);
 
   const userRef = currentUser as User;
 
   useEffect(() => {
     // query db for posts, comments, and favorites on mount
     (async function fetchDataFromDb() {
+
       const userInstanceRef = doc(db, "users", userRef.uid);
       const userInstanceSnap = await getDoc(userInstanceRef);
+
       if (userInstanceSnap.exists()) {
-        
         // save posts, comments, favorites to local state for use
         const posts = userInstanceSnap.data().posts;
         const comments = userInstanceSnap.data().comments;
@@ -56,7 +55,6 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
         });
 
       };
-
     })();
   }, []);
 
@@ -64,17 +62,15 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
     setViewing({
       current: change,
     });
-
   };
 
   const handleDeleteEvent = async (type: string, itemToDelete: Post | Comment): Promise<void> => {
 
-    const userInstanceRef = doc(db, "users", userRef.uid);
-    const userInstanceSnap = await getDoc(userInstanceRef);
+    const userInstanceRef = doc(db, "users", userRef.uid),
+          userInstanceSnap = await getDoc(userInstanceRef);
 
     if (userInstanceSnap.exists()) {
       // access granted to userInstance
-
       if (type === "post") {
         deletePost(userInstanceSnap.data().posts, (itemToDelete as Post), userInstanceRef);
         return;
@@ -94,8 +90,9 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
 
   const deletePost = async (userInstanceData: Post, itemToDelete: Post, userInstanceRef: any): Promise<void> => {
      // remove userInstance of post
-     const postList: any[] = (userInstanceData as any);
-     const filteredList: any[] = postList.filter((element: Post) => element.pid !== (itemToDelete as Post).pid);
+     const postList: any[] = (userInstanceData as any),
+           filteredList: any[] = postList.filter((element: Post) => element.pid !== (itemToDelete as Post).pid);
+
      await updateDoc(userInstanceRef, {
        posts: filteredList,
      });
@@ -110,25 +107,27 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
      });
 
      return;
+
   };
 
   const deleteComment = async (userInstanceData: Post, itemToDelete: Comment, userInstanceRef: any): Promise<void> => {
+
     // remove userInstance of post
-    const commentList: any[] = (userInstanceData as any);
-    const filteredList: any[] = commentList.filter((comment: Comment) => (comment as Comment).comment !== (itemToDelete as Comment).comment);
+    const commentList: any[] = (userInstanceData as any),
+          filteredList: any[] = commentList.filter((comment: Comment) => (comment as Comment).comment !== (itemToDelete as Comment).comment);
 
     await updateDoc(userInstanceRef, {
       comments: filteredList,
     });
 
    // get post from db to remove comment from post instance
-   const postRef = doc(db, "posts", (itemToDelete as Comment).pid);
-   const postSnap = await getDoc(postRef);
+   const postRef = doc(db, "posts", (itemToDelete as Comment).pid),
+         postSnap = await getDoc(postRef);
 
    if (postSnap.exists()) {
 
-     const commentList = postSnap.data().comments;
-     const filteredList = commentList.filter((comment: Comment) => (comment as Comment).comment !== (itemToDelete as Comment).comment);
+     const commentList = postSnap.data().comments,
+           filteredList = commentList.filter((comment: Comment) => (comment as Comment).comment !== (itemToDelete as Comment).comment);
 
      await updateDoc(postRef, {
        comments: filteredList,
@@ -148,8 +147,9 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
   };
 
   const deleteFavorite = async (userInstanceData: Post, itemToDelete: Post, userInstanceRef: any): Promise<void> => {
-    const favoritesList: any[] = (userInstanceData as any);
-    const filteredList: any[] = favoritesList.filter((element: Post) => element.pid !== itemToDelete.pid);
+
+    const favoritesList: any[] = (userInstanceData as any),
+          filteredList: any[] = favoritesList.filter((element: Post) => element.pid !== itemToDelete.pid);
 
     await updateDoc(userInstanceRef, {
       favoritePosts: filteredList,
@@ -160,6 +160,7 @@ const ViewContributions: FC<ViewContributionsProps> = (props): JSX.Element => {
       comments: dbData.comments,
       favorites: filteredList,
     });
+
   };
 
   if (viewing.current.length === 0) {

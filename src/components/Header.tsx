@@ -104,8 +104,8 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
   } = props;
 
   // decides if user is on mobile or web and then renders correct component
-  const isMobileCheck = window.matchMedia("(pointer:coarse)").matches;
-  const isMobileCheck2 = window.matchMedia("(any-pointer:coarse)").matches;
+  const isMobileCheck = window.matchMedia("(pointer:coarse)").matches,
+        isMobileCheck2 = window.matchMedia("(any-pointer:coarse)").matches;
 
   if ("ontouchstart" in document.documentElement || isMobileCheck || isMobileCheck2) {
     // use mobile styling

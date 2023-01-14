@@ -51,6 +51,7 @@ const VoteContainer: FC<VoteContainerProps> = (props): JSX.Element => {
       }, 500);
       return;
     };
+    
   };
 
   const userRef = user as User;

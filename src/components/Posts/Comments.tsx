@@ -17,8 +17,8 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
   } = props;
 
   // for saving comment to correct post on firebase
-  const viewingRef = viewing as Post;
-  const userRef = user as User;
+  const viewingRef = viewing as Post,
+        userRef = user as User;
 
   // default is to sort by most likes
   const sortedComments = commentList.sort(function compareLikes(a, b): any {

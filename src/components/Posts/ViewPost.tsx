@@ -25,8 +25,8 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
     handleDownVoteComment,
   } = props
 
-  const viewingRef = viewing as Post;
-  const userRef = user as User;
+  const viewingRef = viewing as Post,
+        userRef = user as User;
 
   const [viewingPost, setViewingPost] = useState({
     post: viewing,
@@ -40,12 +40,13 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
     storageBucket: "espressit.appspot.com",
     messagingSenderId: "1094129721341",
     appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
-  };
+  },
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  app = initializeApp(firebaseConfig),
+  db = getFirestore(app);
 
   const handleAddCommentToPost = (scrubbedComment: string): void => {
+
     (async function saveComment() {
 
       // gather and set comment data
@@ -78,19 +79,25 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
         });
 
         // get user data to save comment to user for deletion or modification later
-        const getUserDBRef = doc(db, "users", userRef.uid);
-        const getUserDBSnap = await getDoc(getUserDBRef);
+        const getUserDBRef = doc(db, "users", userRef.uid),
+              getUserDBSnap = await getDoc(getUserDBRef);
 
         // set newComment in user data with other comments
         if (getUserDBSnap.exists()) {
-          const userDBData = getUserDBSnap.data();
-          const setUserDBRef = doc(db, "users", userRef.uid);
+
+          const userDBData = getUserDBSnap.data(),
+                setUserDBRef = doc(db, "users", userRef.uid);
+
           await updateDoc(setUserDBRef, {
             comments: [...userDBData.comments, newComment],
           });
+
         };
+
       };
+
     })();
+
   };
 
   // hides CreatePost component when viewing a post, unmounts when leaving view post
@@ -99,8 +106,8 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
     // increment view count on post
     (async function incrementViewsOnPost() {
 
-      const postRef = doc(db, "posts", viewingRef.pid);
-      const postSnap = await getDoc(postRef);
+      const postRef = doc(db, "posts", viewingRef.pid),
+            postSnap = await getDoc(postRef);
 
       if (postSnap.exists()) {
         const post = postSnap.data();
@@ -119,10 +126,12 @@ const ViewPost: FC<ViewPostProps> = (props): JSX.Element => {
     };
 
     return () => {
+
       if (createPostContainer) {
         createPostContainer.classList.add('create-post-container');
         createPostContainer.classList.remove('hidden-create-post-container');
       };
+
     };
     
   }, []);

@@ -17,44 +17,55 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
   const [postData, setPostData] = useState({
     status: false,
     type: '',
-  });
-
-  const [selectedFile, setSelectedFile] = useState();
+  }),
+  [selectedFile, setSelectedFile] = useState();
 
   const handlePostType = (typeOfPost: postType) => {
+
     // helps render the correct post type
     if (typeOfPost.text) {
+
       setPostData({
         status: true,
         type: "text",
       });
+
     } else if (typeOfPost.img) {
+
       setPostData({
         status: true,
         type: "img",
       });
+
     } else if (typeOfPost.link) {
+
       setPostData({
         status: true,
         type: "link",
       });
+
     };
+
   };
 
   const handleCloseForm = () => {
+
     setPostData({
       status: false,
       type: '',
     });
+
   };
 
   const handleInsertImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
+
     if (e.target.files) setSelectedFile((e.target.files as any)[0]);
+
   };
 
   const handleInsertLink = () => {
-    const input = document.querySelector('.insert-link-input') as HTMLInputElement;
-    const errorText = document.querySelector('.error-text-post-input');
+    const input = document.querySelector('.insert-link-input') as HTMLInputElement,
+          errorText = document.querySelector('.error-text-post-input');
 
     // handles error text production and removal
     if (input.validity.valid === false) {
@@ -81,13 +92,13 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
       storageBucket: "espressit.appspot.com",
       messagingSenderId: "1094129721341",
       appId: "1:1094129721341:web:dc2bdc0a2b322504b04394"
-    };
+    },
     // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    app = initializeApp(firebaseConfig),
+    db = getFirestore(app);
 
-    const titleOfPost: string | null = (document.querySelector('.create-post-text-input') as HTMLInputElement).value;
-    const bodyOfPost: string | null = (document.querySelector('#text-body-input') as HTMLInputElement).value;
+    const titleOfPost: string | null = (document.querySelector('.create-post-text-input') as HTMLInputElement).value,
+          bodyOfPost: string | null = (document.querySelector('#text-body-input') as HTMLInputElement).value;
 
     if (postData.type === "text") {
       createPostTypeText(userRef, db, titleOfPost, bodyOfPost);
@@ -112,10 +123,9 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
 
   const createPostTypeText = async (userRef: User, db: Firestore, titleOfPost: string, bodyOfPost: string): Promise<void> => {
 
-    const id = uniqid();
-
-    const userInstanceRef = doc(db, "users", userRef.uid);
-    const getUserInstanceSnap = await getDoc(userInstanceRef);
+    const id = uniqid(),
+          userInstanceRef = doc(db, "users", userRef.uid),
+          getUserInstanceSnap = await getDoc(userInstanceRef);
 
     if (getUserInstanceSnap.exists()) {
 
@@ -140,9 +150,11 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
       await updateDoc(userInstanceRef, {
         posts: [...getUserInstanceSnap.data().posts, post],
       });
+
       await setDoc(doc(db, "posts", id),
         post,
       );
+
     };
 
     fetchNewPost();
@@ -151,10 +163,9 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
 
   const createPostTypeImg = async (userRef: User, db: Firestore, titleOfPost: string, bodyOfPost: string): Promise<void> => {
 
-    const id = uniqid();
-
-    const storage = getStorage();
-    const storageRef = ref(storage, `postImgs/${(selectedFile as any).name}`);
+    const id = uniqid(),
+          storage = getStorage(),
+          storageRef = ref(storage, `postImgs/${(selectedFile as any).name}`);
 
     if (selectedFile !== undefined) {
 
@@ -168,8 +179,8 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
               // save url and storageRef to post
               (async function setPostDataWithImgURL() {
 
-                const userInstanceRef = doc(db, "users", userRef.uid);
-                const getUserInstanceSnap = await getDoc(userInstanceRef);
+                const userInstanceRef = doc(db, "users", userRef.uid),
+                      getUserInstanceSnap = await getDoc(userInstanceRef);
     
                 if (getUserInstanceSnap.exists()) {
 
@@ -194,9 +205,11 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
                   await updateDoc(userInstanceRef, {
                     posts: [...getUserInstanceSnap.data().posts, post],
                   });
+
                   await setDoc(doc(db, "posts", id),
                     post,
                   );
+
                 };
 
                 fetchNewPost();
@@ -217,8 +230,10 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
             });
         })
         .catch(() => {
+
           alert('your image was not uploaded to the server so we cancelled the post upload, please try again later');
           return;
+
         });
 
     };
@@ -227,10 +242,9 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
 
   const createPostTypeLink = async (userRef: User, db: Firestore, titleOfPost: string, bodyOfPost: string, linkOfPost: string): Promise<void> => {
 
-    const id = uniqid();
-
-    const userInstanceRef = doc(db, "users", userRef.uid);
-    const getUserInstanceSnap = await getDoc(userInstanceRef);
+    const id = uniqid(),
+          userInstanceRef = doc(db, "users", userRef.uid),
+          getUserInstanceSnap = await getDoc(userInstanceRef);
 
     if (getUserInstanceSnap.exists()) {
 
@@ -255,9 +269,11 @@ const CreatePostWeb: FC<CreatePostProps> = (props): JSX.Element => {
       await updateDoc(userInstanceRef, {
         posts: [...getUserInstanceSnap.data().posts, post],
       });
+
       await setDoc(doc(db, "posts", id),
         post,
       );
+      
     };
 
     fetchNewPost();

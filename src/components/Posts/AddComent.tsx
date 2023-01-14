@@ -21,50 +21,63 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
       return;
     };
 
-    const filter = new Filter();
+    const filter = new Filter(),
+          validationText: Element | null = document.querySelector('#validation-text');
+
     let commentText: string = (document.querySelector('.comment-input') as HTMLInputElement).value;
-    const validationText: Element | null = document.querySelector('#validation-text');
 
     if (commentText.trim().length === 0) {
+
       if (validationText) {
         validationText.textContent = `Your comment must contain characters and not just white space`;
         validationText.classList.add('text-not-authenticated');
+
         setTimeout(() => {
           if (validationText) {
             validationText.textContent = "";
             validationText.className = "";
           };
         }, 5000);
+
         return;
       };
+
     };
 
     if (commentText.length < 2) {
+
       if (validationText) {
         validationText.textContent = `Your comment was ${commentText.length} character, comments must be at least 2 characters in length`;
         validationText.classList.add('text-not-authenticated');
+
         setTimeout(() => {
           if (validationText) {
             validationText.textContent = "";
             validationText.className = "";
           };
         }, 5000);
+
         return;
       };
+
     };
 
     if (commentText.length > 1000) {
+
       if (validationText) {
         validationText.textContent = `Your comment was ${commentText.length} characters, comments cannot exceed our 1000 character limit`;
         validationText.classList.add('text-not-authenticated');
+
         setTimeout(() => {
           if (validationText) {
             validationText.textContent = "";
             validationText.className = "";
           };
         }, 5000);
+
         return;
       };
+
     };
 
     const scrubbedText: string = filter.clean(commentText).trim();
@@ -72,16 +85,22 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
   };
 
   const submitComment = (scrubbedText: string): void => {
+
     const validationText: Element | null = document.querySelector('#validation-text');
+
     if (validationText)  {
       validationText.textContent = "Thank you for contributing! :); your comment was saved.";
       validationText.classList.add('text-authenticated');
+
       setTimeout(() => {
         validationText.textContent = "";
         validationText.className = "";
       }, 5000);
+
     };
+
     handleAddCommentToPost(scrubbedText);
+
   };
 
   return (
