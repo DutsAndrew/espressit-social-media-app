@@ -66,6 +66,8 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
 
       const sortedData = dataSortController(dataArray);
 
+      console.log(sortedData);
+
       setSortedData({
         data: sortedData,
       });
@@ -109,6 +111,8 @@ const Posts: FC<PostProps> = (props): JSX.Element => {
     };
 
     const reSortedData = dataSortController(data);
+    
+    console.log(reSortedData);
 
     setSortedData({
       data: reSortedData,

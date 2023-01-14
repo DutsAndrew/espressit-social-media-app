@@ -60,7 +60,7 @@ border-bottom: 1px solid #80411e;
 `;
 
 const LogoWrapperMobile = styled.div `
-width: 40vw;
+width: 35vw;
 height: 10vh;
 display: flex;
 justify-content: flex-start;
@@ -69,7 +69,7 @@ gap: 1vw;
 `;
 
 const TitleMobile = styled.p `
-width: 30vw;
+width: 35vw;
 height: 10vh;
 font-size: 1.25em;
 margin: 0;
@@ -80,7 +80,7 @@ color: rgb(138, 109, 76);
 `;
 
 const AccountWrapperMobile = styled.div `
-width: 45vw;
+width: 40vw;
 height: 10vh;
 font-size: 1em;
 display: flex;

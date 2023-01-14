@@ -47,11 +47,11 @@
   }
 
   .account-drop-down-menu {
-    height: 10vh;
-    width: 14vw;
+    height: 20vh;
+    width: 25vw;
     margin: 0;
-    margin-top: 20vh;
-    margin-left: 15vw;
+    margin-top: 30vh;
+    margin-left: 0vw;
   }
 
 }
