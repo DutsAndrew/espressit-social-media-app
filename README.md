@@ -1,8 +1,8 @@
 # espressit-social-media-app
 
-This was such a fun project to build.
-
 Live Link: https://dutsandrew.github.io/espressit-social-media-app/
+
+![Screen Shot 2023-01-21 at 13 08 47](https://user-images.githubusercontent.com/94728848/213885287-5331578c-5c57-4b25-a289-ea758b562a39.png)
 
 How to Use:
 * Espressit is a social media / blog platform that allows users to make posts about all things coffee.
