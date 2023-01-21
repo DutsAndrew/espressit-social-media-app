@@ -34,6 +34,7 @@
   font-weight: 500;
   margin: 0;
   margin-right: auto;
+  margin-left: 4%;
   margin-bottom: 0.5vh;
 }
 
@@ -71,6 +72,8 @@
     height: 75vh;
     width: 75vw;
     margin: 0;
+    padding: 0;
+    border: none;
   }
 
   #create-account-legend {
@@ -107,6 +110,7 @@
     height: 65vh;
     width: 45vw;
     margin: 0;
+    border: none;
   }
 
   #create-account-legend {
