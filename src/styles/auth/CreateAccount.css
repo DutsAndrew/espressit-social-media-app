@@ -23,9 +23,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45vw;
-  height: 3vh;
-  font-size: 1em;
+  height: 5vh;
+  margin: 0;
+  font-size: 0.95em;
   font-weight: bolder;
 }
 
@@ -73,6 +73,10 @@
     margin: 0;
   }
 
+  #create-account-legend {
+    width: 75vw;
+  }
+
   #username-input, #email-input, #password-input, #password-confirm-input {
     width: 70vw;
     height: 5vh;
@@ -103,6 +107,10 @@
     height: 65vh;
     width: 45vw;
     margin: 0;
+  }
+
+  #create-account-legend {
+    width: 50vw;
   }
 
   #username-input, #email-input, #password-input, #password-confirm-input {
