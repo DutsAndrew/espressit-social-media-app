@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/espressit-social-media-app/static/css/main.da7b810e.css",
-    "main.js": "/espressit-social-media-app/static/js/main.4ba5675b.js",
-    "static/css/319.dcc3e954.chunk.css": "/espressit-social-media-app/static/css/319.dcc3e954.chunk.css",
+    "main.js": "/espressit-social-media-app/static/js/main.ebacc35c.js",
+    "static/css/319.572af49e.chunk.css": "/espressit-social-media-app/static/css/319.572af49e.chunk.css",
     "static/js/319.fcf6bc3f.chunk.js": "/espressit-social-media-app/static/js/319.fcf6bc3f.chunk.js",
     "static/css/908.eac01367.chunk.css": "/espressit-social-media-app/static/css/908.eac01367.chunk.css",
     "static/js/908.dc71ba31.chunk.js": "/espressit-social-media-app/static/js/908.dc71ba31.chunk.js",
@@ -37,8 +37,8 @@
     "static/media/arrow-up.svg": "/espressit-social-media-app/static/media/arrow-up.ec731006305b94590fd6703d2ec83078.svg",
     "static/media/arrow-down.svg": "/espressit-social-media-app/static/media/arrow-down.c72123a6c9ffb68c50067b288a15afc5.svg",
     "main.da7b810e.css.map": "/espressit-social-media-app/static/css/main.da7b810e.css.map",
-    "main.4ba5675b.js.map": "/espressit-social-media-app/static/js/main.4ba5675b.js.map",
-    "319.dcc3e954.chunk.css.map": "/espressit-social-media-app/static/css/319.dcc3e954.chunk.css.map",
+    "main.ebacc35c.js.map": "/espressit-social-media-app/static/js/main.ebacc35c.js.map",
+    "319.572af49e.chunk.css.map": "/espressit-social-media-app/static/css/319.572af49e.chunk.css.map",
     "319.fcf6bc3f.chunk.js.map": "/espressit-social-media-app/static/js/319.fcf6bc3f.chunk.js.map",
     "908.eac01367.chunk.css.map": "/espressit-social-media-app/static/css/908.eac01367.chunk.css.map",
     "908.dc71ba31.chunk.js.map": "/espressit-social-media-app/static/js/908.dc71ba31.chunk.js.map",
@@ -60,6 +60,6 @@
   },
   "entrypoints": [
     "static/css/main.da7b810e.css",
-    "static/js/main.4ba5675b.js"
+    "static/js/main.ebacc35c.js"
   ]
 }
